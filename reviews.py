@@ -40,6 +40,14 @@ def previous_results():
 
 def main():
     """Entry point."""
+
+    import pathlib
+
+    # Data folder
+    data_path = "data/"
+    # Reference of the following line: https://stackoverflow.com/a/14364249
+    pathlib.Path(data_path).mkdir(parents=True, exist_ok=True)
+
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('requests').setLevel(logging.DEBUG)
     log = logging.getLogger(__name__)
@@ -128,8 +136,9 @@ def main():
                 review_dict["reviews"][reviewID] = review
 
             output_file = "review_" + str(appid) + ".json"
+            data_filename = data_path + output_file
 
-            with open(output_file, "w") as g:
+            with open(data_filename, "w") as g:
                 g.write(json.dumps(review_dict) + '\n')
 
             log.info("Review records written for %s: %d (expected: %d)",
