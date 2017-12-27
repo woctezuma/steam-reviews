@@ -185,12 +185,11 @@ def analyzeAppID(appID, languages_to_extract = None, create_separate_plots = Tru
 
     return df_extracted
 
-def main():
-    languages_to_extract = ['english']
+def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon_count", languages_to_extract = ['english']):
+    # By definition, we want to overlay plots with this function, hence the following variable is set to False:
     create_separate_plots = False
 
-    appID_list = [723090, 639780, 573170]
-    current_palette = sns.color_palette(n_colors = len(appID_list))
+    current_palette = sns.color_palette(n_colors=len(appID_list))
 
     for (iter_count, appID_int) in enumerate(appID_list):
         appID = str(appID_int)
@@ -198,7 +197,6 @@ def main():
 
         df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
 
-        variable_to_plot = "lexicon_count"
         sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta,
                      color = current_palette[iter_count],
                      label=appID,
@@ -206,6 +204,12 @@ def main():
 
     plt.legend()
     plt.show()
+
+    return
+
+def main():
+    appID_list = [723090, 639780, 573170]
+    plotOverlaysOfUnivariateDistribution(appID_list)
 
     return
 
