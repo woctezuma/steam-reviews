@@ -189,14 +189,28 @@ def analyzeAppIDinEnglish(appID):
     df = analyzeAppID(appID, ['english'], False)
     return df
 
+def getReviewContent(appID, reviewID):
+    data = loadData(appID)
+
+    reviews = list(data['reviews'].values())
+
+    review_content = "-1"
+
+    for review in reviews:
+        print(review['recommendationid'])
+        if review['recommendationid'] == reviewID:
+            review_content = review['review']
+            break
+
+    return review_content
+
 def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon_count", languages_to_extract = ['english']):
     # By definition, we want to overlay plots with this function, hence the following variable is set to False:
     create_separate_plots = False
 
     current_palette = sns.color_palette(n_colors=len(appID_list))
 
-    for (iter_count, appID_int) in enumerate(appID_list):
-        appID = str(appID_int)
+    for (iter_count, appID) in enumerate(appID_list):
         print(appID)
 
         df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
@@ -212,11 +226,11 @@ def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon
     return
 
 def main():
-    appID_list = [723090, 639780, 573170]
+    appID_list = ["723090", "639780", "573170"]
 
     # Analyze one appID
 
-    appID = str( appID_list[0] )
+    appID = appID_list[-1]
     analyzeAppID(appID)
 
     # Compare different appIDs
