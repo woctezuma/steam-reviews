@@ -164,8 +164,8 @@ def analyzeAppID(appID, languages_to_extract = None, create_separate_plots = Tru
 
     df = aggregateReviewsToPandas(appID)
 
+    num_top_languages = 3
     if languages_to_extract is None:
-        num_top_languages = 1
         top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
     else:
         top_languages = languages_to_extract
@@ -209,6 +209,14 @@ def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon
 
 def main():
     appID_list = [723090, 639780, 573170]
+
+    # Analyze one appID
+
+    appID = str( appID_list[0] )
+    analyzeAppID(appID)
+
+    # Compare different appIDs
+
     plotOverlaysOfUnivariateDistribution(appID_list)
 
     return
