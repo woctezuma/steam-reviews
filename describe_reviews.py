@@ -2,6 +2,16 @@ import json
 import re
 from textstat.textstat import textstat
 
+import numpy as np
+import pandas as pd
+from scipy import stats, integrate
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+sns.set(color_codes=True)
+
+np.random.seed(sum(map(ord, "distributions")))
+
 def load_data(appID):
 
     # Data folder
@@ -96,11 +106,42 @@ def analyze(appID):
     return review_stats
 
 def main():
-    appID = "639780"
+    appID = "723090"
 
     review_stats = analyze(appID)
 
-    print(review_stats)
+    df = pd.DataFrame(data = review_stats)
+
+    print(df.describe())
+    df["language"].unique()
+    print(df["language"].describe())
+
+    # Extract top languages (according to review numbers)
+
+    print(df.groupby("language").mean())
+
+    df["language"].value_counts().index.tolist()
+    df["language"].value_counts().tolist()
+
+    num_top_languages = 3
+    top_languages = df["language"].value_counts().index.tolist()[0:num_top_languages]
+
+    print(top_languages)
+
+    s = pd.Series([lang in top_languages for lang in df["language"]], name='language')
+    df_extracted = df[s.values]
+
+    # Plot
+
+    strX = "language"
+    strY = "votes_up"
+
+    # Reference: https://seaborn.pydata.org/examples/grouped_boxplot.html
+    sns.boxplot(x = strX, y = strY, data= df_extracted, palette="PRGn")
+    plt.show()
+
+    # NB: Discriminating between positive and negative reviews (with "voted_up") is not super useful in our case,
+    # since we will only consider games with mostly positive reviews.
 
     return
 
