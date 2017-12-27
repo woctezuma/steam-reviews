@@ -2,7 +2,7 @@
 
 """Create games.json using ID's in idlist.csv."""
 
-# pylama:ignore=E501
+# Heavily inspired from: https://raw.githubusercontent.com/CraigKelly/steam-data/master/data/games.py
 
 import csv
 import json
