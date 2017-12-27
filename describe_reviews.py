@@ -12,7 +12,7 @@ sns.set(color_codes=True)
 
 np.random.seed(sum(map(ord, "distributions")))
 
-def load_data(appID):
+def loadData(appID):
 
     # Data folder
     data_path = "data/"
@@ -26,9 +26,9 @@ def load_data(appID):
 
     return data
 
-def analyze(appID):
+def aggregateReviews(appID):
 
-    data = load_data(appID)
+    data = loadData(appID)
 
     query_summary = data['query_summary']
 
@@ -108,7 +108,7 @@ def analyze(appID):
 def main():
     appID = "723090"
 
-    review_stats = analyze(appID)
+    review_stats = aggregateReviews(appID)
 
     df = pd.DataFrame(data = review_stats)
 
