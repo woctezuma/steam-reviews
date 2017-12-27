@@ -185,15 +185,22 @@ def main():
     languages_to_extract = ['english']
     create_separate_plots = False
 
-    for appID_int in [723090, 639780, 573170]:
+    iter_count = 0
+    appID_list = [723090, 639780, 573170]
+
+    for appID_int in appID_list:
+        iter_count+=1
+        progression = iter_count/len(appID_list)
+
         appID = str(appID_int)
         print(appID)
 
         df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
 
         variable_to_plot = "lexicon_count"
-        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta)
+        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta, label=appID, fit_kws={"label": appID+" fit", "alpha": progression})
 
+    plt.legend()
     plt.show()
 
     return
