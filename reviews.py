@@ -1,6 +1,6 @@
 #!/usr/env/bin python
 
-"""Create games.json and review_APPID.json using APPID's in idlist.csv."""
+"""Create idprocessed.txt, and review_APPID.json for each APPID in idlist.txt."""
 
 # Heavily inspired from: https://raw.githubusercontent.com/CraigKelly/steam-data/master/data/games.py
 
@@ -60,10 +60,10 @@ def main():
 
     max_num_reviews = pow(10, 4)
 
-    log.info("Getting previous results from reviews.json")
+    log.info("Getting previous results from idprocessed.txt")
     previos_ids = previous_results()
 
-    log.info("Opening reviews.json")
+    log.info("Opening idprocessed.txt")
     with open("idprocessed.txt", "a") as f:
         query_count = 0
         game_count = 0
