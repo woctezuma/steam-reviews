@@ -1,6 +1,6 @@
 #!/usr/env/bin python
 
-"""Create idprocessed.txt, and review_APPID.json for each APPID in idlist.txt."""
+"""Create idprocessed.txt, and data/review_APPID.json for each APPID in idlist.txt."""
 
 # Heavily inspired from: https://raw.githubusercontent.com/CraigKelly/steam-data/master/data/games.py
 
