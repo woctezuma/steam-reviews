@@ -44,8 +44,10 @@ def main():
     LIMIT = 150
     WAIT_TIME = (5 * 60) + 10  # 5 minutes plus a cushion
 
+    output_file = "game_"+ str(appID) +".json"
+
     log.info("Opening games.json")
-    with open("games.json", "w") as f:
+    with open(output_file, "w") as f:
         count, batch_count = 0, 0
 
         log.info("Opening hidden_gems_only_appids.txt")
@@ -60,6 +62,9 @@ def main():
         # Initialize
         num_reviews = max_num_reviews
 
+        review_dict = dict()
+        reviews = []
+
         while offset<num_reviews:
             req_data['start_offset'] = str(offset)
 
@@ -69,15 +74,22 @@ def main():
 
             if num_reviews == max_num_reviews:
                 print(result["query_summary"])
+
+                # To be saved to JSON
+                review_dict["query_summary"] = result["query_summary"]
+
+                # Needed for the loop
                 num_reviews = result["query_summary"]["total_reviews"]
 
             num_reviews_with_this_request = result["query_summary"]["num_reviews"]
 
-            review_dict = result["reviews"]
-            f.write(json.dumps(review_dict) + '\n')
+            reviews.extend(result["reviews"])
 
             print(offset)
             offset += num_reviews_with_this_request
+
+        review_dict["reviews"] = reviews
+        f.write(json.dumps(review_dict) + '\n')
 
     # TODO batch and query limit per minute
 
