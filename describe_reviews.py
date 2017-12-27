@@ -185,6 +185,10 @@ def analyzeAppID(appID, languages_to_extract = None, create_separate_plots = Tru
 
     return df_extracted
 
+def analyzeAppIDinEnglish(appID):
+    df = analyzeAppID(appID, ['english'], False)
+    return df
+
 def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon_count", languages_to_extract = ['english']):
     # By definition, we want to overlay plots with this function, hence the following variable is set to False:
     create_separate_plots = False
