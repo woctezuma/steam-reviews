@@ -1,10 +1,8 @@
 import json
-import re
 from textstat.textstat import textstat
 
 import numpy as np
 import pandas as pd
-from scipy import stats, integrate
 import matplotlib.pyplot as plt
 
 import seaborn as sns
@@ -105,43 +103,61 @@ def aggregateReviews(appID):
 
     return review_stats
 
-def main():
-    appID = "723090"
+def aggregateReviewsToPandas(appID):
 
     review_stats = aggregateReviews(appID)
 
-    df = pd.DataFrame(data = review_stats)
+    df = pd.DataFrame(data=review_stats)
 
-    print(df.describe())
-    df["language"].unique()
-    print(df["language"].describe())
+    return df
 
-    # Extract top languages (according to review numbers)
+def findTopLanguagesByReviewNumber(df, num_top_languages = 3, verbose = True):
+    # Extract a dataframe for reviews written in top languages (by review numbers)
 
-    print(df.groupby("language").mean())
+    sorted_languages = df["language"].value_counts().index.tolist()
 
-    df["language"].value_counts().index.tolist()
-    df["language"].value_counts().tolist()
+    top_languages = sorted_languages[0:num_top_languages]
 
-    num_top_languages = 3
-    top_languages = df["language"].value_counts().index.tolist()[0:num_top_languages]
+    if verbose:
+        print(top_languages)
+        print(df["language"].describe())
 
-    print(top_languages)
+    return top_languages
+
+def extractReviewsForTopLanguagesOnly(df, top_languages, verbose = True):
+
+    # Extract a dataframe for reviews written in top languages (by review numbers)
 
     s = pd.Series([lang in top_languages for lang in df["language"]], name='language')
     df_extracted = df[s.values]
 
-    # Plot
+    if verbose:
+        print(df_extracted.groupby("language").mean())
 
-    strX = "language"
-    strY = "votes_up"
+    return df_extracted
 
+def plotBoxPlot(data_frame, strX ="language", strY ="votes_up"):
     # Reference: https://seaborn.pydata.org/examples/grouped_boxplot.html
-    sns.boxplot(x = strX, y = strY, data= df_extracted, palette="PRGn")
+
+    sns.boxplot(x = strX, y = strY, data= data_frame, palette="PRGn")
     plt.show()
 
     # NB: Discriminating between positive and negative reviews (with "voted_up") is not super useful in our case,
     # since we will only consider games with mostly positive reviews.
+
+    return
+
+def main():
+    appID = "723090"
+
+    df = aggregateReviewsToPandas(appID)
+
+    num_top_languages = 3
+    top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
+
+    df_extracted = extractReviewsForTopLanguagesOnly(df, top_languages)
+
+    plotBoxPlot(df_extracted, "language", "votes_up")
 
     return
 
