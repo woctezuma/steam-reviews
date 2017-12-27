@@ -185,20 +185,20 @@ def main():
     languages_to_extract = ['english']
     create_separate_plots = False
 
-    iter_count = 0
     appID_list = [723090, 639780, 573170]
+    current_palette = sns.color_palette(n_colors = len(appID_list))
 
-    for appID_int in appID_list:
-        iter_count+=1
-        progression = iter_count/len(appID_list)
-
+    for (iter_count, appID_int) in enumerate(appID_list):
         appID = str(appID_int)
         print(appID)
 
         df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
 
         variable_to_plot = "lexicon_count"
-        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta, label=appID, fit_kws={"label": appID+" fit", "alpha": progression})
+        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta,
+                     color = current_palette[iter_count],
+                     label=appID,
+                     fit_kws={"label": appID+" fit", "color": current_palette[iter_count], "alpha": 0.25})
 
     plt.legend()
     plt.show()
