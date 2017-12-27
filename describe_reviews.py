@@ -156,13 +156,15 @@ def plotBoxPlot(data_frame, strX ="language", strY ="votes_up"):
 
     return
 
-def main():
-    appID = "723090"
+def analyzeAppID(appID, languages_to_extract = None, create_separate_plots = True):
 
     df = aggregateReviewsToPandas(appID)
 
-    num_top_languages = 1
-    top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
+    if languages_to_extract is None:
+        num_top_languages = 1
+        top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
+    else:
+        top_languages = languages_to_extract
 
     df_extracted = extractReviewsForTopLanguagesOnly(df, top_languages)
 
@@ -170,11 +172,29 @@ def main():
     variables = df_extracted.keys()
     print( variables )
 
-    variable_to_plot = "num_games_owned"
-    plotUnivariateDistribution(df_extracted, variable_to_plot)
+    if create_separate_plots:
+        variable_to_plot = "lexicon_count"
+        plotUnivariateDistribution(df_extracted, variable_to_plot)
 
-    if num_top_languages > 1:
-        plotBoxPlot(df_extracted, "language", variable_to_plot)
+        if num_top_languages > 1:
+            plotBoxPlot(df_extracted, "language", variable_to_plot)
+
+    return df_extracted
+
+def main():
+    languages_to_extract = ['english']
+    create_separate_plots = False
+
+    for appID_int in [723090, 639780, 573170]:
+        appID = str(appID_int)
+        print(appID)
+
+        df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
+
+        variable_to_plot = "lexicon_count"
+        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta)
+
+    plt.show()
 
     return
 
