@@ -40,11 +40,12 @@ def aggregateReviews(appID):
     sentence = 'Number of downloaded reviews: ' + str(len(reviews))
     print(sentence)
 
-    review_example = reviews[0]
-
     review_stats = dict()
 
     ##
+
+    # Review ID
+    review_stats['recommendationid'] = []
 
     # Meta-data regarding the reviewers
     review_stats['num_games_owned'] = []
@@ -74,6 +75,9 @@ def aggregateReviews(appID):
 
     for review in reviews:
         review_content = review['review']
+
+        # Review ID
+        review_stats['recommendationid'].append(review["recommendationid"])
 
         # Meta-data regarding the reviewers
         review_stats['num_games_owned'].append(review['author']['num_games_owned'])
