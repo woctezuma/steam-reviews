@@ -58,6 +58,10 @@ def main():
     query_limit = 150
     wait_time = (5 * 60) + 10  # 5 minutes plus a cushion
 
+    # Initialization of maximal number of reviews with a large number
+    # NB: Any number greater than 20 should have been ok, since:
+    #   - this variable will be overrided after the first API request,
+    #   - an API request cannot return more than 20 reviews (or so, I read).
     max_num_reviews = pow(10, 4)
 
     log.info("Getting previous results from idprocessed.txt")
