@@ -3,6 +3,7 @@ from textstat.textstat import textstat
 
 import numpy as np
 import pandas as pd
+from scipy import stats
 import matplotlib.pyplot as plt
 
 import seaborn as sns
@@ -136,6 +137,14 @@ def extractReviewsForTopLanguagesOnly(df, top_languages, verbose = True):
 
     return df_extracted
 
+def plotUnivariateDistribution(data_frame, strX = "votes_up"):
+    # Reference: https://seaborn.pydata.org/tutorial/distributions.html
+
+    sns.distplot(data_frame[strX], kde=False, fit=stats.lognorm)
+    plt.show()
+
+    return
+
 def plotBoxPlot(data_frame, strX ="language", strY ="votes_up"):
     # Reference: https://seaborn.pydata.org/examples/grouped_boxplot.html
 
@@ -152,12 +161,20 @@ def main():
 
     df = aggregateReviewsToPandas(appID)
 
-    num_top_languages = 3
+    num_top_languages = 1
     top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
 
     df_extracted = extractReviewsForTopLanguagesOnly(df, top_languages)
 
-    plotBoxPlot(df_extracted, "language", "votes_up")
+    # All the possible variables are listed here:
+    variables = df_extracted.keys()
+    print( variables )
+
+    variable_to_plot = "num_games_owned"
+    plotUnivariateDistribution(df_extracted, variable_to_plot)
+
+    if num_top_languages > 1:
+        plotBoxPlot(df_extracted, "language", variable_to_plot)
 
     return
 
