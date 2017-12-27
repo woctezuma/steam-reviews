@@ -1,6 +1,6 @@
 from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
-def main():
+def test_imported_module():
     appID_list = ["723090", "639780", "573170"]
 
     appID = appID_list[-1]
@@ -11,6 +11,9 @@ def main():
 
     print(review_content)
 
+    return
+
+def main():
     return
 
 if __name__ == "__main__":
