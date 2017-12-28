@@ -1,12 +1,16 @@
 from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
+import pandas as pd
 import numpy as np
 
-from sklearn import svm
-from sklearn.covariance import EllipticEnvelope
-from sklearn.ensemble import IsolationForest
+from sklearn.cluster import AffinityPropagation
+from sklearn import metrics
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
-#TODO https://github.com/scikit-learn-contrib/sklearn-pandas
+from sklearn_pandas import DataFrameMapper, gen_features
+import sklearn.preprocessing, sklearn.decomposition, sklearn.linear_model, sklearn.pipeline, sklearn.metrics
+from sklearn.feature_extraction.text import CountVectorizer
 
 def test_imported_module():
     appID = "573170"
@@ -23,9 +27,62 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
     # Reference: https://stackoverflow.com/a/32152755
     D = df.ix[:, df.columns.difference(excluded_columns)]
 
+    D_binary = D.ix[:, ['received_for_free', 'steam_purchase', 'voted_up']]
+    D_generic = D.ix[:, ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score']]
+    D_length_correlated = D.ix[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
+    D_readability_correlated = D.ix[:, ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
+
     # Convert from Pandas to NumPy arrays
     #Reference: https://stackoverflow.com/a/22653050
-    X = D.reset_index().values
+    convertFromPandas = lambda data_frame: data_frame.reset_index().values
+    # X = convertFromPandas(D)
+
+    X_binary = convertFromPandas(D_binary)
+    X_generic = convertFromPandas(D_generic)
+    X_length_correlated = convertFromPandas(D_length_correlated)
+    X_readability_correlated = convertFromPandas(D_readability_correlated)
+
+    scaler = StandardScaler()
+    X_generic_new = scaler.fit_transform(X_generic)
+
+    pca_length = PCA(n_components=2)
+    X_length_correlated_new = pca_length.fit_transform(X_length_correlated)
+
+    pca_readability = PCA(n_components=2)
+    X_readability_correlated_new = pca_readability.fit_transform(X_readability_correlated)
+
+    X = np.concatenate((X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new), axis=1)
+
+    # feature_def_binary = gen_features(
+    #     columns = ['received_for_free', 'steam_purchase', 'voted_up'],
+    #     classes = [sklearn.preprocessing.Binarizer]
+    # )
+    #
+    # feature_def_correlated_length = [(
+    #     ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count'],
+    #     sklearn.decomposition.PCA(1)
+    # )]
+    #
+    # feature_def_correlated_readability = [(
+    #     ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count'],
+    #     sklearn.decomposition.PCA(1)
+    # )]
+    #
+    # feature_def_other = gen_features(
+    #     columns = ['num_games_owned', 'num_reviews', 'playtime_forever',
+    #                'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score'],
+    #     classes = [sklearn.preprocessing.StandardScaler]
+    # )
+    #
+    # feature_def = []
+    # feature_def.extend(feature_def_binary)
+    # feature_def.extend(feature_def_correlated_length)
+    # feature_def.extend(feature_def_correlated_readability)
+    # feature_def.extend(feature_def_other)
+    #
+    # mapper = DataFrameMapper(feature_def)
+    #
+    # X = np.round(mapper.fit_transform(D.copy()), 2)
 
     return X
 
@@ -47,21 +104,17 @@ def main():
 
     ## Processing
 
-    # Reference: http://scikit-learn.org/stable/auto_examples/covariance/plot_outlier_detection.html
-    outliers_fraction = 0.25
-    # clf = svm.OneClassSVM(nu=0.95 * outliers_fraction + 0.05, kernel="rbf", gamma=0.1)
+    # #############################################################################
+    # Compute Affinity Propagation
+    af = AffinityPropagation().fit(X)
+    cluster_centers_indices = af.cluster_centers_indices_
+    labels = af.labels_
 
-    n_samples = 100
-    rng = np.random.RandomState(42)
-    clf = IsolationForest(max_samples=n_samples,
-                    contamination=outliers_fraction,
-                    random_state=rng)
+    n_clusters_ = len(cluster_centers_indices)
 
-    clf.fit(X)
-    scores_pred = clf.decision_function(X)
-    y_pred = clf.predict(X)
-
-    sum([1 for i in y_pred if i > 0])
+    print('Estimated number of clusters: %d' % n_clusters_)
+    print("Silhouette Coefficient: %0.3f"
+          % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
 
     return
 
