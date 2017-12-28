@@ -102,13 +102,18 @@ def main():
 
     ## Show reviews used as cluster centers
 
-    cluster_count = 1
-    for ind in cluster_centers_indices:
+    list_of_clusters_by_importance = summary_labels.index.tolist()
+
+    num_top_clusters = 3
+    top_clusters = list_of_clusters_by_importance[0:num_top_clusters]
+
+    for (cluster_count, cluster_iter) in enumerate(top_clusters):
+        ind = cluster_centers_indices[int(cluster_iter)]
         reviewID = list(df["recommendationid"])[ind]
         review_content = getReviewContent(appID, reviewID)
-        print("\n ==== Cluster " + str(cluster_count) + " ====" )
+        # Reference: https://stackoverflow.com/a/18544440
+        print("\n ==== Cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
         print(review_content)
-        cluster_count += 1
 
     return
 
