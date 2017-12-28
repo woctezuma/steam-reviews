@@ -2,7 +2,9 @@ from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
+from sklearn import cluster, covariance, manifold
 from sklearn.cluster import AffinityPropagation
 from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
@@ -89,6 +91,17 @@ def main():
     print('Estimated number of clusters: %d' % n_clusters_)
     print("Silhouette Coefficient: %0.3f"
           % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
+
+
+    ## Show reviews used as cluster centers
+
+    cluster_count = 1
+    for ind in cluster_centers_indices:
+        reviewID = df["recommendationid"][ind]
+        review_content = getReviewContent(appID, reviewID)
+        print("\n Cluster " + str(cluster_count))
+        print(review_content)
+        cluster_count += 1
 
     return
 
