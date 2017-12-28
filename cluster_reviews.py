@@ -71,6 +71,12 @@ def main():
 
 
     ## Processing
+    # Reference: http://scikit-learn.org/stable/modules/clustering.html
+
+    # NB: We are not interested in outlier detection:
+    # - if the goal were to remove low-quality reviews, a threshold on review lenght should be sufficient,
+    # - for some games, the low-quality/"funny meme" reviews are not outliers, they constitute their own sizable cluster
+
 
     # #############################################################################
     # Compute Affinity Propagation
