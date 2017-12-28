@@ -131,7 +131,7 @@ def main():
           % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
 
     # Show reviews used as cluster centers of the top clusters
-    num_top_clusters = 3
+    num_top_clusters = 4
     verbose = True
     showReviews(appID, df, af, num_top_clusters, verbose)
 
