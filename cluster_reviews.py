@@ -24,10 +24,14 @@ def test_imported_module():
 
     return
 
-def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
+def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
 
-    # Reference: https://stackoverflow.com/a/32152755
-    D = df.ix[:, df.columns.difference(excluded_columns)]
+    # Maybe the variable excluded_columns is not needed after all... I just leave it there as a legacy for now.
+    if excluded_columns is None:
+        D = df
+    else:
+        # Reference: https://stackoverflow.com/a/32152755
+        D = df.ix[:, df.columns.difference(excluded_columns)]
 
     D_binary = D.ix[:, ['received_for_free', 'steam_purchase', 'voted_up']]
     D_generic = D.ix[:, ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score']]
@@ -126,7 +130,7 @@ def showAllReviewsFromGivenCluster(appID, df, af, cluster_count):
 
     return
 
-def showDataFrameForClusterCenters(df, af):
+def showDataFrameForClusterCenters(df, af, num_top_clusters = None, verbose = True):
 
     cluster_centers_indices = af.cluster_centers_indices_
     # labels = af.labels_
@@ -137,6 +141,12 @@ def showDataFrameForClusterCenters(df, af):
 
     # Reference: https://stackoverflow.com/a/19155860
     df_representative = df.iloc[sorted_cluster_centers_indices, :]
+
+    if verbose:
+        if num_top_clusters is None:
+            print(df_representative)
+        else:
+            print(df_representative.iloc[0:num_top_clusters, :])
 
     return df_representative
 
@@ -194,9 +204,7 @@ def main():
 
     # Show dataframe limited to cluster centers
 
-    df_representative = showDataFrameForClusterCenters(df, af)
-
-    print(df_representative.iloc[0:num_top_clusters, :])
+    df_representative = showDataFrameForClusterCenters(df, af, num_top_clusters)
 
     return
 
