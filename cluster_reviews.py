@@ -58,7 +58,7 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
 
     return X
 
-def showReviews(appID, df, af, num_top_clusters = None, verbose = False):
+def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = False):
     # Show reviews used as cluster centers for Affinity Propagation
     # df: dataframe
     # af: affinity propagation model
@@ -122,7 +122,7 @@ def main():
     n_clusters_ = len(cluster_centers_indices)
 
     # Show reviews used as cluster centers (for all clusters)
-    showReviews(appID, df, af)
+    showRepresentativeReviews(appID, df, af)
 
     # Print additional info
 
@@ -133,7 +133,7 @@ def main():
     # Show reviews used as cluster centers of the top clusters
     num_top_clusters = 4
     verbose = True
-    showReviews(appID, df, af, num_top_clusters, verbose)
+    showRepresentativeReviews(appID, df, af, num_top_clusters, verbose)
 
     return
 
