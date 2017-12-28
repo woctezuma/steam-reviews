@@ -58,12 +58,9 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
 
     return X
 
-def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = False):
-    # Show reviews used as cluster centers for Affinity Propagation
-    # df: dataframe
-    # af: affinity propagation model
+def getTopClustersByCount(af, verbose = False):
 
-    cluster_centers_indices = af.cluster_centers_indices_
+    # cluster_centers_indices = af.cluster_centers_indices_
     labels = af.labels_
 
     summary_labels = pd.Series(labels).apply(str).value_counts()
@@ -72,12 +69,24 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
         print("\nCluster stats: ")
         print(summary_labels)
 
-    list_of_clusters_by_importance = summary_labels.index.tolist()
+    list_of_clusters_by_count = summary_labels.index.tolist()
+
+    return (summary_labels, list_of_clusters_by_count)
+
+def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = False):
+    # Show representative reviews, i.e. the reviews used as cluster centers for Affinity Propagation
+    # df: dataframe
+    # af: affinity propagation model
+
+    cluster_centers_indices = af.cluster_centers_indices_
+    # labels = af.labels_
+
+    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af, verbose)
 
     if num_top_clusters is None:
-        top_clusters = list_of_clusters_by_importance
+        top_clusters = list_of_clusters_by_count
     else:
-        top_clusters = list_of_clusters_by_importance[0:num_top_clusters]
+        top_clusters = list_of_clusters_by_count[0:num_top_clusters]
 
     for (cluster_count, cluster_iter) in enumerate(top_clusters):
         ind = cluster_centers_indices[int(cluster_iter)]
@@ -85,6 +94,34 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
         review_content = getReviewContent(appID, reviewID)
         # Reference: https://stackoverflow.com/a/18544440
         print("\n ==== Cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+        print(review_content)
+
+    return
+
+def showAllReviewsFromGivenCluster(appID, df, af, cluster_count):
+
+    cluster_centers_indices = af.cluster_centers_indices_
+    labels = af.labels_
+
+    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
+
+    cluster_index = int(list_of_clusters_by_count[cluster_count])
+
+    cluster_representative_ind = cluster_centers_indices[cluster_index]
+    cluster_content_indices = [i for i, x in enumerate(list(labels)) if x == cluster_index]
+
+    for (review_count, ind) in enumerate(cluster_content_indices):
+        reviewID = list(df["recommendationid"])[ind]
+        review_content = getReviewContent(appID, reviewID)
+
+        if ind == cluster_representative_ind:
+            info_str = " (representative)"
+        else:
+            info_str = ""
+
+        # Reference: https://stackoverflow.com/a/18544440
+        print("\n ==== Review " + str(review_count+1) + info_str + " in cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+
         print(review_content)
 
     return
@@ -119,12 +156,12 @@ def main():
     cluster_centers_indices = af.cluster_centers_indices_
     labels = af.labels_
 
-    n_clusters_ = len(cluster_centers_indices)
-
     # Show reviews used as cluster centers (for all clusters)
     showRepresentativeReviews(appID, df, af)
 
     # Print additional info
+
+    n_clusters_ = len(cluster_centers_indices)
 
     print('\nEstimated number of clusters: %d' % n_clusters_)
     print("Silhouette Coefficient: %0.3f"
@@ -134,6 +171,11 @@ def main():
     num_top_clusters = 4
     verbose = True
     showRepresentativeReviews(appID, df, af, num_top_clusters, verbose)
+
+    # Show all reviews in given cluster (to manually check for cluster homogeneity)
+
+    cluster_count = 1
+    showAllReviewsFromGivenCluster(appID, df, af, cluster_count)
 
     return
 
