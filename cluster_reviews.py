@@ -1,5 +1,7 @@
 from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
+import numpy as np
+
 from sklearn import svm
 from sklearn.covariance import EllipticEnvelope
 from sklearn.ensemble import IsolationForest
@@ -16,19 +18,34 @@ def test_imported_module():
 
     return
 
+def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
+
+    # Reference: https://stackoverflow.com/a/32152755
+    D = df.ix[:, df.columns.difference(excluded_columns)]
+
+    # Convert from Pandas to NumPy arrays
+    #Reference: https://stackoverflow.com/a/22653050
+    X = D.reset_index().values
+
+    return X
+
 def main():
     appID_list = ["723090", "639780", "573170"]
 
     appID = appID_list[-1]
 
+
+    # Features (columns) to exclude
+    excluded_columns = ["language", "recommendationid"]
+
+    # Load Pandas dataframe
     df = analyzeAppIDinEnglish(appID)
 
-    # Reference: https://stackoverflow.com/a/32152755
-    exclude = ["language", "recommendationid"]
-    D = df.ix[:, df.columns.difference(exclude)]
+    # Convert to NumPy matrix format
+    X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
 
-    #Reference: https://stackoverflow.com/a/22653050
-    X = D.reset_index().values
+
+    ## Processing
 
     # Reference: http://scikit-learn.org/stable/auto_examples/covariance/plot_outlier_detection.html
     outliers_fraction = 0.25
