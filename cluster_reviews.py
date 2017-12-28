@@ -35,7 +35,6 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
     # Convert from Pandas to NumPy arrays
     #Reference: https://stackoverflow.com/a/22653050
     convertFromPandas = lambda data_frame: data_frame.reset_index().values
-    # X = convertFromPandas(D)
 
     X_binary = convertFromPandas(D_binary)
     X_generic = convertFromPandas(D_generic)
@@ -52,37 +51,6 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
     X_readability_correlated_new = pca_readability.fit_transform(X_readability_correlated)
 
     X = np.concatenate((X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new), axis=1)
-
-    # feature_def_binary = gen_features(
-    #     columns = ['received_for_free', 'steam_purchase', 'voted_up'],
-    #     classes = [sklearn.preprocessing.Binarizer]
-    # )
-    #
-    # feature_def_correlated_length = [(
-    #     ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count'],
-    #     sklearn.decomposition.PCA(1)
-    # )]
-    #
-    # feature_def_correlated_readability = [(
-    #     ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count'],
-    #     sklearn.decomposition.PCA(1)
-    # )]
-    #
-    # feature_def_other = gen_features(
-    #     columns = ['num_games_owned', 'num_reviews', 'playtime_forever',
-    #                'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score'],
-    #     classes = [sklearn.preprocessing.StandardScaler]
-    # )
-    #
-    # feature_def = []
-    # feature_def.extend(feature_def_binary)
-    # feature_def.extend(feature_def_correlated_length)
-    # feature_def.extend(feature_def_correlated_readability)
-    # feature_def.extend(feature_def_other)
-    #
-    # mapper = DataFrameMapper(feature_def)
-    #
-    # X = np.round(mapper.fit_transform(D.copy()), 2)
 
     return X
 
