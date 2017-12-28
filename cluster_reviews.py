@@ -174,7 +174,7 @@ def main():
 
     # Show all reviews in given cluster (to manually check for cluster homogeneity)
 
-    cluster_count = 1
+    cluster_count = 1 # Warning: this starts at 0
     showAllReviewsFromGivenCluster(appID, df, af, cluster_count)
 
     return
