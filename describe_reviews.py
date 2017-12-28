@@ -197,7 +197,6 @@ def getReviewContent(appID, reviewID):
     review_content = "-1"
 
     for review in reviews:
-        print(review['recommendationid'])
         if review['recommendationid'] == reviewID:
             review_content = review['review']
             break
