@@ -183,19 +183,20 @@ def main():
 
     # Show reviews used as cluster centers of the top clusters
     num_top_clusters = 4
-    verbose = True
+    verbose = False
     showRepresentativeReviews(appID, df, af, num_top_clusters, verbose)
 
     # Show all reviews in given cluster (to manually check for cluster homogeneity)
 
-    cluster_count = 1 # Warning: this starts at 0
-    showAllReviewsFromGivenCluster(appID, df, af, cluster_count)
+    if verbose:
+        cluster_count = 1  # Warning: this starts at 0
+        showAllReviewsFromGivenCluster(appID, df, af, cluster_count)
 
     # Show dataframe limited to cluster centers
 
     df_representative = showDataFrameForClusterCenters(df, af)
 
-    print(df_representative)
+    print(df_representative.iloc[0:num_top_clusters, :])
 
     return
 
