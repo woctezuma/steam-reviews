@@ -90,10 +90,15 @@ def main():
 
     n_clusters_ = len(cluster_centers_indices)
 
-    print('Estimated number of clusters: %d' % n_clusters_)
+    ## Print additional info
+
+    summary_labels = pd.Series(labels).apply(str).value_counts()
+    print( "\nCluster stats: ")
+    print( summary_labels )
+
+    print('\nEstimated number of clusters: %d' % n_clusters_)
     print("Silhouette Coefficient: %0.3f"
           % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
-
 
     ## Show reviews used as cluster centers
 
