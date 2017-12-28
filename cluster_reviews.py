@@ -43,6 +43,8 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns):
     X_length_correlated = convertFromPandas(D_length_correlated)
     X_readability_correlated = convertFromPandas(D_readability_correlated)
 
+    X_readability_correlated = np.nan_to_num(X_readability_correlated)
+
     scaler = StandardScaler()
     X_generic_new = scaler.fit_transform(X_generic)
 
@@ -97,9 +99,9 @@ def main():
 
     cluster_count = 1
     for ind in cluster_centers_indices:
-        reviewID = df["recommendationid"][ind]
+        reviewID = list(df["recommendationid"])[ind]
         review_content = getReviewContent(appID, reviewID)
-        print("\n Cluster " + str(cluster_count))
+        print("\n ==== Cluster " + str(cluster_count) + " ====" )
         print(review_content)
         cluster_count += 1
 
