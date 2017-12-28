@@ -126,6 +126,20 @@ def showAllReviewsFromGivenCluster(appID, df, af, cluster_count):
 
     return
 
+def showDataFrameForClusterCenters(df, af):
+
+    cluster_centers_indices = af.cluster_centers_indices_
+    # labels = af.labels_
+
+    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
+
+    sorted_cluster_centers_indices = cluster_centers_indices[[int(i) for i in list_of_clusters_by_count]]
+
+    # Reference: https://stackoverflow.com/a/19155860
+    df_representative = df.iloc[sorted_cluster_centers_indices, :]
+
+    return df_representative
+
 def main():
     appID_list = ["723090", "639780", "573170"]
 
@@ -176,6 +190,12 @@ def main():
 
     cluster_count = 1 # Warning: this starts at 0
     showAllReviewsFromGivenCluster(appID, df, af, cluster_count)
+
+    # Show dataframe limited to cluster centers
+
+    df_representative = showDataFrameForClusterCenters(df, af)
+
+    print(df_representative)
 
     return
 
