@@ -126,6 +126,13 @@ def aggregateReviewsToPandas(appID):
 
     df = pd.DataFrame(data=review_stats)
 
+    # Correction for an inconsistency which I discovered when running df.mean(). These 2 columns did not appear in the
+    # output of mean(). I don't think it has any real impact for clustering and other purposes, but just to be sure...
+    if "comment_count" in df.columns:
+        df["comment_count"] = df["comment_count"].astype('int')
+    if "weighted_vote_score" in df.columns:
+        df["weighted_vote_score"] = df["weighted_vote_score"].astype('float')
+
     return df
 
 def findTopLanguagesByReviewNumber(df, num_top_languages = 3, verbose = True):
