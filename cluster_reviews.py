@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from sklearn import cluster, covariance, manifold
 from sklearn.cluster import AffinityPropagation
 from sklearn.cluster import Birch
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.neighbors import kneighbors_graph
 from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -231,7 +233,7 @@ def main():
     df_representative = showDataFrameForClusterCenters(df, af, num_top_clusters)
 
     # #############################################################################
-    # Compute Birch
+    # Compute Agglomerative Clustering with Birch as a first step
 
     num_clusters_input = 3
 
@@ -246,6 +248,25 @@ def main():
         showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, brc_labels, num_reviews_to_show_per_cluster)
 
     getTopClustersByCount(None, brc_labels, True)
+
+    # #############################################################################
+    # Compute Agglomerative Clustering without Birch
+
+    knn_graph = kneighbors_graph(X, 30, include_self=False)
+
+    connectivity = knn_graph # one of these: None or knn_graph
+    linkage = 'ward' # one of these: 'average', 'complete', 'ward'
+    model = AgglomerativeClustering(linkage=linkage, connectivity=connectivity, n_clusters=num_clusters_input)
+
+    agg_labels = model.fit_predict(X)
+
+    # Show Agglomerative Clustering results
+
+    for cluster_count in range(num_clusters_input):
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, agg_labels, num_reviews_to_show_per_cluster)
+
+    getTopClustersByCount(None, agg_labels, True)
+
 
     return
 
