@@ -121,6 +121,7 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
 
         (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
 
+        cluster_index = int(list_of_clusters_by_count[cluster_count])
         cluster_representative_ind = cluster_centers_indices[cluster_index]
     else:
         cluster_centers_indices = None
@@ -128,9 +129,8 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
 
         (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(None, provided_labels)
 
+        cluster_index = int(list_of_clusters_by_count[cluster_count])
         cluster_representative_ind = None
-
-    cluster_index = int(list_of_clusters_by_count[cluster_count])
 
     cluster_content_indices = [i for i, x in enumerate(list(labels)) if x == cluster_index]
 
