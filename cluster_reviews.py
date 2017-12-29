@@ -25,7 +25,11 @@ def test_imported_module():
     print('Test of review retrieval:')
     printSentimentAnalysis(review_content)
 
-    print(review_content)
+    try:
+        print(review_content)
+    except UnicodeEncodeError:
+        # Reference: https://stackoverflow.com/a/3224300
+        print(review_content.encode('ascii', 'ignore'))
 
     return
 
@@ -114,7 +118,11 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
         print("\n ==== Cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
         printSentimentAnalysis(review_content)
 
-        print(review_content)
+        try:
+            print(review_content)
+        except UnicodeEncodeError:
+            # Reference: https://stackoverflow.com/a/3224300
+            print(review_content.encode('ascii', 'ignore'))
 
     return
 
@@ -169,7 +177,11 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
         print("\n ==== Review " + str(review_count+1) + info_str + " in cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
         printSentimentAnalysis(review_content)
 
-        print(review_content)
+        try:
+            print(review_content)
+        except UnicodeEncodeError:
+            # Reference: https://stackoverflow.com/a/3224300
+            print(review_content.encode('ascii', 'ignore'))
 
     return
 
