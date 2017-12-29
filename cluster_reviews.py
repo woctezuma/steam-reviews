@@ -367,7 +367,10 @@ def main():
 
     # Demo of every clustering method
 
-    test_every_clustering_method(appID)
+    perform_full_test_suite = False
+
+    if perform_full_test_suite:
+        test_every_clustering_method(appID)
 
     return
 
