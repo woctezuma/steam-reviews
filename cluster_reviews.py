@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 from sklearn import cluster, covariance, manifold
 from sklearn.cluster import AffinityPropagation
+from sklearn.cluster import Birch
 from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -62,10 +63,13 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
 
     return X
 
-def getTopClustersByCount(af, verbose = False):
+def getTopClustersByCount(af, provided_labels = [], verbose = False):
 
-    # cluster_centers_indices = af.cluster_centers_indices_
-    labels = af.labels_
+    if (provided_labels is None) or len(provided_labels) == 0:
+        # cluster_centers_indices = af.cluster_centers_indices_
+        labels = af.labels_
+    else:
+        labels = provided_labels
 
     summary_labels = pd.Series(labels).apply(str).value_counts()
 
@@ -85,7 +89,7 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
     cluster_centers_indices = af.cluster_centers_indices_
     # labels = af.labels_
 
-    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af, verbose)
+    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af, None, verbose)
 
     if num_top_clusters is None:
         top_clusters = list_of_clusters_by_count
@@ -102,23 +106,36 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
 
     return
 
-def showAllReviewsFromGivenCluster(appID, df, af, cluster_count):
+def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels = [], max_num_reviews_to_print = None):
+    # The provided labels can be supplied directly to override the labels found with Affinity Propagation.
+    # Typically used to show results obtained with other clustering methods.
 
-    cluster_centers_indices = af.cluster_centers_indices_
-    labels = af.labels_
+    # You can display a given number of reviews per cluster by playing with the variable max_num_reviews_to_print.
 
-    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
+    if (provided_labels is None) or len(provided_labels) == 0:
+        cluster_centers_indices = af.cluster_centers_indices_
+        labels = af.labels_
+
+        (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
+
+        cluster_representative_ind = cluster_centers_indices[cluster_index]
+    else:
+        cluster_centers_indices = None
+        labels = provided_labels
+
+        (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(None, provided_labels)
+
+        cluster_representative_ind = None
 
     cluster_index = int(list_of_clusters_by_count[cluster_count])
 
-    cluster_representative_ind = cluster_centers_indices[cluster_index]
     cluster_content_indices = [i for i, x in enumerate(list(labels)) if x == cluster_index]
 
     for (review_count, ind) in enumerate(cluster_content_indices):
         reviewID = list(df["recommendationid"])[ind]
         review_content = getReviewContent(appID, reviewID)
 
-        if ind == cluster_representative_ind:
+        if (cluster_representative_ind is not None) and (ind == cluster_representative_ind):
             info_str = " (representative)"
         else:
             info_str = ""
@@ -128,6 +145,13 @@ def showAllReviewsFromGivenCluster(appID, df, af, cluster_count):
 
         print(review_content)
 
+        if (max_num_reviews_to_print is not None) and (review_count >= max_num_reviews_to_print-1):
+            break
+
+    return
+
+def showAllReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels = []):
+    showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels)
     return
 
 def showDataFrameForClusterCenters(df, af, num_top_clusters = None, verbose = True):
@@ -205,6 +229,23 @@ def main():
     # Show dataframe limited to cluster centers
 
     df_representative = showDataFrameForClusterCenters(df, af, num_top_clusters)
+
+    # #############################################################################
+    # Compute Birch
+
+    num_clusters_input = 3
+
+    brc = Birch(branching_factor=50, n_clusters=num_clusters_input, threshold=0.5, compute_labels = True)
+    brc_labels = brc.fit_predict(X)
+
+    # Show Birch results
+
+    num_reviews_to_show_per_cluster = 3
+
+    for cluster_count in range(num_clusters_input):
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, brc_labels, num_reviews_to_show_per_cluster)
+
+    getTopClustersByCount(None, brc_labels, True)
 
     return
 
