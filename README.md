@@ -18,11 +18,11 @@ Most popular languages:
 ![Boxplots per language](https://tof.cx/images/2017/12/29/51178fd817ef7f0c50b867c4450e7ca1.png)
 
 ```
-          character_count  dale_chall_readability_score  \
-language                                                  
-english        340.854839                      6.494324   
-schinese       134.690476                      4.703333   
-thai           148.896552                      2.890690   
+          character_count  comment_count  dale_chall_readability_score  \
+language                                                                 
+english        340.854839       0.354839                      6.494324   
+schinese       134.690476       1.880952                      4.703333   
+thai           148.896552       0.275862                      2.890690   
 
           difficult_words_count  flesch_reading_ease  lexicon_count  \
 language                                                              
@@ -42,11 +42,17 @@ english            0.016129        3.924731        0.951613      0.430813
 schinese           0.023810        1.357143        0.976190      0.033069   
 thai               0.000000        1.413793        0.965517      0.122375   
 
-          syllable_count  voted_up  votes_funny   votes_up  
-language                                                    
-english        81.134409  0.989247     4.559140   9.903226  
-schinese        8.238095  0.928571     2.261905  11.809524  
-thai           12.758621  1.000000     0.275862   1.310345  
+          syllable_count  voted_up  votes_funny   votes_up  \
+language                                                     
+english        81.134409  0.989247     4.559140   9.903226   
+schinese        8.238095  0.928571     2.261905  11.809524   
+thai           12.758621  1.000000     0.275862   1.310345   
+
+          weighted_vote_score  
+language                       
+english              0.373838  
+schinese             0.464888  
+thai                 0.201245  
 ```
 
 ## Review clustering for Meltys Quest
