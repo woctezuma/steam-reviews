@@ -8,6 +8,7 @@ from sklearn import cluster, covariance, manifold
 from sklearn.cluster import AffinityPropagation
 from sklearn.cluster import Birch
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import DBSCAN
 from sklearn.neighbors import kneighbors_graph
 from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
@@ -255,6 +256,40 @@ def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews
 
     return agg_labels
 
+def tryDBSCAN(appID, df, X, db_eps = 0.3, db_min_samples=10, num_reviews_to_show_per_cluster = 3):
+    # #############################################################################
+    # Compute DBSCAN
+
+    # Caveat: It does not seem to be super easy to find adequate parameters.
+    # For Fidel Dungeon Rescue, the following allows to at least return a few different clusters:
+    # db_eps = 40
+    # db_min_samples = 4
+
+    db = DBSCAN(eps=db_eps, min_samples=db_min_samples).fit(X)
+    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+    core_samples_mask[db.core_sample_indices_] = True
+    dbscan_labels = db.labels_
+
+    num_clusters_including_noise_cluster = len(set(dbscan_labels))
+
+    # Number of clusters in labels, ignoring noise if present.
+    n_clusters_ = num_clusters_including_noise_cluster - (1 if -1 in dbscan_labels else 0)
+
+    print('Estimated number of clusters: %d' % n_clusters_)
+    print("Silhouette Coefficient: %0.3f"
+          % metrics.silhouette_score(X, dbscan_labels))
+
+    # Show DBSCAN results
+
+    for cluster_count in range(num_clusters_including_noise_cluster):
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, dbscan_labels, num_reviews_to_show_per_cluster)
+
+    # Display number of reviews in each cluster
+
+    getTopClustersByCount(None, dbscan_labels, True)
+
+    return dbscan_labels
+
 def main():
     appID_list = ["723090", "639780", "573170"]
 
@@ -298,6 +333,13 @@ def main():
     use_connectivity = True
 
     tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage, use_connectivity)
+
+    ## DBSCAN
+
+    db_eps = 40
+    db_min_samples = 4
+
+    tryDBSCAN(appID, df, X, db_eps, db_min_samples, num_reviews_to_show_per_cluster)
 
     return
 
