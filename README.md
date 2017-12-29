@@ -2,57 +2,51 @@
 
 This repository contains code to compute statistics of Steam reviews.
 
-## Review description for Meltys Quest, i.e. features later used for clustering
+## Review description for Fidel Dungeon Rescue, i.e. features for clustering
 
 ```
-Input appID detected as 723090
-Number of reviews: 294 (288 up ; 6 down)
-Number of downloaded reviews: 290
+Input appID detected as 573170
+Number of reviews: 151 (149 up ; 2 down)
+Number of downloaded reviews: 151
 
 Most popular languages:
-['english', 'schinese', 'thai']
+['english', 'schinese', 'spanish']
 ```
 
-![Lexicon count](https://tof.cx/images/2017/12/29/e019318781171298ec1242029fe9b8c4.png)
+![Lexicon count](http://tof.cx/images/2017/12/29/56eb3d6d465d425db194d6bc11d3d40d.png)
 
-![Boxplots per language](https://tof.cx/images/2017/12/29/51178fd817ef7f0c50b867c4450e7ca1.png)
+![Boxplots per language](http://tof.cx/images/2017/12/29/e7053368be1c49abf45209dd2be9ab45.png)
 
 ```
           character_count  comment_count  dale_chall_readability_score  \
 language                                                                 
-english        340.854839       0.354839                      6.494324   
-schinese       134.690476       1.880952                      4.703333   
-thai           148.896552       0.275862                      2.890690   
+english        288.846154       0.100000                      6.789000   
+schinese       212.222222       0.888889                      4.865556   
+spanish        349.500000       0.000000                     11.438750   
 
           difficult_words_count  flesch_reading_ease  lexicon_count  \
 language                                                              
-english                9.768817            79.946000      61.134409   
-schinese               1.809524           109.494048       6.261905   
-thai                   0.931034           104.736897      11.551724   
+english                9.376923            77.535231      51.576923   
+schinese               1.444444           136.487778       7.777778   
+spanish               23.375000            45.555000      58.875000   
 
           num_games_owned  num_reviews  playtime_forever  polarity  \
 language                                                             
-english        245.494624    12.016129        767.709677  0.156955   
-schinese        96.547619     9.785714        509.452381  0.020106   
-thai           225.724138     9.413793        791.931034  0.052586   
+english        257.707692    16.353846        646.338462  0.161304   
+schinese       319.777778    25.222222        347.666667  0.111111   
+spanish        213.875000     8.250000        485.000000  0.138281   
 
           received_for_free  sentence_count  steam_purchase  subjectivity  \
 language                                                                    
-english            0.016129        3.924731        0.951613      0.430813   
-schinese           0.023810        1.357143        0.976190      0.033069   
-thai               0.000000        1.413793        0.965517      0.122375   
+english                 0.0        3.561538             1.0      0.537878   
+schinese                0.0        1.111111             1.0      0.111111   
+spanish                 0.0        3.625000             1.0      0.434821   
 
-          syllable_count  voted_up  votes_funny   votes_up  \
-language                                                     
-english        81.134409  0.989247     4.559140   9.903226   
-schinese        8.238095  0.928571     2.261905  11.809524   
-thai           12.758621  1.000000     0.275862   1.310345   
-
-          weighted_vote_score  
-language                       
-english              0.373838  
-schinese             0.464888  
-thai                 0.201245  
+          syllable_count  voted_up  votes_funny  votes_up  weighted_vote_score  
+language                                                                        
+english        70.684615  0.984615     0.561538  1.930769             0.223770  
+schinese        6.111111  1.000000     1.000000  3.777778             0.497366  
+spanish        95.125000  1.000000     0.000000  0.875000             0.203655  
 ```
 
 ## Review clustering for Meltys Quest
