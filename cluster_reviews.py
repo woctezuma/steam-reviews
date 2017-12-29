@@ -143,13 +143,13 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
         else:
             info_str = ""
 
+        if (max_num_reviews_to_print is not None) and (review_count >= max_num_reviews_to_print):
+            break
+
         # Reference: https://stackoverflow.com/a/18544440
         print("\n ==== Review " + str(review_count+1) + info_str + " in cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
 
         print(review_content)
-
-        if (max_num_reviews_to_print is not None) and (review_count >= max_num_reviews_to_print-1):
-            break
 
     return
 
@@ -290,11 +290,13 @@ def tryDBSCAN(appID, df, X, db_eps = 0.3, db_min_samples=10, num_reviews_to_show
 
     return dbscan_labels
 
-def main():
-    appID_list = ["723090", "639780", "573170"]
+def test_every_clustering_method(appID):
+    ## Clustering
+    # Reference: http://scikit-learn.org/stable/modules/clustering.html
 
-    appID = appID_list[-1]
-
+    # NB: We are not interested in outlier detection:
+    # - if the goal were to remove low-quality reviews, a threshold on review lenght should be sufficient,
+    # - for some games, the low-quality/"funny meme" reviews are not outliers, they constitute their own sizable cluster
 
     # Features (columns) to exclude
     excluded_columns = ["language", "recommendationid"]
@@ -306,12 +308,7 @@ def main():
     X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
 
 
-    ## Clustering
-    # Reference: http://scikit-learn.org/stable/modules/clustering.html
-
-    # NB: We are not interested in outlier detection:
-    # - if the goal were to remove low-quality reviews, a threshold on review lenght should be sufficient,
-    # - for some games, the low-quality/"funny meme" reviews are not outliers, they constitute their own sizable cluster
+    ## Demo of every clustering method
 
     ## Affinity Propagation
 
@@ -340,6 +337,37 @@ def main():
     db_min_samples = 4
 
     tryDBSCAN(appID, df, X, db_eps, db_min_samples, num_reviews_to_show_per_cluster)
+
+    return
+
+def applyBirch(appID, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3):
+    # Cluster reviews for appID using selected method (Birch and then Agglomerative Clustering)
+
+    # Load Pandas dataframe
+    df = analyzeAppIDinEnglish(appID)
+
+    # Convert to NumPy matrix format
+    X = convertFromPandasDataframeToNumpyMatrix(df)
+
+    brc_labels = tryBirch(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster)
+
+    return (df, brc_labels)
+
+def main():
+    appID_list = ["723090", "639780", "573170"]
+
+    appID = appID_list[-1]
+
+    # Apply Birch and then Agglomerative Clustering
+
+    num_clusters_input = 3
+    num_reviews_to_show_per_cluster = 3
+
+    (df, labels) = applyBirch(appID, num_clusters_input, num_reviews_to_show_per_cluster)
+
+    # Demo of every clustering method
+
+    test_every_clustering_method(appID)
 
     return
 
