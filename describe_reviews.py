@@ -1,3 +1,5 @@
+import sys, getopt
+
 import json
 from textstat.textstat import textstat
 from textblob import TextBlob
@@ -234,19 +236,28 @@ def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon
 
     return
 
-def main():
+def main(argv):
     appID_list = ["723090", "639780", "573170"]
+
+    if len(argv) == 0:
+        appID = appID_list[-1]
+        print("No input detected. AppID automatically set to " + appID)
+        compare_appIDs_in_default_list = True
+    else:
+        appID = argv[0]
+        print("Input appID detected as " + appID)
+        compare_appIDs_in_default_list = False
 
     # Analyze one appID
 
-    appID = appID_list[-1]
     analyzeAppID(appID)
 
     # Compare different appIDs
 
-    plotOverlaysOfUnivariateDistribution(appID_list)
+    if compare_appIDs_in_default_list:
+        plotOverlaysOfUnivariateDistribution(appID_list)
 
     return
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
