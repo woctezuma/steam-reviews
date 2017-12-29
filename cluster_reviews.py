@@ -2,9 +2,7 @@ from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
-from sklearn import cluster, covariance, manifold
 from sklearn.cluster import AffinityPropagation
 from sklearn.cluster import Birch
 from sklearn.cluster import AgglomerativeClustering
@@ -14,15 +12,16 @@ from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-from sklearn_pandas import DataFrameMapper, gen_features
-import sklearn.preprocessing, sklearn.decomposition, sklearn.linear_model, sklearn.pipeline, sklearn.metrics
-from sklearn.feature_extraction.text import CountVectorizer
+from textblob import TextBlob
 
 def test_imported_module():
     appID = "573170"
     reviewID = "38674426"
 
     review_content = getReviewContent(appID, reviewID)
+
+    print('Test of review retrieval:')
+    printSentimentAnalysis(review_content)
 
     print(review_content)
 
@@ -41,6 +40,7 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
     D_generic = D.ix[:, ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score']]
     D_length_correlated = D.ix[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
     D_readability_correlated = D.ix[:, ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
+    D_sentiment = D.ix[:, ['polarity','subjectivity']]
 
     # Convert from Pandas to NumPy arrays
     #Reference: https://stackoverflow.com/a/22653050
@@ -53,6 +53,8 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
 
     X_readability_correlated = np.nan_to_num(X_readability_correlated)
 
+    X_sentiment = convertFromPandas(D_sentiment)
+
     scaler = StandardScaler()
     X_generic_new = scaler.fit_transform(X_generic)
 
@@ -62,7 +64,10 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
     pca_readability = PCA(n_components=2)
     X_readability_correlated_new = pca_readability.fit_transform(X_readability_correlated)
 
-    X = np.concatenate((X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new), axis=1)
+    sentiment_scaler = StandardScaler()
+    X_sentiment_new = sentiment_scaler.fit_transform(X_sentiment)
+
+    X = np.concatenate((X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new, X_sentiment_new), axis=1)
 
     return X
 
@@ -105,7 +110,19 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
         review_content = getReviewContent(appID, reviewID)
         # Reference: https://stackoverflow.com/a/18544440
         print("\n ==== Cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+        printSentimentAnalysis(review_content)
+
         print(review_content)
+
+    return
+
+def printSentimentAnalysis(text):
+
+    blob = TextBlob(text)
+
+    print('=> Sentiment analysis: '
+          + 'polarity({0:.2f})'.format(blob.sentiment.polarity) + ' ; '
+          + 'subjectivity({0:.2f})'.format(blob.sentiment.subjectivity) + ')')
 
     return
 
@@ -148,6 +165,7 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
 
         # Reference: https://stackoverflow.com/a/18544440
         print("\n ==== Review " + str(review_count+1) + info_str + " in cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+        printSentimentAnalysis(review_content)
 
         print(review_content)
 

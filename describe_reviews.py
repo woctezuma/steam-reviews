@@ -1,5 +1,6 @@
 import json
 from textstat.textstat import textstat
+from textblob import TextBlob
 
 import numpy as np
 import pandas as pd
@@ -71,6 +72,10 @@ def aggregateReviews(appID):
     review_stats['flesch_reading_ease'] = []
     review_stats['dale_chall_readability_score'] = []
 
+    # Sentiment analysis
+    review_stats['polarity'] = []
+    review_stats['subjectivity'] = []
+
     ##
 
     for review in reviews:
@@ -105,6 +110,11 @@ def aggregateReviews(appID):
         except TypeError:
             review_stats['flesch_reading_ease'].append(None)
         review_stats['dale_chall_readability_score'].append(textstat.dale_chall_readability_score(review_content))
+
+        # Sentiment analysis
+        blob = TextBlob(review_content)
+        review_stats['polarity'].append(blob.sentiment.polarity)
+        review_stats['subjectivity'].append(blob.sentiment.subjectivity)
 
     return review_stats
 
