@@ -1,5 +1,7 @@
 from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
+import sys, getopt
+
 import pandas as pd
 import numpy as np
 
@@ -377,10 +379,15 @@ def applyBirch(appID, num_clusters_input = 3, num_reviews_to_show_per_cluster = 
 
     return (df, brc_labels)
 
-def main():
+def main(argv):
     appID_list = ["723090", "639780", "573170"]
 
-    appID = appID_list[-1]
+    if len(argv) == 0:
+        appID = appID_list[-1]
+        print("No input detected. AppID automatically set to " + appID)
+    else:
+        appID = argv[0]
+        print("Input appID detected as " + appID)
 
     # Apply Birch and then Agglomerative Clustering
 
@@ -399,4 +406,4 @@ def main():
     return
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
