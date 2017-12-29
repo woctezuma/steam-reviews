@@ -176,30 +176,7 @@ def showDataFrameForClusterCenters(df, af, num_top_clusters = None, verbose = Tr
 
     return df_representative
 
-def main():
-    appID_list = ["723090", "639780", "573170"]
-
-    appID = appID_list[-1]
-
-
-    # Features (columns) to exclude
-    excluded_columns = ["language", "recommendationid"]
-
-    # Load Pandas dataframe
-    df = analyzeAppIDinEnglish(appID)
-
-    # Convert to NumPy matrix format
-    X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
-
-
-    ## Processing
-    # Reference: http://scikit-learn.org/stable/modules/clustering.html
-
-    # NB: We are not interested in outlier detection:
-    # - if the goal were to remove low-quality reviews, a threshold on review lenght should be sufficient,
-    # - for some games, the low-quality/"funny meme" reviews are not outliers, they constitute their own sizable cluster
-
-
+def tryAffinityPropagation(appID, df, X, num_top_clusters = 4, verbose = False):
     # #############################################################################
     # Compute Affinity Propagation
     af = AffinityPropagation().fit(X)
@@ -218,8 +195,6 @@ def main():
           % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
 
     # Show reviews used as cluster centers of the top clusters
-    num_top_clusters = 4
-    verbose = False
     showRepresentativeReviews(appID, df, af, num_top_clusters, verbose)
 
     # Show all reviews in given cluster (to manually check for cluster homogeneity)
@@ -232,30 +207,39 @@ def main():
 
     df_representative = showDataFrameForClusterCenters(df, af, num_top_clusters)
 
+    return labels
+
+def tryBirch(appID, df, X, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3):
     # #############################################################################
     # Compute Agglomerative Clustering with Birch as a first step
-
-    num_clusters_input = 3
 
     brc = Birch(branching_factor=50, n_clusters=num_clusters_input, threshold=0.5, compute_labels = True)
     brc_labels = brc.fit_predict(X)
 
     # Show Birch results
 
-    num_reviews_to_show_per_cluster = 3
-
     for cluster_count in range(num_clusters_input):
         showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, brc_labels, num_reviews_to_show_per_cluster)
 
+    # Display number of reviews in each cluster
+
     getTopClustersByCount(None, brc_labels, True)
 
+    return brc_labels
+
+def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3,
+                                linkage = 'ward', use_connectivity = True):
     # #############################################################################
     # Compute Agglomerative Clustering without Birch
 
-    knn_graph = kneighbors_graph(X, 30, include_self=False)
+    # NB: linkage can be any of these: 'average', 'complete', 'ward'
 
-    connectivity = knn_graph # one of these: None or knn_graph
-    linkage = 'ward' # one of these: 'average', 'complete', 'ward'
+    if use_connectivity:
+        knn_graph = kneighbors_graph(X, 30, include_self=False)
+        connectivity = knn_graph # one of these: None or knn_graph
+    else:
+        connectivity = None
+
     model = AgglomerativeClustering(linkage=linkage, connectivity=connectivity, n_clusters=num_clusters_input)
 
     agg_labels = model.fit_predict(X)
@@ -265,8 +249,55 @@ def main():
     for cluster_count in range(num_clusters_input):
         showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, agg_labels, num_reviews_to_show_per_cluster)
 
+    # Display number of reviews in each cluster
+
     getTopClustersByCount(None, agg_labels, True)
 
+    return agg_labels
+
+def main():
+    appID_list = ["723090", "639780", "573170"]
+
+    appID = appID_list[-1]
+
+
+    # Features (columns) to exclude
+    excluded_columns = ["language", "recommendationid"]
+
+    # Load Pandas dataframe
+    df = analyzeAppIDinEnglish(appID)
+
+    # Convert to NumPy matrix format
+    X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
+
+
+    ## Clustering
+    # Reference: http://scikit-learn.org/stable/modules/clustering.html
+
+    # NB: We are not interested in outlier detection:
+    # - if the goal were to remove low-quality reviews, a threshold on review lenght should be sufficient,
+    # - for some games, the low-quality/"funny meme" reviews are not outliers, they constitute their own sizable cluster
+
+    ## Affinity Propagation
+
+    num_top_clusters = 4
+    verbose = False
+
+    tryAffinityPropagation(appID, df, X, num_top_clusters, verbose)
+
+    ## Agglomerative Clustering with Birch
+
+    num_clusters_input = 3
+    num_reviews_to_show_per_cluster = 3
+
+    tryBirch(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster)
+
+    ## Agglomerative Clustering without Birch
+
+    linkage = 'ward'
+    use_connectivity = True
+
+    tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage, use_connectivity)
 
     return
 
