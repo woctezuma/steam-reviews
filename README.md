@@ -13,9 +13,9 @@ Most popular languages:
 ['english', 'schinese', 'spanish']
 ```
 
-![Lexicon count](http://tof.cx/images/2017/12/29/56eb3d6d465d425db194d6bc11d3d40d.png)
+![Lexicon count](https://tof.cx/images/2017/12/29/56eb3d6d465d425db194d6bc11d3d40d.png)
 
-![Boxplots per language](http://tof.cx/images/2017/12/29/e7053368be1c49abf45209dd2be9ab45.png)
+![Boxplots per language](https://tof.cx/images/2017/12/29/e7053368be1c49abf45209dd2be9ab45.png)
 
 ```
           character_count  comment_count  dale_chall_readability_score  \
