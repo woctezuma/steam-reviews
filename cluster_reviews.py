@@ -378,6 +378,41 @@ def test_every_clustering_method(appID):
 
     return
 
+def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster = 3):
+    # Cluster reviews for appID using Affinity Propagation
+
+    # Load Pandas dataframe
+    df = analyzeAppIDinEnglish(appID)
+
+    # Convert to NumPy matrix format
+    X = convertFromPandasDataframeToNumpyMatrix(df)
+
+    af = AffinityPropagation().fit(X)
+    cluster_centers_indices = af.cluster_centers_indices_
+    labels = af.labels_
+
+    # Show reviews used as cluster centers (for all clusters)
+    showRepresentativeReviews(appID, df, af)
+
+    # Print additional info
+
+    n_clusters_ = len(cluster_centers_indices)
+
+    print('\nEstimated number of clusters: %d' % n_clusters_)
+    print("Silhouette Coefficient: %0.3f"
+          % metrics.silhouette_score(X, labels, metric='sqeuclidean'))
+
+    # Show Affinity Propagation results
+
+    for cluster_count in range(n_clusters_):
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, labels, num_reviews_to_show_per_cluster)
+
+    # Display number of reviews in each cluster
+
+    getTopClustersByCount(None, labels, True)
+
+    return (df, labels)
+
 def applyBirch(appID, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3):
     # Cluster reviews for appID using selected method (Birch and then Agglomerative Clustering)
 
@@ -401,12 +436,17 @@ def main(argv):
         appID = argv[0]
         print("Input appID detected as " + appID)
 
-    # Apply Birch and then Agglomerative Clustering
+    num_reviews_to_show_per_cluster = 3 # Set to None to show all the reviews
 
-    num_clusters_input = 3
-    num_reviews_to_show_per_cluster = 3
+    apply_birch_method = True
 
-    (df, labels) = applyBirch(appID, num_clusters_input, num_reviews_to_show_per_cluster)
+    if apply_birch_method:
+        # Apply Birch and then Agglomerative Clustering
+        num_clusters_input = 3
+        (df, labels) = applyBirch(appID, num_clusters_input, num_reviews_to_show_per_cluster)
+    else:
+        # Apply Affinity Propagation
+        (df, labels) = applyAffinityPropagation(appID, num_reviews_to_show_per_cluster)
 
     # Demo of every clustering method
 
