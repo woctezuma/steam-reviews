@@ -311,9 +311,13 @@ def test_every_clustering_method(appID):
     ## Demo of every clustering method
 
     ## Affinity Propagation
+    # NB: The clusters look consistent, I like the results, but:
+    # - there are too many clusters (11) for our application,
+    # - and there is no direct control of the number of clusters.
+    # I don't want to have to look at each cluster to find one-line joke reviews, so I prefer to go with another method.
 
     num_top_clusters = 4
-    verbose = False
+    verbose = True
 
     tryAffinityPropagation(appID, df, X, num_top_clusters, verbose)
 
@@ -325,6 +329,7 @@ def test_every_clustering_method(appID):
     tryBirch(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster)
 
     ## Agglomerative Clustering without Birch
+    # NB: With some parameters, results are similar to Birch's (as expected from scikit-learn documentation of Birch).
 
     linkage = 'ward'
     use_connectivity = True
@@ -332,6 +337,7 @@ def test_every_clustering_method(appID):
     tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage, use_connectivity)
 
     ## DBSCAN
+    # NB: Not satisfactory here. Either the parameters, or the data pre-processing, should be changed for DBSCAN.
 
     db_eps = 40
     db_min_samples = 4
