@@ -1,0 +1,930 @@
+Input appID detected as 573170
+Number of reviews: 151 (149 up ; 2 down)
+Number of downloaded reviews: 151
+['english', 'schinese', 'spanish']
+count         151
+unique          6
+top       english
+freq          130
+Name: language, dtype: object
+          character_count  comment_count  dale_chall_readability_score  \
+language                                                                 
+english        288.846154       0.100000                      6.789000   
+schinese       212.222222       0.888889                      4.865556   
+spanish        349.500000       0.000000                     11.438750   
+
+          difficult_words_count  flesch_reading_ease  lexicon_count  \
+language                                                              
+english                9.376923            77.535231      51.576923   
+schinese               1.444444           136.487778       7.777778   
+spanish               23.375000            45.555000      58.875000   
+
+          num_games_owned  num_reviews  playtime_forever  polarity  \
+language                                                             
+english        257.707692    16.353846        646.338462  0.161304   
+schinese       319.777778    25.222222        347.666667  0.111111   
+spanish        213.875000     8.250000        485.000000  0.138281   
+
+          received_for_free  sentence_count  steam_purchase  subjectivity  \
+language                                                                    
+english                 0.0        3.561538             1.0      0.537878   
+schinese                0.0        1.111111             1.0      0.111111   
+spanish                 0.0        3.625000             1.0      0.434821   
+
+          syllable_count  voted_up  votes_funny  votes_up  weighted_vote_score  
+language                                                                        
+english        70.684615  0.984615     0.561538  1.930769             0.223770  
+schinese        6.111111  1.000000     1.000000  3.777778             0.497366  
+spanish        95.125000  1.000000     0.000000  0.875000             0.203655  
+Index(['character_count', 'comment_count', 'dale_chall_readability_score',
+       'difficult_words_count', 'flesch_reading_ease', 'language',
+       'lexicon_count', 'num_games_owned', 'num_reviews', 'playtime_forever',
+       'polarity', 'received_for_free', 'recommendationid', 'sentence_count',
+       'steam_purchase', 'subjectivity', 'syllable_count', 'voted_up',
+       'votes_funny', 'votes_up', 'weighted_vote_score'],
+      dtype='object')
+Input appID detected as 573170
+Number of reviews: 151 (149 up ; 2 down)
+Number of downloaded reviews: 151
+          character_count  comment_count  dale_chall_readability_score  \
+language                                                                 
+english        288.846154            0.1                         6.789   
+
+          difficult_words_count  flesch_reading_ease  lexicon_count  \
+language                                                              
+english                9.376923            77.535231      51.576923   
+
+          num_games_owned  num_reviews  playtime_forever  polarity  \
+language                                                             
+english        257.707692    16.353846        646.338462  0.161304   
+
+          received_for_free  sentence_count  steam_purchase  subjectivity  \
+language                                                                    
+english                 0.0        3.561538             1.0      0.537878   
+
+          syllable_count  voted_up  votes_funny  votes_up  weighted_vote_score  
+language                                                                        
+english        70.684615  0.984615     0.561538  1.930769              0.22377  
+Index(['character_count', 'comment_count', 'dale_chall_readability_score',
+       'difficult_words_count', 'flesch_reading_ease', 'language',
+       'lexicon_count', 'num_games_owned', 'num_reviews', 'playtime_forever',
+       'polarity', 'received_for_free', 'recommendationid', 'sentence_count',
+       'steam_purchase', 'subjectivity', 'syllable_count', 'voted_up',
+       'votes_funny', 'votes_up', 'weighted_vote_score'],
+      dtype='object')
+
+ ==== Cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.38) ; subjectivity(0.15))
+Almost fun. The gripesome ghost chase is well worth a refund, though!!
+
+ ==== Cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+Press Ctrl to bark
+[spoiler]Dead dog can't bark[/spoiler]
+
+ ==== Cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(-0.09) ; subjectivity(0.42))
+This game is  just plain fun, with a deceptive amount of depth in the puzzles.  I'm looking forward to playing this with my kids who are also excited for this game!
+
+ ==== Cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.24) ; subjectivity(0.51))
+Great game! I thoroughly recommend it.
+
+Brilliant enemy design leads to very diverse puzzles. The ghost applies enough tension and pressure to force you to use your instincts instead of ratholing on a single level. There’s no handholding – discovering the mechanics is part of the game and really interesting and surprising. 
+
+
+ ==== Cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.18) ; subjectivity(0.60))
+I have linked below to a video of my first twenty minutes in the game if you want to get a feel of what to expect. Put simply this is game is a great little puzzler with a cute avatar, short but rewarding play sessions and a nice ramp up in difficulty to stump but never annoy! 
+
+https://www.youtube.com/watch?v=CubsCscXbGk&index=4&list=PLrHW69YeI7GTKkg8foD1foI7uRhDfhCGJ
+
+ ==== Cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.07) ; subjectivity(0.45))
+TL;DR -> This is an excellent puzzle game. <-
+
+It may look simple, but this game is amazingly deep and complex. It just has way to much to share with the player. Much more of what you can see at first glance.
+
+The game grows in complexity with the player experience, so, every time you start the game all over again, is going to be matched up to your current hability.
+
+It will always be a great challenge, not matter how many times you finish it.
+
+Everything else is just right. Simple, but charming.
+
+I don't usually expend time writing reviews, but i actually feel that it's my duty to recommend this game! If you like challenges and puzzle games, you have to try this one!!
+
+ ==== Cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.61))
+Really enjoyed this game. Very addictive. The diversity in each level and randomness makes it a great pick up. Highly recommend for anyone looking for a quick game you can play for hours.
+
+ ==== Cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.19) ; subjectivity(0.59))
+Fidel is unique and well executed.  
+Don't let the puzzle-hype bum you out, if you don't go for puzzle games.  The brick-wall problem where you're struggling to find the only solution is nowhere in Fidel, where you're trying to make the best decisions you can, thinking into the middle, and long-terms.  Failing doesn't feel bad, becasue you feel like you're learning a skill.  Succeeding is grasping little optimizations, and understanding the quirks to best solving a problem.  
+This is the only edge-of-the-seat puzzle game I've ever played.
+Fidel's great dude
+
+ ==== Cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(-0.03) ; subjectivity(0.50))
+Roses are red,
+Violets are blue
+Fidel is a great game
+I recommend it to you.
+
+Look at the dog bark
+Look at the dog die
+Level 16 of area 1
+Makes me want to cry.
+
+Use your brain
+and use it well
+or else poor little doggie
+will be burning in hell.
+
+But you must move fast
+you must move quick
+or else the spooky scary ghost
+will make you still as a brick.
+
+Buy the game
+and buy it fast
+or else myself and the pupper
+will come kick your ass.
+
+ ==== Cluster J (#reviews = 3) ====
+=> Sentiment analysis: polarity(0.17) ; subjectivity(0.57))
+I don't usally leave reviews, but this game is magic. Classic line drawing mechanic, combined with (mostly) stationary enemies and the "three-in-a-row" bonus somehow gave birth to a super compelling experience. A great example of how the whole is greater than the sum of its parts.
+
+The enemies are interesting and intuitive; you pick up on their nuances quite naturally without any tiresome hand-holding. 
+
+I thin it's a game you really have to try for yourself. I watched Northernlion's playthrough on YouTube and wasn't that impressed, but decided to get the game anyway. 15 mins in and I was hooked. Initially I was a little put off by the time pressure, but after awhile I began to appreciate the tension it provided. The game is not about finding the perfect solution(which often gets tedious in my opinion), and the time pressure just encourages you to move things along with a good enough solution.
+
+Also, I'm happily exploring secrets.
+
+Overall, highly recommended.
+
+ ==== Cluster K (#reviews = 2) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.52))
+A very tight, very demanding puzzle-ish game that uses a simple, easily learnable set of mechanics to force you to make mind-destroyingly difficult decisions; getting near-perfect completions of most of the later floors requires you to think five steps ahead, but you don't have to be anywhere near perfect to progress to the next stage, which is a pretty lovely nugget of design. You gain items and health for doing earlier floors better, so performance on early floors affects your ability on later ones, and even when you can't figure out the perfect solution you're always pressured to do as well as you possibly can.
+
+The randomly generated levels will occasionally throw you a floor you can wipe in one try out of instinct, and occasionally something that has you completely stuck, which can be demoralizing near the end of a good run. There's also a timer on each level, which I guess is there to make sure you can't be TOO cautious, but getting wrecked by a ghost when you're 3/4ths of the way through a tricky level can feel frustrating all the same. Despite these gripes, each individual puzzle is still a joy to solve. I don't know if I'll ever be able to 100% this game, but I find that just loading it up and playing a few floors is satisfying even when I don't get very far. I absolutely got the Tetris Effect going the first night I bought this, when I played it for an hour or so before bed.
+
+Estimated number of clusters: 11
+Silhouette Coefficient: 0.604
+
+ ==== Review 1 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.45))
+you learn something new with every replay
+
+ ==== Review 2 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.37) ; subjectivity(0.43))
+Incredibly fun and inventive rogue-like. Definately worth your time an money.
+
+ ==== Review 3 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.37) ; subjectivity(0.58))
+Thanks to the devs for the update! It makes the game so much more awesome, and it's free!
+
+ ==== Review 4 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.49))
+A smart, cute, well-designed puzzle game which oozes with love. It knows what it wants to be and does it so well.
+
+ ==== Review 5 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(-0.18) ; subjectivity(0.60))
+This is a unique game and I like that. 
+Its not my type of game but my sibiling enjoys it
+Keep it up dev!
+
+
+ ==== Review 6 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.37))
+Fun and hard as nails.
+
+ ==== Review 7 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(-0.20) ; subjectivity(0.37))
+Fun puzzle game with random elements
+
+ ==== Review 8 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.01) ; subjectivity(0.35))
+This little dog goes through so much
+
+8/10 would bork at monsters again
+
+ ==== Review 9 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.60) ; subjectivity(0.57))
+I like it a lot. It would be a great fit for a mobile port
+
+ ==== Review 10 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.56) ; subjectivity(0.80))
+Challenging mash-up of rougelikes and puzzle games. I love it!
+
+ ==== Review 11 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.38) ; subjectivity(0.15))
+Almost fun. The gripesome ghost chase is well worth a refund, though!!
+
+ ==== Review 12 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.70) ; subjectivity(0.60))
+He's a good boy, he doesn't deserve all this pain.
+
+ ==== Review 13 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.11) ; subjectivity(0.45))
+I want to play this game more! It's tricky tricky.
+
+ ==== Review 14 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.60) ; subjectivity(1.00))
+Scratches that Witness itch and then goes on to carve an identity all its own.
+
+ ==== Review 15 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(-0.13) ; subjectivity(0.46))
+A long review would speak a different language than that of the game. All I can say is this: Fidel is pure game.
+
+ ==== Review 16 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.24) ; subjectivity(0.68))
+A wonderful puzzle game that's not only cheap but also very well designed.
+
+ ==== Review 17 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+You awoo when you level up.
+
+ ==== Review 18 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(-0.06) ; subjectivity(0.41))
+This game is quite fun. It's a hard interesting puzzle game.
+
+ ==== Review 19 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.30) ; subjectivity(0.59))
+Great puzzler, great atmosphere, AMAZING support post-launch. There's not much more to ask for from a game in this style. Stellar.
+
+ ==== Review 20 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.21) ; subjectivity(0.64))
+Tight design, nice aesthetic, well-tuned gameplay.
+
+ ==== Review 21 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.20) ; subjectivity(0.57))
+Great game
+
+ ==== Review 22 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.40) ; subjectivity(0.62))
+Great puzzle game! Really enjoying it and the challenge is great.
+
+ ==== Review 23 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.33))
+Love the game! Please give us a Daily Challange! BARK, BARK!
+
+ ==== Review 24 in cluster A (#reviews = 24) ====
+=> Sentiment analysis: polarity(-0.05) ; subjectivity(0.30))
+Fun game that requires you to think and plan.
+
+ ==== Review 1 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.24) ; subjectivity(0.63))
+A great little game that has that 'One more go' feeling in spades.
+
+Cute animation to boot.
+
+ ==== Review 2 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.42) ; subjectivity(0.60))
+Pretty good. Fun. Like the witness, but not.
+
+ ==== Review 3 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.59))
+It's a very good game. I can't stop playing it, gotta 100% it.
+
+ ==== Review 4 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.32) ; subjectivity(0.62))
+It is an interesting game. It's challenging but has a good deal of charm.
+
+ ==== Review 5 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.50))
+It's a good game.
+
+ ==== Review 6 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.03) ; subjectivity(0.71))
+Simple premise, lots of depth, brutal difficulty, cute dog. What more do you need?
+
+ ==== Review 7 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.55))
+Excellently addictive puzzle crawler with fun secrets to uncover
+
+ ==== Review 8 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.70))
+Amazing art, challenging puzzles that always change. I can not get enough of this game!
+
+ ==== Review 9 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.36) ; subjectivity(0.60))
+I love it! The fact that there's little to no info about it is probably the best part. You can only wonder!
+
+ ==== Review 10 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.59))
+A very good game.
+
+ ==== Review 11 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+Press Ctrl to bark
+[spoiler]Dead dog can't bark[/spoiler]
+
+ ==== Review 12 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.51) ; subjectivity(0.61))
+Original, lovely, and great fun!
+
+ ==== Review 13 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(-0.00) ; subjectivity(0.55))
+Easy to pick up, hard to put down.
+
+ ==== Review 14 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.27) ; subjectivity(0.50))
+Beautiful graphics, fun gameplay and, cool mechanics. I very much recommend this game.
+
+ ==== Review 15 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.22) ; subjectivity(0.53))
+picked it up without expecting much, played it for over an hour straight ^^
+don't forget to bark ;)
+
+ ==== Review 16 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(1.00) ; subjectivity(1.00))
+Excellent puzzle/roguelike/dungeon crawler!
+
+ ==== Review 17 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(-0.05) ; subjectivity(0.27))
+The first game that killed me in the main menu, 10/10.
+
+ ==== Review 18 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+Doge is cut
+Doge eat monstar
+Doge find muns
+Doge is fyn
+
+ ==== Review 19 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.17) ; subjectivity(0.42))
+Fidel is a really smart fast-paced puzzle game that presents new and interesting ideas.
+Totally worth a play!
+
+ ==== Review 20 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.10) ; subjectivity(1.00))
+I like it so far.
+
+ ==== Review 21 in cluster B (#reviews = 21) ====
+=> Sentiment analysis: polarity(0.26) ; subjectivity(0.64))
+Very original and fun game. Some puzzles are very challenging.
+
+ ==== Review 1 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.20) ; subjectivity(0.66))
+Good puzzles, every attempt always feels new and different, plenty of challenge and replayability. Catchy tunes and great art style. Can't go wrong for the price!
+
+Also: doggos.
+
+ ==== Review 2 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(-0.04) ; subjectivity(0.60))
+Wonderful puzzle game.  Explore and discover new game mechanics, unlock secret levels and secret modes. Tons of replay value, highly recommended.
+
+ ==== Review 3 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(-0.12) ; subjectivity(0.33))
+Fun short puzzle game. Watch gameplay before buying cause it's a hit or miss. Game is well made so no problems in that department. Don't forget to bark.
+
+ ==== Review 4 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.08) ; subjectivity(0.42))
+Fidel is a very well designed hard puzzle roguelike with a good presentation. This game is also not as simple as it may look at first glance. Recommended.
+
+ ==== Review 5 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.19) ; subjectivity(0.60))
+10 runs in and it's amazing so far. Super tightly designed. A lot of value out of a small package, could easily be sold for $20 and still be worth it.
+
+ ==== Review 6 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.42) ; subjectivity(0.70))
+I love puzzles and strategy. (And secrets) and this game is perfect from what I've seen. I will be playing much more of this. :)
+
+ ==== Review 7 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.22) ; subjectivity(0.67))
+This is a wonderfully designed game that's tuned to near perfection. It's an absolute steal at the price and a must-play for anyone who likes puzzle games.
+
+ ==== Review 8 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.43) ; subjectivity(0.62))
+This is an excellent game.  It is a fun challenging puzzle that I am having a great time with.  The game does interesting and surprising things.  I don't really want to say much more than that. :) <3
+
+ ==== Review 9 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.66))
+Great puzzle game to play on idle time. Short download, instant startup! Great aethtetics. Easy to play, hard to master. It's very rewarding when you progresively succeed in getting your head around its mechanic.
+
+ ==== Review 10 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(-0.09) ; subjectivity(0.42))
+This game is  just plain fun, with a deceptive amount of depth in the puzzles.  I'm looking forward to playing this with my kids who are also excited for this game!
+
+ ==== Review 11 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.21) ; subjectivity(0.61))
+Lovely game so far and perfect for just a quick session here and there. I love that I'm slowly able to get further and further as I learn the game and discover new things!
+
+ ==== Review 12 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.02) ; subjectivity(0.70))
+This game combines the mystery of rogue-likes with the discovery of puzzle games in a way that takes the better parts of both genres and ditches the worst.
+
+It's real good.
+
+ ==== Review 13 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.53) ; subjectivity(0.57))
+I kind of want to pat the devs on the head and say "Good boys".
+
+It's really fun, whether you play for 5 minutes or 5 hours.
+
+ ==== Review 14 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(-0.21) ; subjectivity(0.31))
+If you ever found yourself structuring your daily routine to maximize "your efficiency" this is the game for you.
+
+This game's main menu can get an IGF award itself. 
+
+"Dog bless this game."
+
+ ==== Review 15 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.23) ; subjectivity(0.52))
+A great experience for puzzle fans! I would have payed far more for this than the asking price.Not very often do I find a game that challenges me as much as this game has. If you love puzzle games, do not pass this up!
+
+ ==== Review 16 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.29) ; subjectivity(0.54))
+Good game, really enjoying it so far. It's cute. Has good personality. The puzzles are interesting and fun. I can definitely see myself coming back to play this a lot. Recommended to anyone.
+
+ ==== Review 17 in cluster C (#reviews = 17) ====
+=> Sentiment analysis: polarity(0.05) ; subjectivity(0.51))
+Fun and unique only issue is it seems that sometimes the opening screen does not have enough exp to progress down.  I may just be missing somthing though.
+
+ ==== Review 1 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.61))
+This game is giving me so much fun. The dog is the cutest thing ever and the enemies are kinda spooky. I love all the idea behind the game design, it is flawless, innovative and fresh. If you are doubting about buying it, don't doubt anymore, you won't regret it.
+Besides, you can BARK with ctrl! lol
+
+ ==== Review 2 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.18) ; subjectivity(0.62))
+Makes me feel stupid in a wonderful way. My wife and I are having tons of fun finding little secrets and sharing them with each other. You should buy it, the game is brilliantly minimalistic and mechanically deep witch is rare. We need more games like this. I look forward to spending more time with this gem.
+
+ ==== Review 3 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.30) ; subjectivity(0.73))
+Greatly recomended for a cute lunchbreak roguelite. Rounds are short and challenging. Something you want to get if you have that one [i]small[/i] gap of time in your life where you can't find anything to do.
+
+Also, you are a dog. (Which I mean that is one of the greatest pros about this game tbh)
+
+ ==== Review 4 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.09) ; subjectivity(0.55))
+Great game. Each level is simple, yet challenging. As the game progresses you learn more and more about game mechanics that are either new or something you didn't realize was possible. No story, no instructions, but the way the game is set up intuitively allows you to learn. Would recommend to anyone who loves a good puzzle game and dogs.
+
+ ==== Review 5 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.33) ; subjectivity(0.65))
+This is a fun little puzzle dungeon crawler. Lots of interesting mechanics and secrets to discover, with a very cute and polished presentation. My only gripe is I wish it was on a mobile platform where you could pick up and play more easily, but otherwise recommended!
+
+ ==== Review 6 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.56))
+This game was such a joyful experience for me from beginning to end.
+
+Fidel doesn't hold your hand but it's extremely good at conveying all of its mechanics through encouraging experimentation. This is a fast-paced puzzler which grows with you and every time I close the game I immediately want to open it up again for more.
+
+You should own this.
+
+ ==== Review 7 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.17) ; subjectivity(0.69))
+This game is brilliant. The rules are simple yet the game has a ton of depth. There are some genius enemy designs here (especially the vampires!). Oh and there are secrets, lots of them! 
+
+I recommend this for anyone who liked games like The Witness, 868-Hack, Spelunky, or even my own game, Trainyard. 
+
+PS: Make sure you try barking at EVERYTHING. You never know what will react!
+
+ ==== Review 8 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.12) ; subjectivity(0.53))
+Fidel's devs somehow managed to make procedural levels that feel hand crafted, that leaves you wanting to play better every time, learning new secrets and discovering the underlying rules of this world. Start casual, die quickly, and start to become hardcore. And don't forget to bark!
+
+I barked at a spider and it pooped itself: instant classic, GOTY, 11/10
+
+ ==== Review 9 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.24) ; subjectivity(0.50))
+The level design is as tight as it gets. You may go over and over through the same levels, but you always find a new way to play it, or in the worst case, they are still entertaining.
+
+The sound feels very good, i love the BARK of the dog.
+
+Also, best main menu ever.
+
+ ==== Review 10 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.24) ; subjectivity(0.51))
+Great game! I thoroughly recommend it.
+
+Brilliant enemy design leads to very diverse puzzles. The ghost applies enough tension and pressure to force you to use your instincts instead of ratholing on a single level. There’s no handholding – discovering the mechanics is part of the game and really interesting and surprising. 
+
+
+ ==== Review 11 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.28) ; subjectivity(0.62))
+It's original, it's quick and pretty well done.
+
+I enjoyed the 20 minutes or so I spent playing it, but I won't be returning. The levels are all randomized, which to me is a cardinal sin when it comes to a good puzzle game.
+
+Still, it's worthy of a recommendation and some folks out there may really enjoy it a lot!
+
+ ==== Review 12 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(-0.05) ; subjectivity(0.60))
+Sounds cliche, but this is a nice game of "Easy to pick up, difficult to master." The late game puzzles are pretty tough to optimize, so it doesn't really get stale. A nice game to pick up and play for a few quick runs, or to play consistently because you get addicted to it.
+
+ ==== Review 13 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.06) ; subjectivity(0.44))
+A creative and fun puzzle game that looks simple on the surface, but becomes more complex with it's different mechanics as you progress through the game. Each run for me has lasted no longer than 5 minutes, but I find each of my runs improving in length as I learn the patterns associated with each enemy and puzzle presented to you. Easily worth the price.
+
+ ==== Review 14 in cluster D (#reviews = 14) ====
+=> Sentiment analysis: polarity(0.38) ; subjectivity(0.62))
+As someone who really enjoyed the Witness it's great to see the not only the line-drawing mechanic reinterpreted as a fast-paced dungeon crawler, but to have many of the same revelatory moments occur in a completely different context. It's a perfect median between very contemplative puzzle-games, and action-oriented roguelikes.
+
+ ==== Review 1 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.11) ; subjectivity(0.47))
+Like a good puzzle game, just when you think you understand all the rules the game throws a twist.
+
+The game is hard and contemplative, but never slow. The replayability here is really, really high.
+
+This product is exactly what it says it is -- a zero grind puzzler with perfect pacing.
+
+Best of all, this game deeply respects the player's time. Buy it now.
+
+ ==== Review 2 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.08) ; subjectivity(0.46))
+This game was a lot more roguelike then I expected, very fun and challenging at the same time. I also enjoy learning how to face enemies and bosses without the game holding my hand. I would definitely recommend this game to anyone that likes puzzle games or roguelikes... Or just anyone this game is really good!
+
+ ==== Review 3 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(-0.01) ; subjectivity(0.53))
+When it launched, this was a game with loads of charm, a few hidden delightful surprises, and a brutal difficulty curve. With the recent 2.0 update, the ramp up from zero is a lot smoother and (frankly) more fun. There's also a ton of new stuff to do, surprises, and novel permutations of the core ideas. It went from being a game I rather enjoyed but gradually grew bored of, to one of my favourites of the year.
+
+ ==== Review 4 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.16) ; subjectivity(0.78))
+A fast, challenging puzzle game with brilliant design and great music.
+
+PROS:[list]
+    [*]has corgi
+    [*]amazing replay value
+    [*]simple, yet challenging gameplay
+[/list]
+
+CONS:
+[list]
+    [*]literally hell
+    [*]the forward march of time that inexorably dooms the corgi to a tragic fate
+[/list]
+
+13/10 ball is life
+
+ ==== Review 5 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.59))
+A really good sit down for 5 minutes to an hour game to play, with a very cute little doggo. It's challenging enough that it keeps me engaged, but easy enough that if it was a long work day, I don't have to think or work that hard to play. Also great for playing while waiting for queues to pop in other multiplayer games. 
+
+
+ ==== Review 6 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.21) ; subjectivity(0.46))
+I enjoyed playing this game. I'd say I was probably playing the main content of it for about 7 hours. I really like the art and the music, and think they compliment the gameplay very well. When I first started playing, I was immediately interested because I did not find almost anything in the game to be filler/uninteresting. This lack of filler is great for very short play sessions, but I also enjoyed playing for 2 or more hours at a time.
+
+ ==== Review 7 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(-0.07) ; subjectivity(0.61))
+I don't know what I can say about it, but I want to leave a positive review. It's a fantastic simple puzzle game, but if you want to be some crazy perfectionist and get all of the achievements, you can spend a lot of time figuring out the perfect route through all of the levels. I'm not that insane, but I spent what was probably too little money considering how long I played it.
+
+ ==== Review 8 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.18) ; subjectivity(0.60))
+I have linked below to a video of my first twenty minutes in the game if you want to get a feel of what to expect. Put simply this is game is a great little puzzler with a cute avatar, short but rewarding play sessions and a nice ramp up in difficulty to stump but never annoy! 
+
+https://www.youtube.com/watch?v=CubsCscXbGk&index=4&list=PLrHW69YeI7GTKkg8foD1foI7uRhDfhCGJ
+
+ ==== Review 9 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.39) ; subjectivity(0.56))
+I don't like puzzle games, but this one is so deftly designed! Simple rules, great depth, some randomization to make it replayable, short sessions, lovely graphics - that's lot of positive elements, but believe me: Fidel adds these up to a much greater sum. Very cohesive and enjoyable experience.
+
+ ==== Review 10 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.47))
+I haven't seen many games with gameplay as polished as this one. The quick gameplay sessions allowed me to play it in my spare time, a thing I can't do with many games. If you don't have 60+ hours to put into a game but still want to enjoy a great experience, this is THE game to make that happen. Thanks for bringing this to life!
+
+ ==== Review 11 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.09) ; subjectivity(0.57))
+Good puzzle game. What you need to know:
+[list]
+[*]Floors are not proc gen, but they shouldn't be - these are handcrafted puzzles
+[*]Controller support is good, but there are black bars from the couch
+[*]Geniunely unique and fun puzzle mechanic
+[*]Doesn't appear to be a metric ton of content, but definitely enough to merit the small price tag
+[/list]
+
+[b]I'd recommend [i]Fidel Dungeon Rescue[/i] at full price.[/b]
+
+ ==== Review 12 in cluster E (#reviews = 12) ====
+=> Sentiment analysis: polarity(0.08) ; subjectivity(0.52))
+Really neat and polished crawler/puzzler/roguelike full of surprising mechanics. The quick sessions, semi-random dungeons, and a Spelunky-like progression allow a casual play without being too addictive (thank god). I was expecting a short iOS-style game but it keeps going: I'm 3 hours in and I still haven't gotten to the end (there is a story). Definitely recommended!
+
+ ==== Review 1 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.03) ; subjectivity(0.51))
+Fidel dungeon rescue is a great example of an underated game, it's amazing! Fantastic! And it's shocking that not that many people have heard of it. The first time I played through it, I found the game to be a little too unforgiving, 9 times out of 10 I wouldn't die from a mistake I made, but from moving the wrong way by accident...But thanks to the update, the game is less unforgiving, there's loads of new content, bug fixes, and little things that were polished up, like some of the animations, effects, and even gameplay.
+
+I'd say it's totally worth the price, I thought it was high at first, especially for the game before the update, but now it's a better match for the price. I definitly recommend picking this up if a rogue-like puzzle game sounds fun to you.
+
+ ==== Review 2 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(-0.04) ; subjectivity(0.53))
+This is an incredibly clever game. It's genuinely impressive that the creators have managed to make this concept into a working game. The complexity required to make a puzzle/rougelike that works and is consistently fresh each run is executed extremely well. The game never feels unfair, every mistake is something you can see in advance.
+
+It took me around 8 hours to complete the game in its current state, although I haven't done the extended challenges. There's definitely room for some more mechanics and ideas to be implemented, and I hope the devs are still planning on releasing a bit more content. 
+
+Overall, it's a fun and short game, that doesn't get boring before you finish it. 
+
+Also, bark at everything.
+
+ ==== Review 3 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.05) ; subjectivity(0.53))
+I wanted this to be a relaxing puzzle game but the timer/ghost changes that dynamic. I know many players like a little pressure and say it's not a problem if you get better. For me it's an immediate turn off and I'm not interested in playing long enough to become ghost-proof. I'd rather have an option to just disable the ghost, so no timer and instant death. Making a mistake and then trying to correct it in a handful of seconds is just not fun for me.
+
+Other than that it's actually a cute game that broadens the line puzzle concept nicely. Discovering how the different enemies work and the imperfect levels forcing you to choose are clever additions.
+
+ ==== Review 4 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.29) ; subjectivity(0.58))
+This is one of the best puzzle game I've played in a long time. Design is simple, deep, full of surprise. 
+The game doesn't hand hold you and it is pretty good at conveying its rules in a natural manner.
+
+I find the music fantastic and to be perfect fit (rather unexpected for a puzzle game!), graphics are charming, the interaction are smooth and reactive, the effects and feedback are just the right amount of juicy. 
+
+I guess it is more approachable than a game like The Witness (which I also loved but I think The Witness might be more overwhelming for many types of players? Just guessing).
+
+Being able to play for short period of time is amazing, although I have to admit the "one more go" factor made me spend way too much time on it already!
+
+
+ ==== Review 5 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.27) ; subjectivity(0.57))
+Okay, so I haven't beaten this yet, but it's really good.
+
+Puzzle-crawler is actually a very apt descriptor of Fidel Dungeon Rescue. If you like either of those types of games, you're in for a treat. Fidel's design is simple, devious, and very satisfying. The art, sound, and gameplay all form a very coherent package: short and sweet, and ridiculously replayable. You may not understand what you're doing the first 10 to 15 runs, but then the game's design begins to reveal itself. That's when Fidel gets its hooks into you. I might come back to this review. I just urge you to give this a try if it piques your interest.
+
+ ==== Review 6 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.07) ; subjectivity(0.45))
+TL;DR -> This is an excellent puzzle game. <-
+
+It may look simple, but this game is amazingly deep and complex. It just has way to much to share with the player. Much more of what you can see at first glance.
+
+The game grows in complexity with the player experience, so, every time you start the game all over again, is going to be matched up to your current hability.
+
+It will always be a great challenge, not matter how many times you finish it.
+
+Everything else is just right. Simple, but charming.
+
+I don't usually expend time writing reviews, but i actually feel that it's my duty to recommend this game! If you like challenges and puzzle games, you have to try this one!!
+
+ ==== Review 7 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.53))
+Long time I haven't been so hyped by a game.
+The strength of indie video games comes from originality and DAMN, this one is original in many ways.
+If you like puzzle games, to discover secrets, to laugh, to save grandma and to SCREAM AT A F***ING GHOST, then you should stop reading this review and start playing it.
+
+The game teaches you the basics in a very short puzzle, after that you'll have to learn what monsters do, how mechanisms work, how to gain the most XP possible, by yourself.
+It is adorable, intriguing, smart and funny.
+
+I played it for 9 hours for now and there are still secrets to discover.
+
+Well, it's time to save grandma now, see you!
+
+(And don't forget to bark.)
+
+ ==== Review 8 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.10) ; subjectivity(0.46))
+Fidel is a game about the veiled kindness of vampires, the sympathetic nature of red spiders, and being a very good boy.
+
+This is a pretty special little puzzle game. There is a joy in discovering how each enemy functions that doesn't exist in most games. And once you've figure it out and finally beat the game there's always this feeling of "I can do even better next time!" I haven't had a game that's so much fun to just pick up and play - whether it be for 5 minutes or 2 hours at a time - since minesweeper.
+
+If you like puzzles and you're at all intrigued by the screenshots above, pick up this game. You won't regret it!
+
+ ==== Review 9 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.03) ; subjectivity(0.46))
+Really nice game, love the pixel art and the fact that it fits in a small window. Very bad for productivity hehe!
+I really like the puzzles, I love all the things the author did with a few rules. The only things that I don't like are some punishing mechanics, like not being able to go back if my doggy dies (I go back but the ghost always catches me), and having a time/steps (not sure) pressure to complete a level (hate that ghost). Another thing that I felt is that there is a big increase in difficulty from level 1 to level 2. On my first try it was a bit intimidating, maybe on the first try I would have liked a few intermediate levels.
+Overall a really good game, if you like exploration, pixel art and logic puzzles, definitely check it out!
+
+ ==== Review 10 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.47))
+Beautiful combination of a fast paced puzzle (yeah, they made that work somehow) with a roguelike game. Very quick runs turn this into one of those games where you just HAVE to play one more round.
+
+Some more clarification on certain things would be nice, maybe in the form of quick hints as you play. For instance, I discovered after several matches that if you press enter you can switch the start and end squares, which is useful in some levels since the positioning of the enemies and loot is not symetric. I'm also still not sure what the last item that you get when you collect coins does.
+
+In any case, extremely recommended game. Now if you excuse me, I *know* I'm going to beat it on the next run...
+
+ ==== Review 11 in cluster F (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.23) ; subjectivity(0.41))
+Wow, this game is fun, fast, and tricky! 
+Dev once said that the original inspiration for this game came when he was designing a puzzle panel for The Witness. I can see the resemblance! Finding the best path is a real joy, especially because you can take back moves after you make them so you're not just staring at a screen trying to solve the puzzle. Instead, Fidel is always adventuring, trying to find the best path, and maybe sometimes barking. 
+Like all great rouge-likes, the real joy comes from understanding all of the interactions in the game. Like when I discovered if I combo three enemies in a row, the red spiders flip over, vulnerable, until another enemy is killed. 
+It's worth the money!
+
+ ==== Review 1 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.39) ; subjectivity(0.59))
+Challenging, Refreshing, Fast, Fun.
+Very neatly designed and well designed.
+However, some features really serve no purpose. but they don't detract from it a whole lot.
+And, the soundtrack is top-notch.
+
+I give Fidel a 9/10, expect borking.
+
+ ==== Review 2 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.34) ; subjectivity(0.73))
+Just played first three levels. Excellent game! It's really challenging and the levels are smart designed. Congrats to the author. I want a linux version of it! :-)
+
+ ==== Review 3 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(-0.12) ; subjectivity(0.51))
+I was looking for a colorful turn-based puzzle game that I could put a little or a lot of time into, and this game is just that! I also like the quasi-roguelike dungeon crawling them, the music, the art, and of course, the clever puzzles.
+
+ ==== Review 4 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.28) ; subjectivity(0.67))
+It's very good. It's not sokoban, it's not hitman-go, puzzles are different every time and it's the kind of game where you can drown in nuance and depth.
+
+ ==== Review 5 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.61))
+Really enjoyed this game. Very addictive. The diversity in each level and randomness makes it a great pick up. Highly recommend for anyone looking for a quick game you can play for hours.
+
+ ==== Review 6 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(-0.22) ; subjectivity(0.46))
+Extremely underhyped. Buy now.
+
+2.0 Update: Originally Imma say this update makes this game much easier. Now I'm frustrated again. 10/10 would get frustrated again.
+
+ ==== Review 7 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.68))
+A very unique and polished puzzle game. It was very satisfying to explore its different mechanics, which were surprisingly deep.
+
+ ==== Review 8 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.21) ; subjectivity(0.57))
+An elegant and challenging puzzle-solving game in a tiny rogue-lite package. Everything works really well together to provide a thoroughly enjoyable, very replayable experience.
+
+ ==== Review 9 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(-0.05) ; subjectivity(0.49))
+If you like puzzles, this game is full of them, and they are not easy. You will adquire progressively the knowledge of the game, and how everything works, until you find yourself doing the puzzles at high speed without thinking much about it.
+
+ ==== Review 10 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.14) ; subjectivity(0.61))
+Nice and challenging game.
+Simple mechanics that allow for a lot of depth.
+A bit on the short side, but (being a rogue-lite) has tonnes of replayability.
+
+ ==== Review 11 in cluster G (#reviews = 11) ====
+=> Sentiment analysis: polarity(0.11) ; subjectivity(0.44))
+Nice small Game. 
+
+
+You need to consider which enemy / how many of them you will need to take down, and your route before enter the next level. It would be even better if there's description about the monsters.
+
+ ==== Review 1 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.09) ; subjectivity(0.52))
+It's as good as it promises. Quick play sessions with (at least for me) difficult challenges makes for a satisfying game to play for <30 minutes, or longer when you're doing some other low attention thing (eg reading an article or listening to a podcast eg). When you're afk you can also think about the game and get new ideas for next time (or just keep playing when you want). 
+
+It's quite addictive and very polished (the art, sfx and ui is quite good, and it doesn't glitch or crashes afaik)
+
+With the content updates so far (chirstmas 2017) I feel it's worth the full price tag I payed: 9€ EUR
+
+ ==== Review 2 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.20) ; subjectivity(0.60))
+This is a beautiful game. It draws you in with a simple idea that unfolds over time, revealing more and more depth. It is carefully designed to reward your time and attention and respect your intelligence. It's relaxing without being boring and fun without being childish. And on top of that it's full of warmth and charm. In a better world this clever and faithful hound would be the centerpiece of a vast media empire, a global pop culture icon. Let's make our world more like that one. I love you Fidel, you're a good boy.
+
+ ==== Review 3 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.13) ; subjectivity(0.52))
+I absolutely love this game. I play it at least a little bit, pretty much every day. :) The art is simply adorable - I love corgis! - and the whole vibe of the game oozes feel-good charm. I was also surprised by how much I enjoy the soundtrack. I've forgotten my strategy plans more than once, because I was distracted jamming out to the soundtrack. While the game *is* tough, and there's no tutorial to speak of, it's more than worth the effort to figure out and will keep you coming back for more.
+
+ ==== Review 4 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.19) ; subjectivity(0.59))
+Fidel is unique and well executed.  
+Don't let the puzzle-hype bum you out, if you don't go for puzzle games.  The brick-wall problem where you're struggling to find the only solution is nowhere in Fidel, where you're trying to make the best decisions you can, thinking into the middle, and long-terms.  Failing doesn't feel bad, becasue you feel like you're learning a skill.  Succeeding is grasping little optimizations, and understanding the quirks to best solving a problem.  
+This is the only edge-of-the-seat puzzle game I've ever played.
+Fidel's great dude
+
+ ==== Review 5 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.02) ; subjectivity(0.38))
+The best game that I've played in quite a long time.  A masterpiece of micro-design, with an insane amount of polish on every corner.
+
+It's a "small" game, but so deep that it takes quite a long time to work your way through it.  And just when you think you're done, a whole new layer unfolds for you.
+
+I just finished it, 15 hours in, but there are still a few loose ends left to tie up.
+
+Also, it takes quite a while to understand all the nuances that are present in even the earliest levels.  But you can still make your way through them without full mastery.  I recall a gradual process of getting it more and more on each pass through.
+
+ ==== Review 6 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.04) ; subjectivity(0.51))
+[i]Fidel[/i] is an excellent game that respects the player's time. It loads in a couple seconds and returns the player directly to the moment of the previous log-out without wasting a single moment on menus or engine-credits. The straigtht-forward low-res graphics and fantasy elements are just enough to make each gameplay mechanism memorable, and the minimal scoring/survival system has everything needed to keep the game taut and nothing more. Let it be known that [i]Fidel[/i] creator Daniel Benmergui is the William Strunk Jr. of game design!
+
+ ==== Review 7 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.16) ; subjectivity(0.48))
+A simple but fun puzzle rogue-lite dungeon crawler. Prepare to die a lot, learning about the ghost and other enemy mechanics, but eventually you'll learn you have plenty of time to thoroughly consider your route on each level. Soon, you'll become experienced enough to rush through without dying, and beat the game on its normal difficulty, and that's when the real challenge begins! I haven't even beaten the unlockable hard mode, and with all of the secrets along the way, there is plenty of content to be had here, for a good price!
+
+ ==== Review 8 in cluster H (#reviews = 8) ====
+=> Sentiment analysis: polarity(0.12) ; subjectivity(0.48))
+This game is a great pick up and play kind of experience. Each session might last anywhere from 5-15 minutes, it's great if you're sitting down with a laptop on your lunch break or waiting for a game to download. The music is catchy and the art style is fitting. Most importantly, the developer actually cares about his game. He's asking for recomendations from the fans, updating on a regular basis, and fixing bugs that arise in his game. The game is a solid reccomendation for anyone who likes challenging puzzles, and also for people who enjoy rouge-likes such as The Binding of Isaac.
+
+ ==== Review 1 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.02) ; subjectivity(0.49))
+I'm not sure if the term rogue-lite applies here but there is definitely a random element to the game. At it's heart Fidel Dungeon Rescue is a puzzle game, a very good puzzle game, It puts a board in front of you allow you to attack it as you see fit. You are also able to rewind moves as you make them, and you will definitely need to rewind. 
+
+I have beaten the game multiple times but still feel compelled to play more of it. That is the mark of a good game for me, and that is why I am recommending it.
+
+ ==== Review 2 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(-0.13) ; subjectivity(0.40))
+What if Spelunky was a puzzle game intead of a platformer?
+
+From looking at screenshots you'd think it's a roguelike (sorry, roguelite) -- but it actually plays more like a puzzle game. The ghosts stress me out (think Spelunky-style, giving you a timer so you can't fully max each level).
+
+I haven't "beaten" it yet, but it seems like there a ton of secrets to explore and I can see myself coming back to it often.
+
+ ==== Review 3 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.07) ; subjectivity(0.52))
+If you like thoughtful games with tight design do not miss this!  The gameplay is quick but requires careful decisions.  Fidel also achieves an old school sense of discovery about the way enemies work and little secretes that arent always immediately obvious but feel incredibly rewarding and exciting to discover as you play.  
+Definitely grab this, very well designed game that seems small at first but surprises you as it expands its world  and depth with secrets.
+
+ ==== Review 4 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(-0.03) ; subjectivity(0.50))
+Roses are red,
+Violets are blue
+Fidel is a great game
+I recommend it to you.
+
+Look at the dog bark
+Look at the dog die
+Level 16 of area 1
+Makes me want to cry.
+
+Use your brain
+and use it well
+or else poor little doggie
+will be burning in hell.
+
+But you must move fast
+you must move quick
+or else the spooky scary ghost
+will make you still as a brick.
+
+Buy the game
+and buy it fast
+or else myself and the pupper
+will come kick your ass.
+
+ ==== Review 5 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(-0.04) ; subjectivity(0.43))
+It's not really a puzzle-puzzle game, but it does make you think alot. Kind of action puzzely. Surprising amount of depth.
+
+Although the gameplay is extremely different from tetris. The closest game I can think of is tetris, where you want to work out some puzzle-like stuff, while going at a pace. Therefore being a action-puzzle game.
+
+Similar to tetris, this game have given lots of people (including me), tetris syndrome. Play it!
+
+Edit: Probably my goty 2017
+
+ ==== Review 6 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.08) ; subjectivity(0.67))
+I really enjoyed this puzzle crawler so far, the art-style is cute and well done, the animations are simple but nice and the soundtrack is energetic and fun (especially during the first bossfight). I beat the dragonslair once, and now I seem to be stuck on level 1 :(( I'll probably have to do something but for now I've been unable to figure it out. I totally recommend this game.
+
+ ==== Review 7 in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.10) ; subjectivity(0.54))
+Daniel is the nicest developer ever, as one could have guessed based on his Twitter feed. He has not released a lot of games so far, but when he does, he improves the game through a TON of free content. With Fidel, you have a really well-designed rogue-lite game. The game is affordable (sub 10€), despite the incredible amount of (polished) content you get in exchange. Support that dude, and have fun!
+
+ ==== Review 1 in cluster J (#reviews = 3) ====
+=> Sentiment analysis: polarity(0.17) ; subjectivity(0.57))
+I don't usally leave reviews, but this game is magic. Classic line drawing mechanic, combined with (mostly) stationary enemies and the "three-in-a-row" bonus somehow gave birth to a super compelling experience. A great example of how the whole is greater than the sum of its parts.
+
+The enemies are interesting and intuitive; you pick up on their nuances quite naturally without any tiresome hand-holding. 
+
+I thin it's a game you really have to try for yourself. I watched Northernlion's playthrough on YouTube and wasn't that impressed, but decided to get the game anyway. 15 mins in and I was hooked. Initially I was a little put off by the time pressure, but after awhile I began to appreciate the tension it provided. The game is not about finding the perfect solution(which often gets tedious in my opinion), and the time pressure just encourages you to move things along with a good enough solution.
+
+Also, I'm happily exploring secrets.
+
+Overall, highly recommended.
+
+ ==== Review 2 in cluster J (#reviews = 3) ====
+=> Sentiment analysis: polarity(0.22) ; subjectivity(0.60))
+Fidel is a game in the style of The Witness and Stephen's Sausage Roll, where the game has a certain set of mechanics, and the consequences of those mechanics are explored. Sometimes this results in great comedic effect -- particularly with the Alien boss.
+
+Gameplay is super fun and not stressful. Each run lasts about 5-10 minutes, so dying isn't aggravating, since it's usually pretty quick to get back to where you were last run. All of the rooms feel very fair, and it's possible to progress through them without a perfect route.
+
+The art and the sound effects are excellent, and really contribute to the feeling of joyful exploration.
+
+There's also a good amount of replay value, since the game has plenty of optional challenges that stack on the difficulty. I found the default mode pretty easy, but the challenges get pretty tough.
+
+I recommend this game. It's a lot of fun.
+
+ ==== Review 3 in cluster J (#reviews = 3) ====
+=> Sentiment analysis: polarity(0.23) ; subjectivity(0.49))
+Fidel Dungeon Rescue is a fantastic puzzle-roguelike.
+
+At first glance, you can think of it as kind of a cross between Spelunky, Crypt of the Necrodancer and The Witness (for the main puzzle mechanic), but it definitely has its own personality. From the moment you see the opening screen for the first time, it becomes obvious that it's really well designed and polished, and absolutely charming.
+
+The first level of each game is always as a kind of "tutorial" used to teach you (or, rather, to let you discover by yourself) how the different enemies behave and the best way to approach them, and after that you start descending into a dungeon of randomly generated levels.
+
+As for the dungeon itself... it's much more rewarding if you discover for yourself everything that Fidel has to offer, but suffice to say that it's always varied, challenging and, above all, fun to play.
+
+Games usually last just a few minutes, but always manage to leave you wanting to come back for "just another round". 
+
+On top of all this, it's also really cheap for everything that it has to offer, so... what are you waiting for? Go buy it!
+
+ ==== Review 1 in cluster K (#reviews = 2) ====
+=> Sentiment analysis: polarity(-0.03) ; subjectivity(0.53))
+Fidel Dungeon Rescue is a challenging puzzle game in which you move around a randomly generated dungeon of monsters without crossing your path. Everytime you "attack" a monster you lose some health, and everytime you move over a health pack you restore health. As you collect experience while you progress through the increasily difficult dungeon floors, you level up, causing the amount of health you have to increase, providing an incentive to maximum the experience you gain on each floor. While this may sound like a simple concept, there are enough secondary mechanics, interesting monster behaviours, and challenging trade-offs you must make to keep the gameplay varied and interesting. If you lose all your health or spent too long on a level, the ghost will appear to keep you on your toes. This provides a very fast-paced gameplay, while forcing you to pay careful attention to every move you make, even if there is an undo command.
+
+Unfortunately, the game is not without its flaws. The ghost can be an annoyance to those who want to take their time, or experiment without worry of having to start all over again. Furthermore I was unable to get my controller working with the game (although I suspect things like this will be patched in the future..?). Regardless, this game is highly enjoyable and I would recommend to anyone interested in puzzle games!
+
+ ==== Review 2 in cluster K (#reviews = 2) ====
+=> Sentiment analysis: polarity(0.15) ; subjectivity(0.52))
+A very tight, very demanding puzzle-ish game that uses a simple, easily learnable set of mechanics to force you to make mind-destroyingly difficult decisions; getting near-perfect completions of most of the later floors requires you to think five steps ahead, but you don't have to be anywhere near perfect to progress to the next stage, which is a pretty lovely nugget of design. You gain items and health for doing earlier floors better, so performance on early floors affects your ability on later ones, and even when you can't figure out the perfect solution you're always pressured to do as well as you possibly can.
+
+The randomly generated levels will occasionally throw you a floor you can wipe in one try out of instinct, and occasionally something that has you completely stuck, which can be demoralizing near the end of a good run. There's also a timer on each level, which I guess is there to make sure you can't be TOO cautious, but getting wrecked by a ghost when you're 3/4ths of the way through a tricky level can feel frustrating all the same. Despite these gripes, each individual puzzle is still a joy to solve. I don't know if I'll ever be able to 100% this game, but I find that just loading it up and playing a few floors is satisfying even when I don't get very far. I absolutely got the Tetris Effect going the first night I bought this, when I played it for an hour or so before bed.
+
+Cluster stats: 
+1     24
+10    21
+6     17
+8     14
+3     12
+5     11
+0     11
+2      8
+9      7
+4      3
+7      2
+dtype: int64
