@@ -143,20 +143,21 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
     # You can display a given number of reviews per cluster by playing with the variable max_num_reviews_to_print.
 
     if (provided_labels is None) or len(provided_labels) == 0:
-        cluster_centers_indices = af.cluster_centers_indices_
         labels = af.labels_
 
         (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af)
-
-        cluster_index = int(list_of_clusters_by_count[cluster_count])
-        cluster_representative_ind = cluster_centers_indices[cluster_index]
     else:
-        cluster_centers_indices = None
         labels = provided_labels
 
         (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(None, provided_labels)
 
-        cluster_index = int(list_of_clusters_by_count[cluster_count])
+    cluster_index = int(list_of_clusters_by_count[cluster_count])
+
+    if (af is not None):
+        cluster_centers_indices = af.cluster_centers_indices_
+        cluster_representative_ind = cluster_centers_indices[cluster_index]
+    else:
+        cluster_centers_indices = None
         cluster_representative_ind = None
 
     cluster_content_indices = [i for i, x in enumerate(list(labels)) if x == cluster_index]
@@ -405,7 +406,7 @@ def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster = 3):
     # Show Affinity Propagation results
 
     for cluster_count in range(n_clusters_):
-        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, labels, num_reviews_to_show_per_cluster)
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, labels, num_reviews_to_show_per_cluster)
 
     # Display number of reviews in each cluster
 
