@@ -115,6 +115,19 @@ Oh, have a look at my go at this game;
 https://youtu.be/LRusK_OP7Wc?list=PLOeIR5Q7EMVwYyQFaJTXOR1GB8a92_-57
 
  ==== Cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.02) ; subjectivity(0.48))
+*Pockets a bag of marshmellows* No, I'm not being paid for these reviews I swear. >>  No but really, this game's the best one yet of the DSW series. The challenge has been increased much further, with new enemies, harder bosses, environmental dangers (Mines) and more. To counter that, you get access to three different bikes as you progress, each one giving you a different shot type. (Narrow, Spread and Homing)
+
+Unlike the previous game and its DLC where there was no story, this one actually has a plot. It's a silly plot, but you get an introduction to the game and a cutscene after beating each girl. Someone is corrupting the Loli Police from the inside, and it's up to you to save them by... Stripping them naked and following the clues, I guess? Still a better story than Fallout 4.
+
+The difficulty in this game is the highest so far, so I would recommend most of you start on Casual mode or easier, especially for the final boss's level. [spoiler]If you beat it with 5 stars and 100% clothing damage, you get immediately placed in a special bonus level. Have fun! >:D[/spoiler]
+
+ ==== Cluster J (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.09) ; subjectivity(0.47))
+There's about 2 hours of gameplay if you play on normal/easy. Pretty much a space shooter/bullet hell game where you shoot the clothes off girls. they're supposed to be flat girls, and most are, but some are a bit more ample than that. The art 
+on the 14 girls is alright and there's a patch that allows you to see the game uncensored. If you got this game for that.. it's there. The soundtrack is good, though I only really remember hearing a song or two. So I'm not sure if the soundtrack would be worth a purchase. There is a bit of a plot that's both funny and engaging enough to not want to skip through it like other games in the genre. For the price, I think this game is worth it. All in all, this game is what it is and it succeeds in fulfilling expectations. 5.5/10.
+
+ ==== Cluster K (#reviews = 7) ====
 => Sentiment analysis: polarity(0.06) ; subjectivity(0.38))
 It's just as much fun as it was before. Same gameplay with brand new music, brand new girls. Except... all of them are... "FLAT, WHY THEY HAVE TO BE FLAT!? COME ON THIS IS NOT MY RELIGION WHERE IS THE O-P-P-A-I"
 
@@ -123,19 +136,6 @@ Oppai is great you know "Coconut" juicy D cups thats the stuff I am talking abou
 Peace. Fun story to an already cool gameplay. I expect more revolution in the future though, since that is just a spin-off!
 
 "My mission is a lonely one, but my pistol is hard" ~~ Deep Space Waifu Flat Justice
-
- ==== Cluster J (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.09) ; subjectivity(0.47))
-There's about 2 hours of gameplay if you play on normal/easy. Pretty much a space shooter/bullet hell game where you shoot the clothes off girls. they're supposed to be flat girls, and most are, but some are a bit more ample than that. The art 
-on the 14 girls is alright and there's a patch that allows you to see the game uncensored. If you got this game for that.. it's there. The soundtrack is good, though I only really remember hearing a song or two. So I'm not sure if the soundtrack would be worth a purchase. There is a bit of a plot that's both funny and engaging enough to not want to skip through it like other games in the genre. For the price, I think this game is worth it. All in all, this game is what it is and it succeeds in fulfilling expectations. 5.5/10.
-
- ==== Cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.02) ; subjectivity(0.48))
-*Pockets a bag of marshmellows* No, I'm not being paid for these reviews I swear. >>  No but really, this game's the best one yet of the DSW series. The challenge has been increased much further, with new enemies, harder bosses, environmental dangers (Mines) and more. To counter that, you get access to three different bikes as you progress, each one giving you a different shot type. (Narrow, Spread and Homing)
-
-Unlike the previous game and its DLC where there was no story, this one actually has a plot. It's a silly plot, but you get an introduction to the game and a cutscene after beating each girl. Someone is corrupting the Loli Police from the inside, and it's up to you to save them by... Stripping them naked and following the clues, I guess? Still a better story than Fallout 4.
-
-The difficulty in this game is the highest so far, so I would recommend most of you start on Casual mode or easier, especially for the final boss's level. [spoiler]If you beat it with 5 stars and 100% clothing damage, you get immediately placed in a special bonus level. Have fun! >:D[/spoiler]
 
  ==== Cluster L (#reviews = 6) ====
 => Sentiment analysis: polarity(0.00) ; subjectivity(0.47))
@@ -502,7 +502,7 @@ Fun for the whole Lolicon family
 Nearly got caught by my mother 10/10
 
 
- ==== Review 19 in cluster A (#reviews = 35) ====
+ ==== Review 19 (representative) in cluster A (#reviews = 35) ====
 => Sentiment analysis: polarity(0.16) ; subjectivity(0.62))
 Expands on the first game nicely; a great buy, especially at this price.
 
@@ -670,7 +670,7 @@ b"it's good for what it is. lots of (   ) and shoot, just like the first game. i
 => Sentiment analysis: polarity(0.99) ; subjectivity(0.88))
 PLEASE MAKE MORE SENPAI!!! <3 <3 <3
 
- ==== Review 18 in cluster B (#reviews = 28) ====
+ ==== Review 18 (representative) in cluster B (#reviews = 28) ====
 => Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
 The FBI should be knocking at my door any minute now.
 
@@ -790,7 +790,7 @@ omg great game even better than the first major improvment i love it so much the
 => Sentiment analysis: polarity(0.07) ; subjectivity(0.36))
 If you thought the first Deep Space Waifu was enough to get you put on a list of perverts somewhere, wait until you try the loli-centric sequel. NO. REGRETS. 100% recommend.
 
- ==== Review 11 in cluster C (#reviews = 22) ====
+ ==== Review 11 (representative) in cluster C (#reviews = 22) ====
 => Sentiment analysis: polarity(0.40) ; subjectivity(0.60))
 Great game with an amazing soundtrack! So playable and fun that Chris Hanson even played a stage, before asking me to take a seat.  Would strongly recommend to anyone with a windowless van!
 
@@ -907,7 +907,7 @@ it has saved me and many others from eternal hell.
 => Sentiment analysis: polarity(-0.40) ; subjectivity(0.40))
 how do you finish this game? I have all stars and ran through it three times.
 
- ==== Review 12 in cluster D (#reviews = 21) ====
+ ==== Review 12 (representative) in cluster D (#reviews = 21) ====
 => Sentiment analysis: polarity(0.50) ; subjectivity(0.18))
 The last waifu isn't even the best waifu smh. 0/10
 
@@ -1016,7 +1016,7 @@ Fun!
 => Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
 T.H.O.T PATROL
 
- ==== Review 14 in cluster E (#reviews = 21) ====
+ ==== Review 14 (representative) in cluster E (#reviews = 21) ====
 => Sentiment analysis: polarity(-0.12) ; subjectivity(0.75))
 9/11 IGN , We need more LoliPolice :(
 
@@ -1086,7 +1086,7 @@ Flat is justice
 Deep Space WAIFU Flat Justice. is a great game If you like the 1st Deep Space WAIFU you will love this one.
 thier are lots of improvements and the music is on the Epic awsome side.
 
- ==== Review 8 in cluster F (#reviews = 13) ====
+ ==== Review 8 (representative) in cluster F (#reviews = 13) ====
 => Sentiment analysis: polarity(-0.11) ; subjectivity(0.36))
 A gloriously flat shoot'em up masterpiece.
 Don't forget to place a text file named nude.patch inside the game folder so you can enjoy the game to what it can fully provide.
@@ -1146,7 +1146,7 @@ I highly recommend this and I look forward for more games in this growing franch
 => Sentiment analysis: polarity(-0.07) ; subjectivity(0.39))
 b'This is my first Review about the Game.\n\nA Story Mode\n8 Flat Chest Characters\nA Gallery Mode, to see all your unlocked Characters\nThis Game can use a nude.patch to let the girls get naked (   )\nNew Items, like an invinsible shield\nStronger Special Attacks\nHarder Boss Fights \n\nCons: Only 10 Characters, in the previous game, there was like 33 Girls.\n'
 
- ==== Review 5 in cluster G (#reviews = 10) ====
+ ==== Review 5 (representative) in cluster G (#reviews = 10) ====
 => Sentiment analysis: polarity(0.29) ; subjectivity(0.43))
 Just like the 1st game, this one is actually still fun. This one sticks close to the original gameplay (hentai touhou) and has a great soundtrack. And this one also has loli's and flat's in it so this is one of the greatest games in my books. And because steam is steam, be sure to add the patch for "extra fun".
 
@@ -1223,7 +1223,7 @@ Ohh, and again, NO WAIFU NO LAIFU, now it's all.
 => Sentiment analysis: polarity(0.07) ; subjectivity(0.49))
 b'Hey Guys, The original Deep space waife had a Nude patch but Deep space waifu FLAT Justice has one too!! :D\n\n1.Go to your steam files: \\Steam\\steamapps\\common\\Deep Space Waifu Flat Justice \\Deep Space Waifu Flat Justice_Data\n\n2.Create a new txt file and rename to "nude.patch"\n\nScreenshot of my folder: [url=https://gyazo.com/55ab47f98a2f949b548ddf315da7de9b] My Folder\t[/url]\n\n3.(   )'
 
- ==== Review 6 in cluster H (#reviews = 9) ====
+ ==== Review 6 (representative) in cluster H (#reviews = 9) ====
 => Sentiment analysis: polarity(-0.06) ; subjectivity(0.37))
 Well done DEVs! This is one solid standalone sequel! Some storyline and different bikes to unlock. If only there's a in-game wiki to explain those pick ups and power up... Anyway, looking forward to the next release; "Deep Space Waifu: B Side Story". I don't like anything too big. I prefer a grab-able and manageable size like my wife's B cup.
 Oh, have a look at my go at this game;
@@ -1246,111 +1246,72 @@ fun shooter - well-made and just fun to play- you don't even need to play for wa
 
 
  ==== Review 1 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.36) ; subjectivity(0.53))
-[b][i]deep space waifu[/i] continues to be one of the absolute best adult-themed indie games out there.[/b] I kid you not, the story is better than many story-driven games. The humor couldn't be better, either. It doesn't take itself too seriously, and everything is quite perfect. I love the achievement pace. The artwork and game mechanic work oh so well. 
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.56))
+b"As good as the 1st game, you can find a review here\n\nhttp://steamcommunity.com/id/nekomimibadik/recommended/639790\n\nPersonally, I feel like that sequel is harder than the 1st game, because I can't complete most of the levels with a 1st try. Everything else feels the same.\n\n+Soundwork - OST is a god damn 10 out of 10, amazing voice work and okay gun sounds\n+Visuals - Easy to install an uncensor patch, juicy flat chests and silly looking faces.\n\nhttp://steamcommunity.com/sharedfiles/filedetails/?id=1227798444\n\n+Gameplay - Undress them up scroll shooter (   ). Fapabale enough to keep one-handed mode all the time. All kind of girls types - mecha, K9, dolls and police officers, many more :3\n+Free ecchi wallpapers - See inside of the games folder\n+69 (   ) Achievements - pretty easy to get a perfect game\n+Super cheap\n+Japanese and English languages available\n+Ecchi grimdark atmosphere\n+Works on potato computers\nhttp://steamcommunity.com/sharedfiles/filedetails/?id=1227648362\nNo steam cards yet\n-?????????????????\n\nVery nice, brb gotta sniff dem panties Rawr eXdE http://steamcommunity.com/sharedfiles/filedetails/?id=1227799399"
 
-[b]Keep making these.[/b]
+ ==== Review 2 (representative) in cluster I (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.02) ; subjectivity(0.48))
+*Pockets a bag of marshmellows* No, I'm not being paid for these reviews I swear. >>  No but really, this game's the best one yet of the DSW series. The challenge has been increased much further, with new enemies, harder bosses, environmental dangers (Mines) and more. To counter that, you get access to three different bikes as you progress, each one giving you a different shot type. (Narrow, Spread and Homing)
 
-[b]Pros:[/b]
-+The game is just so fun
-+The artwork is outstanding
-+The story and humor are perfect
-+The achievement pace is great
+Unlike the previous game and its DLC where there was no story, this one actually has a plot. It's a silly plot, but you get an introduction to the game and a cutscene after beating each girl. Someone is corrupting the Loli Police from the inside, and it's up to you to save them by... Stripping them naked and following the clues, I guess? Still a better story than Fallout 4.
 
-[b]Cons:[/b]
-...None.
-
-[b]You know what you are getting into here - and if you enjoy adult-themed indie games, this is a must-have.[/b]
-
- ==== Review 2 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.06) ; subjectivity(0.38))
-It's just as much fun as it was before. Same gameplay with brand new music, brand new girls. Except... all of them are... "FLAT, WHY THEY HAVE TO BE FLAT!? COME ON THIS IS NOT MY RELIGION WHERE IS THE O-P-P-A-I"
-
-Oppai is great you know "Coconut" juicy D cups thats the stuff I am talking about, at least you wont be jailed for that! Oh well FAP THAT. I can deal with this inconvenience somehow... Let me just burn my hard disc after beating and giving proper span... I mean justice to all of them lolis.
-
-Peace. Fun story to an already cool gameplay. I expect more revolution in the future though, since that is just a spin-off!
-
-"My mission is a lonely one, but my pistol is hard" ~~ Deep Space Waifu Flat Justice
+The difficulty in this game is the highest so far, so I would recommend most of you start on Casual mode or easier, especially for the final boss's level. [spoiler]If you beat it with 5 stars and 100% clothing damage, you get immediately placed in a special bonus level. Have fun! >:D[/spoiler]
 
  ==== Review 3 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.18) ; subjectivity(0.47))
-It's more Deep Space Waifu, only Flatter.
-If you've played the first one and its DLC, you know what you are getting into here.
-One or two poses may seem familiar to you, if you have, but for the most part theres mostly new unique poses for the girls.
-New to this version is a new special weapon, a new powerup in the form of a close range laser sword thing, and a choice of 3 bikes (that require unlocking), starting with the standard bike from the previous releases, a spreadshot bike and a bike with slightly homing bullets (sadly not a toothpaste laser).
-
-More great music from Funny Death in this version.
-
-Basically if you liked the last DSW game, and you like FLAT, there is no reason to not pick this one up too.
-
-Flat is Justice.
+=> Sentiment analysis: polarity(0.26) ; subjectivity(0.50))
+Coming from a [h1] VERY [/h1] prestigious lad and hentai connoisseur who is proud of owning many hentai related games on steam I have to say this:
+Very intense gameplay which pumps up your heart until you're ready to experience barely legal naked females which will induce a sense of euphoria throughout your body giving you a dopamine rush therefore making you continue throughout this [i] journey. [/i] 
+Once your brain adjusts to this dopamine rush and gets more used to [b] barely legal [/b] women they go out of their way and shove a [b] mature [/b] lady by the very compelling and unique name "M.I.L.F".
+The game also has intersting bosses which resemble the male [strike] penis [/strike] anatomy which serves the role of the [b] cock blocker. [/b]
+[b] TLDR: good game; good hentai; good gameplay; good price and family friendly 8/10 [/b]
+[u] Psst... go into the game folder then go into the _data folder and make a text file called "nude.patch" and experience hentai in its new-found glory. [/u]
 
  ==== Review 4 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.25) ; subjectivity(0.53))
-Great standalone expansion to an already great game imo
+=> Sentiment analysis: polarity(-0.01) ; subjectivity(0.45))
+Not as high in quality as before. 
 
-And as I did for the first one I'll wait for more content / DLC, the current content is completely worth it but I'd gladly support more content
+So I won't lie, it's your standard ecchi game, and if you've played Deep Space Waifu, you'll be pretty much used to this already. It has some small new mechanic changes, and some major ramps in difficulty in some regards, which is nice, but that's when the game starts to deviate slightly.
 
-The main 2 differences that I know would be different compared to the first is 3 different ship attack patterns; straight, spread, and curve (sorta lock on) while the first game only had one
+The inclusion of loli content was... Well, a bit gross, but hey, your tastes may vary. 
 
-A second difference would be that there's a new ultimate (special) ability that shoots a giant laser from your ship, doing tons of damage to whatever's infront of it
+However, that's where the subjectivity gets a bit different. The art style in this version has taken a significant dive as compared to previous versions, with images in the game being actually blurry as though they were made in the wrong resolution and expanded improperly. I mean, for a game that costs less than two bucks, it's not awful, I just expected a little bit better in the quality department is all. 
 
-Music is great, artstyle is great, gameplay (played with a controller) is also great. I personally think maybe a few more songs could be added but overall a nice title.
-
-Even got all of the achievements so gg
-http://steamcommunity.com/sharedfiles/filedetails/?id=1225106788
+Long to short, scale the difficulty better, and fix the artwork, and then we're solid, but until then... meh.
 
  ==== Review 5 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.04) ; subjectivity(0.45))
-Are you somebody who played and enjoyed the first game and it's dlc? 
+=> Sentiment analysis: polarity(0.30) ; subjectivity(0.54))
+It's a more of the same (look at Deep Space Waifu and the DLC if you don't know what I mean) but with everything improved (or almost).
+In my little review of the first game I said that the game is awesome, the soundtrack is awesome and the artworks are awesome too. This kind of things are still awesome, except for the waifus, to me, I preferred the original one (DLC included), just a personal tought, nothing to worry about.
 
-Your Christmas has come early.
+Let's talk about the rest:
 
-Are you a sweaty closeted degenerate who's "just into flat chested girls but totally not into lolicon?" 
+Better graphics (it's cleaner and in higher resolution)
+Better bosses (this one was already improved) in the DLC "Academy".
+Story mode, for the first time (hilarious stuff, I guarantee)
+It's harder, and this is good, 'cause the first one is way too easy (not a bad thing for everyone, but to me, now it's better).
 
-Your Christmas isn't the only thing that has come early.
+That's pretty much everything.
 
-Are you one of my Steam friends who has complained in the past about my reccomending the first game having fucked up your queue and caused weebshit to be in your reccomended? 
-
-Your Christmas is cancelled.
-
-The game is good, it's basically the same thing as the first one with a little more content and gameplay diversity and a top notch soundtrack. These devs are cool guys.
+The game is totally worth the couple of euros it costs.
+Hoping to see more waifus while listening to some good vaporwave in the near future!
 
  ==== Review 6 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.11) ; subjectivity(0.39))
-So I just got done with this game in less than two hours and I got to say that it is fun.
-
-Another great installment to deep space waifu that has an actual plot 0_0. Yeah I know right?!
-
-Just like in deep space waifu, your objective is to shoot parts of the girls' clothes and defeat enemies and bosses.
-The last boss, M.I.L.F, was a pain to deal with, but I eventually was able to beat it. However I still got some achievements to do, so I'll be busy doing those.
-
-The music in levels is great and does not seem out of place.
-
-With a new gallery mode, new powerups, and being difficult than the last one, this is a great game for mature audiences(obviously)
-
-This game may not be for people that like girls that aren't flat, but I feel like they will enjoy it anyway.
-
+=> Sentiment analysis: polarity(0.21) ; subjectivity(0.52))
+b'Okay so i just started playing and man this game has so much improvnemts.\n \nPros:\n-cleaner menus and easier navigation\n-better hitboxes\n-enemy variety\n-music and art (vaporwave style)\n-relaxing \n-price (or lack there of)\n-controls are still awesome \n-althou i prefer steam controller keyboard and mouse work great\n-Cheesy (not in bad way its much better then story in porn) but fun story\n-nude patch (   )\n-one hand mode is unlocked from the start which is a big plus when you need to do a quick job  (   )\n-art style is much cleaner and higher resolution so you can see... ehhm enemy bullets better (   )\n-Great for midnight chilling (   )\n\nCons\n-compare to first game... i dont know what to say so far so good\n-need to play alone (unless you have a good "friend" with you (   ) )\n\nIn conclusion:\nGreat game worth the money (more like steam card), im going to update this review when i finish the game (i just wanted to get this out ASAP to help the dev. So yeah check this game out you wont regret it (unless you are gay then... lets say the "story" wouldnt interest you as much as straight guy)'
 
  ==== Review 7 in cluster I (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.09) ; subjectivity(0.37))
-A spinoff from the original DEEP SPACE WAIFU.
+=> Sentiment analysis: polarity(0.03) ; subjectivity(0.49))
+Yeah ok I was gifted this from the developter.
+I also insisted he should keep calling it "Flat Justice".
 
-deep space waifu: FLAT JUSTICE brings the best from the previous game but adding some new neat features.
+Why?
+Because "Criminal Clevage" is the perfect name for a sequel/sister expac and by god I need more comedy in my weird porn-y, actually quite playable arcade shoot'em'ups.
 
-[h1][b][*]New Pickups
-[*]New Characters
-[*]New Stage mechanics
-[*]New Enemies
-[*]Gallery mode
-[*]An actual Story mode
-[*]H A R D E R[/b][/h1]
+In fact, 'comedy' is the ingredient 'Flat Justice' brings in to the sandwich that Deep Space Waifu is. Back before you had nudity (in a patch) and top notch even if a little laid back arcade shootin' action. Now you get a more developted story mode that it's solely existance is to make you smile or giggle at the sheer ABSURDITY that is shooting giant women for their clothing. 
 
-Compared to the first one it is noticed that the devs were constantly working on to make it better and polished, players asked and they delivered it again.
+If anything I said here did not weird you out, then you ought to nab this game. It's quirky, perhaps a bit too much so, but it got heart, solid gameplay and good visuals. It may be a weird, even vulgar porn game but it is a fun, addcitive vulgar porn game with solid gameplay and character design.
 
-As usual, don't forget to place a text file named nude.patch inside the game folder so you can enjoy the game to what it can fully provide.
-
-Have fun.
+So watch out for the Lolipolice and shoot straight into their heart. There is a sassy conspiracy to uncover with your long, thick arm of the law.
 
  ==== Review 1 in cluster J (#reviews = 7) ====
 => Sentiment analysis: polarity(0.06) ; subjectivity(0.39))
@@ -1373,7 +1334,7 @@ The idea for those that just woke up under a rock is to shoot and disintegrate d
 
 A shout out to a friend who gifted this to me (I wouldn't of made the purchase just based on the premise (..cough..).
 
- ==== Review 5 in cluster J (#reviews = 7) ====
+ ==== Review 5 (representative) in cluster J (#reviews = 7) ====
 => Sentiment analysis: polarity(0.09) ; subjectivity(0.47))
 There's about 2 hours of gameplay if you play on normal/easy. Pretty much a space shooter/bullet hell game where you shoot the clothes off girls. they're supposed to be flat girls, and most are, but some are a bit more ample than that. The art 
 on the 14 girls is alright and there's a patch that allows you to see the game uncensored. If you got this game for that.. it's there. The soundtrack is good, though I only really remember hearing a song or two. So I'm not sure if the soundtrack would be worth a purchase. There is a bit of a plot that's both funny and engaging enough to not want to skip through it like other games in the genre. For the price, I think this game is worth it. All in all, this game is what it is and it succeeds in fulfilling expectations. 5.5/10.
@@ -1397,72 +1358,111 @@ I bought the first DSW for the girls but the music made me stay and the challeng
 Dev, if you can read this, please keep up the good work and please let me know if there's a way for me to support you in making new installments. Hell, I'll pay thrice the amount you're asking for both DSW games.
 
  ==== Review 1 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.25) ; subjectivity(0.56))
-b"As good as the 1st game, you can find a review here\n\nhttp://steamcommunity.com/id/nekomimibadik/recommended/639790\n\nPersonally, I feel like that sequel is harder than the 1st game, because I can't complete most of the levels with a 1st try. Everything else feels the same.\n\n+Soundwork - OST is a god damn 10 out of 10, amazing voice work and okay gun sounds\n+Visuals - Easy to install an uncensor patch, juicy flat chests and silly looking faces.\n\nhttp://steamcommunity.com/sharedfiles/filedetails/?id=1227798444\n\n+Gameplay - Undress them up scroll shooter (   ). Fapabale enough to keep one-handed mode all the time. All kind of girls types - mecha, K9, dolls and police officers, many more :3\n+Free ecchi wallpapers - See inside of the games folder\n+69 (   ) Achievements - pretty easy to get a perfect game\n+Super cheap\n+Japanese and English languages available\n+Ecchi grimdark atmosphere\n+Works on potato computers\nhttp://steamcommunity.com/sharedfiles/filedetails/?id=1227648362\nNo steam cards yet\n-?????????????????\n\nVery nice, brb gotta sniff dem panties Rawr eXdE http://steamcommunity.com/sharedfiles/filedetails/?id=1227799399"
+=> Sentiment analysis: polarity(0.36) ; subjectivity(0.53))
+[b][i]deep space waifu[/i] continues to be one of the absolute best adult-themed indie games out there.[/b] I kid you not, the story is better than many story-driven games. The humor couldn't be better, either. It doesn't take itself too seriously, and everything is quite perfect. I love the achievement pace. The artwork and game mechanic work oh so well. 
 
- ==== Review 2 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.02) ; subjectivity(0.48))
-*Pockets a bag of marshmellows* No, I'm not being paid for these reviews I swear. >>  No but really, this game's the best one yet of the DSW series. The challenge has been increased much further, with new enemies, harder bosses, environmental dangers (Mines) and more. To counter that, you get access to three different bikes as you progress, each one giving you a different shot type. (Narrow, Spread and Homing)
+[b]Keep making these.[/b]
 
-Unlike the previous game and its DLC where there was no story, this one actually has a plot. It's a silly plot, but you get an introduction to the game and a cutscene after beating each girl. Someone is corrupting the Loli Police from the inside, and it's up to you to save them by... Stripping them naked and following the clues, I guess? Still a better story than Fallout 4.
+[b]Pros:[/b]
++The game is just so fun
++The artwork is outstanding
++The story and humor are perfect
++The achievement pace is great
 
-The difficulty in this game is the highest so far, so I would recommend most of you start on Casual mode or easier, especially for the final boss's level. [spoiler]If you beat it with 5 stars and 100% clothing damage, you get immediately placed in a special bonus level. Have fun! >:D[/spoiler]
+[b]Cons:[/b]
+...None.
+
+[b]You know what you are getting into here - and if you enjoy adult-themed indie games, this is a must-have.[/b]
+
+ ==== Review 2 (representative) in cluster K (#reviews = 7) ====
+=> Sentiment analysis: polarity(0.06) ; subjectivity(0.38))
+It's just as much fun as it was before. Same gameplay with brand new music, brand new girls. Except... all of them are... "FLAT, WHY THEY HAVE TO BE FLAT!? COME ON THIS IS NOT MY RELIGION WHERE IS THE O-P-P-A-I"
+
+Oppai is great you know "Coconut" juicy D cups thats the stuff I am talking about, at least you wont be jailed for that! Oh well FAP THAT. I can deal with this inconvenience somehow... Let me just burn my hard disc after beating and giving proper span... I mean justice to all of them lolis.
+
+Peace. Fun story to an already cool gameplay. I expect more revolution in the future though, since that is just a spin-off!
+
+"My mission is a lonely one, but my pistol is hard" ~~ Deep Space Waifu Flat Justice
 
  ==== Review 3 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.26) ; subjectivity(0.50))
-Coming from a [h1] VERY [/h1] prestigious lad and hentai connoisseur who is proud of owning many hentai related games on steam I have to say this:
-Very intense gameplay which pumps up your heart until you're ready to experience barely legal naked females which will induce a sense of euphoria throughout your body giving you a dopamine rush therefore making you continue throughout this [i] journey. [/i] 
-Once your brain adjusts to this dopamine rush and gets more used to [b] barely legal [/b] women they go out of their way and shove a [b] mature [/b] lady by the very compelling and unique name "M.I.L.F".
-The game also has intersting bosses which resemble the male [strike] penis [/strike] anatomy which serves the role of the [b] cock blocker. [/b]
-[b] TLDR: good game; good hentai; good gameplay; good price and family friendly 8/10 [/b]
-[u] Psst... go into the game folder then go into the _data folder and make a text file called "nude.patch" and experience hentai in its new-found glory. [/u]
+=> Sentiment analysis: polarity(0.18) ; subjectivity(0.47))
+It's more Deep Space Waifu, only Flatter.
+If you've played the first one and its DLC, you know what you are getting into here.
+One or two poses may seem familiar to you, if you have, but for the most part theres mostly new unique poses for the girls.
+New to this version is a new special weapon, a new powerup in the form of a close range laser sword thing, and a choice of 3 bikes (that require unlocking), starting with the standard bike from the previous releases, a spreadshot bike and a bike with slightly homing bullets (sadly not a toothpaste laser).
+
+More great music from Funny Death in this version.
+
+Basically if you liked the last DSW game, and you like FLAT, there is no reason to not pick this one up too.
+
+Flat is Justice.
 
  ==== Review 4 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(-0.01) ; subjectivity(0.45))
-Not as high in quality as before. 
+=> Sentiment analysis: polarity(0.25) ; subjectivity(0.53))
+Great standalone expansion to an already great game imo
 
-So I won't lie, it's your standard ecchi game, and if you've played Deep Space Waifu, you'll be pretty much used to this already. It has some small new mechanic changes, and some major ramps in difficulty in some regards, which is nice, but that's when the game starts to deviate slightly.
+And as I did for the first one I'll wait for more content / DLC, the current content is completely worth it but I'd gladly support more content
 
-The inclusion of loli content was... Well, a bit gross, but hey, your tastes may vary. 
+The main 2 differences that I know would be different compared to the first is 3 different ship attack patterns; straight, spread, and curve (sorta lock on) while the first game only had one
 
-However, that's where the subjectivity gets a bit different. The art style in this version has taken a significant dive as compared to previous versions, with images in the game being actually blurry as though they were made in the wrong resolution and expanded improperly. I mean, for a game that costs less than two bucks, it's not awful, I just expected a little bit better in the quality department is all. 
+A second difference would be that there's a new ultimate (special) ability that shoots a giant laser from your ship, doing tons of damage to whatever's infront of it
 
-Long to short, scale the difficulty better, and fix the artwork, and then we're solid, but until then... meh.
+Music is great, artstyle is great, gameplay (played with a controller) is also great. I personally think maybe a few more songs could be added but overall a nice title.
+
+Even got all of the achievements so gg
+http://steamcommunity.com/sharedfiles/filedetails/?id=1225106788
 
  ==== Review 5 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.30) ; subjectivity(0.54))
-It's a more of the same (look at Deep Space Waifu and the DLC if you don't know what I mean) but with everything improved (or almost).
-In my little review of the first game I said that the game is awesome, the soundtrack is awesome and the artworks are awesome too. This kind of things are still awesome, except for the waifus, to me, I preferred the original one (DLC included), just a personal tought, nothing to worry about.
+=> Sentiment analysis: polarity(0.04) ; subjectivity(0.45))
+Are you somebody who played and enjoyed the first game and it's dlc? 
 
-Let's talk about the rest:
+Your Christmas has come early.
 
-Better graphics (it's cleaner and in higher resolution)
-Better bosses (this one was already improved) in the DLC "Academy".
-Story mode, for the first time (hilarious stuff, I guarantee)
-It's harder, and this is good, 'cause the first one is way too easy (not a bad thing for everyone, but to me, now it's better).
+Are you a sweaty closeted degenerate who's "just into flat chested girls but totally not into lolicon?" 
 
-That's pretty much everything.
+Your Christmas isn't the only thing that has come early.
 
-The game is totally worth the couple of euros it costs.
-Hoping to see more waifus while listening to some good vaporwave in the near future!
+Are you one of my Steam friends who has complained in the past about my reccomending the first game having fucked up your queue and caused weebshit to be in your reccomended? 
+
+Your Christmas is cancelled.
+
+The game is good, it's basically the same thing as the first one with a little more content and gameplay diversity and a top notch soundtrack. These devs are cool guys.
 
  ==== Review 6 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.21) ; subjectivity(0.52))
-b'Okay so i just started playing and man this game has so much improvnemts.\n \nPros:\n-cleaner menus and easier navigation\n-better hitboxes\n-enemy variety\n-music and art (vaporwave style)\n-relaxing \n-price (or lack there of)\n-controls are still awesome \n-althou i prefer steam controller keyboard and mouse work great\n-Cheesy (not in bad way its much better then story in porn) but fun story\n-nude patch (   )\n-one hand mode is unlocked from the start which is a big plus when you need to do a quick job  (   )\n-art style is much cleaner and higher resolution so you can see... ehhm enemy bullets better (   )\n-Great for midnight chilling (   )\n\nCons\n-compare to first game... i dont know what to say so far so good\n-need to play alone (unless you have a good "friend" with you (   ) )\n\nIn conclusion:\nGreat game worth the money (more like steam card), im going to update this review when i finish the game (i just wanted to get this out ASAP to help the dev. So yeah check this game out you wont regret it (unless you are gay then... lets say the "story" wouldnt interest you as much as straight guy)'
+=> Sentiment analysis: polarity(0.11) ; subjectivity(0.39))
+So I just got done with this game in less than two hours and I got to say that it is fun.
+
+Another great installment to deep space waifu that has an actual plot 0_0. Yeah I know right?!
+
+Just like in deep space waifu, your objective is to shoot parts of the girls' clothes and defeat enemies and bosses.
+The last boss, M.I.L.F, was a pain to deal with, but I eventually was able to beat it. However I still got some achievements to do, so I'll be busy doing those.
+
+The music in levels is great and does not seem out of place.
+
+With a new gallery mode, new powerups, and being difficult than the last one, this is a great game for mature audiences(obviously)
+
+This game may not be for people that like girls that aren't flat, but I feel like they will enjoy it anyway.
+
 
  ==== Review 7 in cluster K (#reviews = 7) ====
-=> Sentiment analysis: polarity(0.03) ; subjectivity(0.49))
-Yeah ok I was gifted this from the developter.
-I also insisted he should keep calling it "Flat Justice".
+=> Sentiment analysis: polarity(0.09) ; subjectivity(0.37))
+A spinoff from the original DEEP SPACE WAIFU.
 
-Why?
-Because "Criminal Clevage" is the perfect name for a sequel/sister expac and by god I need more comedy in my weird porn-y, actually quite playable arcade shoot'em'ups.
+deep space waifu: FLAT JUSTICE brings the best from the previous game but adding some new neat features.
 
-In fact, 'comedy' is the ingredient 'Flat Justice' brings in to the sandwich that Deep Space Waifu is. Back before you had nudity (in a patch) and top notch even if a little laid back arcade shootin' action. Now you get a more developted story mode that it's solely existance is to make you smile or giggle at the sheer ABSURDITY that is shooting giant women for their clothing. 
+[h1][b][*]New Pickups
+[*]New Characters
+[*]New Stage mechanics
+[*]New Enemies
+[*]Gallery mode
+[*]An actual Story mode
+[*]H A R D E R[/b][/h1]
 
-If anything I said here did not weird you out, then you ought to nab this game. It's quirky, perhaps a bit too much so, but it got heart, solid gameplay and good visuals. It may be a weird, even vulgar porn game but it is a fun, addcitive vulgar porn game with solid gameplay and character design.
+Compared to the first one it is noticed that the devs were constantly working on to make it better and polished, players asked and they delivered it again.
 
-So watch out for the Lolipolice and shoot straight into their heart. There is a sassy conspiracy to uncover with your long, thick arm of the law.
+As usual, don't forget to place a text file named nude.patch inside the game folder so you can enjoy the game to what it can fully provide.
+
+Have fun.
 
  ==== Review 1 in cluster L (#reviews = 6) ====
 => Sentiment analysis: polarity(0.15) ; subjectivity(0.48))
@@ -1520,7 +1520,7 @@ Do it, it's funny, perverted and a guilty pleasure.
 
 Oh and the music is really relaxing and good if you dig the style.
 
- ==== Review 4 in cluster L (#reviews = 6) ====
+ ==== Review 4 (representative) in cluster L (#reviews = 6) ====
 => Sentiment analysis: polarity(0.00) ; subjectivity(0.47))
 So first off id like to say this is a spoof shooter in the sense it doesnt take its self seriously but as you start if your a completionist then you cant help but get addicted to trying to manage to unclothe the girls for the 100% part, killing enemys and collecting stars for the 5 star rating on each level.  
 Dont get me wrong this is no bullet hell shooter its to casual for that but at the same time managing the points above can feel like your in a bullet hell game (not trying to start any arguments this is my personal oppinion).
@@ -1595,7 +1595,7 @@ Cons: I've found some bugs when playing the game, but they are very likely to be
 => Sentiment analysis: polarity(0.11) ; subjectivity(0.51))
 b'Honestly, this actually is a pretty good shooter for $2. It doesn\'t change much from the original DSW but it really doesn\'t need to. It\'s more of what makes it good, combined with some humor and all-around fun. \n\nIf you can put up with the sex-related jokes (the robot boss being named M.I.L.F.), the year 2069, the bear\'s name being Bear F. King, etc.) it actually is a fun bullet hell shooter. \n\nThe truth is, you\'re here to undress the girls. I get that. Unfortunately, Steam makes it that you can\'t feature actual nudity, but let\'s look at this: \n\nStep 1: Go into your file: (whatever directory you used)\\steamapps\\common\\Deep Space Waifu Flat Justice\\Deep Space Waifu Flat Justice_Data \n\nStep 2: create a new text file and name it "nude.patch"\n\nStep 3: Restart the game. \n\nStep 4: (   )'
 
- ==== Review 3 in cluster M (#reviews = 5) ====
+ ==== Review 3 (representative) in cluster M (#reviews = 5) ====
 => Sentiment analysis: polarity(0.25) ; subjectivity(0.61))
 Okay, so the devs notified me, with a reply to my praising comment under the OG Deep Space Waifu, that Flat Justice came out. It was refreshing, and just so nice that they cared enough to reply to a random reviewer, that it caught me off-guard.
 I have nothing but praise for this game. The new content is awesome, the waifus are varied, nice to look at, the gameplay is fun, fast and addicting. As of now I have completed the game, but have yet to unlock the one handed achievements, but I will surely do so in the upcoming few days :3.
@@ -1619,7 +1619,7 @@ P.P.S The "nude.patch" thing still works ;)
 => Sentiment analysis: polarity(0.12) ; subjectivity(0.60))
 Like the original Deep Space Waifu, this is a short, simple shoot 'em up. That isn't a bad thing, because the games and their DLC are sold for dirt cheap, constantly updated with free content and support, and the games are stylish as hell. I honestly have very little interest in playing a game to see anime tiddies, but I play these games because I love their style so much. The soundtracks are amazing and the visuals are sleek and interesting. You might come for the nudity, but you'll stay for the style. For the price these games and their add-ons are sold for, you really won't be disappointed with what you get.
 
- ==== Review 2 in cluster N (#reviews = 4) ====
+ ==== Review 2 (representative) in cluster N (#reviews = 4) ====
 => Sentiment analysis: polarity(0.19) ; subjectivity(0.54))
 First things First I need to make sure you understand 1 simple thing. I played this game for the PLOT, nothing else.
 
@@ -1691,7 +1691,7 @@ As with the original, I'm going to give Flat Justice a thumbs-up, and recommend 
 
 EDIT: They patched in a 13th girl as a postgame bonus. I'm pretty sure her boss is reused from one of the previous level sets, but it was a free bonus so I'm not really going to complain.
 
- ==== Review 4 in cluster O (#reviews = 4) ====
+ ==== Review 4 (representative) in cluster O (#reviews = 4) ====
 => Sentiment analysis: polarity(0.26) ; subjectivity(0.49))
 Well, it's sort of a sequel to Deep Space Waifu.
 A rather easy kind of bullet hell shooter.
@@ -1725,7 +1725,7 @@ Its a casual bullet hell type game that has a pretty good soundtrack. Includes l
 
 Also jail is fun you get free food and housing. but you have to work in jail and they pay you like a couple cents an hour. at least my butt's clean now.
 
- ==== Review 2 in cluster P (#reviews = 4) ====
+ ==== Review 2 (representative) in cluster P (#reviews = 4) ====
 => Sentiment analysis: polarity(0.08) ; subjectivity(0.39))
 Pros:
 - Same old Shoot 'Em Up game mechanics that we have come to love in the first game.
@@ -1775,7 +1775,7 @@ Or if you're above the 6th layer of irony and can't afford HuniePop.
 [B]Why not. I liked it. [/b]
 When you're finished, you can get the first game along with its DLC as well.
 
- ==== Review 2 in cluster Q (#reviews = 3) ====
+ ==== Review 2 (representative) in cluster Q (#reviews = 3) ====
 => Sentiment analysis: polarity(0.11) ; subjectivity(0.55))
 This... this is actually a surprisingly solid casual shmup, playable and enjoyable by pretty much anybody, though complete with higher difficulty levels that, as a nice change, aren't requirements to unlock a single thing. You can play the whole game on "super casual" without ever being told that only hardcore players can progress farther, but those players possessed of harder cores can turn the challenge up.
 
@@ -1789,7 +1789,7 @@ Oddly enough, I'm recommending this one. It's not very long, but it's fun, and i
 => Sentiment analysis: polarity(-0.03) ; subjectivity(0.46))
 When I purchased the first Deep Space Waifu I had initially purchased the game as a gag, not ever thinking I'd find any value in a game I purchased for only a $1. Little did I know that I would end up finding what at the time I'd consider a hidden gem on steam. Now after the increased sucess of the first game, Neko Climax Studios has managed to create a game that is simply amazing. So much heart and soul was put into the development of this game and it really shows in the games quality. The in game story is very funny. I love the way they added it into this one instead of it just throwing you in and going "strip some big ol' anime bozangas" like the previous game did. The gameplay is very fun, still continuing with the bullet hell shooter style as this game's predecessor except it changes things up a little by adding some new special attacks and two new bike styles. The art is really cute and drawn very well. The sheer talent that is put to work on these games and it blows my mind that they can sell this game and the previous title for only $1.99, and I purchased the game during the autumn sale so I got it for even cheaper. I highly recommend this game to anyone who loves bullet hells, qt anime girls, both, or are just looking for a cheaply priced game to pass the time. You won't be dissapointed.
 
- ==== Review 1 in cluster R (#reviews = 2) ====
+ ==== Review 1 (representative) in cluster R (#reviews = 2) ====
 => Sentiment analysis: polarity(0.15) ; subjectivity(0.55))
 And here we are back again, reviewing another game from Neko Climax studios we swore the first time was only a one time purchase, and that it slipped into our basket with a sale by mistake or that we really hated that friend that gifted this to us... Yeah right, lol. They keep making them and we keep buying them, don't we Mr Hentai-San :) ? There is something very nice about these games, uhm standing up ovation... HIde the feminist, prepare the inuendo jokes...let's review DSW Flat justice.
 
@@ -1832,7 +1832,7 @@ With no reservations? I give Deep Space Waifu : Flat Justice, a resounding 10/10
 
 Go pick it up today, after all - The force needs you.
 
- ==== Review 1 in cluster S (#reviews = 1) ====
+ ==== Review 1 (representative) in cluster S (#reviews = 1) ====
 => Sentiment analysis: polarity(0.30) ; subjectivity(0.35))
 Man this is the best left handed game of 2017 and
 best game of2018
@@ -2027,9 +2027,9 @@ Cluster stats:
 15    13
 7     10
 17     9
-14     7
-1      7
 13     7
+1      7
+14     7
 8      6
 9      5
 5      4
