@@ -24,24 +24,30 @@ def loadData(appID):
     data_filename = data_path + json_filename
 
     with open(data_filename, 'r', encoding="utf8") as in_json_file:
-        data = json.load(in_json_file)
+        review_data = json.load(in_json_file)
 
-    return data
+    return review_data
 
-def aggregateReviews(appID):
+def describeData(review_data):
 
-    data = loadData(appID)
-
-    query_summary = data['query_summary']
+    query_summary = review_data['query_summary']
 
     sentence = 'Number of reviews: {0} ({1} up ; {2} down)'
     sentence = sentence.format(query_summary["total_reviews"], query_summary["total_positive"], query_summary["total_negative"])
     print(sentence)
 
-    reviews = list(data['reviews'].values())
+    reviews = list(review_data['reviews'].values())
 
     sentence = 'Number of downloaded reviews: ' + str(len(reviews))
     print(sentence)
+
+    return (query_summary, reviews)
+
+def aggregateReviews(appID):
+
+    review_data = loadData(appID)
+
+    (query_summary, reviews) = describeData(review_data)
 
     review_stats = dict()
 
