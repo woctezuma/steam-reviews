@@ -1,7 +1,10 @@
 import sys, getopt
+
 from textblob import TextBlob
+
 from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
+from cluster_reviews import printSentimentAnalysis
 
 def getReviewSubjectivityDictionary(appID, accepted_languages = ['english']):
     # A light version of aggregateReviews() from describe_reviews.py
@@ -65,6 +68,27 @@ def printDictionaryStats(review_dict):
 
     return wilson_score
 
+def showReviews(appID, reviewID_list, max_num_reviews_to_print = None):
+    # Adapted from showFixedNumberOfReviewsFromGivenCluster() in cluster_reviews.py
+
+    for (review_count, reviewID) in enumerate(reviewID_list):
+        review_content = getReviewContent(appID, reviewID)
+
+        if (max_num_reviews_to_print is not None) and (review_count >= max_num_reviews_to_print):
+            break
+
+        # Reference: https://stackoverflow.com/a/18544440
+        print("\n ==== Review " + str(review_count+1) + " (#reviews = " + str(len(reviewID_list)) + ") ====" )
+        printSentimentAnalysis(review_content)
+
+        try:
+            print(review_content)
+        except UnicodeEncodeError:
+            # Reference: https://stackoverflow.com/a/3224300
+            print(review_content.encode('ascii', 'ignore'))
+
+    return
+
 def main(argv):
     appID_list = ["723090", "639780", "573170"]
 
@@ -84,10 +108,30 @@ def main(argv):
     print('\nStats for all reviews available in ' + ' '.join([l.capitalize() for l in accepted_languages]))
     wilson_score_raw = printDictionaryStats(review_dict)
 
-    print('\nStats for all acceptable reviews (subjectivity >= {0:.2f})'.format(subjectivity_threshold))
+    print('\nThreshold for subjectivity: {0:.2f}'.format(subjectivity_threshold))
+
+    max_num_reviews_to_print = 5
+
+    for keyword in ['positive', 'negative']:
+        reviewID_list = acceptable_reviews_dict[keyword]
+        if len(reviewID_list) > 0:
+            print('\n\t[ ========================================== ]')
+            print('\t[ ====== Acceptable ' + keyword + ' reviews ======= ]')
+            showReviews(appID, reviewID_list, max_num_reviews_to_print)
+
+    for keyword in ['positive', 'negative']:
+        reviewID_list = joke_reviews_dict[keyword]
+        if len(reviewID_list) > 0:
+            print('\n\t[ ==================================== ]')
+            print('\t[ ====== Joke ' + keyword + ' reviews ======= ]')
+            showReviews(appID, reviewID_list, max_num_reviews_to_print)
+
+    print('\n\t[ ==================================== ]')
+
+    print('\nStats for all acceptable reviews (subjectivity >= threshold)')
     wilson_score_acceptable_only = printDictionaryStats(acceptable_reviews_dict)
 
-    print('\nStats for detected joke reviews (subjectivity < {0:.2f})'.format(subjectivity_threshold))
+    print('\nStats for detected joke reviews (subjectivity < threshold)')
     wilson_score_joke_only = printDictionaryStats(joke_reviews_dict)
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
