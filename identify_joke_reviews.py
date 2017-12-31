@@ -1,5 +1,6 @@
 import sys, getopt
 from textblob import TextBlob
+from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
 
 def getReviewSubjectivityDictionary(appID, accepted_languages = ['english']):
@@ -57,11 +58,12 @@ def printDictionaryStats(review_dict):
 
     num_pos = len(review_dict['positive'])
     num_neg = len(review_dict['negative'])
+    wilson_score = computeWilsonScore(num_pos, num_neg)
 
-    sentence = 'Number of reviews: {0} ({1} up ; {2} down)'.format(num_pos+num_neg, num_pos, num_neg)
-    print(sentence)
+    sentence = 'Number of reviews: {0} ({1} up ; {2} down) ; Wilson score: {3:.2f}'
+    print(sentence.format(num_pos+num_neg, num_pos, num_neg, wilson_score))
 
-    return 
+    return wilson_score
 
 def main(argv):
     appID_list = ["723090", "639780", "573170"]
@@ -80,13 +82,16 @@ def main(argv):
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
 
     print('\nStats for all reviews available in ' + ' '.join([l.capitalize() for l in accepted_languages]))
-    printDictionaryStats(review_dict)
+    wilson_score_raw = printDictionaryStats(review_dict)
 
     print('\nStats for all acceptable reviews (subjectivity >= {0:.2f})'.format(subjectivity_threshold))
-    printDictionaryStats(acceptable_reviews_dict)
+    wilson_score_acceptable_only = printDictionaryStats(acceptable_reviews_dict)
 
     print('\nStats for detected joke reviews (subjectivity < {0:.2f})'.format(subjectivity_threshold))
-    printDictionaryStats(joke_reviews_dict)
+    wilson_score_joke_only = printDictionaryStats(joke_reviews_dict)
+
+    wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
+    print('\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(wilson_score_deviation))
 
     return
 
