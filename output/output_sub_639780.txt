@@ -1,0 +1,119 @@
+Input appID detected as 639780
+Number of reviews: 347 (338 up ; 9 down)
+Number of downloaded reviews: 332
+
+Stats for all reviews available in English
+Number of reviews: 209 (204 up ; 5 down) ; Wilson score: 0.95
+
+Threshold for subjectivity: 0.36
+
+	[ ========================================== ]
+	[ ====== Acceptable positive reviews ======= ]
+
+ ==== Review 1 (#reviews = 155) ====
+=> Sentiment analysis: polarity(0.06) ; subjectivity(0.39))
+Definately a SHMUP game with a very nice musical soundtrack.  This is a stand alone expansion that takes place after the dlc from the first game.  Same rules apply here, Shoot the clothing off to get a 100% or be a gentleman and try to clear a stage without *stripping* them.  Different modes for those who want it easier and multiple loadouts for your ship.  This stand alone seems to be only in japanese atm, but after playing the first game, I figured out where the menus were easy nuff.  prob is, theres are semi *story* scenes in this one, and I cant understand what they are saying, be it legit or Waifu lol.  A fun game nonetheess.  Hopefully they add a patch for multiple languages as they did for the first game ^,..,^
+
+ ==== Review 2 (#reviews = 155) ====
+=> Sentiment analysis: polarity(0.50) ; subjectivity(0.50))
+it's okay
+
+ ==== Review 3 (#reviews = 155) ====
+=> Sentiment analysis: polarity(-0.01) ; subjectivity(0.56))
+[I][B]Deep Space Waifu: FLAT JUSTICE[/b][/i] is another "chapter" of the DEEP SPACE WAIFU series. This time with [u]even better[/u] plot and overall quality! (if I can refer to this game with the word)
+
+[H1]Why do you refer to these games as "series"? [/h1]
+They follow the original concept of a funny, NSFW bullet hell / dating sim(?) game with bright, violent colours and and 2D art.
+[H1]Why should I buy this game?[/h1]
+Look at it's price. And you can beat your meat to it*
+[H1]*Can I actually beat my meat to it? [/h1]
+Depends on how desperate you are.
+[H1]What about the gameplay..?[/h1]
+The game is actually pretty fun to play. It has improved, especially if you consider the storyline.
+It even has humorous cutscenes after you clear the stage. [I]Yatta! [/i]
+[H1]So, should I really buy it? [/h1]
+Yes, go ahead. Especially if you watch too much of "those" cartoons.
+Or if you're above the 6th layer of irony and can't afford HuniePop.
+
+[H1]The final verdict:[/h1]
+[B]Why not. I liked it. [/b]
+When you're finished, you can get the first game along with its DLC as well.
+
+ ==== Review 4 (#reviews = 155) ====
+=> Sentiment analysis: polarity(0.05) ; subjectivity(0.70))
+This game was gifted to me
+
+You know who you are
+
+ ==== Review 5 (#reviews = 155) ====
+=> Sentiment analysis: polarity(-0.43) ; subjectivity(0.77))
+WTF THIS GAME IS GOD,I MEAN, YOU CAN EVEN STRIP A K-9 UNIT WTF
+
+	[ ========================================== ]
+	[ ====== Acceptable negative reviews ======= ]
+
+ ==== Review 1 (#reviews = 1) ====
+=> Sentiment analysis: polarity(-0.01) ; subjectivity(0.45))
+Not as high in quality as before. 
+
+So I won't lie, it's your standard ecchi game, and if you've played Deep Space Waifu, you'll be pretty much used to this already. It has some small new mechanic changes, and some major ramps in difficulty in some regards, which is nice, but that's when the game starts to deviate slightly.
+
+The inclusion of loli content was... Well, a bit gross, but hey, your tastes may vary. 
+
+However, that's where the subjectivity gets a bit different. The art style in this version has taken a significant dive as compared to previous versions, with images in the game being actually blurry as though they were made in the wrong resolution and expanded improperly. I mean, for a game that costs less than two bucks, it's not awful, I just expected a little bit better in the quality department is all. 
+
+Long to short, scale the difficulty better, and fix the artwork, and then we're solid, but until then... meh.
+
+	[ ==================================== ]
+	[ ====== Joke positive reviews ======= ]
+
+ ==== Review 1 (#reviews = 49) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+I dont need to explain anything.
+
+ ==== Review 2 (#reviews = 49) ====
+=> Sentiment analysis: polarity(-0.28) ; subjectivity(0.28))
+10/10 expansion to the previous game. Would write a longer review but I think I need to go to church now
+
+ ==== Review 3 (#reviews = 49) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+Bless the devs for creating a standalone version of DSW with flat-chested females.
+
+ ==== Review 4 (#reviews = 49) ====
+=> Sentiment analysis: polarity(0.44) ; subjectivity(0.30))
+Keep up the good work guys!
+
+How about adding moving waifus in the next one? You know some moving animated lolis who try to dodge my bullets while I'm trying to rip off their clothes and salivating on my keyboard?
+
+ ==== Review 5 (#reviews = 49) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+A$$ and Tiddies.
+
+	[ ==================================== ]
+	[ ====== Joke negative reviews ======= ]
+
+ ==== Review 1 (#reviews = 4) ====
+=> Sentiment analysis: polarity(0.10) ; subjectivity(0.30))
+i love this game but its buggy and glitchy like for example i would swipe no one the first girl and its still stuck on the same girl or if you choose another waifu it still takes you to the level with the first girl and i also notice if i quit and go back the screen is stuck. I hope the creators fix this soon
+
+ ==== Review 2 (#reviews = 4) ====
+=> Sentiment analysis: polarity(-0.12) ; subjectivity(0.35))
+b' \n\nAs of Dec 09 2017, 12:54 AM in PST +09:00, this review has been flagged by developers because my korean review was not related with topic.\n\nWhat I wrote is I hate flat chest. And I haven\'t thought those "Flat Justice" in game title means flat boobies of girls in game.\n\nIt\'s my personal opinion how I can tell about boobies god damn it\n\nDec 15th, 02:28 AM  in PST +09:00, I\'m finally able to show this review. Shame on you dev teams, it\'s my freedom to talk about how I think about flat chest!'
+
+ ==== Review 3 (#reviews = 4) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+THIS ONE IS UNPAYABLE WITHOUT MOUSE CONTROL
+
+ ==== Review 4 (#reviews = 4) ====
+=> Sentiment analysis: polarity(0.00) ; subjectivity(0.00))
+y is ther no cheevo for beeting tha gam on gentalmanne moed and being a gud christiaen boyo?
+
+	[ ==================================== ]
+
+Stats for all acceptable reviews (subjectivity >= threshold)
+Number of reviews: 156 (155 up ; 1 down) ; Wilson score: 0.96
+
+Stats for detected joke reviews (subjectivity < threshold)
+Number of reviews: 53 (49 up ; 4 down) ; Wilson score: 0.82
+
+Conclusion: estimated deviation of Wilson score due to joke reviews: -0.02
