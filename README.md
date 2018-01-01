@@ -20,7 +20,7 @@ Number of reviews: 130 (128 up ; 2 down) ; Wilson score: 0.95
 
 Threshold for subjectivity: 0.36
 
-          [ ==================================== ]
+        [ ==================================== ]
 	[ ====== Joke positive reviews ======= ]
 
  ==== Review 1 (#reviews = 9) ====
