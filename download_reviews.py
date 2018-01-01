@@ -9,7 +9,7 @@ import json
 import time
 import requests
 import logging
-
+import os.path
 
 def parse_id(i):
     """Since we deal with both strings and ints, force appid to be correct."""
@@ -20,7 +20,7 @@ def parse_id(i):
 
 
 def id_reader():
-    """Read the previous created idlist.csv."""
+    """Read the previous created idlist.txt."""
     with open("idlist.txt") as basefile:
         reader = csv.reader(basefile)
         for row in reader:
@@ -29,12 +29,17 @@ def id_reader():
 
 def previous_results():
     """Return a set of all previous found ID's."""
+    temp_filename = "idprocessed.txt"
     all_ids = set()
-    with open("idprocessed.txt", "r") as f:
-        for line in f:
-            appid = parse_id(line)
-            if appid:
-                all_ids.add(appid)
+    try:
+        with open(temp_filename, "r") as f:
+            for line in f:
+                appid = parse_id(line)
+                if appid:
+                    all_ids.add(appid)
+    except FileNotFoundError:
+        with open(temp_filename, "w") as f:
+            print('Creating ' + temp_filename)
     return all_ids
 
 
@@ -76,76 +81,82 @@ def main():
     previos_ids = previous_results()
 
     log.info("Opening idprocessed.txt")
-    with open("idprocessed.txt", "a") as f:
-        query_count = 0
-        game_count = 0
-        game = dict()
+    query_count = 0
+    game_count = 0
+    game = dict()
 
-        log.info("Opening idlist.csv")
-        for appid in id_reader():
+    log.info("Opening idlist.txt")
+    for appid in id_reader():
+
+        output_file = "review_" + str(appid) + ".json"
+        data_filename = data_path + output_file
+
+        if os.path.isfile(data_filename):
             if appid in previos_ids:
                 log.info("Skipping previously found id %d", appid)
                 continue
+            else:
+                with open("idprocessed.txt", "a") as f:
+                    f.write(str(appid) + '\n')
+                continue
 
-            url = api_url + str(appid)
+        url = api_url + str(appid)
 
-            req_data = dict(defaults)
-            req_data['appids'] = str(appid)
+        req_data = dict(defaults)
+        req_data['appids'] = str(appid)
 
-            review_dict = dict()
-            reviews = []
+        review_dict = dict()
+        reviews = []
 
-            # Initialize
-            offset = 0
-            num_reviews = max_num_reviews
-            try_count = 0
-            while (offset < num_reviews) and (try_count < 3):
-                req_data['start_offset'] = str(offset)
+        # Initialize
+        offset = 0
+        num_reviews = max_num_reviews
+        try_count = 0
+        while (offset < num_reviews) and (try_count < 3):
+            req_data['start_offset'] = str(offset)
 
-                resp_data = requests.get(url, params=req_data)
+            resp_data = requests.get(url, params=req_data)
 
-                result = resp_data.json()
+            result = resp_data.json()
 
-                reviews.extend(result["reviews"])
+            reviews.extend(result["reviews"])
 
-                num_reviews_with_this_request = result["query_summary"]["num_reviews"]
-                offset += num_reviews_with_this_request
+            num_reviews_with_this_request = result["query_summary"]["num_reviews"]
+            offset += num_reviews_with_this_request
 
-                if num_reviews_with_this_request == 0:
-                    try_count += 1
+            if num_reviews_with_this_request == 0:
+                try_count += 1
 
-                if num_reviews == max_num_reviews:
-                    # Real number of reviews for the given appID
-                    num_reviews = result["query_summary"]["total_reviews"]
+            if num_reviews == max_num_reviews:
+                # Real number of reviews for the given appID
+                num_reviews = result["query_summary"]["total_reviews"]
 
-                    print(result["query_summary"])
+                print(result["query_summary"])
 
-                    # To be saved to JSON
-                    review_dict["query_summary"] = result["query_summary"]
+                # To be saved to JSON
+                review_dict["query_summary"] = result["query_summary"]
 
-                query_count += 1
+            query_count += 1
 
-                if query_count >= query_limit:
-                    log.info("query count is %d, waiting for %d secs", query_count, wait_time)
-                    time.sleep(wait_time)
-                    query_count = 0
+            if query_count >= query_limit:
+                log.info("query count is %d, waiting for %d secs", query_count, wait_time)
+                time.sleep(wait_time)
+                query_count = 0
 
-            review_dict["reviews"] = dict()
-            for review in reviews:
-                reviewID = review["recommendationid"]
-                review_dict["reviews"][reviewID] = review
+        review_dict["reviews"] = dict()
+        for review in reviews:
+            reviewID = review["recommendationid"]
+            review_dict["reviews"][reviewID] = review
 
-            output_file = "review_" + str(appid) + ".json"
-            data_filename = data_path + output_file
+        with open(data_filename, "w") as g:
+            g.write(json.dumps(review_dict) + '\n')
 
-            with open(data_filename, "w") as g:
-                g.write(json.dumps(review_dict) + '\n')
+        log.info("Review records written for %s: %d (expected: %d)",
+                 appid, len(review_dict["reviews"]), num_reviews)
 
-            log.info("Review records written for %s: %d (expected: %d)",
-                     appid, len(review_dict["reviews"]), num_reviews)
+        game_count += 1
 
-            game_count += 1
-
+        with open("idprocessed.txt", "a") as f:
             f.write(str(appid) + '\n')
 
     log.info("Game records written: %d", game_count)
