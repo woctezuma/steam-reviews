@@ -3,6 +3,7 @@ hidden_gems.txt
 idlist.txt
 idprocessed.txt
 review_*.json
+201*_steamspy.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
