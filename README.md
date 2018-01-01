@@ -9,6 +9,8 @@ This repository contains code to compute statistics of Steam reviews:
 * `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
 * `cluster_reviews.py` attempts to divide reviews into clusters.
 
+Data can be downloaded from SteamSpy API and Steam API. It is readily available as a snapshot if needs be in [my Steam-Reviews-Data repository](https://github.com/woctezuma/steam-reviews-data).
+
 ## Identification of joke reviews, based on the subjectivity feature
 
 We list below examples of identified joke reviews. If you are interested in the classification acceptable vs. joke reviews, please feel free to have a look at examples of acceptable reviews, which are listed in the `output/` folder.
