@@ -7,7 +7,7 @@ def getNumReviews(review_dict):
 
     return num_reviews
 
-def getHype(joke_reviews_dict, acceptable_reviews_dict, appID = '', verbose = True):
+def getHype(joke_reviews_dict, acceptable_reviews_dict):
 
     num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
     num_reviews_joke_only = getNumReviews(joke_reviews_dict)
@@ -20,10 +20,6 @@ def getHype(joke_reviews_dict, acceptable_reviews_dict, appID = '', verbose = Tr
         hype = num_reviews_joke_only / num_reviews
     else:
         hype = -1
-
-    if verbose:
-        sentence = '\nAppID: ' + appID + '\tNumber of joke reviews: {0} ; Number of reviews: {1} ; Hype: {2:.3f}'
-        print(sentence.format(num_reviews_joke_only, num_reviews, hype))
 
     return hype
 
@@ -46,6 +42,8 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
     # Only reviews written in English are considered, for sentiment analysis to work.
     accepted_languages = ['english']
 
+    accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
+
     # Threshold to distinguish between acceptable and joke reviews
     subjectivity_threshold = 0.36
 
@@ -53,12 +51,20 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
 
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
 
-    hype = getHype(joke_reviews_dict, acceptable_reviews_dict, appID, verbose)
+    num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
+    num_reviews_joke_only = getNumReviews(joke_reviews_dict)
 
-    if all([bool(len(review_dict[keyword]) == 0) for keyword in ['positive', 'negative']]):
-        print('No review found in ' + ' '.join(l.capitalize() for l in accepted_languages)  + '.')
+    num_reviews = num_reviews_acceptable_only + num_reviews_joke_only
+
+    hype = getHype(joke_reviews_dict, acceptable_reviews_dict)
 
     wilson_score_deviation = getWilsonScoreDeviation(review_dict, acceptable_reviews_dict)
+
+    sentence = 'Number of reviews in ' + accepted_languages_as_concatenated_str + ': {0} ({1} joke ; {2} acceptable)'
+    print(sentence.format(num_reviews, num_reviews_joke_only, num_reviews_acceptable_only))
+
+    sentence = 'Hype: {0:.3f} ; Wilson score deviation: {1:.3f}'
+    print(sentence.format(hype, wilson_score_deviation))
 
     return (hype, wilson_score_deviation)
 

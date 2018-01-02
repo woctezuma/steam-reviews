@@ -12,6 +12,8 @@ def getReviewSubjectivityDictionary(appID, accepted_languages = ['english']):
 
     review_data = loadData(appID)
 
+    print('\nAppID: ' + appID)
+
     (query_summary, reviews) = describeData(review_data)
 
     review_dict = dict()
