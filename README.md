@@ -20,7 +20,7 @@ I have filtered Steam reviews in order to find out:
 
 All the results are available in [this text file](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.md).
 
-Interestingly, I have found that Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.6% and 1.5% lower).
+Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.4% and 1.1% lower).
 
 ### Definitions
 
@@ -36,50 +36,51 @@ In order to perform this filtering in an automatic manner, I could only consider
 
 ### Ranking by hype
 
-  0. AppID: 552280	Hype: 0.400	(Tayutama2 -you're the only one- CHI ver.)
-  1. AppID: 410830	Hype: 0.344	(ARENA GODS)
-  2. AppID: 502800	Hype: 0.342	(SENRAN KAGURA ESTIVAL VERSUS)
-  3. AppID: 441050	Hype: 0.328	(Polandball: Can into Space!)
-  4. AppID: 689580	Hype: 0.325	(TurnSignal)
-  5. AppID: 283960	Hype: 0.323	(Pajama Sam: No Need to Hide When It's Dark Outside)
-  6. AppID: 733990	Hype: 0.317	(I Can't Believe It's Not Gambling)
-  7. AppID: 664180	Hype: 0.316	(Draw Puzzle)
-  8. AppID: 260750	Hype: 0.311	(Neighbours from Hell Compilation)
-  9. AppID: 588040	Hype: 0.310	(WILL: A Wonderful World / WILL)
- 10. AppID: 745880	Hype: 0.308	(  Hidden Star in Four Seasons.)
- 11. AppID: 639790	Hype: 0.308	(DEEP SPACE WAIFU)
- 12. AppID: 294530	Hype: 0.302	(Freddi Fish 2: The Case of the Haunted Schoolhouse)
- 13. AppID: 410980	Hype: 0.301	(Master of Orion 2)
- 14. AppID: 623080	Hype: 0.300	(planetarian HD)
- 15. AppID: 460120	Hype: 0.286	(Megadimension Neptunia VII)
- 16. AppID: 412830	Hype: 0.284	(STEINS;GATE)
- 17. AppID: 723090	Hype: 0.282	(Meltys Quest)
- 18. AppID: 448370	Hype: 0.253	(IS Defense)
- 19. AppID: 426690	Hype: 0.250	(Narcissu 10th Anniversary Anthology Project)
+  0. AppID: 623080	Hype: 0.300	(planetarian HD)
+  1. AppID: 410830	Hype: 0.281	(ARENA GODS)
+  2. AppID: 502800	Hype: 0.270	(SENRAN KAGURA ESTIVAL VERSUS)
+  3. AppID: 283960	Hype: 0.264	(Pajama Sam: No Need to Hide When It's Dark Outside)
+  4. AppID: 733990	Hype: 0.247	(I Can't Believe It's Not Gambling)
+  5. AppID: 745880	Hype: 0.246	(  Hidden Star in Four Seasons.)
+  6. AppID: 639790	Hype: 0.239	(DEEP SPACE WAIFU)
+  7. AppID: 294530	Hype: 0.238	(Freddi Fish 2: The Case of the Haunted Schoolhouse)
+  8. AppID: 260750	Hype: 0.237	(Neighbours from Hell Compilation)
+  9. AppID: 689580	Hype: 0.225	(TurnSignal)
+ 10. AppID: 723090	Hype: 0.213	(Meltys Quest)
+ 11. AppID: 407310	Hype: 0.213	(NEKO-NIN exHeart)
+ 12. AppID: 664180	Hype: 0.211	(Draw Puzzle)
+ 13. AppID: 441050	Hype: 0.209	(Polandball: Can into Space!)
+ 14. AppID: 658560	Hype: 0.200	(Zup! 7)
+ 15. AppID: 357330	Hype: 0.200	(Space Beast Terror Fright)
+ 16. AppID: 448370	Hype: 0.199	(IS Defense)
+ 17. AppID: 639780	Hype: 0.193	(deep space waifu: FLAT JUSTICE VERSION)
+ 18. AppID: 472870	Hype: 0.185	(Higurashi When They Cry Hou - Ch.3 Tatarigoroshi)
+ 19. AppID: 658620	Hype: 0.183	(Wonderful Everyday Down the Rabbit-Hole)
+ 20. AppID: 426690	Hype: 0.178	(Narcissu 10th Anniversary Anthology Project)
 
 ### Ranking by Wilson score bonus due to unexpectedly positive hype
 
-  0. AppID: 552280	Wilson score bonus: 0.159	(Tayutama2 -you're the only one- CHI ver.)
-  1. AppID: 588040	Wilson score bonus: 0.081	(WILL: A Wonderful World / WILL)
-  2. AppID: 623080	Wilson score bonus: 0.077	(planetarian HD)
-  3. AppID: 357330	Wilson score bonus: 0.075	(Space Beast Terror Fright)
-  4. AppID: 664180	Wilson score bonus: 0.060	(Draw Puzzle)
-  5. AppID: 368570	Wilson score bonus: 0.050	(Beat Da Beat)
-  6. AppID: 593200	Wilson score bonus: 0.049	(The Adventures of Fei Duanmu )
-  7. AppID: 410830	Wilson score bonus: 0.047	(ARENA GODS)
-  8. AppID: 496350	Wilson score bonus: 0.040	(Supipara - Chapter 1 Spring Has Come!)
-  9. AppID: 689580	Wilson score bonus: 0.037	(TurnSignal)
- 10. AppID: 658620	Wilson score bonus: 0.026	(Wonderful Everyday Down the Rabbit-Hole)
- 11. AppID: 441050	Wilson score bonus: 0.025	(Polandball: Can into Space!)
- 12. AppID: 370280	Wilson score bonus: 0.022	(Season of 12 Colors)
- 13. AppID: 462990	Wilson score bonus: 0.022	(Tomoyo After \~It's a Wonderful Life\~ English Edition)
- 14. AppID: 745850	Wilson score bonus: 0.022	(KARAKARA2)
- 15. AppID: 640380	Wilson score bonus: 0.020	(UBERMOSH Vol.5)
- 16. AppID: 399600	Wilson score bonus: 0.018	(I and Me)
- 17. AppID: 412830	Wilson score bonus: 0.018	(STEINS;GATE)
- 18. AppID: 606480	Wilson score bonus: 0.018	(Flood of Light)
- 19. AppID: 617440	Wilson score bonus: 0.017	(Juanito Arcade Mayhem)
-
+  0. AppID: 623080	Wilson score deviation: 0.077	(planetarian HD)
+  1. AppID: 357330	Wilson score deviation: 0.075	(Space Beast Terror Fright)
+  2. AppID: 410830	Wilson score deviation: 0.036	(ARENA GODS)
+  3. AppID: 664180	Wilson score deviation: 0.036	(Draw Puzzle)
+  4. AppID: 368570	Wilson score deviation: 0.034	(Beat Da Beat)
+  5. AppID: 588040	Wilson score deviation: 0.033	(WILL: A Wonderful World / WILL)
+  6. AppID: 496350	Wilson score deviation: 0.028	(Supipara - Chapter 1 Spring Has Come!)
+  7. AppID: 658620	Wilson score deviation: 0.025	(Wonderful Everyday Down the Rabbit-Hole)
+  8. AppID: 689580	Wilson score deviation: 0.023	(TurnSignal)
+  9. AppID: 745850	Wilson score deviation: 0.022	(KARAKARA2)
+ 10. AppID: 640380	Wilson score deviation: 0.014	(UBERMOSH Vol.5)
+ 11. AppID: 427700	Wilson score deviation: 0.014	(Zwei: The Ilvard Insurrection)
+ 12. AppID: 370280	Wilson score deviation: 0.014	(Season of 12 Colors)
+ 13. AppID: 534290	Wilson score deviation: 0.013	(Cursed Castilla (Maldita Castilla EX))
+ 14. AppID: 462990	Wilson score deviation: 0.013	(Tomoyo After ~It's a Wonderful Life~ English Edition)
+ 15. AppID: 348430	Wilson score deviation: 0.013	(Quell Reflect)
+ 16. AppID: 441050	Wilson score deviation: 0.012	(Polandball: Can into Space!)
+ 17. AppID: 421660	Wilson score deviation: 0.012	(Harmonia)
+ 18. AppID: 546080	Wilson score deviation: 0.011	(Coffin of Ashes)
+ 19. AppID: 410980	Wilson score deviation: 0.011	(Master of Orion 2)
+ 20. AppID: 723090	Wilson score deviation: 0.011	(Meltys Quest)
 
 ## Identification of joke reviews, based on the subjectivity feature
 
