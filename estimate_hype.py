@@ -82,7 +82,7 @@ def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
         except KeyError:
             appName = 'unknown'
         sentence = '{0:3}. AppID: ' + appID + '\t' + formatted_keyword + ': {1:.3f}' + '\t(' + appName + ')'
-        print( sentence.format(rank, hype_dict[appID][keyword]) )
+        print( sentence.format(rank+1, hype_dict[appID][keyword]) )
 
     return
 
