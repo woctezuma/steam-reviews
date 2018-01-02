@@ -32,7 +32,7 @@ By "hype", I mean the percentage of joke reviews for a given game.
 
 The analysis of Steam reviews requires to download them first through Steam API, which has a rate limit of about 10 reviews/second, I have limited the analysis to the top 250 hidden gems as of yesterday.
 
-In order to perform this filtering in an automatic manner, I could only consider the reviews tagged as being written in English. It is possible that some of the following games appear in the ranking due to reviews written in other languages yet tagged as being written in English.
+In order to perform this filtering in an automatic manner, I could only consider the reviews tagged as being written in English. It is possible that some of the following games appear in the ranking due to reviews written in other languages yet tagged as being written in English. However, to try to be as robust as possible against wrong tag, the language of each review tagged as being written in English was then processed by Google Translate's language detection algorithm using [TextBlob](https://github.com/sloria/TextBlob), so that wrongly tagged reviews could be filtered out as well as possible.
 
 ### Ranking by hype
 
