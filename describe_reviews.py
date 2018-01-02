@@ -30,10 +30,16 @@ def loadData(appID):
 
 def describeData(review_data):
 
-    query_summary = review_data['query_summary']
+    try:
+        query_summary = review_data['query_summary']
 
-    sentence = 'Number of reviews: {0} ({1} up ; {2} down)'
-    sentence = sentence.format(query_summary["total_reviews"], query_summary["total_positive"], query_summary["total_negative"])
+        sentence = 'Number of reviews: {0} ({1} up ; {2} down)'
+        sentence = sentence.format(query_summary["total_reviews"], query_summary["total_positive"], query_summary["total_negative"])
+    except KeyError:
+        query_summary = None
+
+        sentence = 'Query summary cannot be found in the JSON file.'
+
     print(sentence)
 
     reviews = list(review_data['reviews'].values())
