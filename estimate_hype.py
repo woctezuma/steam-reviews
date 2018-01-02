@@ -7,18 +7,7 @@ def getNumReviews(review_dict):
 
     return num_reviews
 
-def getHype(appID, verbose = True):
-    from identify_joke_reviews import getReviewSubjectivityDictionary, classifyReviews
-
-    # Only reviews written in English are considered, for sentiment analysis to work.
-    accepted_languages = ['english']
-
-    # Threshold to distinguish between acceptable and joke reviews
-    subjectivity_threshold = 0.36
-
-    review_dict = getReviewSubjectivityDictionary(appID, accepted_languages)
-
-    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
+def getHype(joke_reviews_dict, acceptable_reviews_dict, appID = '', verbose = True):
 
     num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
     num_reviews_joke_only = getNumReviews(joke_reviews_dict)
@@ -38,34 +27,78 @@ def getHype(appID, verbose = True):
 
     return hype
 
-def printHypeRanking(hype_dict):
+def getWilsonScoreDeviation(review_dict, acceptable_reviews_dict):
+    from identify_joke_reviews import getDictionaryWilsonScore
+
+    wilson_score_raw = getDictionaryWilsonScore(review_dict)
+    wilson_score_acceptable_only = getDictionaryWilsonScore(acceptable_reviews_dict)
+
+    try:
+        wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
+    except TypeError:
+        wilson_score_deviation = -1
+
+    return wilson_score_deviation
+
+def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
+    from identify_joke_reviews import getReviewSubjectivityDictionary, classifyReviews
+
+    # Only reviews written in English are considered, for sentiment analysis to work.
+    accepted_languages = ['english']
+
+    # Threshold to distinguish between acceptable and joke reviews
+    subjectivity_threshold = 0.36
+
+    review_dict = getReviewSubjectivityDictionary(appID, accepted_languages)
+
+    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
+
+    hype = getHype(joke_reviews_dict, acceptable_reviews_dict, appID, verbose)
+
+    if all([bool(len(review_dict[keyword]) == 0) for keyword in ['positive', 'negative']]):
+        print('No review found in ' + ' '.join(l.capitalize() for l in accepted_languages)  + '.')
+
+    wilson_score_deviation = getWilsonScoreDeviation(review_dict, acceptable_reviews_dict)
+
+    return (hype, wilson_score_deviation)
+
+def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
     from download_json import getTodaysSteamSpyData
 
     # Download latest SteamSpy data to have access to the matching between appID and game name
     SteamSpyData = getTodaysSteamSpyData()
 
-    hype_ranking = sorted(hype_dict.keys(), key=lambda x: hype_dict[x], reverse=True)
+    hype_ranking = sorted(hype_dict.keys(), key=lambda x: hype_dict[x][keyword], reverse=True)
 
-    print('\nHype ranking:')
+    formatted_keyword = keyword.capitalize().replace('_', ' ')
+
+    print('\n' + formatted_keyword + ' ranking:')
     for (rank, appID) in enumerate(hype_ranking):
         try:
             appName = SteamSpyData[appID]['name']
         except KeyError:
             appName = 'unknown'
-        sentence = '{0:3}. AppID: ' + appID + '\tHype: {1:.3f}' + '\t(' + appName + ')'
-        print( sentence.format(rank, hype_dict[appID]) )
+        sentence = '{0:3}. AppID: ' + appID + '\t' + formatted_keyword + ': {1:.3f}' + '\t(' + appName + ')'
+        print( sentence.format(rank, hype_dict[appID][keyword]) )
 
     return
 
 def main():
-    from download_reviews import previous_results
+    with open('idlist.txt') as f:
+        d = f.readlines()
 
-    hype_dict = dict()
-    for appID_int in previous_results():
-        appID = str(appID_int)
-        hype_dict[appID] = getHype(appID)
+    appID_list = [x.strip() for x in d]
 
-    printHypeRanking(hype_dict)
+    result_dict = dict()
+    for appID in appID_list:
+        (hype, wilson_score_deviation) = computeHypeAndWilsonScoreDeviation(appID)
+        result_dict[appID] = dict()
+        result_dict[appID]['hype'] = hype
+        result_dict[appID]['wilson_score_deviation'] = wilson_score_deviation
+
+    printRankingAccordingToKeyword(result_dict, 'hype')
+
+    printRankingAccordingToKeyword(result_dict, 'wilson_score_deviation')
 
     return
 
