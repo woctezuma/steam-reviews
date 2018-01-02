@@ -124,6 +124,7 @@ def main():
             try:
                 reviews.extend(result["reviews"])
             except KeyError:
+                print('\nThe request returned an empty response with flag: ', str(request_success_flag) + '\n')
                 break
 
             num_reviews_with_this_request = result["query_summary"]["num_reviews"]
@@ -148,16 +149,13 @@ def main():
                 time.sleep(wait_time)
                 query_count = 0
 
-        print('\nRequest success flag: ', str(request_success_flag) + '\n')
-
         review_dict["reviews"] = dict()
         for review in reviews:
             reviewID = review["recommendationid"]
             review_dict["reviews"][reviewID] = review
 
-        if len(review_dict["reviews"])>0:
-            with open(data_filename, "w") as g:
-                g.write(json.dumps(review_dict) + '\n')
+        with open(data_filename, "w") as g:
+            g.write(json.dumps(review_dict) + '\n')
 
         log.info("Review records written for %s: %d (expected: %d)",
                  appid, len(review_dict["reviews"]), num_reviews)
