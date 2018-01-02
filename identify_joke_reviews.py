@@ -31,10 +31,20 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
             # Review text
             review_content = review['review']
 
-            # TODO detect non-latin languages to omit reviews wrongly tagged as English, maybe TextBlob can do this
 
             # Sentiment analysis
             blob = TextBlob(review_content)
+
+            # Check language with Google Translate to detect reviews WRONGLY tagged as English
+            detected_language = blob.detect_language()
+
+            # Hard-coded check for English language
+            accepted_languages_iso = ['en']
+            # TODO For generality, one would need to match accepted_languages to accepted_languages_iso (ISO 639-1)
+            # cf. https://en.wikipedia.org/wiki/ISO_639-1
+            # cf. https://gist.github.com/carlopires/1262033
+            if not(detected_language in accepted_languages_iso):
+                continue
 
             if is_positive_review:
                 keyword = 'positive'
