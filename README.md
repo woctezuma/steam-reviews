@@ -5,11 +5,81 @@ This repository contains code to compute statistics of Steam reviews:
 * `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `identify_joke_reviews.py` allows to classify reviews as acceptable vs. joke,
-* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews),
+* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews) and Wilson score bonus (due to hype),
 * `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
 * `cluster_reviews.py` attempts to divide reviews into clusters.
 
 Data can be downloaded from SteamSpy API and Steam API. It is readily available as a snapshot if needs be in [my Steam-Reviews-Data repository](https://github.com/woctezuma/steam-reviews-data).
+
+## Results as of January 1, 2018
+
+I have filtered Steam reviews in order to find out:
+
+* which game has the highest percentage of joke reviews,
+* and which game benefits the most from joke reviews in terms of Wilson score.
+
+All the results are available in [this text file](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.md).
+
+Interestingly, I have found that Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.6% and 1.5% lower).
+
+### Definitions
+
+By "joke review", I mean a review which does not try to express the reviewer's opinion, but is instead a kind of joke with regards to the game's themes or characters.
+
+By "hype", I mean the percentage of joke reviews for a given game.
+
+### Limitations
+
+The analysis of Steam reviews requires to download them first through Steam API, which has a rate limit of about 10 reviews/second, I have limited the analysis to the top 250 hidden gems as of yesterday.
+
+In order to perform this filtering in an automatic manner, I could only consider the reviews tagged as being written in English. It is possible that some of the following games appear in the ranking due to reviews written in other languages yet tagged as being written in English.
+
+### Ranking by hype
+
+  0. AppID: 552280	Hype: 0.400	(Tayutama2 -you're the only one- CHI ver.)
+  1. AppID: 410830	Hype: 0.344	(ARENA GODS)
+  2. AppID: 502800	Hype: 0.342	(SENRAN KAGURA ESTIVAL VERSUS)
+  3. AppID: 441050	Hype: 0.328	(Polandball: Can into Space!)
+  4. AppID: 689580	Hype: 0.325	(TurnSignal)
+  5. AppID: 283960	Hype: 0.323	(Pajama Sam: No Need to Hide When It's Dark Outside)
+  6. AppID: 733990	Hype: 0.317	(I Can't Believe It's Not Gambling)
+  7. AppID: 664180	Hype: 0.316	(Draw Puzzle)
+  8. AppID: 260750	Hype: 0.311	(Neighbours from Hell Compilation)
+  9. AppID: 588040	Hype: 0.310	(WILL: A Wonderful World / WILL)
+ 10. AppID: 745880	Hype: 0.308	(  Hidden Star in Four Seasons.)
+ 11. AppID: 639790	Hype: 0.308	(DEEP SPACE WAIFU)
+ 12. AppID: 294530	Hype: 0.302	(Freddi Fish 2: The Case of the Haunted Schoolhouse)
+ 13. AppID: 410980	Hype: 0.301	(Master of Orion 2)
+ 14. AppID: 623080	Hype: 0.300	(planetarian HD)
+ 15. AppID: 460120	Hype: 0.286	(Megadimension Neptunia VII)
+ 16. AppID: 412830	Hype: 0.284	(STEINS;GATE)
+ 17. AppID: 723090	Hype: 0.282	(Meltys Quest)
+ 18. AppID: 448370	Hype: 0.253	(IS Defense)
+ 19. AppID: 426690	Hype: 0.250	(Narcissu 10th Anniversary Anthology Project)
+
+### Ranking by Wilson score bonus due to unexpectedly positive hype
+
+  0. AppID: 552280	Wilson score deviation: 0.159	(Tayutama2 -you're the only one- CHI ver.)
+  1. AppID: 588040	Wilson score deviation: 0.081	(WILL: A Wonderful World / WILL)
+  2. AppID: 623080	Wilson score deviation: 0.077	(planetarian HD)
+  3. AppID: 357330	Wilson score deviation: 0.075	(Space Beast Terror Fright)
+  4. AppID: 664180	Wilson score deviation: 0.060	(Draw Puzzle)
+  5. AppID: 368570	Wilson score deviation: 0.050	(Beat Da Beat)
+  6. AppID: 593200	Wilson score deviation: 0.049	(The Adventures of Fei Duanmu )
+  7. AppID: 410830	Wilson score deviation: 0.047	(ARENA GODS)
+  8. AppID: 496350	Wilson score deviation: 0.040	(Supipara - Chapter 1 Spring Has Come!)
+  9. AppID: 689580	Wilson score deviation: 0.037	(TurnSignal)
+ 10. AppID: 658620	Wilson score deviation: 0.026	(Wonderful Everyday Down the Rabbit-Hole)
+ 11. AppID: 441050	Wilson score deviation: 0.025	(Polandball: Can into Space!)
+ 12. AppID: 370280	Wilson score deviation: 0.022	(Season of 12 Colors)
+ 13. AppID: 462990	Wilson score deviation: 0.022	(Tomoyo After ~It's a Wonderful Life~ English Edition)
+ 14. AppID: 745850	Wilson score deviation: 0.022	(KARAKARA2)
+ 15. AppID: 640380	Wilson score deviation: 0.020	(UBERMOSH Vol.5)
+ 16. AppID: 399600	Wilson score deviation: 0.018	(I and Me)
+ 17. AppID: 412830	Wilson score deviation: 0.018	(STEINS;GATE)
+ 18. AppID: 606480	Wilson score deviation: 0.018	(Flood of Light)
+ 19. AppID: 617440	Wilson score deviation: 0.017	(Juanito Arcade Mayhem)
+
 
 ## Identification of joke reviews, based on the subjectivity feature
 
