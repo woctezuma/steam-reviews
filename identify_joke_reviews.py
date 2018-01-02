@@ -1,6 +1,6 @@
 import sys, getopt
 
-from textblob import TextBlob
+from textblob import TextBlob, exceptions
 
 from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
@@ -36,7 +36,13 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
             blob = TextBlob(review_content)
 
             # Check language with Google Translate to detect reviews WRONGLY tagged as English
-            detected_language = blob.detect_language()
+            try:
+                detected_language = blob.detect_language()
+            except exceptions.TranslatorError:
+                # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
+                # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
+                # Example of such a review: http://steamcommunity.com/profiles/76561198169555911/recommended/723090/
+                detected_language = 'en'
 
             # Hard-coded check for English language
             accepted_languages_iso = ['en']
