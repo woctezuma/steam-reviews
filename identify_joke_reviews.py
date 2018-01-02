@@ -6,7 +6,7 @@ from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
 from cluster_reviews import printSentimentAnalysis
 
-def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
+def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perform_language_detection_with_Google_Translate = False):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
@@ -37,7 +37,10 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
 
             # Check language with Google Translate to detect reviews WRONGLY tagged as English
             try:
-                detected_language = blob.detect_language()
+                if perform_language_detection_with_Google_Translate:
+                    detected_language = blob.detect_language()
+                else:
+                    detected_language = 'en'
             except exceptions.TranslatorError:
                 # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
                 # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
@@ -154,7 +157,8 @@ def main(argv):
         print("Input appID detected as " + appID)
 
     accepted_languages = ['english']
-    review_dict = getReviewSentimentDictionary(appID, accepted_languages)
+    perform_language_detection_with_Google_Translate = False
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Translate)
 
     sentiment_verbose = True
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, None, sentiment_verbose)

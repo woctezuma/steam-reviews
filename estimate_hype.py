@@ -44,7 +44,8 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
 
     accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
 
-    review_dict = getReviewSentimentDictionary(appID, accepted_languages)
+    perform_language_detection_with_Google_Translate = False
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Translate)
 
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict)
 
