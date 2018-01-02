@@ -57,14 +57,15 @@ def classifyReviews(review_dict, subjectivity_threshold = 0.36):
 
     return (acceptable_reviews_dict, joke_reviews_dict)
 
-def printDictionaryStats(review_dict):
+def getDictionaryWilsonScore(review_dict, verbose = False):
 
     num_pos = len(review_dict['positive'])
     num_neg = len(review_dict['negative'])
     wilson_score = computeWilsonScore(num_pos, num_neg)
 
-    sentence = 'Number of reviews: {0} ({1} up ; {2} down) ; Wilson score: {3:.2f}'
-    print(sentence.format(num_pos+num_neg, num_pos, num_neg, wilson_score))
+    if verbose:
+        sentence = 'Number of reviews: {0} ({1} up ; {2} down) ; Wilson score: {3:.2f}'
+        print(sentence.format(num_pos+num_neg, num_pos, num_neg, wilson_score))
 
     return wilson_score
 
@@ -105,8 +106,10 @@ def main(argv):
     subjectivity_threshold = 0.36
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
 
+    print_Wilson_score = True
+
     print('\nStats for all reviews available in ' + ' '.join([l.capitalize() for l in accepted_languages]))
-    wilson_score_raw = printDictionaryStats(review_dict)
+    wilson_score_raw = getDictionaryWilsonScore(review_dict, print_Wilson_score)
 
     print('\nThreshold for subjectivity: {0:.2f}'.format(subjectivity_threshold))
 
@@ -129,10 +132,10 @@ def main(argv):
     print('\n\t[ ==================================== ]')
 
     print('\nStats for all acceptable reviews (subjectivity >= threshold)')
-    wilson_score_acceptable_only = printDictionaryStats(acceptable_reviews_dict)
+    wilson_score_acceptable_only = getDictionaryWilsonScore(acceptable_reviews_dict, print_Wilson_score)
 
     print('\nStats for detected joke reviews (subjectivity < threshold)')
-    wilson_score_joke_only = printDictionaryStats(joke_reviews_dict)
+    wilson_score_joke_only = getDictionaryWilsonScore(joke_reviews_dict, print_Wilson_score)
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
     print('\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(wilson_score_deviation))
