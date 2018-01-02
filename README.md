@@ -72,7 +72,7 @@ In order to perform this filtering in an automatic manner, I could only consider
  10. AppID: 658620	Wilson score bonus: 0.026	(Wonderful Everyday Down the Rabbit-Hole)
  11. AppID: 441050	Wilson score bonus: 0.025	(Polandball: Can into Space!)
  12. AppID: 370280	Wilson score bonus: 0.022	(Season of 12 Colors)
- 13. AppID: 462990	Wilson score bonus: 0.022	(Tomoyo After ~It's a Wonderful Life~ English Edition)
+ 13. AppID: 462990	Wilson score bonus: 0.022	(Tomoyo After \~It's a Wonderful Life\~ English Edition)
  14. AppID: 745850	Wilson score bonus: 0.022	(KARAKARA2)
  15. AppID: 640380	Wilson score bonus: 0.020	(UBERMOSH Vol.5)
  16. AppID: 399600	Wilson score bonus: 0.018	(I and Me)
