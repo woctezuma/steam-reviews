@@ -37,19 +37,24 @@ def getWilsonScoreDeviation(review_dict, acceptable_reviews_dict):
     return wilson_score_deviation
 
 def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
-    from identify_joke_reviews import getReviewSubjectivityDictionary, classifyReviews
+    from identify_joke_reviews import getReviewSentimentDictionary, classifyReviews
 
     # Only reviews written in English are considered, for sentiment analysis to work.
     accepted_languages = ['english']
 
     accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
 
-    # Threshold to distinguish between acceptable and joke reviews
-    subjectivity_threshold = 0.36
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages)
 
-    review_dict = getReviewSubjectivityDictionary(appID, accepted_languages)
+    # Sentiment analysis criterion to distinguish between acceptable and joke reviews
+    sentiment_threshold = dict()
+    # Default: [0, 0] to avoid using a criterion based on polarity
+    sentiment_threshold['polarity'] = [0, 0]
+    # Default: [0, 1] to avoid using a criterion based on subjectivity
+    sentiment_threshold['subjectivity'] = [0.36, 1]
 
-    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
+    sentiment_verbose = False
+    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, sentiment_threshold, sentiment_verbose)
 
     num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
     num_reviews_joke_only = getNumReviews(joke_reviews_dict)

@@ -6,7 +6,7 @@ from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
 from cluster_reviews import printSentimentAnalysis
 
-def getReviewSubjectivityDictionary(appID, accepted_languages = ['english']):
+def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
@@ -39,11 +39,13 @@ def getReviewSubjectivityDictionary(appID, accepted_languages = ['english']):
             else:
                 keyword = 'negative'
 
-            review_dict[keyword][reviewID] = blob.sentiment.subjectivity
+            review_dict[keyword][reviewID] = dict()
+            review_dict[keyword][reviewID]['polarity'] = blob.sentiment.polarity
+            review_dict[keyword][reviewID]['subjectivity'] = blob.sentiment.subjectivity
 
     return review_dict
 
-def classifyReviews(review_dict, subjectivity_threshold = 0.36):
+def classifyReviews(review_dict, sentiment_threshold = { 'polarity': [0, 0] , 'subjectivity': [0.36, 1] }, verbose = False):
 
     acceptable_reviews_dict = dict()
     joke_reviews_dict = dict()
@@ -51,11 +53,27 @@ def classifyReviews(review_dict, subjectivity_threshold = 0.36):
     for keyword in ['positive', 'negative']:
         current_reviewIDs = review_dict[keyword].keys()
 
-        acceptable_reviewIDs = [ reviewID for reviewID in current_reviewIDs
-                                 if review_dict[keyword][reviewID] >= subjectivity_threshold ]
+        # Polarity set used with OR: acceptable reviews have a polarity OUTSIDE the interval!
+        acceptable_reviewIDs_wrt_polarity = [ reviewID for reviewID in current_reviewIDs
+                                 if bool(review_dict[keyword][reviewID]['polarity'] <= sentiment_threshold['polarity'][0]
+                                      or review_dict[keyword][reviewID]['polarity'] >= sentiment_threshold['polarity'][1]) ]
+
+        # Subjectivity interval used with AND: acceptable reviews have a subjectivity INSIDE the interval!
+        acceptable_reviewIDs_wrt_subjectivity = [ reviewID for reviewID in current_reviewIDs
+                                 if bool(review_dict[keyword][reviewID]['subjectivity'] >= sentiment_threshold['subjectivity'][0]
+                                     and review_dict[keyword][reviewID]['subjectivity'] <= sentiment_threshold['subjectivity'][1]) ]
+
+        acceptable_reviewIDs = set(acceptable_reviewIDs_wrt_polarity).union(set(acceptable_reviewIDs_wrt_subjectivity))
 
         acceptable_reviews_dict[keyword] = acceptable_reviewIDs
         joke_reviews_dict[keyword] = current_reviewIDs - acceptable_reviewIDs
+
+    if verbose:
+        print('Set for being acceptable w.r.t. polarity: [-1, {0:.2f}] U [{1:.2f}, 1]'.format(sentiment_threshold['polarity'][0],
+                                                                                                sentiment_threshold['polarity'][1]))
+        print('Interval for being acceptable w.r.t. subjectivity: [{0:.2f}, {1:.2f}]'.format(sentiment_threshold['subjectivity'][0],
+                                                                                               sentiment_threshold['subjectivity'][1]))
+        print('A review is acceptable if it is acceptable with respect to either polarity or subjectivity.')
 
     return (acceptable_reviews_dict, joke_reviews_dict)
 
@@ -103,17 +121,22 @@ def main(argv):
         print("Input appID detected as " + appID)
 
     accepted_languages = ['english']
-    review_dict = getReviewSubjectivityDictionary(appID, accepted_languages)
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages)
 
-    subjectivity_threshold = 0.36
-    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, subjectivity_threshold)
+    # Sentiment analysis criterion to distinguish between acceptable and joke reviews
+    sentiment_threshold = dict()
+    # Default: [0, 0] to avoid using a criterion based on polarity
+    sentiment_threshold['polarity'] = [0, 0]
+    # Default: [0, 1] to avoid using a criterion based on subjectivity
+    sentiment_threshold['subjectivity'] = [0.36, 1]
+
+    sentiment_verbose = True
+    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, sentiment_threshold, sentiment_verbose)
 
     print_Wilson_score = True
 
     print('\nStats for all reviews available in ' + ' '.join([l.capitalize() for l in accepted_languages]))
     wilson_score_raw = getDictionaryWilsonScore(review_dict, print_Wilson_score)
-
-    print('\nThreshold for subjectivity: {0:.2f}'.format(subjectivity_threshold))
 
     max_num_reviews_to_print = 5
 
