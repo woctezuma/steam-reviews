@@ -63,7 +63,17 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english']):
 
     return review_dict
 
-def classifyReviews(review_dict, sentiment_threshold = { 'polarity': [-1, 1] , 'subjectivity': [0.36, 1] }, verbose = False):
+def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
+
+    # The variable sentiment_threshold is a Python dictionary, which describes the criterion to distinguish between
+    # acceptable and joke reviews, based on Sentiment Analysis.
+    if (sentiment_threshold is None) or bool(len(sentiment_threshold) == 0):
+        sentiment_threshold = {'polarity': [-0.2, 0.2], 'subjectivity': [0.36, 1]}
+
+    # NB: If thresholds for polarity and subjectivity are set to the following values,
+    #     then the classification cannot be performed, i.e. every review is marked as ACCEPTABLE.
+    # - polarity threshold:     [-1, 1] to avoid using a criterion based on polarity (and therefore solely rely on subjectivity)
+    # - subjectivity threshold: [ 0, 1] to avoid using a criterion based on subjectivity (and therefore solely rely on polarity)
 
     acceptable_reviews_dict = dict()
     joke_reviews_dict = dict()
@@ -146,17 +156,8 @@ def main(argv):
     accepted_languages = ['english']
     review_dict = getReviewSentimentDictionary(appID, accepted_languages)
 
-    # Sentiment analysis criterion to distinguish between acceptable and joke reviews
-    sentiment_threshold = dict()
-    # Default: [-1, 1] to avoid using a criterion based on polarity (and therefore solely rely on subjectivity)
-    sentiment_threshold['polarity'] = [-1, 1]
-    # Default: [0, 1] to avoid using a criterion based on subjectivity
-    sentiment_threshold['subjectivity'] = [0.36, 1]
-    # NB: If thresholds for polarity and subjectivity are set to defaults,
-    #     then the classification cannot be performed, i.e. every review is marked as ACCEPTABLE.
-
     sentiment_verbose = True
-    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, sentiment_threshold, sentiment_verbose)
+    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, None, sentiment_verbose)
 
     print_Wilson_score = True
 
