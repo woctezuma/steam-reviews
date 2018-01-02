@@ -36,6 +36,8 @@ In order to perform this filtering in an automatic manner, I could only consider
 
 ### Ranking by hype
 
+A hype of 0.300 means that 30.0% of the reviews are classified as joke reviews.
+
   0. AppID: 623080	Hype: 0.300	(planetarian HD)
   1. AppID: 410830	Hype: 0.281	(ARENA GODS)
   2. AppID: 502800	Hype: 0.270	(SENRAN KAGURA ESTIVAL VERSUS)
@@ -59,6 +61,8 @@ In order to perform this filtering in an automatic manner, I could only consider
  20. AppID: 426690	Hype: 0.178	(Narcissu 10th Anniversary Anthology Project)
 
 ### Ranking by Wilson score bonus due to unexpectedly positive hype
+
+A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score (95% confidence) is improved by 7.7% thanks to the joke reviews.
 
   0. AppID: 623080	Wilson score deviation: 0.077	(planetarian HD)
   1. AppID: 357330	Wilson score deviation: 0.075	(Space Beast Terror Fright)
