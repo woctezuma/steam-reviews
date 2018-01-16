@@ -1,7 +1,7 @@
 # Steam Reviews
 
 This repository contains code to compute statistics of Steam reviews:
-* `download_reviews.py` allows to dowload reviews via Steam API,
+* `download_reviews.py` allows to download reviews via Steam API,
 * `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `identify_joke_reviews.py` allows to classify reviews as acceptable vs. joke,
