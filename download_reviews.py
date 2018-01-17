@@ -26,10 +26,23 @@ def id_reader():
         for row in reader:
             yield parse_id(row[0])
 
+def get_id_processed_filename(use_date = True):
+    import time
+
+    # Get current day as yyyymmdd format
+    date_format = "%Y%m%d"
+    current_date = time.strftime(date_format)
+
+    if use_date:
+        id_processed_filename = "idprocessed_on_" + current_date + ".txt"
+    else:
+        id_processed_filename = "idprocessed.txt"
+
+    return id_processed_filename
 
 def previous_results():
     """Return a set of all previous found ID's."""
-    temp_filename = "idprocessed.txt"
+    temp_filename = get_id_processed_filename()
     all_ids = set()
     try:
         with open(temp_filename, "r") as f:
@@ -77,13 +90,15 @@ def main():
     #   - an API request cannot return more than 20 reviews (or so, I read).
     max_num_reviews = pow(10, 4)
 
-    log.info("Getting previous results from idprocessed.txt")
+    log.info("Getting previous results from " + get_id_processed_filename())
     previos_ids = previous_results()
 
-    log.info("Opening idprocessed.txt")
+    log.info("Opening " + get_id_processed_filename())
     query_count = 0
     game_count = 0
     game = dict()
+
+    temp_filename = get_id_processed_filename()
 
     log.info("Opening idlist.txt")
     for appid in id_reader():
@@ -96,17 +111,25 @@ def main():
                 log.info("Skipping previously found id %d", appid)
                 continue
             else:
-                with open("idprocessed.txt", "a") as f:
+                log.info("Updating previously found id %d", appid)
+                with open(temp_filename, "a") as f:
                     f.write(str(appid) + '\n')
-                continue
+
+        try:
+            with open(data_filename, 'r', encoding="utf8") as in_json_file:
+                review_dict = json.load(in_json_file)
+        except:
+            review_dict = dict()
+            review_dict["reviews"] = dict()
+
+        previous_reviewIDs = set( review_dict["reviews"].keys() )
 
         url = api_url + str(appid)
 
         req_data = dict(defaults)
         req_data['appids'] = str(appid)
 
-        review_dict = dict()
-        reviews = []
+        new_reviews = []
 
         # Initialize
         offset = 0
@@ -122,7 +145,8 @@ def main():
             request_success_flag = result['success']
 
             try:
-                reviews.extend(result["reviews"])
+                downloaded_reviews = result["reviews"]
+                new_reviews.extend(downloaded_reviews)
             except KeyError:
                 print('\nThe request returned an empty response with flag: ', str(request_success_flag) + '\n')
                 break
@@ -149,8 +173,10 @@ def main():
                 time.sleep(wait_time)
                 query_count = 0
 
-        review_dict["reviews"] = dict()
-        for review in reviews:
+            if any([ review["recommendationid"] in previous_reviewIDs for review in downloaded_reviews ]):
+                break
+
+        for review in [r for r in new_reviews if r["recommendationid"] not in previous_reviewIDs]:
             reviewID = review["recommendationid"]
             review_dict["reviews"][reviewID] = review
 
@@ -162,7 +188,7 @@ def main():
 
         game_count += 1
 
-        with open("idprocessed.txt", "a") as f:
+        with open(temp_filename, "a") as f:
             f.write(str(appid) + '\n')
 
     log.info("Game records written: %d", game_count)
