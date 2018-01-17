@@ -64,6 +64,8 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
             # cf. https://en.wikipedia.org/wiki/ISO_639-1
             # cf. https://gist.github.com/carlopires/1262033
             if not(detected_language in accepted_languages_iso):
+                print('\nReview detected as being written in ' + detected_language + ' instead of English:')
+                print(review_content + '\n')
                 continue
 
             if is_positive_review:
