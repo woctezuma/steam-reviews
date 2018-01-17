@@ -52,6 +52,7 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
                 else:
                     detected_language = 'en'
             except exceptions.TranslatorError:
+                # This exception can be raised by 'textblob'. It is a priori not used by 'langdetect'.
                 # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
                 # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
                 # Example of such a review: http://steamcommunity.com/profiles/76561198169555911/recommended/723090/
