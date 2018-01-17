@@ -112,8 +112,6 @@ def main():
                 continue
             else:
                 log.info("Updating previously found id %d", appid)
-                with open(temp_filename, "a") as f:
-                    f.write(str(appid) + '\n')
 
         try:
             with open(data_filename, 'r', encoding="utf8") as in_json_file:
