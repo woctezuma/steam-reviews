@@ -1,7 +1,7 @@
 import sys, getopt
 
 from textblob import TextBlob, exceptions
-from langdetect import detect, DetectorFactory
+from langdetect import detect, DetectorFactory, lang_detect_exception
 
 from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
@@ -40,22 +40,29 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
             try:
                 if perform_language_detection_with_Google_Translate:
 
+                    DetectorFactory.seed = 0
+                    detected_language = detect(review_content)
+
+
+                    # It is up to the user to decide (trade-off accuracy vs. slower running time + Internet requirement)
+
                     # detected_language = blob.detect_language()
 
                     # NB: We avoid using blob.detect_language() as it calls Google Translate, which results in:
                     # - the requirement to have an Internet connection active,
                     # - a slow down of the algorithm.
-
-                    DetectorFactory.seed = 0
-                    detected_language = detect(review_content)
+                    # However, blob.detect_language() looks more accurate than detect(review_content) in practice.
 
                 else:
                     detected_language = 'en'
             except exceptions.TranslatorError:
-                # This exception can be raised by 'textblob'. It is a priori not used by 'langdetect'.
+                # This exception can be raised by 'textblob'.
                 # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
                 # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
                 # Example of such a review: http://steamcommunity.com/profiles/76561198169555911/recommended/723090/
+                detected_language = 'en'
+            except lang_detect_exception.LangDetectException:
+                # This exception can be raised by 'langdetect'.
                 detected_language = 'en'
 
             # Hard-coded check for English language
