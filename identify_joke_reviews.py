@@ -1,6 +1,7 @@
 import sys, getopt
 
 from textblob import TextBlob, exceptions
+from langdetect import detect, DetectorFactory
 
 from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
@@ -38,7 +39,16 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
             # Check language with Google Translate to detect reviews WRONGLY tagged as English
             try:
                 if perform_language_detection_with_Google_Translate:
-                    detected_language = blob.detect_language()
+
+                    # detected_language = blob.detect_language()
+
+                    # NB: We avoid using blob.detect_language() as it calls Google Translate, which results in:
+                    # - the requirement to have an Internet connection active,
+                    # - a slow down of the algorithm.
+
+                    DetectorFactory.seed = 0
+                    detected_language = detect(review_content)
+
                 else:
                     detected_language = 'en'
             except exceptions.TranslatorError:
