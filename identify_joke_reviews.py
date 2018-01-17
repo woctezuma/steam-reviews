@@ -167,7 +167,7 @@ def main(argv):
         print("Input appID detected as " + appID)
 
     accepted_languages = ['english']
-    perform_language_detection_with_Google_Translate = False
+    perform_language_detection_with_Google_Translate = True
     review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Translate)
 
     sentiment_verbose = True
