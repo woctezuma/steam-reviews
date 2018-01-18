@@ -109,13 +109,16 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
 
     try:
         percentage_reviews_wrongly_tagged_as_written_in_English = count_reviews_wrongly_tagged_as_written_in_English/count_reviews_tagged_as_written_in_English
+        end_of_sentence =  ' About {0:.2f} of the total is dubious.\n'.format(percentage_reviews_wrongly_tagged_as_written_in_English)
     except ZeroDivisionError:
-        percentage_reviews_wrongly_tagged_as_written_in_English = -1
+        end_of_sentence = '\n'
 
-    sentence = 'Number of reviews wrongly tagged as written in English: {0}/{1} (about {2:.2f} of the total)\n'
-    print(sentence.format(count_reviews_wrongly_tagged_as_written_in_English,
-                          count_reviews_tagged_as_written_in_English,
-                          percentage_reviews_wrongly_tagged_as_written_in_English))
+    accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
+    sentence = 'Number of reviews tagged as in ' + accepted_languages_as_concatenated_str + ': {0} ({1} with dubious tag ; {2} with tag confirmed by language detection).'
+    print(sentence.format(review_dict['language_tag']['num_reviews_tagged_English'],
+                          review_dict['language_tag']['num_reviews_wrongly_tagged_English'],
+                          review_dict['language_tag']['num_reviews_tagged_English']-review_dict['language_tag']['num_reviews_wrongly_tagged_English'])
+          + end_of_sentence)
 
     return review_dict
 
