@@ -154,6 +154,7 @@ NB: Three games do not appear in this ranking as the download process failed for
 
 ### Ranking by proportion of English reviews, with confirmation by a language detection tool
 
+[Gorogoa](http://store.steampowered.com/app/557600), [Rusty Lake Paradise](http://store.steampowered.com/app/744190) and [Splasher](http://store.steampowered.com/app/446840) feature respectively 20.6%, 18.2% and 17.2% English reviews. For the first two, this might be due to the fact that these games do not require to be able to read English text as most of the instructions are conveyed through drawings. The game store pages indicate respectively that 17 and 14 languages are supported. For the third game, the texts have been translated to 9 languages, including Chinese, Russian, Japanese, and Brazilian Portuguese.
 
 ```
   4. AppID: 418520	Proportion confirmed-english-tags: 0.979	(SculptrVR)
