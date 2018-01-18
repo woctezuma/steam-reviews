@@ -1,38 +1,64 @@
 # Steam Reviews
 
-This repository contains code to compute statistics of Steam reviews:
-* `download_reviews.py` allows to download reviews via Steam API,
-* `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
-* `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
-* `identify_joke_reviews.py` allows to classify reviews as acceptable vs. joke,
-* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews) and Wilson score bonus (due to hype),
-* `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
-* `cluster_reviews.py` attempts to divide reviews into clusters.
-
-Data can be downloaded from SteamSpy API and Steam API. It is readily available as a snapshot if needs be in [my Steam-Reviews-Data repository](https://github.com/woctezuma/steam-reviews-data).
-
-## Results as of January 1, 2018
-
-I have filtered Steam reviews in order to find out:
-
-* which game has the highest percentage of joke reviews,
-* and which game benefits the most from joke reviews in terms of Wilson score.
-
-All the results are available in [this text file](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.md).
-
-Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.4% and 1.1% lower).
+This repository contains Python code to compute statistics of Steam reviews.
 
 ### Definitions
 
-By "joke review", I mean a review which does not try to express the reviewer's opinion, but is instead a kind of joke with regards to the game's themes or characters.
+A "joke review" is a review which does not try to express the reviewer's opinion, but is instead a kind of joke with regards to the game's themes or characters.
 
-By "hype", I mean the percentage of joke reviews for a given game.
+"Hype" is the percentage of joke reviews for a given game.
+
+## Goal
+
+The goal is to filter Steam reviews in order to find out:
+
+* which game has the highest percentage of joke reviews,
+* which game benefits the most from joke reviews in terms of Wilson score,
+* which game has the highest percentage of English reviews.
+
+## Data source
+
+Data can be downloaded from SteamSpy API and Steam API. It is also available as a snapshot in [a data repository](https://github.com/woctezuma/steam-reviews-data).
 
 ### Limitations
 
-The analysis of Steam reviews requires to download them first through Steam API, which has a rate limit of about 10 reviews/second, I have limited the analysis to the top 250 hidden gems as of yesterday.
+The analysis of Steam reviews requires to download data through Steam API, which has a rate limit of about 10 reviews/second.
 
-In order to perform this filtering in an automatic manner, I could only consider the reviews tagged as being written in English. It is possible that some of the following games appear in the ranking due to reviews written in other languages yet tagged as being written in English. However, to try to be as robust as possible against wrong tag, the language of each review tagged as being written in English was then processed by Google Translate's language detection algorithm using [TextBlob](https://github.com/sloria/TextBlob), so that wrongly tagged reviews could be filtered out as well as possible.
+[Sentiment analysis](https://github.com/sloria/TextBlob) is performed on reviews written in English. The language is available with Steam's meta-data, but it is not always accurate because it requires the reviewers to correctly specify their language at the time the review is published. To try to be as robust as possible against mistagging, the language of each review is confirmed by [a tool running locally](https://github.com/Mimino666/langdetect), which used to be provided by Google. The limitation of this tool is that there are occasional false negatives (reviews which are written in English, but only consists of 3-5 words, with typos, so the algorithm might not recognize it is English).
+
+## Usage
+
+If you are running Windows, you could call the main functions using the `steamReviews.bat` script.
+
+The main functions are structured as follows:
+* `download_reviews.py` allows to download reviews via Steam API,
+* `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
+* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
+
+Additional functions are called from:
+* `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
+* `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
+* `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
+* `cluster_reviews.py` attempts to divide reviews into clusters.
+
+## Results as of January 18, 2018
+
+[A list of 250 hidden gems](https://github.com/woctezuma/steam-reviews/blob/master/hidden_gems.md) has been processed. Here is an excerpt of the input:
+
+00001.	[Short Stories Collection of Class Tangerine](http://store.steampowered.com/app/701930)
+00002.	[BLUE REVOLVER](http://store.steampowered.com/app/439490)
+00003.	[planetarian HD](http://store.steampowered.com/app/623080)
+00004.	[  Hidden Star in Four Seasons.](http://store.steampowered.com/app/745880)
+00005.	[Tayutama2 -you're the only one- CHI ver.](http://store.steampowered.com/app/552280)
+00006.	[DUSK](http://store.steampowered.com/app/519860)
+00007.	[Muv-Luv Alternative](http://store.steampowered.com/app/449840)
+00008.	[Paint it Back](http://store.steampowered.com/app/385250)
+00009.	[Linelight](http://store.steampowered.com/app/469790)
+00010.	[Monolith](http://store.steampowered.com/app/603960)
+
+Here are the results as [output](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.md) by `estimate_hype.py`.
+
+Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.4% and 1.1% lower).
 
 ### Ranking by hype
 
