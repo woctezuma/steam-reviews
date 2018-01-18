@@ -58,11 +58,13 @@ Additional functions are called from:
 
 Here are the results as [output](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.txt) by `estimate_hype.py`.
 
-Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.4% and 1.1% lower).
 
 ### Ranking by hype
 
-A hype of 0.300 means that 30.0% of the reviews are classified as joke reviews.
+A hype of 0.300 means that 30.0% of the English reviews are classified as joke reviews.
+
+NB: For `Planetarian HD`, only 1.4% of reviews are written in English, so 30% hype is only due to very few English reviews.
+
 
 ```
   1. AppID: 623080	Hype: 0.300	(planetarian HD)
@@ -75,11 +77,25 @@ A hype of 0.300 means that 30.0% of the reviews are classified as joke reviews.
   8. AppID: 639790	Hype: 0.207	(DEEP SPACE WAIFU)
   9. AppID: 294530	Hype: 0.203	(Freddi Fish 2: The Case of the Haunted Schoolhouse)
  10. AppID: 639780	Hype: 0.201	(deep space waifu: FLAT JUSTICE VERSION)
+[...]
+236. AppID: 698260	Hype: 0.015	(Star Shelter)
+237. AppID: 691450	Hype: 0.014	(Misao: Definitive Edition)
+238. AppID: 665270	Hype: 0.000	(  / Barrage Musical  ~A Fantasy of Tempest~)
+239. AppID: 516600	Hype: 0.000	(Bai Qu )
+240. AppID: 630060	Hype: 0.000	(Consummate:Missing World)
+241. AppID: 637880	Hype: 0.000	(I wanna be The Cat)
+242. AppID: 769920	Hype: 0.000	(Odysseus Kosmos and his Robot Quest: Episode 1)
+243. AppID: 435970	Hype: 0.000	(RefRain - prism memories -)
+244. AppID: 593200	Hype: 0.000	(The Adventures of Fei Duanmu )
+245. AppID: 650570	Hype: 0.000	(Code 7)
 ```
 
 ### Ranking by Wilson score bonus due to unexpectedly positive hype
 
 A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score (95% confidence) is improved by 7.7% thanks to the joke reviews.
+
+NB: The Wilson score depends on the sample size, and may vary widly after small adjustements in case of small sample sizes. The impact is of filtering joke reviews is expected to be strong for games with few English reviews.
+
 
 ```
   1. AppID: 623080	Wilson score deviation: 0.077	(planetarian HD)
@@ -92,9 +108,25 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
   8. AppID: 588040	Wilson score deviation: 0.023	(WILL: A Wonderful World / WILL)
   9. AppID: 658620	Wilson score deviation: 0.022	(Wonderful Everyday Down the Rabbit-Hole)
  10. AppID: 653950	Wilson score deviation: 0.018	(Your Smile Beyond Twilight:)
+[...]
+236. AppID: 314180	Wilson score deviation: -0.011	(Deathsmiles)
+237. AppID: 635940	Wilson score deviation: -0.011	(Little Busters! English Edition)
+238. AppID: 561080	Wilson score deviation: -0.012	(The Price of Freedom)
+239. AppID: 624460	Wilson score deviation: -0.012	(Fantasynth: Chez Nous)
+240. AppID: 468050	Wilson score deviation: -0.012	(The Last Time)
+241. AppID: 586880	Wilson score deviation: -0.014	(Mini Ghost)
+242. AppID: 607460	Wilson score deviation: -0.017	(Epic Snails)
+243. AppID: 562500	Wilson score deviation: -0.018	(Warstone TD)
+244. AppID: 758500	Wilson score deviation: -0.018	(Loot Box Quest)
+245. AppID: 372940	Wilson score deviation: -0.021	(Lost Lands: The Four Horsemen)
 ```
 
 ### Ranking by proportion of English reviews
+
+Some games appear at the top of the ranking of hidden gems, yet at the bottom of the ranking by proportion of English reviews: these games are really pushed to the higher ranks by non-English reviewers.
+
+NB: Three games do not appear in this ranking as the download process failed for them: Out of the Park Baseball 15 (appID=272670), Civilization IV: Beyond the Sword (appID=34460), Little Triangle (appID=575050).
+
 
 ```
   1. AppID: 662210	Proportion english-tags: 0.986	(Metal as Phuk)
@@ -122,6 +154,7 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
 
 ### Ranking by proportion of English reviews, with confirmation by a language detection tool
 
+
 ```
   4. AppID: 418520	Proportion confirmed-english-tags: 0.979	(SculptrVR)
   5. AppID: 662210	Proportion confirmed-english-tags: 0.971	(Metal as Phuk)
@@ -144,5 +177,29 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
 248. AppID: 552280	Proportion confirmed-english-tags: 0.006	(Tayutama2 -you're the only one- CHI ver.)
 249. AppID: 701930	Proportion confirmed-english-tags: -0.000	(Short Stories Collection of Class Tangerine)
 250. AppID: 713260	Proportion confirmed-english-tags: -0.000	(Beyond the Sunset )
+```
+
+### Final remarks
+
+Deep Space Waifu and Meltys Quest feature respectively 20.7% and 18.6% joke reviews. However, they do not benefit much from joke reviews: their Wilson score is respectively 0.3% and 0.9% lower without the joke reviews.
+
+```
+AppID: 639790 (DEEP SPACE WAIFU)
+Number of reviews: 4113 (3998 up ; 115 down)
+Number of downloaded reviews: 3828
+Number of reviews: 3828 (2150 with English tag ; 1678 with another language tag). Percentage of English tags: 0.56
+Number of reviews tagged as in English: 2150 (307 with dubious tag ; 1843 with tag confirmed by language detection). Percentage of confirmed English tags: 0.86
+Number of reviews in English: 1843 (382 joke ; 1461 acceptable)
+Hype: 0.207 ; Wilson score deviation: 0.003
+```
+
+```
+AppID: 723090 (Meltys Quest)
+Number of reviews: 317 (311 up ; 6 down)
+Number of downloaded reviews: 299
+Number of reviews: 299 (191 with English tag ; 108 with another language tag). Percentage of English tags: 0.64
+Number of reviews tagged as in English: 191 (19 with dubious tag ; 172 with tag confirmed by language detection). Percentage of confirmed English tags: 0.90
+Number of reviews in English: 172 (32 joke ; 140 acceptable)
+Hype: 0.186 ; Wilson score deviation: 0.009
 ```
 
