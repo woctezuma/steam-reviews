@@ -49,6 +49,7 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
     (query_summary, reviews) = describeData(review_data)
 
     count_reviews_wrongly_tagged_as_written_in_English = 0
+    count_reviews_tagged_as_written_in_English = 0
 
     review_dict = dict()
     review_dict['positive'] = dict()
@@ -65,6 +66,7 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
             # Review text
             review_content = review['review']
 
+            count_reviews_tagged_as_written_in_English += 1
 
             # Sentiment analysis
             blob = TextBlob(review_content)
@@ -97,8 +99,15 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
             review_dict[keyword][reviewID]['polarity'] = blob.sentiment.polarity
             review_dict[keyword][reviewID]['subjectivity'] = blob.sentiment.subjectivity
 
-    sentence = 'Number of reviews wrongly tagged as written in English: {0}\n'
-    print(sentence.format(count_reviews_wrongly_tagged_as_written_in_English))
+    try:
+        percentage_reviews_wrongly_tagged_as_written_in_English = count_reviews_wrongly_tagged_as_written_in_English/count_reviews_tagged_as_written_in_English
+    except ZeroDivisionError:
+        percentage_reviews_wrongly_tagged_as_written_in_English = -1
+
+    sentence = 'Number of reviews wrongly tagged as written in English: {0}/{1} (about {2:.2f} of the total)\n'
+    print(sentence.format(count_reviews_wrongly_tagged_as_written_in_English,
+                          count_reviews_tagged_as_written_in_English,
+                          percentage_reviews_wrongly_tagged_as_written_in_English))
 
     return review_dict
 
