@@ -36,7 +36,9 @@ def detectLanguage(review_content, blob = None, call_Google_Translate = False):
 
     return detected_language
 
-def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perform_language_detection_with_Google_Tool = False):
+def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
+                                 perform_language_detection_with_Google_Tool = False,
+                                 verbose_reviews_wrongly_tagged_as_written_in_English = False):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
@@ -77,8 +79,9 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
             # cf. https://en.wikipedia.org/wiki/ISO_639-1
             # cf. https://gist.github.com/carlopires/1262033
             if not(detected_language in accepted_languages_iso):
-                print('\nReview detected as being written in ' + detected_language + ' instead of English:')
-                print(review_content + '\n')
+                if verbose_reviews_wrongly_tagged_as_written_in_English:
+                    print('\nReview detected as being written in ' + detected_language + ' instead of English:')
+                    print(review_content + '\n')
                 continue
 
             if is_positive_review:
