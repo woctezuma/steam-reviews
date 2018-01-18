@@ -7,7 +7,36 @@ from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
 from cluster_reviews import printSentimentAnalysis
 
-def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perform_language_detection_with_Google_Translate = False):
+def detectLanguage(review_content, blob = None, call_Google_Translate = False):
+
+    try:
+
+        if call_Google_Translate:
+            # More accurate but requires an active Internet connection, and might result in a slow down of the process.
+
+            if blob is None:
+                blob = TextBlob(review_content)
+            detected_language = blob.detect_language()
+
+        else:
+            # It is up to the user to decide (trade-off accuracy vs. slower running time + Internet requirement).
+
+            DetectorFactory.seed = 0
+            detected_language = detect(review_content)
+
+    except exceptions.TranslatorError:
+        # This exception can be raised by 'textblob'.
+        # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
+        # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
+        # Example of such a review: http://steamcommunity.com/profiles/76561198169555911/recommended/723090/
+        detected_language = 'en'
+    except lang_detect_exception.LangDetectException:
+        # This exception can be raised by 'langdetect'.
+        detected_language = 'en'
+
+    return detected_language
+
+def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perform_language_detection_with_Google_Tool = False):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
@@ -36,33 +65,10 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'], perfor
             # Sentiment analysis
             blob = TextBlob(review_content)
 
-            # Check language with Google Translate to detect reviews WRONGLY tagged as English
-            try:
-                if perform_language_detection_with_Google_Translate:
-
-                    DetectorFactory.seed = 0
-                    detected_language = detect(review_content)
-
-
-                    # It is up to the user to decide (trade-off accuracy vs. slower running time + Internet requirement)
-
-                    # detected_language = blob.detect_language()
-
-                    # NB: We avoid using blob.detect_language() as it calls Google Translate, which results in:
-                    # - the requirement to have an Internet connection active,
-                    # - a slow down of the algorithm.
-                    # However, blob.detect_language() looks more accurate than detect(review_content) in practice.
-
-                else:
-                    detected_language = 'en'
-            except exceptions.TranslatorError:
-                # This exception can be raised by 'textblob'.
-                # The error is typically: TranslatorError('Must provide a string with at least 3 characters.')
-                # Since the review is very short, it is likely a joke review, so we won't dismiss it from our study.
-                # Example of such a review: http://steamcommunity.com/profiles/76561198169555911/recommended/723090/
-                detected_language = 'en'
-            except lang_detect_exception.LangDetectException:
-                # This exception can be raised by 'langdetect'.
+            # Check language with a tool by Google to detect reviews WRONGLY tagged as English
+            if perform_language_detection_with_Google_Tool:
+                detected_language = detectLanguage(review_content, blob)
+            else:
                 detected_language = 'en'
 
             # Hard-coded check for English language
@@ -177,8 +183,8 @@ def main(argv):
         print("Input appID detected as " + appID)
 
     accepted_languages = ['english']
-    perform_language_detection_with_Google_Translate = True
-    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Translate)
+    perform_language_detection_with_Google_Tool = True
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Tool)
 
     sentiment_verbose = True
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, None, sentiment_verbose)
