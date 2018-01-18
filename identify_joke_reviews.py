@@ -48,6 +48,7 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
 
     (query_summary, reviews) = describeData(review_data)
 
+    wrongly_tagged_reviewID = []
     count_reviews_wrongly_tagged_as_written_in_English = 0
     count_reviews_tagged_as_written_in_English = 0
 
@@ -84,6 +85,7 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
             # cf. https://gist.github.com/carlopires/1262033
             if not(detected_language in accepted_languages_iso):
                 count_reviews_wrongly_tagged_as_written_in_English += 1
+                wrongly_tagged_reviewID.append(reviewID)
                 if verbose_reviews_wrongly_tagged_as_written_in_English:
                     print('\nReview #' + str(count_reviews_wrongly_tagged_as_written_in_English)
                           + ' detected as being written in ' + detected_language + ' instead of English:')
@@ -98,6 +100,12 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
             review_dict[keyword][reviewID] = dict()
             review_dict[keyword][reviewID]['polarity'] = blob.sentiment.polarity
             review_dict[keyword][reviewID]['subjectivity'] = blob.sentiment.subjectivity
+
+    review_dict['language_tag'] = dict()
+    review_dict['language_tag']['reviews_wrongly_tagged_English'] = wrongly_tagged_reviewID
+    review_dict['language_tag']['num_reviews_wrongly_tagged_English'] = count_reviews_wrongly_tagged_as_written_in_English
+    review_dict['language_tag']['num_reviews_tagged_English'] = count_reviews_tagged_as_written_in_English
+    review_dict['language_tag']['num_reviews'] = len(reviews)
 
     try:
         percentage_reviews_wrongly_tagged_as_written_in_English = count_reviews_wrongly_tagged_as_written_in_English/count_reviews_tagged_as_written_in_English
