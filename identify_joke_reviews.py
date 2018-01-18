@@ -194,7 +194,9 @@ def main(argv):
 
     accepted_languages = ['english']
     perform_language_detection_with_Google_Tool = True
-    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Tool)
+    verbose_reviews_wrongly_tagged_as_written_in_English = True
+    review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Tool,
+                                               verbose_reviews_wrongly_tagged_as_written_in_English)
 
     sentiment_verbose = True
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, None, sentiment_verbose)
