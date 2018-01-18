@@ -181,7 +181,7 @@ NB: Three games do not appear in this ranking as the download process failed for
 
 ### Final remarks
 
-Deep Space Waifu and Meltys Quest feature respectively 20.7% and 18.6% joke reviews. However, they do not benefit much from joke reviews: their Wilson score is respectively 0.3% and 0.9% lower without the joke reviews.
+`Deep Space Waifu` and `Meltys Quest` feature respectively 20.7% and 18.6% joke reviews. However, they do not benefit much from joke reviews: their Wilson score is respectively 0.3% and 0.9% lower without the joke reviews.
 
 ```
 AppID: 639790 (DEEP SPACE WAIFU)
