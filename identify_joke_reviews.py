@@ -107,17 +107,41 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
     review_dict['language_tag']['num_reviews_tagged_English'] = count_reviews_tagged_as_written_in_English
     review_dict['language_tag']['num_reviews'] = len(reviews)
 
+    ## Mostly display
+
     try:
-        percentage_reviews_wrongly_tagged_as_written_in_English = count_reviews_wrongly_tagged_as_written_in_English/count_reviews_tagged_as_written_in_English
-        end_of_sentence =  ' About {0:.2f} of the total is dubious.\n'.format(percentage_reviews_wrongly_tagged_as_written_in_English)
+        percentage_reviews_tagged_as_written_in_English = review_dict['language_tag']['num_reviews_tagged_English']/review_dict['language_tag']['num_reviews']
+        end_of_sentence =  ' Percentage of English tags: {0:.2f}'.format(percentage_reviews_tagged_as_written_in_English)
     except ZeroDivisionError:
+        percentage_reviews_tagged_as_written_in_English = -1
+        end_of_sentence = ''
+
+    review_dict['language_tag']['prct_English_tags'] = percentage_reviews_tagged_as_written_in_English
+
+    sentence = 'Number of reviews: {0} ({1} with English tag ; {2} with another language tag).'
+    print(sentence.format(review_dict['language_tag']['num_reviews'],
+                          review_dict['language_tag']['num_reviews_tagged_English'],
+                          review_dict['language_tag']['num_reviews']-review_dict['language_tag']['num_reviews_tagged_English'])
+          + end_of_sentence)
+
+    ## Mostly display
+
+    num_confirmed_English_tags = review_dict['language_tag']['num_reviews_tagged_English']-review_dict['language_tag']['num_reviews_wrongly_tagged_English']
+
+    try:
+        percentage_confirmed_English_tags = num_confirmed_English_tags/review_dict['language_tag']['num_reviews_tagged_English']
+        end_of_sentence =  ' Percentage of confirmed English tags: {0:.2f}\n'.format(percentage_confirmed_English_tags)
+    except ZeroDivisionError:
+        percentage_confirmed_English_tags = -1
         end_of_sentence = '\n'
+
+    review_dict['language_tag']['prct_confirmed_English_tags'] = percentage_confirmed_English_tags
 
     accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
     sentence = 'Number of reviews tagged as in ' + accepted_languages_as_concatenated_str + ': {0} ({1} with dubious tag ; {2} with tag confirmed by language detection).'
     print(sentence.format(review_dict['language_tag']['num_reviews_tagged_English'],
                           review_dict['language_tag']['num_reviews_wrongly_tagged_English'],
-                          review_dict['language_tag']['num_reviews_tagged_English']-review_dict['language_tag']['num_reviews_wrongly_tagged_English'])
+                          num_confirmed_English_tags)
           + end_of_sentence)
 
     return review_dict
