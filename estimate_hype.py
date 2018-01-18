@@ -49,6 +49,9 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
     review_dict = getReviewSentimentDictionary(appID, accepted_languages, perform_language_detection_with_Google_Tool,
                                                verbose_reviews_wrongly_tagged_as_written_in_English)
 
+    prct_English_tags = review_dict['language_tag']['prct_English_tags']
+    prct_confirmed_English_tags_among_all_tags = review_dict['language_tag']['prct_confirmed_English_tags_among_all_tags']
+
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict)
 
     num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
@@ -66,7 +69,7 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
     sentence = 'Hype: {0:.3f} ; Wilson score deviation: {1:.3f}'
     print(sentence.format(hype, wilson_score_deviation))
 
-    return (hype, wilson_score_deviation)
+    return (hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags)
 
 def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
     from download_json import getTodaysSteamSpyData
@@ -97,14 +100,20 @@ def main():
 
     result_dict = dict()
     for appID in appID_list:
-        (hype, wilson_score_deviation) = computeHypeAndWilsonScoreDeviation(appID)
+        (hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags) = computeHypeAndWilsonScoreDeviation(appID)
         result_dict[appID] = dict()
         result_dict[appID]['hype'] = hype
         result_dict[appID]['wilson_score_deviation'] = wilson_score_deviation
+        result_dict[appID]['proportion_English-tags'] = prct_English_tags
+        result_dict[appID]['proportion_confirmed-English-tags'] = prct_confirmed_English_tags_among_all_tags
 
     printRankingAccordingToKeyword(result_dict, 'hype')
 
     printRankingAccordingToKeyword(result_dict, 'wilson_score_deviation')
+
+    printRankingAccordingToKeyword(result_dict, 'proportion_English-tags')
+
+    printRankingAccordingToKeyword(result_dict, 'proportion_confirmed-English-tags')
 
     return
 

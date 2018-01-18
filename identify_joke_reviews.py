@@ -135,7 +135,8 @@ def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
         percentage_confirmed_English_tags = -1
         end_of_sentence = '\n'
 
-    review_dict['language_tag']['prct_confirmed_English_tags'] = percentage_confirmed_English_tags
+    review_dict['language_tag']['prct_confirmed_English_tags_among_English_tags'] = percentage_confirmed_English_tags
+    review_dict['language_tag']['prct_confirmed_English_tags_among_all_tags'] = percentage_confirmed_English_tags * percentage_reviews_tagged_as_written_in_English
 
     accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
     sentence = 'Number of reviews tagged as in ' + accepted_languages_as_concatenated_str + ': {0} ({1} with dubious tag ; {2} with tag confirmed by language detection).'
