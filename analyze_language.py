@@ -99,9 +99,10 @@ def getAllReviewLanguageSummaries(max_num_appID = None):
 def getAllLanguages(language_filename = "list_all_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
 
+    # Import the list of languages from a text file
     with open(language_filename, 'r', encoding="utf8") as infile:
         lines = infile.readlines()
-        # The dictionary is on the first line
+        # The list is on the first line
         all_languages = eval(lines[0])
 
     print('List of languages loaded from disk.')
@@ -114,7 +115,7 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
     try:
 
-        # Import the dictionary from a text file
+        # Import the dictionary of game features from a text file
         with open(dict_filename, 'r', encoding="utf8") as infile:
             lines = infile.readlines()
             # The dictionary is on the first line
@@ -129,13 +130,13 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
         max_num_appID = None
         (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID)
 
-        # Export the dictionary to a text file
+        # Export the dictionary of game features to a text file
         with open(dict_filename, 'w', encoding="utf8") as outfile:
             print(game_feature_dict, file=outfile)
 
         print('Dictionary of language features written to disk.')
 
-        # Export the dictionary to a text file
+        # Export the list of languages to a text file
         with open(language_filename, 'w', encoding="utf8") as outfile:
             print(all_languages, file=outfile)
 
