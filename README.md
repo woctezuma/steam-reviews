@@ -187,8 +187,10 @@ NB: Three games do not appear in this ranking as the download process failed for
 AppID: 639790 (DEEP SPACE WAIFU)
 Number of reviews: 4113 (3998 up ; 115 down)
 Number of downloaded reviews: 3828
-Number of reviews: 3828 (2150 with English tag ; 1678 with another language tag). Percentage of English tags: 0.56
-Number of reviews tagged as in English: 2150 (307 with dubious tag ; 1843 with tag confirmed by language detection). Percentage of confirmed English tags: 0.86
+Number of reviews: 3828 (2150 with English tag ; 1678 with another language tag).
+Percentage of English tags: 0.56
+Number of reviews tagged as in English: 2150 (307 with dubious tag ; 1843 with tag confirmed by language detection).
+Percentage of confirmed English tags: 0.86
 Number of reviews in English: 1843 (382 joke ; 1461 acceptable)
 Hype: 0.207 ; Wilson score deviation: 0.003
 ```
@@ -197,8 +199,10 @@ Hype: 0.207 ; Wilson score deviation: 0.003
 AppID: 723090 (Meltys Quest)
 Number of reviews: 317 (311 up ; 6 down)
 Number of downloaded reviews: 299
-Number of reviews: 299 (191 with English tag ; 108 with another language tag). Percentage of English tags: 0.64
-Number of reviews tagged as in English: 191 (19 with dubious tag ; 172 with tag confirmed by language detection). Percentage of confirmed English tags: 0.90
+Number of reviews: 299 (191 with English tag ; 108 with another language tag).
+Percentage of English tags: 0.64
+Number of reviews tagged as in English: 191 (19 with dubious tag ; 172 with tag confirmed by language detection).
+Percentage of confirmed English tags: 0.90
 Number of reviews in English: 172 (32 joke ; 140 acceptable)
 Hype: 0.186 ; Wilson score deviation: 0.009
 ```
