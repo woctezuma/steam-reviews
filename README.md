@@ -154,6 +154,10 @@ NB: Three games do not appear in this ranking as the download process failed for
 
 ### Ranking by proportion of English reviews, with confirmation by a language detection tool
 
+After assessing the language with a tool to correct for mistagging, the top 10 ranking is roughly the same: `Tota Miner`, `Pajama Sam: No Need to Hide When It's Dark Outside` and `Paradigm` are out, while `Unbreakable Vr Runner`, `Subsurface Circular` and `(Champions of Breakfast` are in. The bottom 10 consists of the same games which are a priori popular in Asia, and might not have been translated to English.
+
+The games which are reviewed almost exclusively by English speakers seem to be games heavy on English puns (Metal as Phuk), or textual adventures (Herald to some extent, Open Sorcery, Subsurface Circular).
+
 [Gorogoa](http://store.steampowered.com/app/557600), [Rusty Lake Paradise](http://store.steampowered.com/app/744190) and [Splasher](http://store.steampowered.com/app/446840) feature respectively 20.6%, 18.2% and 17.2% English reviews. For the first two, this might be due to the fact that these games do not require to be able to read English text as most of the instructions are conveyed through drawings. The game store pages indicate respectively that 17 and 14 languages are supported. For the third game, the texts have been translated to 9 languages, including Chinese, Russian, Japanese, and Brazilian Portuguese.
 
 ```
