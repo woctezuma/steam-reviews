@@ -96,22 +96,26 @@ def getAllReviewLanguageSummaries(max_num_appID = None):
 
     return (game_feature_dict, all_languages)
 
-def getAllLanguages():
-    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems as follows:
+def getAllLanguages(language_filename = "list_all_languages.txt"):
+    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
 
-    all_languages = ['bg', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hu',
-                     'it', 'ja', 'ko', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sv',
-                     'th', 'tr', 'uk', 'zh-cn']
+    with open(language_filename, 'r', encoding="utf8") as infile:
+        lines = infile.readlines()
+        # The dictionary is on the first line
+        all_languages = eval(lines[0])
+
+    print('List of languages loaded from disk.')
 
     return all_languages
 
-def getGameFeaturesAsReviewLanguage(filename ="dict_review_languages.txt"):
+def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
+                                    language_filename ="list_all_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
 
     try:
 
         # Import the dictionary from a text file
-        with open(filename, 'r', encoding="utf8") as infile:
+        with open(dict_filename, 'r', encoding="utf8") as infile:
             lines = infile.readlines()
             # The dictionary is on the first line
             game_feature_dict = eval(lines[0])
@@ -126,15 +130,25 @@ def getGameFeaturesAsReviewLanguage(filename ="dict_review_languages.txt"):
         (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID)
 
         # Export the dictionary to a text file
-        with open(filename, 'w', encoding="utf8") as outfile:
+        with open(dict_filename, 'w', encoding="utf8") as outfile:
             print(game_feature_dict, file=outfile)
+
+        print('Dictionary of language features written to disk.')
+
+        # Export the dictionary to a text file
+        with open(language_filename, 'w', encoding="utf8") as outfile:
+            print(all_languages, file=outfile)
+
+        print('List of languages written to disk.')
 
     return game_feature_dict
 
 def main():
-    all_languages = getAllLanguages()
+    dict_filename = "dict_review_languages.txt"
+    language_filename = "list_all_languages.txt"
 
-    game_feature_dict = getGameFeaturesAsReviewLanguage()
+    game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename)
+    all_languages = getAllLanguages(language_filename)
 
     return
 
