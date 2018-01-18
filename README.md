@@ -176,8 +176,8 @@ NB: Three games do not appear in this ranking as the download process failed for
 246. AppID: 593200	Proportion confirmed-english-tags: 0.010	(The Adventures of Fei Duanmu )
 247. AppID: 588040	Proportion confirmed-english-tags: 0.009	(WILL: A Wonderful World / WILL)
 248. AppID: 552280	Proportion confirmed-english-tags: 0.006	(Tayutama2 -you're the only one- CHI ver.)
-249. AppID: 701930	Proportion confirmed-english-tags: -0.000	(Short Stories Collection of Class Tangerine)
-250. AppID: 713260	Proportion confirmed-english-tags: -0.000	(Beyond the Sunset )
+249. AppID: 701930	Proportion confirmed-english-tags: 0.000	(Short Stories Collection of Class Tangerine)
+250. AppID: 713260	Proportion confirmed-english-tags: 0.000	(Beyond the Sunset )
 ```
 
 ### Final remarks
