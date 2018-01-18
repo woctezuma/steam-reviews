@@ -94,7 +94,7 @@ NB: For `Planetarian HD`, only 1.4% of reviews are written in English, so 30% hy
 
 A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score (95% confidence) is improved by 7.7% thanks to the joke reviews.
 
-NB: The Wilson score depends on the sample size, and may vary widly after small adjustements in case of small sample sizes. The impact is of filtering joke reviews is expected to be strong for games with few English reviews.
+NB: The Wilson score depends on the sample size, and may vary widly after small adjustements in case of small sample sizes. The impact of filtering joke reviews is expected to be strong for games with few English reviews.
 
 
 ```
@@ -125,7 +125,7 @@ NB: The Wilson score depends on the sample size, and may vary widly after small 
 
 Some games appear at the top of the ranking of hidden gems, yet at the bottom of the ranking by proportion of English reviews: these games are really pushed to the higher ranks by non-English reviewers.
 
-NB: Three games do not appear in this ranking as the download process failed for them: Out of the Park Baseball 15 (appID=272670), Civilization IV: Beyond the Sword (appID=34460), Little Triangle (appID=575050).
+NB: Three games do not appear in this ranking as the download process failed for them: [Out of the Park Baseball 15](https://steamdb.info/app/272670/), [Civilization IV: Beyond the Sword](https://steamcommunity.com/app/34460), [Little Triangle](https://steamcommunity.com/app/575050).
 
 
 ```
