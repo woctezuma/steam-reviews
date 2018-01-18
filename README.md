@@ -56,7 +56,7 @@ Additional functions are called from:
 00009.	[Linelight](http://store.steampowered.com/app/469790)
 00010.	[Monolith](http://store.steampowered.com/app/603960)
 
-Here are the results as [output](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.md) by `estimate_hype.py`.
+Here are the results as [output](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.txt) by `estimate_hype.py`.
 
 Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from joke reviews: without the joke reviews, the Wilson score is more or less the same (respectively 0.4% and 1.1% lower).
 
