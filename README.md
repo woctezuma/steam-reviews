@@ -125,7 +125,7 @@ NB: The Wilson score depends on the sample size, and may vary widly after small 
 
 Some games appear at the top of the ranking of hidden gems, yet at the bottom of the ranking by proportion of English reviews: these games are really pushed to the higher ranks by non-English reviewers.
 
-NB: Three games do not appear in this ranking as the download process failed for them: [Out of the Park Baseball 15](https://steamdb.info/app/272670/), [Civilization IV: Beyond the Sword](https://steamcommunity.com/app/34460), [Little Triangle](https://steamcommunity.com/app/575050).
+NB: Three games do not appear in this ranking as the download process failed for them: [Out of the Park Baseball 15](https://steamdb.info/app/272670), [Civilization IV: Beyond the Sword](https://steamdb.info/app/34460), [Little Triangle](https://steamdb.info/app/575050).
 
 
 ```
