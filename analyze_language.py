@@ -83,27 +83,58 @@ def getAllReviewLanguageSummaries(max_num_appID = None):
         max_num_appID = min(max_num_appID, len(appID_list))
         appID_list = appID_list[0: max_num_appID]
 
-    result_dict = dict()
+    game_feature_dict = dict()
     all_languages = set()
 
     for appID in appID_list:
         summary_dict = getReviewLanguageSummary(appID)
 
-        result_dict[appID] = summary_dict
+        game_feature_dict[appID] = summary_dict
         all_languages = all_languages.union(summary_dict.keys())
 
     all_languages = sorted(list(all_languages))
 
-    return (result_dict, all_languages)
+    return (game_feature_dict, all_languages)
+
+def getAllLanguages():
+    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems as follows:
+
+    all_languages = ['bg', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hu',
+                     'it', 'ja', 'ko', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sv',
+                     'th', 'tr', 'uk', 'zh-cn']
+
+    return all_languages
+
+def getGameFeaturesAsReviewLanguage(filename ="dict_review_languages.txt"):
+    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
+
+    try:
+
+        # Import the dictionary from a text file
+        with open(filename, 'r', encoding="utf8") as infile:
+            lines = infile.readlines()
+            # The dictionary is on the first line
+            game_feature_dict = eval(lines[0])
+
+            print('Dictionary of language features loaded from disk.')
+
+    except FileNotFoundError:
+
+        print('Computing dictonary of language features from scratch.')
+
+        max_num_appID = None
+        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID)
+
+        # Export the dictionary to a text file
+        with open(filename, 'w', encoding="utf8") as outfile:
+            print(game_feature_dict, file=outfile)
+
+    return game_feature_dict
 
 def main():
-    max_num_appID = None
+    all_languages = getAllLanguages()
 
-    (result_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID)
-
-    print(result_dict)
-
-    print(all_languages)
+    game_feature_dict = getGameFeaturesAsReviewLanguage()
 
     return
 
