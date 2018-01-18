@@ -4,6 +4,10 @@ from describe_reviews import loadData, describeData, getReviewContent
 
 import iso639
 
+import scipy.sparse as sp
+
+from sklearn.preprocessing import normalize
+
 def getReviewLanguageDictionary(appID):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
 
@@ -144,12 +148,47 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
     return game_feature_dict
 
+def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose = False):
+    appIDs = sorted(list(game_feature_dict.keys()))
+    languages = sorted(list(all_languages))
+
+    # Reference: https://stackoverflow.com/a/43381974
+    map_row_dict = dict(zip(list(appIDs), range(len(appIDs))))
+    map_col_dict = dict(zip(list(languages), range(len(languages))))
+
+    rows, cols, vals = [], [], []
+    for appID, values in game_feature_dict.items():
+        for language, count in values.items():
+            rows.append(map_row_dict[appID])
+            cols.append(map_col_dict[language])
+            vals.append(count)
+
+    game_feature_matrix = sp.csr_matrix((vals, (rows, cols)))
+
+    if verbose:
+        print(game_feature_matrix.toarray())
+
+    return game_feature_matrix
+
+def normalizeEachRow(X, verbose = False):
+
+    X_normalized = normalize(X.astype('float64'), norm='l1')
+
+    if verbose:
+        print(X_normalized.toarray())
+
+    return X_normalized
+
 def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
 
     game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename)
     all_languages = getAllLanguages(language_filename)
+
+    game_feature_matrix = computeGameFeatureMatrix(game_feature_dict, all_languages)
+
+    normalized_game_feature_matrix = normalizeEachRow(game_feature_matrix)
 
     return
 
