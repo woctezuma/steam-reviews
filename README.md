@@ -64,6 +64,7 @@ Unexpectedly, Deep Space Waifu and Meltys Quest do not benefit that much from jo
 
 A hype of 0.300 means that 30.0% of the reviews are classified as joke reviews.
 
+'''
   1. AppID: 623080	Hype: 0.300	(planetarian HD)
   2. AppID: 410830	Hype: 0.290	(ARENA GODS)
   3. AppID: 733990	Hype: 0.250	(I Can't Believe It's Not Gambling)
@@ -74,11 +75,13 @@ A hype of 0.300 means that 30.0% of the reviews are classified as joke reviews.
   8. AppID: 639790	Hype: 0.207	(DEEP SPACE WAIFU)
   9. AppID: 294530	Hype: 0.203	(Freddi Fish 2: The Case of the Haunted Schoolhouse)
  10. AppID: 639780	Hype: 0.201	(deep space waifu: FLAT JUSTICE VERSION)
+'''
 
 ### Ranking by Wilson score bonus due to unexpectedly positive hype
 
 A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score (95% confidence) is improved by 7.7% thanks to the joke reviews.
 
+'''
   1. AppID: 623080	Wilson score deviation: 0.077	(planetarian HD)
   2. AppID: 552280	Wilson score deviation: 0.061	(Tayutama2 -you're the only one- CHI ver.)
   3. AppID: 438320	Wilson score deviation: 0.039	(Rush Rover)
@@ -89,9 +92,11 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
   8. AppID: 588040	Wilson score deviation: 0.023	(WILL: A Wonderful World / WILL)
   9. AppID: 658620	Wilson score deviation: 0.022	(Wonderful Everyday Down the Rabbit-Hole)
  10. AppID: 653950	Wilson score deviation: 0.018	(Your Smile Beyond Twilight:)
+'''
 
 ### Ranking by proportion of English reviews
 
+'''
   1. AppID: 662210	Proportion english-tags: 0.986	(Metal as Phuk)
   2. AppID: 418520	Proportion english-tags: 0.979	(SculptrVR)
   3. AppID: 453000	Proportion english-tags: 0.959	(TheWaveVR Beta)
@@ -113,9 +118,11 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
 245. AppID: 552280	Proportion english-tags: 0.010	(Tayutama2 -you're the only one- CHI ver.)
 246. AppID: 701930	Proportion english-tags: 0.000	(Short Stories Collection of Class Tangerine)
 247. AppID: 713260	Proportion english-tags: 0.000	(Beyond the Sunset )
+'''
 
 ### Ranking by proportion of English reviews, with confirmation by a language detection tool
 
+'''
   4. AppID: 418520	Proportion confirmed-english-tags: 0.979	(SculptrVR)
   5. AppID: 662210	Proportion confirmed-english-tags: 0.971	(Metal as Phuk)
   6. AppID: 380810	Proportion confirmed-english-tags: 0.934	(Herald: An Interactive Period Drama - Book I & II)
@@ -137,4 +144,4 @@ A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score 
 248. AppID: 552280	Proportion confirmed-english-tags: 0.006	(Tayutama2 -you're the only one- CHI ver.)
 249. AppID: 701930	Proportion confirmed-english-tags: -0.000	(Short Stories Collection of Class Tangerine)
 250. AppID: 713260	Proportion confirmed-english-tags: -0.000	(Beyond the Sunset )
-
+'''
