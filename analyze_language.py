@@ -207,7 +207,7 @@ def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs = ['272670', '34460
 
     return game_feature_dict
 
-def testClustering(normalized_game_feature_matrix, appIDs, languages):
+def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
     X = normalized_game_feature_matrix
 
@@ -217,7 +217,7 @@ def testClustering(normalized_game_feature_matrix, appIDs, languages):
     from sklearn.pipeline import make_pipeline
     from sklearn.preprocessing import Normalizer
 
-    # Dimensionality reduction (none if set to 0)
+    # Truncated SVD for dimensionality reduction (none if set to 0)
     n_components_dim_reduction = 0
     # K-means clustering
     n_clusters_kmeans = 3
@@ -304,7 +304,7 @@ def main():
 
     appIDs = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
-    testClustering(normalized_game_feature_matrix, appIDs, languages)
+    testKmeansClustering(normalized_game_feature_matrix, appIDs, languages)
 
     return
 
