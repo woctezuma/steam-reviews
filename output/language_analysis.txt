@@ -1,0 +1,144 @@
+Dictionary of language features loaded from disk.
+List of languages loaded from disk.
+
+Removing bugged appIDs:	Out of the Park Baseball 15 ; Civilization IV: Beyond the Sword ; Little Triangle
+
+Estimated number of clusters: 13
+
+Cluster 0: 21 elements
+Cluster 1: 19 elements
+Cluster 2: 9 elements
+Cluster 3: 71 elements
+Cluster 4: 12 elements
+Cluster 5: 58 elements
+Cluster 6: 12 elements
+Cluster 7: 10 elements
+Cluster 8: 8 elements
+Cluster 9: 1 elements
+Cluster 10: 3 elements
+Cluster 11: 12 elements
+Cluster 12: 11 elements
+
+Cluster 0: en ; zh-cn ; ko ; ru ; ja ;
+Cluster 1: en ; ru ; pt ; de ; es ;
+Cluster 2: en ; ru ; es ; pt ; zh-cn ;
+Cluster 3: en ; zh-cn ; de ; fr ; es ;
+Cluster 4: en ; zh-cn ; ko ; es ; ru ;
+Cluster 5: en ; zh-cn ; ru ; ko ; de ;
+Cluster 6: en ; zh-cn ; ko ; ru ; de ;
+Cluster 7: zh-cn ; en ; ko ; ru ; fr ;
+Cluster 8: ru ; en ; de ; fr ; zh-cn ;
+Cluster 9: de ; it ; en ; hu ; cs ;
+Cluster 10: es ; en ; ja ; pt ; zh-cn ;
+Cluster 11: zh-cn ; ko ; en ; it ; cs ;
+Cluster 12: zh-cn ; en ; ko ; ru ; fr ;
+
+
+Cluster A:	 21 game(s)
+Languages by number of reviews:	 en ; zh-cn ; ko ; ru ; ja ; etc.
+Samples:
+	 The Dishwasher: Vampire Smile ;	 KAMI ;	 Hexcells Infinite ;	 Deathsmiles ;	 planetarian ~the reverie of a little planet~ ;
+	 Quell ;	 Quell Reflect ;	 Love at First Sight ;	 Dungeon Warfare ;	 CrossCode ;
+	 LiEat ;	 Chronicon ;	 G-senjou no Maou - The Devil on G-String ;	 Mushihimesama ;	 Megadimension Neptunia VII ;
+	 KNIGHTS ;	 Zero Escape: The Nonary Games ;	 Opus Magnum ;	 Love Ribbon ;	 1bitHeart ;
+	 Little Busters! English Edition ;	
+
+Cluster B:	 19 game(s)
+Languages by number of reviews:	 en ; ru ; pt ; de ; es ; etc.
+Samples:
+	 Tetrobot and Co. ;	 Chicken Invaders 4 ;	 Super Panda Adventures ;	 Doom & Destiny ;	 Marvin's Mittens ;
+	 Chicken Invaders 5 ;	 Kick Ass Commandos ;	 Lost Lands: The Four Horsemen ;	 Lost Lands: The Golden Curse ;	 IS Defense ;
+	 Book of Demons ;	 SEUM: Speedrunners from Hell ;	 Mad Father ;	 Wonder Boy: The Dragon's Trap ;	 Orbox C ;
+	 SteamWorld Dig 2 ;	 deep space waifu: FLAT JUSTICE VERSION ;	 DEEP SPACE WAIFU ;	 UBERMOSH Vol.5 ;	
+
+Cluster C:	 9 game(s)
+Languages by number of reviews:	 en ; ru ; es ; pt ; zh-cn ; etc.
+Samples:
+	 Grim Legends 2: Song of the Dark Swan ;	 Enigmatis 2: The Mists of Ravenwood ;	 Batman: Arkham Asylum Game of the Year Edition ;	 Little Big Adventure 2 ;	 The Count Lucanor ;
+	 Bot Vice ;	 Pinkman ;	 Orbt XL ;	 Agatha Knife ;	
+
+Cluster D:	 71 game(s)
+Languages by number of reviews:	 en ; zh-cn ; de ; fr ; es ; etc.
+Samples:
+	 Primordia ;	 The Legend of Heroes: Trails in the Sky SC ;	 Gravity Ghost ;	 A Hat in Time ;	 Descent ;
+	 Pajama Sam: No Need to Hide When It's Dark Outside ;	 Freddi Fish 2: The Case of the Haunted Schoolhouse ;	 Redirection ;	 Caves of Qud ;	 The Sea Will Claim Everything ;
+	 Choice of Robots ;	 Total Miner ;	 UnReal World ;	 Stephen's Sausage Roll ;	 The Darkside Detective ;
+	 Templar Battleforce ;	 Contradiction - Spot The Liar! ;	 Tin Star ;	 Herald: An Interactive Period Drama - Book I & II ;	 Mindshow ;
+	 Aviary Attorney ;	 ACE Academy ;	 Hylics ;	 TY the Tasmanian Tiger ;	 TY the Tasmanian Tiger 2 ;
+	 SculptrVR ;	 Overload ;	 Hot Dogs, Horseshoes & Hand Grenades ;	 TheWaveVR Beta ;	 Champions of Breakfast ;
+	 3030 Deathwar Redux ;	 The Last Time ;	 Eleven: Table Tennis VR ;	 Unbreakable Vr Runner ;	 Mervils: A VR Adventure ;
+	 Unexplored ;	 Zombie Estate 2 ;	 DUSK ;	 Princess Remedy 2: In A Heap of Trouble ;	 Lazerbait ;
+	 Mutant Football League ;	 VR The Diner Duo ;	 Smashbox Arena ;	 Castle Must Be Mine ;	 Voodoo Vince: Remastered ;
+	 IronWolf VR ;	 The Price of Freedom ;	 Cinderella Phenomenon - Otome/Visual Novel ;	 Angels with Scaly Wings ;	 Fidel Dungeon Rescue ;
+	 GORN ;	 Open Sorcery ;	 Chroma Lab ;	 West of Loathing ;	 Paradigm ;
+	 Monolith ;	 Null Vector ;	 Crystalline ;	 Fantasynth: Chez Nous ;	 Cattails | Become a Cat! ;
+	 Operation Warcade VR ;	 Code 7 ;	 Metal as Phuk ;	 VTOL VR ;	 Subsurface Circular ;
+	 Helium Rain ;	 Silicon Zeroes ;	 Star Shelter ;	 SIMULACRA ;	 Cogmind ;
+	 Loot Box Quest ;	
+
+Cluster E:	 12 game(s)
+Languages by number of reviews:	 en ; zh-cn ; ko ; es ; ru ; etc.
+Samples:
+	 eden* ;	 CLANNAD ;	 Finding Paradise ;	 Wuppo ;	 Harmonia ;
+	 RefRain - prism memories - ;	 Muv-Luv Alternative ;	 Linelight ;	 The Legend of Heroes: Trails of Cold Steel ;	 Yomawari: Midnight Shadows /  ;
+	 I wanna be The Cat ;	 Wonderful Everyday Down the Rabbit-Hole ;	
+
+Cluster F:	 58 game(s)
+Languages by number of reviews:	 en ; zh-cn ; ru ; ko ; de ; etc.
+Samples:
+	 Blackwell Epiphany ;	 Escape Goat ;	 Escape Goat 2 ;	 Micron ;	 The House in Fata Morgana ;
+	 Hidden in Plain Sight ;	 Higurashi When They Cry Hou - Ch.1 Onikakushi ;	 Everyday Genius: SquareLogic ;	 Impossible Creatures Steam Edition ;	 Airships: Conquer the Skies ;
+	 Induction ;	 Umihara Kawase ;	 Paint it Back ;	 Bleed 2 ;	 Kindred Spirits on the Roof ;
+	 Turok ;	 Turok 2: Seeds of Evil ;	 Umineko When They Cry - Question Arcs ;	 Princess Remedy in a World of Hurt ;	 unknown ;
+	 Higurashi When They Cry Hou - Ch.2 Watanagashi ;	 Master of Orion 2 ;	 Bullet Heaven 2 ;	 Engare ;	 Ghost of a Tale ;
+	 OneShot ;	 Militia ;	 Racket: Nx ;	 Aseprite ;	 Moonlight ;
+	 BLUE REVOLVER ;	 Polandball: Can into Space! ;	 Muv-Luv ;	 Highway Blossoms ;	 Battle Chef Brigade ;
+	 Allumette ;	 Empires of the Undergrowth ;	 She Remembered Caterpillars ;	 Higurashi When They Cry Hou - Ch.3 Tatarigoroshi ;	 Recursed ;
+	 Four Last Things ;	 SHENZHEN I/O ;	 Nightshade ;	 Slayaway Camp ;	 Milkmaid of the Milky Way ;
+	 Rakuen ;	 Sky Knights ;	 Clone Drone in the Danger Zone ;	 Shotgun Legend ;	 Epic Snails ;
+	 Tower of Time ;	 Fight'N Rage ;	 Misao: Definitive Edition ;	 Diamo XL ;	 Meltys Quest ;
+	 Superflight ;	 I Can't Believe It's Not Gambling ;	 Blackwell Deception ;	
+
+Cluster G:	 12 game(s)
+Languages by number of reviews:	 en ; zh-cn ; ko ; ru ; de ; etc.
+Samples:
+	 Life Goes On: Done to Death ;	 Crazy Machines 3 ;	 Blockwick 2 ;	 Hidden Folks ;	 Kingdom Rush Frontiers ;
+	 Zenge ;	 DoDonPachi Resurrection ;	 klocki ;	 Rusty Lake: Roots ;	 Bad Dream: Coma ;
+	 Danganronpa Another Episode: Ultra Despair Girls ;	 Cat Quest ;	
+
+Cluster H:	 10 game(s)
+Languages by number of reviews:	 zh-cn ; en ; ko ; ru ; fr ; etc.
+Samples:
+	 NEKO-NIN exHeart ;	 Rush Rover ;	 Flowers -Le volume sur printemps- ;	 Nurse Love Addiction ;	 Supipara - Chapter 1 Spring Has Come! ;
+	 Coffin of Ashes ;	 Gorogoa ;	 Flood of Light ;	 Your Smile Beyond Twilight: ;	 KARAKARA2 ;
+	
+
+Cluster I:	 8 game(s)
+Languages by number of reviews:	 ru ; en ; de ; fr ; zh-cn ; etc.
+Samples:
+	 Neighbours from Hell Compilation ;	 The Tale of a Common Man ;	 Sally Face ;	 Hello Charlotte ;	 Warstone TD ;
+	 Zup! 7 ;	 Hello Charlotte: Childhood's End ;	 Odysseus Kosmos and his Robot Quest: Episode 1 ;	
+
+Cluster J:	 1 game(s)
+Languages by number of reviews:	 de ; it ; en ; hu ; cs ; etc.
+Samples:
+	 Bud Spencer & Terence Hill - Slaps And Beans ;	
+
+Cluster K:	 3 game(s)
+Languages by number of reviews:	 es ; en ; ja ; pt ; zh-cn ; etc.
+Samples:
+	 Mini Ghost ;	 Majotori ;	 Juanito Arcade Mayhem ;	
+
+Cluster L:	 12 game(s)
+Languages by number of reviews:	 zh-cn ; ko ; en ; it ; cs ; etc.
+Samples:
+	 Season of 12 Colors ;	 I and Me ;	 Bai Qu  ;	 Tayutama2 -you're the only one- CHI ver. ;	 WILL: A Wonderful World / WILL ;
+	 The Adventures of Fei Duanmu  ;	 planetarian HD ;	 Consummate:Missing World ;	 Draw Puzzle ;	   / Barrage Musical  ~A Fantasy of Tempest~ ;
+	 Short Stories Collection of Class Tangerine ;	 Beyond the Sunset  ;	
+
+Cluster M:	 11 game(s)
+Languages by number of reviews:	 zh-cn ; en ; ko ; ru ; fr ; etc.
+Samples:
+	 fault - milestone two side:above ;	 Beat Da Beat ;	 Rabi-Ribi ;	 STEINS;GATE ;	 Narcissu 10th Anniversary Anthology Project ;
+	 Lucy -The Eternity She Wished For- ;	 Splasher ;	 SENRAN KAGURA ESTIVAL VERSUS ;	 Glass Masquerade ;	 Rusty Lake Paradise ;
+	   Hidden Star in Four Seasons. ;	
