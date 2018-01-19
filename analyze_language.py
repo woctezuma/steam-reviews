@@ -298,8 +298,8 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
     my_af_preference = None
     # If you are lost and cannot find good values for preference, just set it to None and it will be initialized as:
-    from sklearn.metrics.pairwise import euclidean_distances
-    print( np.median( - euclidean_distances(X, squared=True) ) )
+    # from sklearn.metrics.pairwise import euclidean_distances
+    # print( np.median( - euclidean_distances(X, squared=True) ) )
 
     # Reference: http://scikit-learn.org/stable/auto_examples/cluster/plot_affinity_propagation.html
 
@@ -382,7 +382,7 @@ def main():
     languages = sorted(list(all_languages))
 
     # Need to know the number of clusters we want in order to use K-means
-    testKmeansClustering(normalized_game_feature_matrix, appIDs, languages)
+    # testKmeansClustering(normalized_game_feature_matrix, appIDs, languages)
 
     # Need to specify the "preference" parameter in order to use Affinity Propagation
     testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages)
