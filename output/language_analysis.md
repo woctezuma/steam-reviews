@@ -1,4 +1,38 @@
+Dictionary of language features loaded from disk.
+List of languages loaded from disk.
+
+Removing bugged appIDs:	Out of the Park Baseball 15 ; Civilization IV: Beyond the Sword ; Little Triangle
+
 Estimated number of clusters: 13
+
+Cluster 0: 21 elements
+Cluster 1: 19 elements
+Cluster 2: 9 elements
+Cluster 3: 71 elements
+Cluster 4: 12 elements
+Cluster 5: 58 elements
+Cluster 6: 12 elements
+Cluster 7: 10 elements
+Cluster 8: 8 elements
+Cluster 9: 1 elements
+Cluster 10: 3 elements
+Cluster 11: 12 elements
+Cluster 12: 11 elements
+
+Cluster 0: en ; zh-cn ; ko ; ru ; ja ;
+Cluster 1: en ; ru ; pt ; de ; es ;
+Cluster 2: en ; ru ; es ; pt ; zh-cn ;
+Cluster 3: en ; zh-cn ; de ; fr ; es ;
+Cluster 4: en ; zh-cn ; ko ; es ; ru ;
+Cluster 5: en ; zh-cn ; ru ; ko ; de ;
+Cluster 6: en ; zh-cn ; ko ; ru ; de ;
+Cluster 7: zh-cn ; en ; ko ; ru ; fr ;
+Cluster 8: ru ; en ; de ; fr ; zh-cn ;
+Cluster 9: de ; it ; en ; hu ; cs ;
+Cluster 10: es ; en ; ja ; pt ; zh-cn ;
+Cluster 11: zh-cn ; ko ; en ; it ; cs ;
+Cluster 12: zh-cn ; en ; ko ; ru ; fr ;
+
 
 Cluster A:	 21 game(s)
 Languages by number of reviews:	 en ; zh-cn ; ko ; ru ; ja ; etc.
@@ -108,4 +142,3 @@ Samples:
 	 fault - milestone two side:above ;	 Beat Da Beat ;	 Rabi-Ribi ;	 STEINS;GATE ;	 Narcissu 10th Anniversary Anthology Project ;
 	 Lucy -The Eternity She Wished For- ;	 Splasher ;	 SENRAN KAGURA ESTIVAL VERSUS ;	 Glass Masquerade ;	 Rusty Lake Paradise ;
 	   Hidden Star in Four Seasons. ;	
-
