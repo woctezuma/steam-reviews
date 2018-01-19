@@ -7,6 +7,7 @@ import iso639
 import scipy.sparse as sp
 
 from sklearn.preprocessing import normalize
+import numpy as np
 
 def getReviewLanguageDictionary(appID):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
@@ -179,6 +180,115 @@ def normalizeEachRow(X, verbose = False):
 
     return X_normalized
 
+def getAppNameList(appID_list):
+    from download_json import getTodaysSteamSpyData
+
+    # Download latest SteamSpy data to have access to the matching between appID and game name
+    SteamSpyData = getTodaysSteamSpyData()
+
+    appName_list = []
+
+    for appID in appID_list:
+        try:
+            appName = SteamSpyData[appID]['name']
+        except KeyError:
+            appName = 'unknown'
+        appName_list.append(appName)
+
+    return appName_list
+
+def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs = ['272670', '34460', '575050']):
+    list_bugged_appNames = getAppNameList(list_bugged_appIDs)
+
+    print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
+
+    for appID in list_bugged_appIDs:
+        game_feature_dict.pop(appID)
+
+    return game_feature_dict
+
+def testClustering(normalized_game_feature_matrix, appIDs, languages):
+    # Cluster hidden gems based on the number of reviews and the language they are written in.
+    X = normalized_game_feature_matrix
+
+    import matplotlib.pyplot as plt
+    from sklearn.decomposition import TruncatedSVD
+    from sklearn.cluster import KMeans
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import Normalizer
+
+    # Dimensionality reduction (none if set to 0)
+    n_components_dim_reduction = 0
+    # K-means clustering
+    n_clusters_kmeans = 3
+
+    # Reference: http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
+
+    if n_components_dim_reduction:
+        svd = TruncatedSVD(n_components_dim_reduction)
+        normalizer = Normalizer(copy=False)
+        lsa = make_pipeline(svd, normalizer)
+
+        X = lsa.fit_transform(X)
+
+        explained_variance = svd.explained_variance_ratio_.sum()
+        print("Explained variance of the SVD step: {}%".format(
+            int(explained_variance * 100)))
+
+        plt.figure()
+        lw = 2
+
+        plt.scatter(X[:, 0], X[:, 1], alpha=.8, lw=lw)
+        plt.title('SVD')
+        # plt.show()
+
+    km = KMeans(n_clusters=n_clusters_kmeans, init='k-means++', max_iter=100, n_init=1, verbose=True)
+
+    print("Clustering sparse data with %s" % km)
+    km.fit(X)
+
+    if n_components_dim_reduction:
+        original_space_centroids = svd.inverse_transform(km.cluster_centers_)
+        order_centroids = original_space_centroids.argsort()[:, ::-1]
+    else:
+        order_centroids = km.cluster_centers_.argsort()[:, ::-1]
+
+    print()
+
+    for i in range(n_clusters_kmeans):
+        print("Cluster %d:" % i, end='')
+        indices = np.where(km.labels_ == i)[0]
+        print(' %s elements' % len(indices), end='')
+        print()
+
+    print()
+
+    terms = languages
+    num_features_to_show = 10
+    for i in range(n_clusters_kmeans):
+        print("Cluster %d:" % i, end='')
+        for ind in order_centroids[i, :num_features_to_show]:
+            print(' %s ;' % terms[ind], end='')
+        print()
+
+    print()
+
+    terms = getAppNameList(appIDs)
+    num_appIDs_to_show = 20
+    for i in range(n_clusters_kmeans):
+        print("Cluster %d:\n\t" % i, end='')
+        indices = np.where(km.labels_ == i)[0]
+        iter_count = 0
+        for ind in indices[:num_appIDs_to_show]:
+            iter_count += 1
+            if iter_count % 7 == 0:
+                print(' %s \n\t' % terms[ind], end='')
+            else:
+                print(' %s \t' % terms[ind], end='')
+        print()
+
+    return
+
 def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
@@ -186,9 +296,15 @@ def main():
     game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename)
     all_languages = getAllLanguages(language_filename)
 
+    game_feature_dict = removeBuggedAppIDs(game_feature_dict)
+
     game_feature_matrix = computeGameFeatureMatrix(game_feature_dict, all_languages)
 
     normalized_game_feature_matrix = normalizeEachRow(game_feature_matrix)
+
+    appIDs = sorted(list(game_feature_dict.keys()))
+    languages = sorted(list(all_languages))
+    testClustering(normalized_game_feature_matrix, appIDs, languages)
 
     return
 
