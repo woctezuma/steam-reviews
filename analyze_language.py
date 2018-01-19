@@ -289,6 +289,82 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
 
     return
 
+def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages):
+    # Cluster hidden gems based on the number of reviews and the language they are written in.
+    X = normalized_game_feature_matrix
+
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import AffinityPropagation
+
+    my_af_preference = None
+    # If you are lost and cannot find good values for preference, just set it to None and it will be initialized as:
+    from sklearn.metrics.pairwise import euclidean_distances
+    print( np.median( - euclidean_distances(X, squared=True) ) )
+
+    # Reference: http://scikit-learn.org/stable/auto_examples/cluster/plot_affinity_propagation.html
+
+    af = AffinityPropagation(preference=my_af_preference).fit(X)
+
+    n_clusters_ = len(af.cluster_centers_indices_)
+
+    print('Estimated number of clusters: %d' % n_clusters_)
+
+    order_centroids = af.cluster_centers_.toarray().argsort()[:, ::-1]
+
+    if n_clusters_ < 20:
+
+        print()
+
+        for i in range(n_clusters_):
+            print("Cluster %d:" % i, end='')
+            indices = np.where(af.labels_ == i)[0]
+            print(' %s elements' % len(indices), end='')
+            print()
+
+        print()
+
+        num_features_to_show = 5
+        for i in range(n_clusters_):
+            print("Cluster %d:" % i, end='')
+            for ind in order_centroids[i, :num_features_to_show]:
+                print(' %s ;' % languages[ind], end='')
+            print()
+
+        print()
+
+        num_appIDs_to_show = None
+        terms = getAppNameList(appIDs)
+        for i in range(n_clusters_):
+            # Samples
+            indices = np.where(af.labels_ == i)[0]
+
+            print("\nCluster {}:\t {} game(s)".format(chr(i+65), len(indices)))
+
+            # Features
+            print('Languages by number of reviews:\t', end='')
+            for ind in order_centroids[i, :num_features_to_show]:
+                print(' %s ;' % languages[ind], end='')
+            print(' etc.')
+
+            print('Samples:')
+            iter_count = 0
+            if num_appIDs_to_show is not None:
+                selected_indices_to_display = indices[:num_appIDs_to_show]
+            else:
+                selected_indices_to_display = indices
+            for ind in selected_indices_to_display:
+                iter_count += 1
+                if iter_count % 5 == 0:
+                    print(' %s ;' % terms[ind], end='\n\t')
+                else:
+                    if iter_count == 1:
+                        print('\t %s ;' % terms[ind], end='\t')
+                    else:
+                        print(' %s ;' % terms[ind], end='\t')
+            print()
+
+    return
+
 def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
@@ -304,7 +380,12 @@ def main():
 
     appIDs = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
+
+    # Need to know the number of clusters we want in order to use K-means
     testKmeansClustering(normalized_game_feature_matrix, appIDs, languages)
+
+    # Need to specify the "preference" parameter in order to use Affinity Propagation
+    testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages)
 
     return
 
