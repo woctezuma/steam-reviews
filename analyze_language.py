@@ -354,7 +354,7 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
                 selected_indices_to_display = indices
             for ind in selected_indices_to_display:
                 iter_count += 1
-                if iter_count % 5 == 0:
+                if iter_count % 3 == 0:
                     print(' %s ;' % terms[ind], end='\n\t')
                 else:
                     if iter_count == 1:
