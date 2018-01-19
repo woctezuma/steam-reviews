@@ -16,6 +16,8 @@ The goal is to filter Steam reviews in order to find out:
 * which game benefits the most from joke reviews in terms of Wilson score,
 * which game has the highest percentage of English reviews.
 
+It is noticeable that a few genres are more popular in a few parts of the world, and this leads to different appreciations of rankings of hidden gems. Moreover, genre can be a very fuzzy concept, and attributing a genre to a game is debatable and error-prone. A work-in-progress deals with clustering games with regards to the player demography. Indeed, this would allow to personalize rankings of hidden gems based on each player's language, and completely avoid considering genres. For each game, a number of reviews is written in English, Chinese, Russian, etc. This piece of information allows to characterize the player demography, and cluster games with similar demography. An example of such clustering is shown [here](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/language_analysis.md).
+
 ## Data source
 
 Data can be downloaded from SteamSpy API and Steam API. It is also available as a snapshot in [a data repository](https://github.com/woctezuma/steam-reviews-data).
@@ -34,6 +36,7 @@ The main functions are structured as follows:
 * `download_reviews.py` allows to download reviews via Steam API,
 * `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
 * `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
+* `analyze_language.py` allows to cluster games according to the player demography, assessed with the number of reviews written for each language.
 
 Additional functions are called from:
 * `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
