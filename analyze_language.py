@@ -24,6 +24,9 @@ def getReviewLanguageDictionary(appID):
         # Review ID
         reviewID = review["recommendationid"]
 
+        # Review polarity tag, i.e. either "recommended" or "not recommended"
+        is_a_positive_review = review['voted_up']
+
         # Review text
         review_content = review['review']
 
@@ -40,6 +43,7 @@ def getReviewLanguageDictionary(appID):
         language_dict[reviewID] = dict()
         language_dict[reviewID]['tag'] = review_language_tag
         language_dict[reviewID]['detected'] = detected_language
+        language_dict[reviewID]['voted_up'] = is_a_positive_review
 
     return language_dict
 
