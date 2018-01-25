@@ -23,6 +23,9 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None
     if previously_detected_languages_dict is None:
         previously_detected_languages_dict = dict()
 
+    if appID not in previously_detected_languages_dict.keys():
+        previously_detected_languages_dict[appID] = dict()
+
     for review in reviews:
         # Review ID
         reviewID = review["recommendationid"]
@@ -37,15 +40,15 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None
         review_language_tag = review['language']
 
         # Review's automatically detected language
-        if reviewID in previously_detected_languages_dict.keys():
-            detected_language = previously_detected_languages_dict[reviewID]
+        if reviewID in previously_detected_languages_dict[appID].keys():
+            detected_language = previously_detected_languages_dict[appID][reviewID]
         else:
             try:
                 DetectorFactory.seed = 0
                 detected_language = detect(review_content)
             except lang_detect_exception.LangDetectException:
                 detected_language = 'unknown'
-            previously_detected_languages_dict[reviewID] = detected_language
+            previously_detected_languages_dict[appID][reviewID] = detected_language
 
         language_dict[reviewID] = dict()
         language_dict[reviewID]['tag'] = review_language_tag
