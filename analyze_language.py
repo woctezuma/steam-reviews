@@ -49,6 +49,7 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None
             except lang_detect_exception.LangDetectException:
                 detected_language = 'unknown'
             previously_detected_languages_dict[appID][reviewID] = detected_language
+            previously_detected_languages_dict['has_changed'] = True
 
         language_dict[reviewID] = dict()
         language_dict[reviewID]['tag'] = review_language_tag
@@ -75,6 +76,8 @@ def preProcessReviews(previously_detected_languages_filename = None, delta_n_rev
     except FileNotFoundError:
         previously_detected_languages_dict = dict()
 
+    previously_detected_languages_dict['has_changed'] = False
+
     for count, appID in enumerate(appID_list):
         (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
 
@@ -84,9 +87,10 @@ def preProcessReviews(previously_detected_languages_filename = None, delta_n_rev
             write_to_temp_files = bool(count==len(appID_list)-1)
 
         # Export to file
-        if previously_detected_languages_filename is not None and write_to_temp_files:
+        if previously_detected_languages_filename is not None and write_to_temp_files and previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
+            previously_detected_languages_dict['has_changed'] = False
 
         print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
 
@@ -221,6 +225,8 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
     except FileNotFoundError:
         previously_detected_languages_dict = dict()
 
+    previously_detected_languages_dict['has_changed'] = False
+
     for count, appID in enumerate(appID_list):
         (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
 
@@ -245,9 +251,10 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
                 print(all_languages, file=outfile)
 
         # Export to file
-        if previously_detected_languages_filename is not None and write_to_temp_files:
+        if previously_detected_languages_filename is not None and write_to_temp_files and previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
+            previously_detected_languages_dict['has_changed'] = False
 
         print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
 
