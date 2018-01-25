@@ -58,46 +58,6 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None
 
     return (language_dict, previously_detected_languages_dict)
 
-def preProcessReviews(previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
-    # Perform language detection on each review and store the result to avoid redundant computations
-    # Code largely copied from getGameFeaturesAsReviewLanguage()
-
-    print('Pre-computing language detection for each review.')
-
-    with open('idlist.txt') as f:
-        d = f.readlines()
-
-    appID_list = [x.strip() for x in d]
-
-    # Load from storage of previously detected languages for each reviewID
-    try:
-        with open(previously_detected_languages_filename, 'r', encoding="utf8") as infile:
-            lines = infile.readlines()
-            # The dictionary is on the first line
-            previously_detected_languages_dict = eval(lines[0])
-    except FileNotFoundError:
-        previously_detected_languages_dict = dict()
-
-    previously_detected_languages_dict['has_changed'] = False
-
-    for count, appID in enumerate(appID_list):
-        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
-
-        if delta_n_reviews_between_temp_saves > 0:
-            flush_to_file_now = bool(count % delta_n_reviews_between_temp_saves == 0)
-        else:
-            flush_to_file_now = bool(count==len(appID_list)-1)
-
-        # Export to file
-        if previously_detected_languages_filename is not None and flush_to_file_now and previously_detected_languages_dict['has_changed']:
-            with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
-                print(previously_detected_languages_dict, file=outfile)
-            previously_detected_languages_dict['has_changed'] = False
-
-        print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
-
-    return
-
 def most_common(L):
     # Reference: https://stackoverflow.com/a/1518632
 
@@ -188,7 +148,7 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename = None,
     game_feature_dict = dict()
     all_languages = set()
 
-    # Load from storage of previously detected languages for each reviewID
+    # Load the result of language detection for each review
     try:
         with open(previously_detected_languages_filename, 'r', encoding="utf8") as infile:
             lines = infile.readlines()
@@ -212,7 +172,7 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename = None,
         else:
             flush_to_file_now = bool(count==len(appID_list)-1)
 
-        # Export to file
+        # Export the result of language detection for each review, so as to avoid repeating intensive computations.
         if previously_detected_languages_filename is not None and flush_to_file_now and previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
@@ -506,21 +466,10 @@ def main():
     # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
     load_from_disk = True
 
-    # If detect_languages_in_separate_step is set to True, then language detection is computed during a separate step.
-    # However, this leads to redundant computations: game_feature_dict is computed twice,
-    # - once in preProcessReviews(), without saving the result,
-    # - and then once in getGameFeaturesAsReviewLanguage(), which ends by saving the result to a text file on the disk.
-    detect_languages_in_separate_step = False
-    # I suggest to set this variable to False for most of your computations. If you will, you can set it to True ONCE
-    # after you have updated the database of reviews with the download_reviews module. This bool is mostly for quality
-    # of life, since language detection is the only computation-intensive step.
-
     if load_from_disk:
         game_feature_dict = loadGameFeaturesAsReviewLanguage(dict_filename)
         all_languages = loadAllLanguages(language_filename)
     else:
-        if detect_languages_in_separate_step:
-            preProcessReviews(previously_detected_languages_filename)
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
     game_feature_dict = removeBuggedAppIDs(game_feature_dict)
