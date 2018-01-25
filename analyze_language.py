@@ -9,7 +9,7 @@ import scipy.sparse as sp
 from sklearn.preprocessing import normalize
 import numpy as np
 
-def getReviewLanguageDictionary(appID):
+def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
 
     review_data = loadData(appID)
@@ -19,6 +19,9 @@ def getReviewLanguageDictionary(appID):
     (query_summary, reviews) = describeData(review_data)
 
     language_dict = dict()
+
+    if previously_detected_languages_dict is None:
+        previously_detected_languages_dict = dict()
 
     for review in reviews:
         # Review ID
@@ -34,18 +37,57 @@ def getReviewLanguageDictionary(appID):
         review_language_tag = review['language']
 
         # Review's automatically detected language
-        try:
-            DetectorFactory.seed = 0
-            detected_language = detect(review_content)
-        except lang_detect_exception.LangDetectException:
-            detected_language = 'unknown'
+        if reviewID in previously_detected_languages_dict.keys():
+            detected_language = previously_detected_languages_dict[reviewID]
+        else:
+            try:
+                DetectorFactory.seed = 0
+                detected_language = detect(review_content)
+            except lang_detect_exception.LangDetectException:
+                detected_language = 'unknown'
+            previously_detected_languages_dict[reviewID] = detected_language
 
         language_dict[reviewID] = dict()
         language_dict[reviewID]['tag'] = review_language_tag
         language_dict[reviewID]['detected'] = detected_language
         language_dict[reviewID]['voted_up'] = is_a_positive_review
 
-    return language_dict
+    return (language_dict, previously_detected_languages_dict)
+
+def preProcessReviews(previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
+    # Perform language detection on each review and store the result to avoid redundant computations
+    # Code largely copied from getGameFeaturesAsReviewLanguage()
+
+    with open('idlist.txt') as f:
+        d = f.readlines()
+
+    appID_list = [x.strip() for x in d]
+
+    # Load from storage of previously detected languages for each reviewID
+    try:
+        with open(previously_detected_languages_filename, 'r', encoding="utf8") as infile:
+            lines = infile.readlines()
+            # The dictionary is on the first line
+            previously_detected_languages_dict = eval(lines[0])
+    except FileNotFoundError:
+        previously_detected_languages_dict = dict()
+
+    for count, appID in enumerate(appID_list):
+        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
+
+        if delta_n_reviews_between_temp_saves > 0:
+            write_to_temp_files = bool(count % delta_n_reviews_between_temp_saves == 0)
+        else:
+            write_to_temp_files = bool(count==len(appID_list)-1)
+
+        # Export to file
+        if previously_detected_languages_filename is not None and write_to_temp_files:
+            with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
+                print(previously_detected_languages_dict, file=outfile)
+
+        print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
+
+    return
 
 def most_common(L):
     # Reference: https://stackoverflow.com/a/1518632
@@ -127,15 +169,7 @@ def summarizeReviewLanguageDictionary(language_dict):
 
     return summary_dict
 
-def getReviewLanguageSummary(appID):
-
-    language_dict = getReviewLanguageDictionary(appID)
-
-    summary_dict = summarizeReviewLanguageDictionary(language_dict)
-
-    return summary_dict
-
-def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None, delta_n_reviews_between_temp_saves = 10):
+def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None, previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
 
     with open('idlist.txt') as f:
         d = f.readlines()
@@ -156,6 +190,8 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
                 # The dictionary is on the first line
                 game_feature_dict = eval(lines[0])
 
+                print('[Warning] AppIDs which already appear in temporary files are skipped.')
+                print('To update previously encountered appID with new reviews, please delete temporary files.')
                 appID_list = set(appID_list).difference(game_feature_dict.keys())
                 appID_list = sorted(list(appID_list), key=lambda x: int(x))
         except FileNotFoundError:
@@ -173,8 +209,19 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         except FileNotFoundError:
             all_languages = set()
 
+    # Load from storage of previously detected languages for each reviewID
+    try:
+        with open(previously_detected_languages_filename, 'r', encoding="utf8") as infile:
+            lines = infile.readlines()
+            # The dictionary is on the first line
+            previously_detected_languages_dict = eval(lines[0])
+    except FileNotFoundError:
+        previously_detected_languages_dict = dict()
+
     for count, appID in enumerate(appID_list):
-        summary_dict = getReviewLanguageSummary(appID)
+        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
+
+        summary_dict = summarizeReviewLanguageDictionary(language_dict)
 
         game_feature_dict[appID] = summary_dict
         all_languages = all_languages.union(summary_dict.keys())
@@ -182,7 +229,7 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         if delta_n_reviews_between_temp_saves > 0:
             write_to_temp_files = bool(count % delta_n_reviews_between_temp_saves == 0)
         else:
-            write_to_temp_files = False
+            write_to_temp_files = bool(count==len(appID_list)-1)
 
         # Export to temporary file
         if temp_dict_filename is not None and write_to_temp_files:
@@ -193,6 +240,11 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         if temp_language_filename is not None and write_to_temp_files:
             with open(temp_language_filename, 'w', encoding="utf8") as outfile:
                 print(all_languages, file=outfile)
+
+        # Export to file
+        if previously_detected_languages_filename is not None and write_to_temp_files:
+            with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
+                print(previously_detected_languages_dict, file=outfile)
 
         print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
 
@@ -214,7 +266,8 @@ def getAllLanguages(language_filename = "list_all_languages.txt"):
     return all_languages
 
 def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
-                                    language_filename ="list_all_languages.txt"):
+                                    language_filename ="list_all_languages.txt",
+                                    previously_detected_languages_filename = "previously_detected_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
 
     try:
@@ -237,7 +290,7 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
         temp_language_filename = getTemporaryFilename(language_filename)
 
         max_num_appID = None
-        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename)
+        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename, previously_detected_languages_filename)
 
         # Export the dictionary of game features to a text file
         with open(dict_filename, 'w', encoding="utf8") as outfile:
@@ -473,8 +526,11 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
+    previously_detected_languages_filename = "previously_detected_languages.txt"
+    
+    preProcessReviews(previously_detected_languages_filename)
 
-    game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename)
+    game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
     all_languages = getAllLanguages(language_filename)
 
     game_feature_dict = removeBuggedAppIDs(game_feature_dict)
