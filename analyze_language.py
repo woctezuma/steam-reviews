@@ -133,7 +133,7 @@ def getReviewLanguageSummary(appID):
 
     return summary_dict
 
-def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None):
+def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None, delta_n_reviews_between_temp_saves = 10):
 
     with open('idlist.txt') as f:
         d = f.readlines()
@@ -144,6 +144,7 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         max_num_appID = min(max_num_appID, len(appID_list))
         appID_list = appID_list[0: max_num_appID]
 
+    # Load from temporary file
     if temp_dict_filename is None:
         game_feature_dict = dict()
     else:
@@ -158,6 +159,7 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         except FileNotFoundError:
             game_feature_dict = dict()
 
+    # Load from temporary file
     if temp_language_filename is None:
         all_languages = set()
     else:
@@ -175,11 +177,18 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         game_feature_dict[appID] = summary_dict
         all_languages = all_languages.union(summary_dict.keys())
 
-        # Temporary exports
-        if temp_dict_filename is not None:
+        if delta_n_reviews_between_temp_saves > 0:
+            write_to_temp_files = bool(count % delta_n_reviews_between_temp_saves == 0)
+        else:
+            write_to_temp_files = False
+
+        # Export to temporary file
+        if temp_dict_filename is not None and write_to_temp_files:
             with open(temp_dict_filename, 'w', encoding="utf8") as outfile:
                 print(game_feature_dict, file=outfile)
-        if temp_language_filename is not None:
+
+        # Export to temporary file
+        if temp_language_filename is not None and write_to_temp_files:
             with open(temp_language_filename, 'w', encoding="utf8") as outfile:
                 print(all_languages, file=outfile)
 
