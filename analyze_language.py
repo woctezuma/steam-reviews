@@ -62,6 +62,8 @@ def preProcessReviews(previously_detected_languages_filename = None, delta_n_rev
     # Perform language detection on each review and store the result to avoid redundant computations
     # Code largely copied from getGameFeaturesAsReviewLanguage()
 
+    print('Pre-computing language detection for each review.')
+
     with open('idlist.txt') as f:
         d = f.readlines()
 
@@ -262,8 +264,8 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
 
     return (game_feature_dict, all_languages)
 
-def getAllLanguages(language_filename = "list_all_languages.txt"):
-    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
+def loadAllLanguages(language_filename ="list_all_languages.txt"):
+    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
 
     # Import the list of languages from a text file
     with open(language_filename, 'r', encoding="utf8") as infile:
@@ -275,46 +277,51 @@ def getAllLanguages(language_filename = "list_all_languages.txt"):
 
     return all_languages
 
+def loadGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt"):
+    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
+
+    # Import the dictionary of game features from a text file
+    with open(dict_filename, 'r', encoding="utf8") as infile:
+        lines = infile.readlines()
+        # The dictionary is on the first line
+        game_feature_dict = eval(lines[0])
+
+    print('Dictionary of language features loaded from disk.')
+
+    return game_feature_dict
+
+def writeContentToDisk(contentToWrite, filename):
+
+    # Export the content to a text file
+    with open(filename, 'w', encoding="utf8") as outfile:
+        print(contentToWrite, file=outfile)
+
+    return
+
 def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
                                     language_filename ="list_all_languages.txt",
                                     previously_detected_languages_filename = "previously_detected_languages.txt"):
-    # Obtained by running getAllReviewLanguageSummaries() on the top 250 hidden gems.
+    # Run getAllReviewLanguageSummaries() on the top hidden gems.
 
-    try:
+    print('Computing dictonary of language features from scratch.')
 
-        # Import the dictionary of game features from a text file
-        with open(dict_filename, 'r', encoding="utf8") as infile:
-            lines = infile.readlines()
-            # The dictionary is on the first line
-            game_feature_dict = eval(lines[0])
+    getTemporaryFilename = lambda filename: 'temp_' + filename
 
-            print('Dictionary of language features loaded from disk.')
+    temp_dict_filename = getTemporaryFilename(dict_filename)
+    temp_language_filename = getTemporaryFilename(language_filename)
 
-    except FileNotFoundError:
+    max_num_appID = None
+    (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename, previously_detected_languages_filename)
 
-        print('Computing dictonary of language features from scratch.')
+    # Export the dictionary of game features to a text file
+    writeContentToDisk(game_feature_dict, dict_filename)
+    print('Dictionary of language features written to disk.')
 
-        getTemporaryFilename = lambda filename: 'temp_' + filename
+    # Export the list of languages to a text file
+    writeContentToDisk(all_languages, language_filename)
+    print('List of languages written to disk.')
 
-        temp_dict_filename = getTemporaryFilename(dict_filename)
-        temp_language_filename = getTemporaryFilename(language_filename)
-
-        max_num_appID = None
-        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename, previously_detected_languages_filename)
-
-        # Export the dictionary of game features to a text file
-        with open(dict_filename, 'w', encoding="utf8") as outfile:
-            print(game_feature_dict, file=outfile)
-
-        print('Dictionary of language features written to disk.')
-
-        # Export the list of languages to a text file
-        with open(language_filename, 'w', encoding="utf8") as outfile:
-            print(all_languages, file=outfile)
-
-        print('List of languages written to disk.')
-
-    return game_feature_dict
+    return (game_feature_dict, all_languages)
 
 def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose = False):
     appIDs = sorted(list(game_feature_dict.keys()))
@@ -371,7 +378,10 @@ def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs = ['272670', '34460
     print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
 
     for appID in list_bugged_appIDs:
-        game_feature_dict.pop(appID)
+        try:
+            game_feature_dict.pop(appID)
+        except KeyError:
+            continue
 
     return game_feature_dict
 
@@ -537,11 +547,26 @@ def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
     previously_detected_languages_filename = "previously_detected_languages.txt"
-    
-    preProcessReviews(previously_detected_languages_filename)
 
-    game_feature_dict = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
-    all_languages = getAllLanguages(language_filename)
+    # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
+    # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
+    load_from_disk = True
+
+    # If detect_languages_in_separate_step is set to True, then language detection is computed during a separate step.
+    # However, this leads to redundant computations: game_feature_dict is computed twice,
+    # - once in preProcessReviews(), without saving the result,
+    # - and then once in getGameFeaturesAsReviewLanguage(), which ends by saving the result to a text file on the disk.
+    detect_languages_in_separate_step = False
+    # I suggest to set this variable to False for most of your computations. If you will, you can set it to True ONCE
+    # after you have updated the database of reviews with the download_reviews module.
+
+    if load_from_disk:
+        game_feature_dict = loadGameFeaturesAsReviewLanguage(dict_filename)
+        all_languages = loadAllLanguages(language_filename)
+    else:
+        if detect_languages_in_separate_step:
+            preProcessReviews(previously_detected_languages_filename)
+        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
     game_feature_dict = removeBuggedAppIDs(game_feature_dict)
 
