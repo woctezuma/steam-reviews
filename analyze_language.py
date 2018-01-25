@@ -133,7 +133,7 @@ def getReviewLanguageSummary(appID):
 
     return summary_dict
 
-def getAllReviewLanguageSummaries(max_num_appID = None):
+def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None):
 
     with open('idlist.txt') as f:
         d = f.readlines()
@@ -144,14 +144,46 @@ def getAllReviewLanguageSummaries(max_num_appID = None):
         max_num_appID = min(max_num_appID, len(appID_list))
         appID_list = appID_list[0: max_num_appID]
 
-    game_feature_dict = dict()
-    all_languages = set()
+    if temp_dict_filename is None:
+        game_feature_dict = dict()
+    else:
+        try:
+            with open(temp_dict_filename, 'r', encoding="utf8") as infile:
+                lines = infile.readlines()
+                # The dictionary is on the first line
+                game_feature_dict = eval(lines[0])
 
-    for appID in appID_list:
+                appID_list = set(appID_list).difference(game_feature_dict.keys())
+                appID_list = sorted(list(appID_list), key=lambda x: int(x))
+        except FileNotFoundError:
+            game_feature_dict = dict()
+
+    if temp_language_filename is None:
+        all_languages = set()
+    else:
+        try:
+            with open(temp_language_filename, 'r', encoding="utf8") as infile:
+                lines = infile.readlines()
+                # The list is on the first line
+                all_languages = eval(lines[0])
+        except FileNotFoundError:
+            all_languages = set()
+
+    for count, appID in enumerate(appID_list):
         summary_dict = getReviewLanguageSummary(appID)
 
         game_feature_dict[appID] = summary_dict
         all_languages = all_languages.union(summary_dict.keys())
+
+        # Temporary exports
+        if temp_dict_filename is not None:
+            with open(temp_dict_filename, 'w', encoding="utf8") as outfile:
+                print(game_feature_dict, file=outfile)
+        if temp_language_filename is not None:
+            with open(temp_language_filename, 'w', encoding="utf8") as outfile:
+                print(all_languages, file=outfile)
+
+        print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
 
     all_languages = sorted(list(all_languages))
 
@@ -188,8 +220,11 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
         print('Computing dictonary of language features from scratch.')
 
+        temp_dict_filename = 'temp_' + dict_filename
+        temp_language_filename = 'temp_' + language_filename
+
         max_num_appID = None
-        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID)
+        (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename)
 
         # Export the dictionary of game features to a text file
         with open(dict_filename, 'w', encoding="utf8") as outfile:
