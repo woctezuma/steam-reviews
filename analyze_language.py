@@ -114,8 +114,10 @@ def summarizeReviewLanguageDictionary(language_dict):
     language_iso_dict = convertReviewLanguageDictionaryToISO(language_dict)
 
     for language_iso in set(language_iso_dict.values()):
-        num_votes   = sum([1 for r in language_dict.values() if r['detected'] == language_iso ])
-        num_upvotes = sum([1 for r in language_dict.values() if r['detected'] == language_iso and bool(r['voted_up']) ])
+        reviews_with_matching_languages = [r for r in language_dict.values() if r['detected'] == language_iso]
+        num_votes = len(reviews_with_matching_languages)
+        positive_reviews_with_matching_languages = [r for r in reviews_with_matching_languages if bool(r['voted_up']) ]
+        num_upvotes = len(positive_reviews_with_matching_languages)
         num_downvotes = num_votes - num_upvotes
 
         summary_dict[language_iso] = dict()
