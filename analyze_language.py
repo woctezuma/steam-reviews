@@ -231,8 +231,10 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
         print('Computing dictonary of language features from scratch.')
 
-        temp_dict_filename = 'temp_' + dict_filename
-        temp_language_filename = 'temp_' + language_filename
+        getTemporaryFilename = lambda filename: 'temp_' + filename
+
+        temp_dict_filename = getTemporaryFilename(dict_filename)
+        temp_language_filename = getTemporaryFilename(language_filename)
 
         max_num_appID = None
         (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename)
