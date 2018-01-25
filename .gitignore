@@ -5,6 +5,7 @@ idprocessed*.txt
 review_*.json
 201*_steamspy.json
 data/
+temp_*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
