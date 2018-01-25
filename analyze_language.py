@@ -558,7 +558,8 @@ def main():
     # - and then once in getGameFeaturesAsReviewLanguage(), which ends by saving the result to a text file on the disk.
     detect_languages_in_separate_step = False
     # I suggest to set this variable to False for most of your computations. If you will, you can set it to True ONCE
-    # after you have updated the database of reviews with the download_reviews module.
+    # after you have updated the database of reviews with the download_reviews module. This bool is mostly for quality
+    # of life, since language detection is the only computation-intensive step.
 
     if load_from_disk:
         game_feature_dict = loadGameFeaturesAsReviewLanguage(dict_filename)
