@@ -84,12 +84,12 @@ def preProcessReviews(previously_detected_languages_filename = None, delta_n_rev
         (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
 
         if delta_n_reviews_between_temp_saves > 0:
-            write_to_temp_files = bool(count % delta_n_reviews_between_temp_saves == 0)
+            flush_to_file_now = bool(count % delta_n_reviews_between_temp_saves == 0)
         else:
-            write_to_temp_files = bool(count==len(appID_list)-1)
+            flush_to_file_now = bool(count==len(appID_list)-1)
 
         # Export to file
-        if previously_detected_languages_filename is not None and write_to_temp_files and previously_detected_languages_dict['has_changed']:
+        if previously_detected_languages_filename is not None and flush_to_file_now and previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
             previously_detected_languages_dict['has_changed'] = False
@@ -178,45 +178,15 @@ def summarizeReviewLanguageDictionary(language_dict):
 
     return summary_dict
 
-def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = None, temp_language_filename = None, previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
+def getAllReviewLanguageSummaries(previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
 
     with open('idlist.txt') as f:
         d = f.readlines()
 
     appID_list = [x.strip() for x in d]
 
-    if max_num_appID is not None:
-        max_num_appID = min(max_num_appID, len(appID_list))
-        appID_list = appID_list[0: max_num_appID]
-
-    # Load from temporary file
-    if temp_dict_filename is None:
-        game_feature_dict = dict()
-    else:
-        try:
-            with open(temp_dict_filename, 'r', encoding="utf8") as infile:
-                lines = infile.readlines()
-                # The dictionary is on the first line
-                game_feature_dict = eval(lines[0])
-
-                print('[Warning] AppIDs which already appear in temporary files are skipped.')
-                print('To update previously encountered appID with new reviews, please delete temporary files.')
-                appID_list = set(appID_list).difference(game_feature_dict.keys())
-                appID_list = sorted(list(appID_list), key=lambda x: int(x))
-        except FileNotFoundError:
-            game_feature_dict = dict()
-
-    # Load from temporary file
-    if temp_language_filename is None:
-        all_languages = set()
-    else:
-        try:
-            with open(temp_language_filename, 'r', encoding="utf8") as infile:
-                lines = infile.readlines()
-                # The list is on the first line
-                all_languages = eval(lines[0])
-        except FileNotFoundError:
-            all_languages = set()
+    game_feature_dict = dict()
+    all_languages = set()
 
     # Load from storage of previously detected languages for each reviewID
     try:
@@ -238,22 +208,12 @@ def getAllReviewLanguageSummaries(max_num_appID = None, temp_dict_filename = Non
         all_languages = all_languages.union(summary_dict.keys())
 
         if delta_n_reviews_between_temp_saves > 0:
-            write_to_temp_files = bool(count % delta_n_reviews_between_temp_saves == 0)
+            flush_to_file_now = bool(count % delta_n_reviews_between_temp_saves == 0)
         else:
-            write_to_temp_files = bool(count==len(appID_list)-1)
-
-        # Export to temporary file
-        if temp_dict_filename is not None and write_to_temp_files:
-            with open(temp_dict_filename, 'w', encoding="utf8") as outfile:
-                print(game_feature_dict, file=outfile)
-
-        # Export to temporary file
-        if temp_language_filename is not None and write_to_temp_files:
-            with open(temp_language_filename, 'w', encoding="utf8") as outfile:
-                print(all_languages, file=outfile)
+            flush_to_file_now = bool(count==len(appID_list)-1)
 
         # Export to file
-        if previously_detected_languages_filename is not None and write_to_temp_files and previously_detected_languages_dict['has_changed']:
+        if previously_detected_languages_filename is not None and flush_to_file_now and previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
             previously_detected_languages_dict['has_changed'] = False
@@ -305,13 +265,7 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
     print('Computing dictonary of language features from scratch.')
 
-    getTemporaryFilename = lambda filename: 'temp_' + filename
-
-    temp_dict_filename = getTemporaryFilename(dict_filename)
-    temp_language_filename = getTemporaryFilename(language_filename)
-
-    max_num_appID = None
-    (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(max_num_appID, temp_dict_filename, temp_language_filename, previously_detected_languages_filename)
+    (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(previously_detected_languages_filename)
 
     # Export the dictionary of game features to a text file
     writeContentToDisk(game_feature_dict, dict_filename)
