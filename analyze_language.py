@@ -47,16 +47,42 @@ def getReviewLanguageDictionary(appID):
 
     return language_dict
 
-def summarizeReviewLanguageDictionary(language_dict):
-    # Returns dictionary: language -> number of reviews for which tagged language coincides with detected language
+def most_common(L):
+    # Reference: https://stackoverflow.com/a/1518632
 
-    summary_dict = dict()
+    import itertools
+    import operator
 
-    languages = set([r['tag'] for r in language_dict.values() ])
+    # get an iterable of (item, iterable) pairs
+    SL = sorted((x, i) for i, x in enumerate(L))
+    # print 'SL:', SL
+    groups = itertools.groupby(SL, key=operator.itemgetter(0))
+
+    # auxiliary function to get "quality" for an item
+    def _auxfun(g):
+        item, iterable = g
+        count = 0
+        min_index = len(L)
+        for _, where in iterable:
+            count += 1
+            min_index = min(min_index, where)
+        # print 'item %r, count %r, minind %r' % (item, count, min_index)
+        return count, -min_index
+
+    # pick the highest-count/earliest item
+    return max(groups, key=_auxfun)[0]
+
+def convertReviewLanguageDictionaryToISO(language_dict):
+
+    language_iso_dict = dict()
+
+    languages = set([r['tag'] for r in language_dict.values()])
 
     for language in languages:
+
         try:
             language_iso = iso639.to_iso639_1(language)
+
         except iso639.NonExistentLanguageError:
             if language == 'schinese' or language == 'tchinese':
                 language_iso = 'zh-cn'
@@ -66,10 +92,36 @@ def summarizeReviewLanguageDictionary(language_dict):
                 language_iso = 'ko'
             else:
                 print('Missing language:' + language)
-                print([r['detected'] for r in language_dict.values() if r['tag'] == language])
-                continue
 
-        summary_dict[language_iso] = sum([1 for r in language_dict.values() if r['detected'] == language_iso])
+                detected_languages = [r['detected'] for r in language_dict.values() if r['tag'] == language]
+                print(detected_languages)
+
+                language_iso = most_common(detected_languages)
+                print('Most common match among detected languages: ' + language_iso)
+
+        language_iso_dict[language] = language_iso
+
+    return language_iso_dict
+
+def summarizeReviewLanguageDictionary(language_dict):
+    # Returns dictionary: language -> review stats including:
+    #                                 - number of reviews for which tagged language coincides with detected language
+    #                                 - number of such reviews which are "Recommended"
+    #                                 - number of such reviews which are "Not Recommended"
+
+    summary_dict = dict()
+
+    language_iso_dict = convertReviewLanguageDictionaryToISO(language_dict)
+
+    for language_iso in set(language_iso_dict.values()):
+        num_votes   = sum([1 for r in language_dict.values() if r['detected'] == language_iso ])
+        num_upvotes = sum([1 for r in language_dict.values() if r['detected'] == language_iso and bool(r['voted_up']) ])
+        num_downvotes = num_votes - num_upvotes
+
+        summary_dict[language_iso] = dict()
+        summary_dict[language_iso]['voted'] = num_votes
+        summary_dict[language_iso]['voted_up'] = num_upvotes
+        summary_dict[language_iso]['voted_down'] = num_downvotes
 
     return summary_dict
 
@@ -163,7 +215,8 @@ def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose = False):
 
     rows, cols, vals = [], [], []
     for appID, values in game_feature_dict.items():
-        for language, count in values.items():
+        for language, language_stats in values.items():
+            count = language_stats['voted']
             rows.append(map_row_dict[appID])
             cols.append(map_col_dict[language])
             vals.append(count)
