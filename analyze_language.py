@@ -506,7 +506,42 @@ def computeReviewLanguageDistribution(game_feature_dict, all_languages):
 
     return review_language_distribution
 
+def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages, quantile_for_our_own_wilson_score = 0.95):
+    # Prepare dictionary to feed to compute_stats module in hidden-gems repository
+
+    from compute_wilson_score import computeWilsonScore
+
+    D = dict()
+
+    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+
+    for appID in game_feature_dict.keys():
+        D[appID] = dict()
+
+        num_players_for_all_languages = steam_spy_dict[appID]['players_forever']
+
+        for language in all_languages:
+
+            try:
+                num_positive_reviews = game_feature_dict[appID][language]['voted_up']
+                num_negative_reviews = game_feature_dict[appID][language]['voted_down']
+            except KeyError:
+                num_positive_reviews = 0
+                num_negative_reviews = 0
+
+            wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews, quantile_for_our_own_wilson_score)
+
+            # Assumption: for every game, players and reviews are distributed among regions in the same proportions.
+            num_players = num_players_for_all_languages * review_language_distribution[appID]['distribution'][language]
+
+            D[appID][language]['wilson_score'] = wilson_score
+            D[appID][language]['num_players'] = num_players
+
+    return D
+
 def main():
+    from download_json import getTodaysSteamSpyData
+
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
     previously_detected_languages_filename = "previously_detected_languages.txt"
@@ -522,7 +557,9 @@ def main():
 
     # testClustering(game_feature_dict, all_languages)
 
-    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+    steam_spy_dict = getTodaysSteamSpyData()
+
+    D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages)
 
     return
 
