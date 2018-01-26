@@ -36,11 +36,13 @@ The main functions are structured as follows:
 * `download_reviews.py` allows to download reviews via Steam API,
 * `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
 * `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
-* `analyze_language.py` allows to cluster games according to the player demography, assessed with the number of reviews written for each language.
+* `analyze_language.py` allows to i) compute regional rankings of hidden gems, ii) cluster games according to the player demography, assessed with the number of reviews written for each language.
 
 Additional functions are called from:
 * `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
+* `compute_stats.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
+* `appids.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
 * `cluster_reviews.py` attempts to divide reviews into clusters.
 
