@@ -521,6 +521,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
         num_players_for_all_languages = steam_spy_dict[appID]['players_forever']
 
         for language in all_languages:
+            D[appID][language] = dict()
 
             try:
                 num_positive_reviews = game_feature_dict[appID][language]['voted_up']
