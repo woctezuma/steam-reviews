@@ -154,7 +154,7 @@
 00017.	[CrossCode](http://store.steampowered.com/app/368340)
 00018.	[Bit Blaster XL](http://store.steampowered.com/app/433950)
 00019.	[Downwell](http://store.steampowered.com/app/360740)
-00020.	[planetarian ~the reverie of a little planet~](http://store.steampowered.com/app/316720)
+00020.	[planetarian \~the reverie of a little planet\~](http://store.steampowered.com/app/316720)
 
 ### Top 20 hidden gems for Spanish; Castilian speakers
 00001.	[UnEpic](http://store.steampowered.com/app/233980)
