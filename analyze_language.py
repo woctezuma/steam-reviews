@@ -184,6 +184,19 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename = None,
 
     return (game_feature_dict, all_languages)
 
+def loadGameFeatureDictionary(dict_filename ="dict_review_languages.txt"):
+    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
+
+    # Import the dictionary of game features from a text file
+    with open(dict_filename, 'r', encoding="utf8") as infile:
+        lines = infile.readlines()
+        # The dictionary is on the first line
+        game_feature_dict = eval(lines[0])
+
+    print('Dictionary of language features loaded from disk.')
+
+    return game_feature_dict
+
 def loadAllLanguages(language_filename ="list_all_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
 
@@ -197,18 +210,14 @@ def loadAllLanguages(language_filename ="list_all_languages.txt"):
 
     return all_languages
 
-def loadGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt"):
-    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
+def loadGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
+                                     language_filename ="list_all_languages.txt"):
 
-    # Import the dictionary of game features from a text file
-    with open(dict_filename, 'r', encoding="utf8") as infile:
-        lines = infile.readlines()
-        # The dictionary is on the first line
-        game_feature_dict = eval(lines[0])
+    game_feature_dict = loadGameFeatureDictionary(dict_filename)
 
-    print('Dictionary of language features loaded from disk.')
+    all_languages = loadAllLanguages(language_filename)
 
-    return game_feature_dict
+    return (game_feature_dict, all_languages)
 
 def writeContentToDisk(contentToWrite, filename):
 
@@ -467,8 +476,7 @@ def main():
     load_from_disk = True
 
     if load_from_disk:
-        game_feature_dict = loadGameFeaturesAsReviewLanguage(dict_filename)
-        all_languages = loadAllLanguages(language_filename)
+        (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
     else:
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
