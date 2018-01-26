@@ -24,7 +24,7 @@
 * uk	   --->	Ukrainian
 * zh-cn	   --->	Chinese
 
-### Top 10 hidden gems for Bulgarian speakers
+### Top 20 hidden gems for Bulgarian speakers
 00001.	[Montaro](http://store.steampowered.com/app/495890)
 00002.	[Zup!](http://store.steampowered.com/app/533300)
 00003.	[Space Rangers HD: A War Apart](http://store.steampowered.com/app/214730)
@@ -46,7 +46,7 @@
 00019.	[Lucy -The Eternity She Wished For-](http://store.steampowered.com/app/430960)
 00020.	[Peace, Death!](http://store.steampowered.com/app/588690)
 
-### Top 10 hidden gems for Czech speakers
+### Top 20 hidden gems for Czech speakers
 00001.	[Original War](http://store.steampowered.com/app/235320)
 00002.	[Mafia](http://store.steampowered.com/app/40990 )
 00003.	[Samorost 3](http://store.steampowered.com/app/421120)
@@ -68,7 +68,7 @@
 00019.	[Refunct](http://store.steampowered.com/app/406150)
 00020.	[Ravenfield](http://store.steampowered.com/app/636480)
 
-### Top 10 hidden gems for Danish speakers
+### Top 20 hidden gems for Danish speakers
 00001.	[Montaro](http://store.steampowered.com/app/495890)
 00002.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00003.	[Kingdom Rush](http://store.steampowered.com/app/246420)
@@ -90,7 +90,7 @@
 00019.	[Wild Animal Racing](http://store.steampowered.com/app/389510)
 00020.	[Unreal Tournament 2004: Editor's Choice Edition](http://store.steampowered.com/app/13230 )
 
-### Top 10 hidden gems for German speakers
+### Top 20 hidden gems for German speakers
 00001.	[Doom & Destiny](http://store.steampowered.com/app/318130)
 00002.	[The Room Two](http://store.steampowered.com/app/425580)
 00003.	[CrossCode](http://store.steampowered.com/app/368340)
@@ -112,7 +112,7 @@
 00019.	[Zenge](http://store.steampowered.com/app/461840)
 00020.	[Turok 2: Seeds of Evil](http://store.steampowered.com/app/405830)
 
-### Top 10 hidden gems for Greek, Modern (1453-); Greek speakers
+### Top 20 hidden gems for Greek, Modern (1453-); Greek speakers
 00001.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00002.	[The Cat Lady](http://store.steampowered.com/app/253110)
 00003.	[PAC-MAN Championship Edition DX+](http://store.steampowered.com/app/236450)
@@ -134,7 +134,7 @@
 00019.	[Ittle Dew](http://store.steampowered.com/app/241320)
 00020.	[Nightmares from the Deep 2: The Siren`s Call](http://store.steampowered.com/app/284790)
 
-### Top 10 hidden gems for English speakers
+### Top 20 hidden gems for English speakers
 00001.	[Aseprite](http://store.steampowered.com/app/431730)
 00002.	[  Hidden Star in Four Seasons.](http://store.steampowered.com/app/745880)
 00003.	[Finding Paradise](http://store.steampowered.com/app/337340)
@@ -156,7 +156,7 @@
 00019.	[Downwell](http://store.steampowered.com/app/360740)
 00020.	[planetarian ~the reverie of a little planet~](http://store.steampowered.com/app/316720)
 
-### Top 10 hidden gems for Spanish; Castilian speakers
+### Top 20 hidden gems for Spanish; Castilian speakers
 00001.	[UnEpic](http://store.steampowered.com/app/233980)
 00002.	[The Room Two](http://store.steampowered.com/app/425580)
 00003.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
@@ -178,7 +178,7 @@
 00019.	[Guacamelee! Super Turbo Championship Edition](http://store.steampowered.com/app/275390)
 00020.	[DEEP SPACE WAIFU](http://store.steampowered.com/app/639790)
 
-### Top 10 hidden gems for Finnish speakers
+### Top 20 hidden gems for Finnish speakers
 00001.	[Bleed](http://store.steampowered.com/app/239800)
 00002.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00003.	[Lost Lands: Mahjong](http://store.steampowered.com/app/435030)
@@ -200,7 +200,7 @@
 00019.	[Hyperdimension Neptunia Re;Birth3 V Generation /  Re;Birth3 V CENTURY](http://store.steampowered.com/app/353270)
 00020.	[UnEpic](http://store.steampowered.com/app/233980)
 
-### Top 10 hidden gems for French speakers
+### Top 20 hidden gems for French speakers
 00001.	[The Room Two](http://store.steampowered.com/app/425580)
 00002.	[OneShot](http://store.steampowered.com/app/420530)
 00003.	[The Silent Age](http://store.steampowered.com/app/352520)
@@ -222,7 +222,7 @@
 00019.	[Freedom Planet](http://store.steampowered.com/app/248310)
 00020.	[SEUM: Speedrunners from Hell](http://store.steampowered.com/app/457210)
 
-### Top 10 hidden gems for Hungarian speakers
+### Top 20 hidden gems for Hungarian speakers
 00001.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00002.	[PAC-MAN Championship Edition DX+](http://store.steampowered.com/app/236450)
 00003.	[The Room](http://store.steampowered.com/app/288160)
@@ -244,7 +244,7 @@
 00019.	[Software Inc.](http://store.steampowered.com/app/362620)
 00020.	[UnEpic](http://store.steampowered.com/app/233980)
 
-### Top 10 hidden gems for Italian speakers
+### Top 20 hidden gems for Italian speakers
 00001.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00002.	[The Room Two](http://store.steampowered.com/app/425580)
 00003.	[Doom & Destiny](http://store.steampowered.com/app/318130)
@@ -266,7 +266,7 @@
 00019.	[Lost Lands: Mahjong](http://store.steampowered.com/app/435030)
 00020.	[VA-11 Hall-A: Cyberpunk Bartender Action](http://store.steampowered.com/app/447530)
 
-### Top 10 hidden gems for Japanese speakers
+### Top 20 hidden gems for Japanese speakers
 00001.	[OneShot](http://store.steampowered.com/app/420530)
 00002.	[Rabi-Ribi](http://store.steampowered.com/app/400910)
 00003.	[NEKOPARA Vol. 2](http://store.steampowered.com/app/420110)
@@ -288,7 +288,7 @@
 00019.	[Montaro](http://store.steampowered.com/app/495890)
 00020.	[Downwell](http://store.steampowered.com/app/360740)
 
-### Top 10 hidden gems for Korean speakers
+### Top 20 hidden gems for Korean speakers
 00001.	[  Hidden Star in Four Seasons.](http://store.steampowered.com/app/745880)
 00002.	[fault - milestone two side:above](http://store.steampowered.com/app/344770)
 00003.	[Rabi-Ribi](http://store.steampowered.com/app/400910)
@@ -310,7 +310,7 @@
 00019.	[Draw Puzzle](http://store.steampowered.com/app/664180)
 00020.	[Hook](http://store.steampowered.com/app/367580)
 
-### Top 10 hidden gems for Dutch; Flemish speakers
+### Top 20 hidden gems for Dutch; Flemish speakers
 00001.	[Kingdom Rush](http://store.steampowered.com/app/246420)
 00002.	[Hyperdimension Neptunia Re;Birth3 V Generation /  Re;Birth3 V CENTURY](http://store.steampowered.com/app/353270)
 00003.	[Montaro](http://store.steampowered.com/app/495890)
@@ -332,7 +332,7 @@
 00019.	[Wild Animal Racing](http://store.steampowered.com/app/389510)
 00020.	[NEKOPARA Vol. 3](http://store.steampowered.com/app/602520)
 
-### Top 10 hidden gems for Norwegian speakers
+### Top 20 hidden gems for Norwegian speakers
 00001.	[NEKOPARA Vol. 2](http://store.steampowered.com/app/420110)
 00002.	[Zup! 2](http://store.steampowered.com/app/562220)
 00003.	[Montaro](http://store.steampowered.com/app/495890)
@@ -354,7 +354,7 @@
 00019.	[DEEP SPACE WAIFU](http://store.steampowered.com/app/639790)
 00020.	[Doom & Destiny](http://store.steampowered.com/app/318130)
 
-### Top 10 hidden gems for Polish speakers
+### Top 20 hidden gems for Polish speakers
 00001.	[klocki](http://store.steampowered.com/app/499440)
 00002.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00003.	[Book of Demons](http://store.steampowered.com/app/449960)
@@ -376,7 +376,7 @@
 00019.	[Zenge](http://store.steampowered.com/app/461840)
 00020.	[Melody's Escape](http://store.steampowered.com/app/270210)
 
-### Top 10 hidden gems for Portuguese speakers
+### Top 20 hidden gems for Portuguese speakers
 00001.	[Momodora: Reverie Under The Moonlight](http://store.steampowered.com/app/428550)
 00002.	[The Room Two](http://store.steampowered.com/app/425580)
 00003.	[UnEpic](http://store.steampowered.com/app/233980)
@@ -398,7 +398,7 @@
 00019.	[Noitu Love 2: Devolution](http://store.steampowered.com/app/207530)
 00020.	[What Remains of Edith Finch](http://store.steampowered.com/app/501300)
 
-### Top 10 hidden gems for Romanian; Moldavian; Moldovan speakers
+### Top 20 hidden gems for Romanian; Moldavian; Moldovan speakers
 00001.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00002.	[Montaro](http://store.steampowered.com/app/495890)
 00003.	[The Room](http://store.steampowered.com/app/288160)
@@ -420,7 +420,7 @@
 00019.	[LiEat](http://store.steampowered.com/app/373770)
 00020.	[Downwell](http://store.steampowered.com/app/360740)
 
-### Top 10 hidden gems for Russian speakers
+### Top 20 hidden gems for Russian speakers
 00001.	[Hook](http://store.steampowered.com/app/367580)
 00002.	[Neighbours from Hell Compilation](http://store.steampowered.com/app/260750)
 00003.	[DEEP SPACE WAIFU](http://store.steampowered.com/app/639790)
@@ -442,7 +442,7 @@
 00019.	[Bit Blaster XL](http://store.steampowered.com/app/433950)
 00020.	[Samorost 3](http://store.steampowered.com/app/421120)
 
-### Top 10 hidden gems for Swedish speakers
+### Top 20 hidden gems for Swedish speakers
 00001.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00002.	[Lost Lands: Mahjong](http://store.steampowered.com/app/435030)
 00003.	[VA-11 Hall-A: Cyberpunk Bartender Action](http://store.steampowered.com/app/447530)
@@ -464,7 +464,7 @@
 00019.	[Death Road to Canada](http://store.steampowered.com/app/252610)
 00020.	[UnEpic](http://store.steampowered.com/app/233980)
 
-### Top 10 hidden gems for Thai speakers
+### Top 20 hidden gems for Thai speakers
 00001.	[Mirror](http://store.steampowered.com/app/644560)
 00002.	[Cat Quest](http://store.steampowered.com/app/593280)
 00003.	[SENRAN KAGURA SHINOVI VERSUS](http://store.steampowered.com/app/411830)
@@ -486,7 +486,7 @@
 00019.	[Saint Seiya: Soldiers' Soul](http://store.steampowered.com/app/348710)
 00020.	[Heart's Medicine - Time to Heal](http://store.steampowered.com/app/494230)
 
-### Top 10 hidden gems for Turkish speakers
+### Top 20 hidden gems for Turkish speakers
 00001.	[Zup! 2](http://store.steampowered.com/app/562220)
 00002.	[Hook](http://store.steampowered.com/app/367580)
 00003.	[Zup! Zero](http://store.steampowered.com/app/610360)
@@ -508,7 +508,7 @@
 00019.	[The Room Two](http://store.steampowered.com/app/425580)
 00020.	[Tormentum - Dark Sorrow](http://store.steampowered.com/app/335000)
 
-### Top 10 hidden gems for Ukrainian speakers
+### Top 20 hidden gems for Ukrainian speakers
 00001.	[Hero of the Kingdom](http://store.steampowered.com/app/259550)
 00002.	[Batman: Arkham Asylum Game of the Year Edition](http://store.steampowered.com/app/35140 )
 00003.	[Montaro](http://store.steampowered.com/app/495890)
@@ -530,7 +530,7 @@
 00019.	[Guns, Gore & Cannoli](http://store.steampowered.com/app/322210)
 00020.	[Bit Blaster XL](http://store.steampowered.com/app/433950)
 
-### Top 10 hidden gems for Chinese speakers
+### Top 20 hidden gems for Chinese speakers
 00001.	[  Hidden Star in Four Seasons.](http://store.steampowered.com/app/745880)
 00002.	[Narcissu 1st & 2nd](http://store.steampowered.com/app/264380)
 00003.	[Hexcells](http://store.steampowered.com/app/265890)
