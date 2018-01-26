@@ -37,6 +37,7 @@ The main functions are structured as follows:
 * `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
 * `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
 * `analyze_language.py` allows to compute [regional rankings](https://www.resetera.com/posts/3786423/) of hidden gems. [Full results here](https://github.com/woctezuma/steam-reviews/tree/master/regional_rankings). It can also allow to cluster games according to the player demography, assessed with the number of reviews written for each language.
+* `create_README_for_regional_rankings.py` displays the content to be pasted to `regional_rankings/README.md`
 
 Additional functions are called from:
 * `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
