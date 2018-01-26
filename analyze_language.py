@@ -139,11 +139,14 @@ def summarizeReviewLanguageDictionary(language_dict):
     return summary_dict
 
 def getAllReviewLanguageSummaries(previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
+    from appids import appid_hidden_gems_reference_set
 
     with open('idlist.txt') as f:
         d = f.readlines()
 
     appID_list = [x.strip() for x in d]
+
+    appID_list = list(set(appID_list).union(appid_hidden_gems_reference_set))
 
     game_feature_dict = dict()
     all_languages = set()
