@@ -552,12 +552,19 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
 
+    import pathlib
+
+    # Output folder for regional rankings of hidden gems
+    output_folder = 'regional_rankings/'
+    # Reference of the following line: https://stackoverflow.com/a/14364249
+    pathlib.Path(output_folder).mkdir(parents=True, exist_ok=True)
+
     steam_spy_dict = getTodaysSteamSpyData()
 
     D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages)
 
     for language in all_languages:
-        output_filename = "hidden_gems_" + language + ".md"
+        output_filename = output_folder + "hidden_gems_" + language + ".md"
 
         ranking = computeRanking(D, num_top_games_to_print, [], [], language)
 
