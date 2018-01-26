@@ -542,6 +542,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
 def main():
     from download_json import getTodaysSteamSpyData
+    from compute_stats import computeRanking, saveRankingToFile
 
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
@@ -561,6 +562,15 @@ def main():
     steam_spy_dict = getTodaysSteamSpyData()
 
     D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages)
+
+    num_top_games_to_print = 100
+
+    for language in all_languages:
+        output_filename = "hidden_gems_" + language + ".md"
+
+        ranking = computeRanking(D, num_top_games_to_print, [], [], language)
+
+        saveRankingToFile(output_filename, ranking)
 
     return
 
