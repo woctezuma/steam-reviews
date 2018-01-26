@@ -485,6 +485,27 @@ def testClustering(game_feature_dict, all_languages):
 
     return
 
+def computeReviewLanguageDistribution(game_feature_dict, all_languages):
+    # Compute the distribution of review languages among reviewers
+
+    review_language_distribution = dict()
+
+    for appID in game_feature_dict.keys():
+        data_for_current_game = game_feature_dict[appID]
+
+        num_reviews = sum([ data_for_current_game[language]['voted'] for language in data_for_current_game.keys() ])
+
+        review_language_distribution[appID] = dict()
+        review_language_distribution[appID]['num_reviews'] = num_reviews
+        review_language_distribution[appID]['distribution'] = dict()
+        for language in all_languages:
+            try:
+                review_language_distribution[appID]['distribution'][language] = data_for_current_game[language]['voted'] / num_reviews
+            except KeyError:
+                review_language_distribution[appID]['distribution'][language] = 0
+
+    return review_language_distribution
+
 def main():
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
@@ -500,6 +521,8 @@ def main():
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
     # testClustering(game_feature_dict, all_languages)
+
+    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
 
     return
 
