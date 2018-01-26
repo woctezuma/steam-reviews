@@ -499,7 +499,7 @@ def main():
     else:
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
-    testClustering(game_feature_dict, all_languages)
+    # testClustering(game_feature_dict, all_languages)
 
     return
 
