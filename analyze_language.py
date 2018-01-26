@@ -517,6 +517,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
     for appID in game_feature_dict.keys():
         D[appID] = dict()
+        D[appID]['name'] = steam_spy_dict[appID]['name']
 
         num_players_for_all_languages = steam_spy_dict[appID]['players_forever']
 
@@ -531,6 +532,9 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
                 num_negative_reviews = 0
 
             wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews, quantile_for_our_own_wilson_score)
+
+            if wilson_score is None:
+                wilson_score = -1
 
             # Assumption: for every game, players and reviews are distributed among regions in the same proportions.
             num_players = num_players_for_all_languages * review_language_distribution[appID]['distribution'][language]
