@@ -466,19 +466,7 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
     return
 
-def main():
-    dict_filename = "dict_review_languages.txt"
-    language_filename = "list_all_languages.txt"
-    previously_detected_languages_filename = "previously_detected_languages.txt"
-
-    # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
-    # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
-    load_from_disk = True
-
-    if load_from_disk:
-        (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
-    else:
-        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
+def testClustering(game_feature_dict, all_languages):
 
     game_feature_dict = removeBuggedAppIDs(game_feature_dict)
 
@@ -494,6 +482,24 @@ def main():
 
     # Need to specify the "preference" parameter in order to use Affinity Propagation
     testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages)
+
+    return
+
+def main():
+    dict_filename = "dict_review_languages.txt"
+    language_filename = "list_all_languages.txt"
+    previously_detected_languages_filename = "previously_detected_languages.txt"
+
+    # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
+    # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
+    load_from_disk = True
+
+    if load_from_disk:
+        (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
+    else:
+        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
+
+    testClustering(game_feature_dict, all_languages)
 
     return
 
