@@ -565,23 +565,32 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
 
     return
 
-def main():
+def getInputData(force_update_of_regional_stats = False):
+    # If force_update_of_regional_stats is True, the TXT files below will be updated, which might take a lot of time
+    # if the last update was done a long time ago. Otherwise, the TXT files will just be loaded as they are.
+
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
     previously_detected_languages_filename = "previously_detected_languages.txt"
 
     # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
     # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
-    load_from_disk = True
+    load_from_disk = not(force_update_of_regional_stats)
 
     if load_from_disk:
         (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
     else:
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
 
+    return (game_feature_dict, all_languages)
+
+def main():
+    force_update_of_regional_stats = False
+    (game_feature_dict, all_languages) = getInputData(force_update_of_regional_stats)
+
     # testClustering(game_feature_dict, all_languages)
 
-    num_top_games_to_print = 100
+    num_top_games_to_print = 250
     computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, num_top_games_to_print)
 
     return
