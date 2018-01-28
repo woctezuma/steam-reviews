@@ -548,6 +548,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
     return D
 
 def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
+                                        perform_optimization_at_runtime = True,
                                         num_top_games_to_print = 1000):
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
@@ -566,7 +567,7 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
     for language in all_languages:
         output_filename = output_folder + "hidden_gems_" + language + ".md"
 
-        ranking = computeRanking(D, num_top_games_to_print, [], [], language)
+        ranking = computeRanking(D, num_top_games_to_print, [], [], language, perform_optimization_at_runtime)
 
         saveRankingToFile(output_filename, ranking)
 
@@ -597,8 +598,9 @@ def main():
 
     # testClustering(game_feature_dict, all_languages)
 
+    perform_optimization_at_runtime = True
     num_top_games_to_print = 250
-    computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, num_top_games_to_print)
+    computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime, num_top_games_to_print)
 
     return
 
