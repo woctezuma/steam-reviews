@@ -520,9 +520,15 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
     for appID in game_feature_dict.keys():
         D[appID] = dict()
-        D[appID]['name'] = steam_spy_dict[appID]['name']
+        try:
+            D[appID]['name'] = steam_spy_dict[appID]['name']
+        except KeyError:
+            D[appID]['name'] = 'Unknown ' + str(appID)
 
-        num_players_for_all_languages = steam_spy_dict[appID]['players_forever']
+        try:
+            num_players_for_all_languages = steam_spy_dict[appID]['players_forever']
+        except KeyError:
+            num_players_for_all_languages = 0
 
         for language in all_languages:
             D[appID][language] = dict()
