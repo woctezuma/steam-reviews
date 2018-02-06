@@ -1,0 +1,10 @@
+iso639
+langdetect
+numpy
+pandas
+requests
+scipy
+seaborn
+sklearn
+textblob
+textstat
