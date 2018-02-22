@@ -1,13 +1,11 @@
-from langdetect import detect, DetectorFactory, lang_detect_exception
-
-from describe_reviews import loadData, describeData, getReviewContent
-
 import iso639
-
-import scipy.sparse as sp
-
-from sklearn.preprocessing import normalize
 import numpy as np
+import scipy.sparse as sp
+from langdetect import detect, DetectorFactory, lang_detect_exception
+from sklearn.preprocessing import normalize
+
+from describe_reviews import loadData, describeData
+
 
 def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
@@ -397,7 +395,6 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
     # Cluster hidden gems based on the number of reviews and the language they are written in.
     X = normalized_game_feature_matrix
 
-    import matplotlib.pyplot as plt
     from sklearn.cluster import AffinityPropagation
 
     my_af_preference = None
@@ -540,6 +537,8 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
                 num_positive_reviews = 0
                 num_negative_reviews = 0
 
+            num_reviews = num_positive_reviews + num_negative_reviews
+
             wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews, quantile_for_our_own_wilson_score)
 
             if wilson_score is None:
@@ -550,6 +549,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
             D[appID][language]['wilson_score'] = wilson_score
             D[appID][language]['num_players'] = num_players
+            D[appID][language]['num_reviews'] = num_reviews
 
     return D
 
