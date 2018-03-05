@@ -16,7 +16,7 @@ The goal is to filter Steam reviews in order to find out:
 * which game benefits the most from joke reviews in terms of Wilson score,
 * which game has the highest percentage of English reviews.
 
-It is noticeable that a few genres are more popular in a few parts of the world, and this leads to different appreciations of rankings of hidden gems. Moreover, genre can be a very fuzzy concept, and attributing a genre to a game is debatable and error-prone. A work-in-progress deals with clustering games with regards to the player demography. Indeed, this would allow to personalize rankings of hidden gems based on each player's language, and completely avoid considering genres. For each game, a number of reviews is written in English, Chinese, Russian, etc. This piece of information allows to characterize the player demography, and cluster games with similar demography. An example of such clustering is shown [here](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/language_analysis.txt).
+It is noticeable that a few genres are more popular in a few parts of the world, and this leads to different appreciations of rankings of hidden gems. Moreover, genre can be a very fuzzy concept, and attributing a genre to a game is debatable and error-prone. A work-in-progress deals with clustering games with regards to the player demography. Indeed, this would allow to personalize rankings of hidden gems based on each player's language, and completely avoid considering genres. For each game, a number of reviews is written in English, Chinese, Russian, etc. This piece of information allows to characterize the player demography, and cluster games with similar demography. An example of such clustering is shown [here](output/language_analysis.txt).
 
 ## Data source
 
@@ -36,7 +36,7 @@ The main functions are structured as follows:
 * `download_reviews.py` allows to download reviews via Steam API,
 * `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
 * `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
-* `analyze_language.py` allows to compute [regional rankings](https://www.resetera.com/posts/3786423/) of hidden gems. [Full results here](https://github.com/woctezuma/steam-reviews/tree/master/regional_rankings). It can also allow to cluster games according to the player demography, assessed with the number of reviews written for each language.
+* `analyze_language.py` allows to compute [regional rankings](https://www.resetera.com/posts/3786423/) of hidden gems. [Full results here](regional_rankings/). It can also allow to cluster games according to the player demography, assessed with the number of reviews written for each language.
 * `create_README_for_regional_rankings.py` displays the content to be pasted to `regional_rankings/README.md`
 
 Additional functions are called from:
@@ -49,7 +49,7 @@ Additional functions are called from:
 
 ## Results as of January 18, 2018
 
-[A list of 250 hidden gems](https://github.com/woctezuma/steam-reviews/blob/master/hidden_gems.md) has been processed. Here is an excerpt of the input:
+[A list of 250 hidden gems](hidden_gems.md) has been processed. Here is an excerpt of the input:
 
 00001.	[Short Stories Collection of Class Tangerine](http://store.steampowered.com/app/701930)
 00002.	[BLUE REVOLVER](http://store.steampowered.com/app/439490)
@@ -62,7 +62,7 @@ Additional functions are called from:
 00009.	[Linelight](http://store.steampowered.com/app/469790)
 00010.	[Monolith](http://store.steampowered.com/app/603960)
 
-Here are the results as [output](https://raw.githubusercontent.com/woctezuma/steam-reviews/master/output/output_rankings.txt) by `estimate_hype.py`.
+Here are the results as [output](output/output_rankings.txt) by `estimate_hype.py`.
 
 
 ### Ranking by hype
