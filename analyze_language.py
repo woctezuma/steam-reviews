@@ -7,7 +7,7 @@ from sklearn.preprocessing import normalize
 from describe_reviews import loadData, describeData
 
 
-def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None):
+def getReviewLanguageDictionary(appID, previously_detected_languages_dict=None):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
 
     review_data = loadData(appID)
@@ -56,6 +56,7 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict = None
 
     return (language_dict, previously_detected_languages_dict)
 
+
 def most_common(L):
     # Reference: https://stackoverflow.com/a/1518632
 
@@ -81,8 +82,8 @@ def most_common(L):
     # pick the highest-count/earliest item
     return max(groups, key=_auxfun)[0]
 
-def convertReviewLanguageDictionaryToISO(language_dict):
 
+def convertReviewLanguageDictionaryToISO(language_dict):
     language_iso_dict = dict()
 
     languages = set([r['tag'] for r in language_dict.values()])
@@ -112,6 +113,7 @@ def convertReviewLanguageDictionaryToISO(language_dict):
 
     return language_iso_dict
 
+
 def summarizeReviewLanguageDictionary(language_dict):
     # Returns dictionary: language -> review stats including:
     #                                 - number of reviews for which tagged language coincides with detected language
@@ -125,7 +127,7 @@ def summarizeReviewLanguageDictionary(language_dict):
     for language_iso in set(language_iso_dict.values()):
         reviews_with_matching_languages = [r for r in language_dict.values() if r['detected'] == language_iso]
         num_votes = len(reviews_with_matching_languages)
-        positive_reviews_with_matching_languages = [r for r in reviews_with_matching_languages if bool(r['voted_up']) ]
+        positive_reviews_with_matching_languages = [r for r in reviews_with_matching_languages if bool(r['voted_up'])]
         num_upvotes = len(positive_reviews_with_matching_languages)
         num_downvotes = num_votes - num_upvotes
 
@@ -136,7 +138,8 @@ def summarizeReviewLanguageDictionary(language_dict):
 
     return summary_dict
 
-def getAllReviewLanguageSummaries(previously_detected_languages_filename = None, delta_n_reviews_between_temp_saves = 10):
+
+def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, delta_n_reviews_between_temp_saves=10):
     from appids import appid_hidden_gems_reference_set
 
     with open('idlist.txt') as f:
@@ -161,7 +164,8 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename = None,
     previously_detected_languages_dict['has_changed'] = False
 
     for count, appID in enumerate(appID_list):
-        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID, previously_detected_languages_dict)
+        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID,
+                                                                                          previously_detected_languages_dict)
 
         summary_dict = summarizeReviewLanguageDictionary(language_dict)
 
@@ -171,21 +175,23 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename = None,
         if delta_n_reviews_between_temp_saves > 0:
             flush_to_file_now = bool(count % delta_n_reviews_between_temp_saves == 0)
         else:
-            flush_to_file_now = bool(count==len(appID_list)-1)
+            flush_to_file_now = bool(count == len(appID_list) - 1)
 
         # Export the result of language detection for each review, so as to avoid repeating intensive computations.
-        if previously_detected_languages_filename is not None and flush_to_file_now and previously_detected_languages_dict['has_changed']:
+        if previously_detected_languages_filename is not None and flush_to_file_now and \
+                previously_detected_languages_dict['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
                 print(previously_detected_languages_dict, file=outfile)
             previously_detected_languages_dict['has_changed'] = False
 
-        print('AppID ' + str(count+1) + '/' + str(len(appID_list)) + ' done.')
+        print('AppID ' + str(count + 1) + '/' + str(len(appID_list)) + ' done.')
 
     all_languages = sorted(list(all_languages))
 
     return (game_feature_dict, all_languages)
 
-def loadGameFeatureDictionary(dict_filename ="dict_review_languages.txt"):
+
+def loadGameFeatureDictionary(dict_filename="dict_review_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
 
     # Import the dictionary of game features from a text file
@@ -198,7 +204,8 @@ def loadGameFeatureDictionary(dict_filename ="dict_review_languages.txt"):
 
     return game_feature_dict
 
-def loadAllLanguages(language_filename ="list_all_languages.txt"):
+
+def loadAllLanguages(language_filename="list_all_languages.txt"):
     # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
 
     # Import the list of languages from a text file
@@ -211,26 +218,27 @@ def loadAllLanguages(language_filename ="list_all_languages.txt"):
 
     return all_languages
 
-def loadGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
-                                     language_filename ="list_all_languages.txt"):
 
+def loadGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
+                                     language_filename="list_all_languages.txt"):
     game_feature_dict = loadGameFeatureDictionary(dict_filename)
 
     all_languages = loadAllLanguages(language_filename)
 
     return (game_feature_dict, all_languages)
 
-def writeContentToDisk(contentToWrite, filename):
 
+def writeContentToDisk(contentToWrite, filename):
     # Export the content to a text file
     with open(filename, 'w', encoding="utf8") as outfile:
         print(contentToWrite, file=outfile)
 
     return
 
-def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
-                                    language_filename ="list_all_languages.txt",
-                                    previously_detected_languages_filename = "previously_detected_languages.txt"):
+
+def getGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
+                                    language_filename="list_all_languages.txt",
+                                    previously_detected_languages_filename="previously_detected_languages.txt"):
     # Run getAllReviewLanguageSummaries() on the top hidden gems.
 
     print('Computing dictonary of language features from scratch.')
@@ -247,7 +255,8 @@ def getGameFeaturesAsReviewLanguage(dict_filename ="dict_review_languages.txt",
 
     return (game_feature_dict, all_languages)
 
-def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose = False):
+
+def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose=False):
     appIDs = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
 
@@ -270,14 +279,15 @@ def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose = False):
 
     return game_feature_matrix
 
-def normalizeEachRow(X, verbose = False):
 
+def normalizeEachRow(X, verbose=False):
     X_normalized = normalize(X.astype('float64'), norm='l1')
 
     if verbose:
         print(X_normalized.toarray())
 
     return X_normalized
+
 
 def getAppNameList(appID_list):
     from download_json import getTodaysSteamSpyData
@@ -296,7 +306,8 @@ def getAppNameList(appID_list):
 
     return appName_list
 
-def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs = ['272670', '34460', '575050']):
+
+def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs=['272670', '34460', '575050']):
     list_bugged_appNames = getAppNameList(list_bugged_appIDs)
 
     print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
@@ -308,6 +319,7 @@ def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs = ['272670', '34460
             continue
 
     return game_feature_dict
+
 
 def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
@@ -391,6 +403,7 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
 
     return
 
+
 def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
     X = normalized_game_feature_matrix
@@ -439,7 +452,7 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
             # Samples
             indices = np.where(af.labels_ == i)[0]
 
-            print("\nCluster {}:\t {} game(s)".format(chr(i+65), len(indices)))
+            print("\nCluster {}:\t {} game(s)".format(chr(i + 65), len(indices)))
 
             # Features
             print('Languages by number of reviews:\t', end='')
@@ -466,8 +479,8 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
     return
 
-def testClustering(game_feature_dict, all_languages):
 
+def testClustering(game_feature_dict, all_languages):
     game_feature_dict = removeBuggedAppIDs(game_feature_dict)
 
     game_feature_matrix = computeGameFeatureMatrix(game_feature_dict, all_languages)
@@ -485,6 +498,7 @@ def testClustering(game_feature_dict, all_languages):
 
     return
 
+
 def computeReviewLanguageDistribution(game_feature_dict, all_languages):
     # Compute the distribution of review languages among reviewers
 
@@ -493,27 +507,57 @@ def computeReviewLanguageDistribution(game_feature_dict, all_languages):
     for appID in game_feature_dict.keys():
         data_for_current_game = game_feature_dict[appID]
 
-        num_reviews = sum([ data_for_current_game[language]['voted'] for language in data_for_current_game.keys() ])
+        num_reviews = sum([data_for_current_game[language]['voted'] for language in data_for_current_game.keys()])
 
         review_language_distribution[appID] = dict()
         review_language_distribution[appID]['num_reviews'] = num_reviews
         review_language_distribution[appID]['distribution'] = dict()
         for language in all_languages:
             try:
-                review_language_distribution[appID]['distribution'][language] = data_for_current_game[language]['voted'] / num_reviews
+                review_language_distribution[appID]['distribution'][language] = data_for_current_game[language][
+                                                                                    'voted'] / num_reviews
             except KeyError:
                 review_language_distribution[appID]['distribution'][language] = 0
 
     return review_language_distribution
 
-def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages, quantile_for_our_own_wilson_score = 0.95):
+
+def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
+                                            quantile_for_our_own_wilson_score=0.95):
     # Prepare dictionary to feed to compute_stats module in hidden-gems repository
 
     from compute_wilson_score import computeWilsonScore
+    from compute_bayesian_rating import choose_prior, compute_bayesian_score
 
     D = dict()
 
     review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+
+    # For each language, compute the prior to be used for the inference of a Bayesian rating
+    prior = dict()
+    for language in all_languages:
+
+        # Construct observation structure used to compute a prior for the inference of a Bayesian rating
+        observations = dict()
+        for appid in game_feature_dict.keys():
+
+            try:
+                num_positive_reviews = game_feature_dict[appid][language]['voted_up']
+                num_negative_reviews = game_feature_dict[appid][language]['voted_down']
+            except KeyError:
+                num_positive_reviews = 0
+                num_negative_reviews = 0
+
+            num_reviews = num_positive_reviews + num_negative_reviews
+
+            if num_reviews > 0:
+                observations[appid] = dict()
+                observations[appid]['score'] = num_positive_reviews / num_reviews
+                observations[appid]['num_votes'] = num_reviews
+
+        prior[language] = choose_prior(observations)
+      
+    print(prior)
 
     for appID in game_feature_dict.keys():
         D[appID] = dict()
@@ -539,23 +583,36 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
             num_reviews = num_positive_reviews + num_negative_reviews
 
-            wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews, quantile_for_our_own_wilson_score)
+            wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews,
+                                              quantile_for_our_own_wilson_score)
 
             if wilson_score is None:
                 wilson_score = -1
+
+            if num_reviews > 0:
+                # Construct game structure used to compute Bayesian rating
+                game = dict()
+                game['score'] = num_positive_reviews / num_reviews
+                game['num_votes'] = num_reviews
+
+                bayesian_rating = compute_bayesian_score(game, prior[language])
+            else:
+                bayesian_rating = -1
 
             # Assumption: for every game, players and reviews are distributed among regions in the same proportions.
             num_players = num_players_for_all_languages * review_language_distribution[appID]['distribution'][language]
 
             D[appID][language]['wilson_score'] = wilson_score
+            D[appID][language]['bayesian_rating'] = bayesian_rating
             D[appID][language]['num_players'] = num_players
             D[appID][language]['num_reviews'] = num_reviews
 
     return D
 
+
 def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
-                                        perform_optimization_at_runtime = True,
-                                        num_top_games_to_print = 1000):
+                                        perform_optimization_at_runtime=True,
+                                        num_top_games_to_print=1000):
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
 
@@ -579,7 +636,8 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
 
     return
 
-def getInputData(force_update_of_regional_stats = False):
+
+def getInputData(force_update_of_regional_stats=False):
     # If force_update_of_regional_stats is True, the TXT files below will be updated, which might take a lot of time
     # if the last update was done a long time ago. Otherwise, the TXT files will just be loaded as they are.
 
@@ -589,14 +647,16 @@ def getInputData(force_update_of_regional_stats = False):
 
     # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
     # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
-    load_from_disk = not(force_update_of_regional_stats)
+    load_from_disk = not (force_update_of_regional_stats)
 
     if load_from_disk:
         (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
     else:
-        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename, previously_detected_languages_filename)
+        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename,
+                                                                             previously_detected_languages_filename)
 
     return (game_feature_dict, all_languages)
+
 
 def main():
     force_update_of_regional_stats = False
@@ -606,9 +666,11 @@ def main():
 
     perform_optimization_at_runtime = True
     num_top_games_to_print = 250
-    computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime, num_top_games_to_print)
+    computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
+                                        num_top_games_to_print)
 
     return
+
 
 if __name__ == "__main__":
     main()
