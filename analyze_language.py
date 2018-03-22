@@ -556,7 +556,7 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
                 observations[appid]['num_votes'] = num_reviews
 
         prior[language] = choose_prior(observations)
-      
+
     print(prior)
 
     for appID in game_feature_dict.keys():
@@ -612,7 +612,9 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
 def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
                                         perform_optimization_at_runtime=True,
-                                        num_top_games_to_print=1000):
+                                        num_top_games_to_print=1000,
+                                        popularity_measure_str=None,
+                                        quality_measure_str=None):
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
 
@@ -630,7 +632,9 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
     for language in all_languages:
         output_filename = output_folder + "hidden_gems_" + language + ".md"
 
-        ranking = computeRanking(D, num_top_games_to_print, [], [], language, perform_optimization_at_runtime)
+        ranking = computeRanking(D, num_top_games_to_print, [], [], language, perform_optimization_at_runtime,
+                                 popularity_measure_str,
+                                 quality_measure_str)
 
         saveRankingToFile(output_filename, ranking)
 
@@ -666,8 +670,14 @@ def main():
 
     perform_optimization_at_runtime = True
     num_top_games_to_print = 250
+
+    popularity_measure_str = 'num_players'  # Either 'num_players' or 'num_reviews'
+    quality_measure_str = 'wilson_score'  # Either 'wilson_score' or 'bayesian_rating'
+
     computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
-                                        num_top_games_to_print)
+                                        num_top_games_to_print,
+                                        popularity_measure_str,
+                                        quality_measure_str)
 
     return
 
