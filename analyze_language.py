@@ -522,19 +522,80 @@ def computeReviewLanguageDistribution(game_feature_dict, all_languages):
     return review_language_distribution
 
 
-def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
-                                            quantile_for_our_own_wilson_score=0.95):
-    # Prepare dictionary to feed to compute_stats module in hidden-gems repository
+def choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dict, all_languages, verbose=False):
+    from compute_bayesian_rating import choose_prior
 
-    from compute_wilson_score import computeWilsonScore
-    from compute_bayesian_rating import choose_prior, compute_bayesian_score
+    # Construct observation structure used to compute a prior for the inference of a Bayesian rating
+    observations = dict()
+    for appid in steam_spy_dict.keys():
+        num_positive_reviews = steam_spy_dict[appid]['positive']
+        num_negative_reviews = steam_spy_dict[appid]['negative']
 
-    D = dict()
+        num_votes = num_positive_reviews + num_negative_reviews
 
-    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+        if num_votes > 0:
+            observations[appid] = dict()
+            observations[appid]['score'] = num_positive_reviews / num_votes
+            observations[appid]['num_votes'] = num_votes
+
+    common_prior = choose_prior(observations)
+
+    if verbose:
+        print(common_prior)
 
     # For each language, compute the prior to be used for the inference of a Bayesian rating
-    prior = dict()
+
+    language_independent_prior = dict()
+
+    for language in all_languages:
+        language_independent_prior[language] = common_prior
+
+    return language_independent_prior
+
+
+def choose_language_independent_prior_based_on_hidden_gems(game_feature_dict, all_languages, verbose=False):
+    from compute_bayesian_rating import choose_prior
+
+    # Construct observation structure used to compute a prior for the inference of a Bayesian rating
+    observations = dict()
+    for appid in game_feature_dict.keys():
+        num_positive_reviews = 0
+        num_negative_reviews = 0
+
+        for language in all_languages:
+            try:
+                num_positive_reviews += game_feature_dict[appid][language]['voted_up']
+                num_negative_reviews += game_feature_dict[appid][language]['voted_down']
+            except KeyError:
+                continue
+
+        num_votes = num_positive_reviews + num_negative_reviews
+
+        if num_votes > 0:
+            observations[appid] = dict()
+            observations[appid]['score'] = num_positive_reviews / num_votes
+            observations[appid]['num_votes'] = num_votes
+
+    common_prior = choose_prior(observations)
+
+    if verbose:
+        print(common_prior)
+
+    # For each language, compute the prior to be used for the inference of a Bayesian rating
+
+    language_independent_prior = dict()
+
+    for language in all_languages:
+        language_independent_prior[language] = common_prior
+
+    return language_independent_prior
+
+
+def choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_languages, verbose=False):
+    from compute_bayesian_rating import choose_prior
+
+    # For each language, compute the prior to be used for the inference of a Bayesian rating
+    language_specific_prior = dict()
     for language in all_languages:
 
         # Construct observation structure used to compute a prior for the inference of a Bayesian rating
@@ -555,9 +616,36 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
                 observations[appid]['score'] = num_positive_reviews / num_reviews
                 observations[appid]['num_votes'] = num_reviews
 
-        prior[language] = choose_prior(observations)
+        language_specific_prior[language] = choose_prior(observations)
 
-    print(prior)
+        if verbose:
+            print(language + ':', end='\t')
+            print(language_specific_prior[language])
+
+    return language_specific_prior
+
+
+def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
+                                            compute_prior_on_whole_steam_catalog=True,
+                                            compute_language_specific_prior=False,
+                                            quantile_for_our_own_wilson_score=0.95,
+                                            verbose=False):
+    # Prepare dictionary to feed to compute_stats module in hidden-gems repository
+
+    from compute_wilson_score import computeWilsonScore
+    from compute_bayesian_rating import compute_bayesian_score
+
+    D = dict()
+
+    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+
+    if compute_prior_on_whole_steam_catalog:
+        prior = choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dict, all_languages, verbose)
+    else:
+        if compute_language_specific_prior:
+            prior = choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_languages, verbose)
+        else:
+            prior = choose_language_independent_prior_based_on_hidden_gems(game_feature_dict, all_languages, verbose)
 
     for appID in game_feature_dict.keys():
         D[appID] = dict()
@@ -614,7 +702,9 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
                                         perform_optimization_at_runtime=True,
                                         num_top_games_to_print=1000,
                                         popularity_measure_str=None,
-                                        quality_measure_str=None):
+                                        quality_measure_str=None,
+                                        compute_prior_on_whole_steam_catalog=True,
+                                        compute_language_specific_prior=False):
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
 
@@ -627,7 +717,9 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
 
     steam_spy_dict = getTodaysSteamSpyData()
 
-    D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages)
+    D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
+                                                compute_prior_on_whole_steam_catalog,
+                                                compute_language_specific_prior)
 
     for language in all_languages:
         output_filename = output_folder + "hidden_gems_" + language + ".md"
@@ -674,10 +766,20 @@ def main():
     popularity_measure_str = 'num_players'  # Either 'num_players' or 'num_reviews'
     quality_measure_str = 'wilson_score'  # Either 'wilson_score' or 'bayesian_rating'
 
+    # Whether to compute a prior for Bayesian rating with the whole Steam catalog, or with a pre-computed set of top-ranked hidden gems
+    compute_prior_on_whole_steam_catalog = True
+
+    # Whether to compute a prior for Bayesian rating for each language independently
+    # NB: This bool is only relevant if the prior is not based on the whole Steam catalog. Indeed, language-specific
+    #     computation is impossible for the whole catalog since we don't have access to language data for every game.
+    compute_language_specific_prior = False
+
     computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
                                         num_top_games_to_print,
                                         popularity_measure_str,
-                                        quality_measure_str)
+                                        quality_measure_str,
+                                        compute_prior_on_whole_steam_catalog,
+                                        compute_language_specific_prior)
 
     return
 
