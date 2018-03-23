@@ -763,16 +763,16 @@ def main():
     perform_optimization_at_runtime = True
     num_top_games_to_print = 250
 
-    popularity_measure_str = 'num_players'  # Either 'num_players' or 'num_reviews'
-    quality_measure_str = 'wilson_score'  # Either 'wilson_score' or 'bayesian_rating'
+    popularity_measure_str = 'num_reviews'  # Either 'num_players' or 'num_reviews'
+    quality_measure_str = 'bayesian_rating'  # Either 'wilson_score' or 'bayesian_rating'
 
     # Whether to compute a prior for Bayesian rating with the whole Steam catalog, or with a pre-computed set of top-ranked hidden gems
-    compute_prior_on_whole_steam_catalog = True
+    compute_prior_on_whole_steam_catalog = False
 
     # Whether to compute a prior for Bayesian rating for each language independently
     # NB: This bool is only relevant if the prior is not based on the whole Steam catalog. Indeed, language-specific
     #     computation is impossible for the whole catalog since we don't have access to language data for every game.
-    compute_language_specific_prior = False
+    compute_language_specific_prior = True
 
     computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
                                         num_top_games_to_print,
