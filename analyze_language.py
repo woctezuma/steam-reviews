@@ -544,12 +544,10 @@ def choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dic
 
         num_votes = num_positive_reviews + num_negative_reviews
 
-        observations[appid] = dict()
-        observations[appid]['num_votes'] = num_votes
         if num_votes > 0:
+            observations[appid] = dict()
+            observations[appid]['num_votes'] = num_votes
             observations[appid]['score'] = num_positive_reviews / num_votes
-        else:
-            observations[appid]['score'] = None
 
     common_prior = choose_prior(observations)
 
@@ -584,12 +582,10 @@ def choose_language_independent_prior_based_on_hidden_gems(game_feature_dict, al
 
         num_votes = num_positive_reviews + num_negative_reviews
 
-        observations[appid] = dict()
-        observations[appid]['num_votes'] = num_votes
         if num_votes > 0:
+            observations[appid] = dict()
+            observations[appid]['num_votes'] = num_votes
             observations[appid]['score'] = num_positive_reviews / num_votes
-        else:
-            observations[appid]['score'] = None
 
     common_prior = choose_prior(observations)
 
@@ -626,12 +622,10 @@ def choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_l
 
             num_votes = num_positive_reviews + num_negative_reviews
 
-            observations[appid] = dict()
-            observations[appid]['num_votes'] = num_votes
             if num_votes > 0:
+                observations[appid] = dict()
+                observations[appid]['num_votes'] = num_votes
                 observations[appid]['score'] = num_positive_reviews / num_votes
-            else:
-                observations[appid]['score'] = None
 
         language_specific_prior[language] = choose_prior(observations)
 
