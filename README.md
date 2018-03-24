@@ -1,4 +1,7 @@
-# Steam Reviews
+# Steam Reviews [![Build status][Build image]][Build]
+
+  [Build]: https://travis-ci.org/woctezuma/steam-reviews
+  [Build image]: https://travis-ci.org/woctezuma/steam-reviews.svg?branch=master
 
 This repository contains Python code to compute statistics of Steam reviews.
 
