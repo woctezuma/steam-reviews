@@ -772,9 +772,11 @@ def main():
     compute_prior_on_whole_steam_catalog = False
 
     # Whether to compute a prior for Bayesian rating for each language independently
-    # NB: This bool is only relevant if the prior is not based on the whole Steam catalog. Indeed, language-specific
-    #     computation is impossible for the whole catalog since we don't have access to language data for every game.
     compute_language_specific_prior = True
+    # NB: This bool is only relevant if the prior is NOT based on the whole Steam catalog. Indeed, language-specific
+    #     computation is impossible for the whole catalog since we don't have access to language data for every game.
+    if compute_prior_on_whole_steam_catalog:
+        assert (not (compute_language_specific_prior))
 
     verbose = True
 
