@@ -826,7 +826,8 @@ def main():
     num_lines_to_print = 50
     with open(file_path) as f:
         for i in range(num_lines_to_print):
-            print(f.readline)
+            line = f.readline().strip()
+            print(line)
 
     return
 
