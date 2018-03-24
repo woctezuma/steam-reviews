@@ -628,8 +628,8 @@ def choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_l
 def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
                                             compute_prior_on_whole_steam_catalog=True,
                                             compute_language_specific_prior=False,
-                                            quantile_for_our_own_wilson_score=0.95,
-                                            verbose=False):
+                                            verbose=False,
+                                            quantile_for_our_own_wilson_score=0.95):
     # Prepare dictionary to feed to compute_stats module in hidden-gems repository
 
     from compute_wilson_score import computeWilsonScore
@@ -704,7 +704,8 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
                                         popularity_measure_str=None,
                                         quality_measure_str=None,
                                         compute_prior_on_whole_steam_catalog=True,
-                                        compute_language_specific_prior=False):
+                                        compute_language_specific_prior=False,
+                                        verbose=False):
     from download_json import getTodaysSteamSpyData
     from compute_stats import computeRanking, saveRankingToFile
 
@@ -719,7 +720,8 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
 
     D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
                                                 compute_prior_on_whole_steam_catalog,
-                                                compute_language_specific_prior)
+                                                compute_language_specific_prior,
+                                                verbose)
 
     for language in all_languages:
         output_filename = output_folder + "hidden_gems_" + language + ".md"
@@ -774,12 +776,15 @@ def main():
     #     computation is impossible for the whole catalog since we don't have access to language data for every game.
     compute_language_specific_prior = True
 
+    verbose = True
+
     computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
                                         num_top_games_to_print,
                                         popularity_measure_str,
                                         quality_measure_str,
                                         compute_prior_on_whole_steam_catalog,
-                                        compute_language_specific_prior)
+                                        compute_language_specific_prior,
+                                        verbose)
 
     return
 
