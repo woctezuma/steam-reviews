@@ -820,6 +820,14 @@ def main():
                                         compute_language_specific_prior,
                                         verbose)
 
+    # Print the top 50 games of ranking for French speakers (mainly to check results with Github Travis)
+    language = 'fr'
+    file_path = 'regional_rankings/hidden_gems_' + language + '.md'
+    num_lines_to_print = 50
+    with open(file_path) as f:
+        for i in range(num_lines_to_print):
+            print(f.readline)
+
     return
 
 
