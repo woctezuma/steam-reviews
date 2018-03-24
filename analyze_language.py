@@ -544,10 +544,12 @@ def choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dic
 
         num_votes = num_positive_reviews + num_negative_reviews
 
+        observations[appid] = dict()
+        observations[appid]['num_votes'] = num_votes
         if num_votes > 0:
-            observations[appid] = dict()
             observations[appid]['score'] = num_positive_reviews / num_votes
-            observations[appid]['num_votes'] = num_votes
+        else:
+            observations[appid]['score'] = None
 
     common_prior = choose_prior(observations)
 
@@ -582,10 +584,12 @@ def choose_language_independent_prior_based_on_hidden_gems(game_feature_dict, al
 
         num_votes = num_positive_reviews + num_negative_reviews
 
+        observations[appid] = dict()
+        observations[appid]['num_votes'] = num_votes
         if num_votes > 0:
-            observations[appid] = dict()
             observations[appid]['score'] = num_positive_reviews / num_votes
-            observations[appid]['num_votes'] = num_votes
+        else:
+            observations[appid]['score'] = None
 
     common_prior = choose_prior(observations)
 
@@ -620,12 +624,14 @@ def choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_l
                 num_positive_reviews = 0
                 num_negative_reviews = 0
 
-            num_reviews = num_positive_reviews + num_negative_reviews
+            num_votes = num_positive_reviews + num_negative_reviews
 
-            if num_reviews > 0:
-                observations[appid] = dict()
-                observations[appid]['score'] = num_positive_reviews / num_reviews
-                observations[appid]['num_votes'] = num_reviews
+            observations[appid] = dict()
+            observations[appid]['num_votes'] = num_votes
+            if num_votes > 0:
+                observations[appid]['score'] = num_positive_reviews / num_votes
+            else:
+                observations[appid]['score'] = None
 
         language_specific_prior[language] = choose_prior(observations)
 
@@ -649,12 +655,15 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
     review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
 
-    whole_catalog_prior = choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dict, all_languages)
-
     if compute_prior_on_whole_steam_catalog:
+
+        whole_catalog_prior = choose_language_independent_prior_based_on_whole_steam_catalog(steam_spy_dict,
+                                                                                             all_languages)
+
         print('Estimating prior (score and num_votes) on the whole Steam catalog (' + str(
             len(steam_spy_dict)) + ' games.')
         prior = whole_catalog_prior
+
     else:
         if compute_language_specific_prior:
             subset_catalog_prior = choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_languages)
@@ -662,15 +671,9 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
             subset_catalog_prior = choose_language_independent_prior_based_on_hidden_gems(game_feature_dict,
                                                                                           all_languages)
 
-        print('Estimating prior (score) on the whole Steam catalog (' + str(len(steam_spy_dict)) + ' games).')
-        print('Estimating prior (num_votes) on a pre-computed set of ' + str(len(game_feature_dict)) + ' hidden gems.')
-        prior = dict()
-        for language in all_languages:
-            prior[language] = dict()
-            # Overwrite score prior with estimate for whole Steam catalog, otherwise the score prior is really high because it is computed on a pre-computed set of hidden gems.
-            prior[language]['score'] = whole_catalog_prior[language]['score']
-            # The prior for the number of reviews is expected to depend on the language a lot. So we use the data available, which are the language stats for a pre-computed set of hidden gems.
-            prior[language]['num_votes'] = subset_catalog_prior[language]['num_votes']
+        print('Estimating prior (score and num_votes) on a pre-computed set of ' + str(
+            len(game_feature_dict)) + ' hidden gems.')
+        prior = subset_catalog_prior
 
     if verbose:
         print_prior(prior, all_languages)
@@ -798,7 +801,6 @@ def main():
 
     # Whether to compute a prior for Bayesian rating with the whole Steam catalog, or with a pre-computed set of top-ranked hidden gems
     compute_prior_on_whole_steam_catalog = False
-    # NB: In any case, the prior for the score will be computed on the Steam catalog. Only the prior for the number of votes will be affected by this bool.
 
     # Whether to compute a prior for Bayesian rating for each language independently
     compute_language_specific_prior = True
