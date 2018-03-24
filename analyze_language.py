@@ -715,6 +715,13 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
             # Assumption: for every game, players and reviews are distributed among regions in the same proportions.
             num_players = num_players_for_all_languages * review_language_distribution[appID]['distribution'][language]
 
+            if num_players < num_reviews:
+                print(
+                    "[Warning] Abnormal data detected (" + str(int(num_players)) + " players ; " + str(
+                        num_reviews) + " reviews) for language=" + language + " and appID=" + appID + ". Game skipped.")
+                wilson_score = -1
+                bayesian_rating = -1
+
             D[appID][language]['wilson_score'] = wilson_score
             D[appID][language]['bayesian_rating'] = bayesian_rating
             D[appID][language]['num_players'] = num_players
