@@ -3,7 +3,7 @@ langdetect==1.0.7
 numpy==1.14.3
 pandas==0.22.0
 requests==2.18.4
-scipy
+scipy==1.0.1
 seaborn
 sklearn
 textblob
