@@ -4,7 +4,7 @@ numpy==1.14.3
 pandas==0.22.0
 requests==2.18.4
 scipy==1.0.1
-seaborn
+seaborn==0.8.1
 sklearn
 textblob
 textstat
