@@ -7,4 +7,4 @@ scipy==1.0.1
 seaborn==0.8.1
 sklearn==0.0
 textblob==0.15.1
-textstat
+textstat==0.4.1
