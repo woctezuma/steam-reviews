@@ -1,4 +1,4 @@
-iso639
+iso639==0.1.4
 langdetect
 numpy
 pandas
