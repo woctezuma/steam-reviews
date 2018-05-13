@@ -829,7 +829,7 @@ def main():
             line = f.readline().strip()
             print(line)
 
-    return
+    return True
 
 
 if __name__ == "__main__":
