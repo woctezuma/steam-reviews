@@ -1,7 +1,14 @@
-# Steam Reviews [![Build status][Build image]][Build]
+# Steam Reviews [![Build status][Build image]][Build] [![Updates][Dependency image]][PyUp] [![Python 3][Python3 image]][PyUp] [![Code coverage][Codecov image]][Codecov]
 
   [Build]: https://travis-ci.org/woctezuma/steam-reviews
   [Build image]: https://travis-ci.org/woctezuma/steam-reviews.svg?branch=master
+
+  [PyUp]: https://pyup.io/repos/github/woctezuma/steam-reviews/
+  [Dependency image]: https://pyup.io/repos/github/woctezuma/steam-reviews/shield.svg
+  [Python3 image]: https://pyup.io/repos/github/woctezuma/steam-reviews/python-3-shield.svg
+
+  [Codecov]: https://codecov.io/gh/woctezuma/steam-reviews
+  [Codecov image]: https://codecov.io/gh/woctezuma/steam-reviews/branch/master/graph/badge.svg
 
 This repository contains Python code to compute statistics of Steam reviews.
 
