@@ -1,11 +1,12 @@
-import sys, getopt
+import sys
 
-from textblob import TextBlob, exceptions
 from langdetect import detect, DetectorFactory, lang_detect_exception
+from textblob import TextBlob, exceptions
 
+from cluster_reviews import printSentimentAnalysis
 from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
-from cluster_reviews import printSentimentAnalysis
+
 
 def detectLanguage(review_content, blob = None, call_Google_Translate = False):
 
@@ -36,12 +37,15 @@ def detectLanguage(review_content, blob = None, call_Google_Translate = False):
 
     return detected_language
 
-def getReviewSentimentDictionary(appID, accepted_languages = ['english'],
+
+def getReviewSentimentDictionary(appID, accepted_languages=None,
                                  perform_language_detection_with_Google_Tool = False,
                                  verbose_reviews_wrongly_tagged_as_written_in_English = False):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
+    if accepted_languages is None:
+        accepted_languages = ['english']
     review_data = loadData(appID)
 
     print('\nAppID: ' + appID)

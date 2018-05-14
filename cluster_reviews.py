@@ -1,20 +1,19 @@
+import sys
+
+import numpy as np
+import pandas as pd
+from sklearn import metrics
+from sklearn.cluster import AffinityPropagation
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import Birch
+from sklearn.cluster import DBSCAN
+from sklearn.decomposition import PCA
+from sklearn.neighbors import kneighbors_graph
+from sklearn.preprocessing import StandardScaler
+from textblob import TextBlob
+
 from describe_reviews import analyzeAppIDinEnglish, getReviewContent
 
-import sys, getopt
-
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import AffinityPropagation
-from sklearn.cluster import Birch
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.cluster import DBSCAN
-from sklearn.neighbors import kneighbors_graph
-from sklearn import metrics
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-
-from textblob import TextBlob
 
 def test_imported_module():
     appID = "573170"
@@ -77,8 +76,10 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
 
     return X
 
-def getTopClustersByCount(af, provided_labels = [], verbose = False):
 
+def getTopClustersByCount(af, provided_labels=None, verbose=False):
+    if provided_labels is None:
+        provided_labels = []
     if (provided_labels is None) or len(provided_labels) == 0:
         # cluster_centers_indices = af.cluster_centers_indices_
         labels = af.labels_
@@ -136,12 +137,16 @@ def printSentimentAnalysis(text):
 
     return
 
-def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels = [], max_num_reviews_to_print = None):
+
+def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels=None,
+                                             max_num_reviews_to_print=None):
     # The provided labels can be supplied directly to override the labels found with Affinity Propagation.
     # Typically used to show results obtained with other clustering methods.
 
     # You can display a given number of reviews per cluster by playing with the variable max_num_reviews_to_print.
 
+    if provided_labels is None:
+        provided_labels = []
     if (provided_labels is None) or len(provided_labels) == 0:
         labels = af.labels_
 
@@ -186,7 +191,10 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
 
     return
 
-def showAllReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels = []):
+
+def showAllReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels=None):
+    if provided_labels is None:
+        provided_labels = []
     showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels)
     return
 

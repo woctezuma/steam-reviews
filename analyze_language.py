@@ -307,7 +307,9 @@ def getAppNameList(appID_list):
     return appName_list
 
 
-def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs=['272670', '34460', '575050']):
+def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs=None):
+    if list_bugged_appIDs is None:
+        list_bugged_appIDs = ['272670', '34460', '575050']
     list_bugged_appNames = getAppNameList(list_bugged_appIDs)
 
     print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
