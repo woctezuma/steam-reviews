@@ -1,26 +1,26 @@
-def replaceChineseISO(str):
-    if str == 'zh-cn':
-        str = 'zh'
-    return str
+def replace_chinese_iso(text):
+    if text == 'zh-cn':
+        text = 'zh'
+    return text
 
 
-def printLanguages(all_languages):
+def print_languages(all_languages):
     import iso639
 
     print('## Language ISO 639-1')
 
     for language_iso in all_languages:
-        language_name = iso639.to_name(replaceChineseISO(language_iso))
-        print('* ' + replaceChineseISO(language_iso) + '\t   --->\t' + language_name)
+        language_name = iso639.to_name(replace_chinese_iso(language_iso))
+        print('* ' + replace_chinese_iso(language_iso) + '\t   --->\t' + language_name)
 
     print()
 
 
-def printRegionalRankings(all_languages, num_entries=20):
+def print_regional_rankings(all_languages, num_entries=20):
     import iso639
 
     for language_iso in all_languages:
-        language_name = iso639.to_name(replaceChineseISO(language_iso))
+        language_name = iso639.to_name(replace_chinese_iso(language_iso))
 
         print('### Top ' + str(num_entries) + ' hidden gems for ' + language_name + ' speakers')
 
@@ -35,15 +35,15 @@ def printRegionalRankings(all_languages, num_entries=20):
 
 
 def main():
-    from analyze_language import loadAllLanguages
+    from analyze_language import load_all_languages
 
     language_filename = "list_all_languages.txt"
-    all_languages = loadAllLanguages(language_filename)
+    all_languages = load_all_languages(language_filename)
 
-    printLanguages(all_languages)
+    print_languages(all_languages)
 
     num_entries = 20
-    printRegionalRankings(all_languages, num_entries)
+    print_regional_rankings(all_languages, num_entries)
 
 
 if __name__ == "__main__":

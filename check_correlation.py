@@ -1,7 +1,7 @@
-def getXY():
-    from download_json import getTodaysSteamSpyData
+def get_x_y():
+    from download_json import get_todays_steam_spy_data
 
-    steam_spy_dict = getTodaysSteamSpyData()
+    steam_spy_dict = get_todays_steam_spy_data()
 
     num_players_list = []
     num_reviews_list = []
@@ -16,7 +16,7 @@ def getXY():
     return num_players_list, num_reviews_list
 
 
-def getLogList(vec):
+def get_log_list(vec):
     from math import log10
 
     log_vec = [log10(1 + x) for x in vec]
@@ -27,10 +27,10 @@ def getLogList(vec):
 def main():
     import matplotlib.pyplot as plt
 
-    (num_players_list, num_reviews_list) = getXY()
+    (num_players_list, num_reviews_list) = get_x_y()
 
-    log_num_players_list = getLogList(num_players_list)
-    log_num_reviews_list = getLogList(num_reviews_list)
+    log_num_players_list = get_log_list(num_players_list)
+    log_num_reviews_list = get_log_list(num_reviews_list)
 
     fig, ax = plt.subplots()
     ax.scatter(log_num_players_list, log_num_reviews_list)

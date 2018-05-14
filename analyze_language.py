@@ -4,17 +4,17 @@ import scipy.sparse as sp
 from langdetect import detect, DetectorFactory, lang_detect_exception
 from sklearn.preprocessing import normalize
 
-from describe_reviews import loadData, describeData
+from describe_reviews import load_data, describe_data
 
 
-def getReviewLanguageDictionary(app_id, previously_detected_languages_dict=None):
+def get_review_language_dictionary(app_id, previously_detected_languages_dict=None):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
 
-    review_data = loadData(app_id)
+    review_data = load_data(app_id)
 
     print('\nAppID: ' + app_id)
 
-    (query_summary, reviews) = describeData(review_data)
+    (query_summary, reviews) = describe_data(review_data)
 
     language_dict = dict()
 
@@ -57,6 +57,7 @@ def getReviewLanguageDictionary(app_id, previously_detected_languages_dict=None)
     return language_dict, previously_detected_languages_dict
 
 
+# noinspection PyPep8Naming
 def most_common(L):
     # Reference: https://stackoverflow.com/a/1518632
 
@@ -64,6 +65,7 @@ def most_common(L):
     import operator
 
     # get an iterable of (item, iterable) pairs
+    # noinspection PyPep8Naming
     SL = sorted((x, i) for i, x in enumerate(L))
     # print 'SL:', SL
     groups = itertools.groupby(SL, key=operator.itemgetter(0))
@@ -83,7 +85,7 @@ def most_common(L):
     return max(groups, key=_auxfun)[0]
 
 
-def convertReviewLanguageDictionaryToISO(language_dict):
+def convert_review_language_dictionary_to_iso(language_dict):
     language_iso_dict = dict()
 
     languages = set([r['tag'] for r in language_dict.values()])
@@ -114,7 +116,7 @@ def convertReviewLanguageDictionaryToISO(language_dict):
     return language_iso_dict
 
 
-def summarizeReviewLanguageDictionary(language_dict):
+def summarize_review_language_dictionary(language_dict):
     # Returns dictionary: language -> review stats including:
     #                                 - number of reviews for which tagged language coincides with detected language
     #                                 - number of such reviews which are "Recommended"
@@ -122,7 +124,7 @@ def summarizeReviewLanguageDictionary(language_dict):
 
     summary_dict = dict()
 
-    language_iso_dict = convertReviewLanguageDictionaryToISO(language_dict)
+    language_iso_dict = convert_review_language_dictionary_to_iso(language_dict)
 
     for language_iso in set(language_iso_dict.values()):
         reviews_with_matching_languages = [r for r in language_dict.values() if r['detected'] == language_iso]
@@ -139,7 +141,8 @@ def summarizeReviewLanguageDictionary(language_dict):
     return summary_dict
 
 
-def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, delta_n_reviews_between_temp_saves=10):
+def get_all_review_language_summaries(previously_detected_languages_filename=None,
+                                      delta_n_reviews_between_temp_saves=10):
     from appids import appid_hidden_gems_reference_set
 
     with open('idlist.txt') as f:
@@ -164,10 +167,10 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
     previously_detected_languages['has_changed'] = False
 
     for count, appID in enumerate(app_id_list):
-        (language_dict, previously_detected_languages) = getReviewLanguageDictionary(appID,
-                                                                                     previously_detected_languages)
+        (language_dict, previously_detected_languages) = get_review_language_dictionary(appID,
+                                                                                        previously_detected_languages)
 
-        summary_dict = summarizeReviewLanguageDictionary(language_dict)
+        summary_dict = summarize_review_language_dictionary(language_dict)
 
         game_feature_dict[appID] = summary_dict
         all_languages = all_languages.union(summary_dict.keys())
@@ -191,8 +194,8 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
     return game_feature_dict, all_languages
 
 
-def loadGameFeatureDictionary(dict_filename="dict_review_languages.txt"):
-    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
+def load_game_feature_dictionary(dict_filename="dict_review_languages.txt"):
+    # Obtained by running get_all_review_language_summaries() on the top hidden gems.
 
     # Import the dictionary of game features from a text file
     with open(dict_filename, 'r', encoding="utf8") as infile:
@@ -205,8 +208,8 @@ def loadGameFeatureDictionary(dict_filename="dict_review_languages.txt"):
     return game_feature_dict
 
 
-def loadAllLanguages(language_filename="list_all_languages.txt"):
-    # Obtained by running getAllReviewLanguageSummaries() on the top hidden gems.
+def load_all_languages(language_filename="list_all_languages.txt"):
+    # Obtained by running get_all_review_language_summaries() on the top hidden gems.
 
     # Import the list of languages from a text file
     with open(language_filename, 'r', encoding="utf8") as infile:
@@ -219,49 +222,49 @@ def loadAllLanguages(language_filename="list_all_languages.txt"):
     return all_languages
 
 
-def loadGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
-                                     language_filename="list_all_languages.txt"):
-    game_feature_dict = loadGameFeatureDictionary(dict_filename)
+def load_game_features_as_review_language(dict_filename="dict_review_languages.txt",
+                                          language_filename="list_all_languages.txt"):
+    game_feature_dict = load_game_feature_dictionary(dict_filename)
 
-    all_languages = loadAllLanguages(language_filename)
+    all_languages = load_all_languages(language_filename)
 
     return game_feature_dict, all_languages
 
 
-def writeContentToDisk(contentToWrite, filename):
+def write_content_to_disk(content_to_write, filename):
     # Export the content to a text file
     with open(filename, 'w', encoding="utf8") as outfile:
-        print(contentToWrite, file=outfile)
+        print(content_to_write, file=outfile)
 
     return
 
 
-def getGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
-                                    language_filename="list_all_languages.txt",
-                                    previously_detected_languages_filename="previously_detected_languages.txt"):
-    # Run getAllReviewLanguageSummaries() on the top hidden gems.
+def get_game_features_as_review_language(dict_filename="dict_review_languages.txt",
+                                         language_filename="list_all_languages.txt",
+                                         previously_detected_languages_filename="previously_detected_languages.txt"):
+    # Run get_all_review_language_summaries() on the top hidden gems.
 
     print('Computing dictonary of language features from scratch.')
 
-    (game_feature_dict, all_languages) = getAllReviewLanguageSummaries(previously_detected_languages_filename)
+    (game_feature_dict, all_languages) = get_all_review_language_summaries(previously_detected_languages_filename)
 
     # Export the dictionary of game features to a text file
-    writeContentToDisk(game_feature_dict, dict_filename)
+    write_content_to_disk(game_feature_dict, dict_filename)
     print('Dictionary of language features written to disk.')
 
     # Export the list of languages to a text file
-    writeContentToDisk(all_languages, language_filename)
+    write_content_to_disk(all_languages, language_filename)
     print('List of languages written to disk.')
 
     return game_feature_dict, all_languages
 
 
-def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose=False):
-    appIDs = sorted(list(game_feature_dict.keys()))
+def compute_game_feature_matrix(game_feature_dict, all_languages, verbose=False):
+    app_ids = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
 
     # Reference: https://stackoverflow.com/a/43381974
-    map_row_dict = dict(zip(list(appIDs), range(len(appIDs))))
+    map_row_dict = dict(zip(list(app_ids), range(len(app_ids))))
     map_col_dict = dict(zip(list(languages), range(len(languages))))
 
     rows, cols, vals = [], [], []
@@ -280,7 +283,9 @@ def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose=False):
     return game_feature_matrix
 
 
+# noinspection PyPep8Naming
 def normalize_each_row(X, verbose=False):
+    # noinspection PyPep8Naming
     X_normalized = normalize(X.astype('float64'), norm='l1')
 
     if verbose:
@@ -289,32 +294,32 @@ def normalize_each_row(X, verbose=False):
     return X_normalized
 
 
-def get_app_name_list(appID_list):
-    from download_json import getTodaysSteamSpyData
+def get_app_name_list(app_id_list):
+    from download_json import get_todays_steam_spy_data
 
     # Download latest SteamSpy data to have access to the matching between appID and game name
-    SteamSpyData = getTodaysSteamSpyData()
+    steam_spy_data = get_todays_steam_spy_data()
 
-    appName_list = []
+    app_name_list = []
 
-    for appID in appID_list:
+    for appID in app_id_list:
         try:
-            appName = SteamSpyData[appID]['name']
+            app_name = steam_spy_data[appID]['name']
         except KeyError:
-            appName = 'unknown'
-        appName_list.append(appName)
+            app_name = 'unknown'
+        app_name_list.append(app_name)
 
-    return appName_list
+    return app_name_list
 
 
-def remove_bugged_app_ids(game_feature_dict, list_bugged_appIDs=None):
-    if list_bugged_appIDs is None:
-        list_bugged_appIDs = ['272670', '34460', '575050']
-    list_bugged_appNames = get_app_name_list(list_bugged_appIDs)
+def remove_bugged_app_ids(game_feature_dict, list_bugged_app_ids=None):
+    if list_bugged_app_ids is None:
+        list_bugged_app_ids = ['272670', '34460', '575050']
+    list_bugged_app_names = get_app_name_list(list_bugged_app_ids)
 
-    print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
+    print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_app_names) + '\n')
 
-    for appID in list_bugged_appIDs:
+    for appID in list_bugged_app_ids:
         try:
             game_feature_dict.pop(appID)
         except KeyError:
@@ -323,14 +328,16 @@ def remove_bugged_app_ids(game_feature_dict, list_bugged_appIDs=None):
     return game_feature_dict
 
 
-def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
+def test_kmeans_clustering(normalized_game_feature_matrix, app_ids, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
     global svd
+    # noinspection PyPep8Naming
     X = normalized_game_feature_matrix
 
     import matplotlib.pyplot as plt
     from sklearn.decomposition import TruncatedSVD
     from sklearn.cluster import KMeans
+    # noinspection PyProtectedMember
     from sklearn.pipeline import make_pipeline
     from sklearn.preprocessing import Normalizer
 
@@ -346,6 +353,7 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
         normalizer = Normalizer(copy=False)
         lsa = make_pipeline(svd, normalizer)
 
+        # noinspection PyPep8Naming
         X = lsa.fit_transform(X)
 
         explained_variance = svd.explained_variance_ratio_.sum()
@@ -390,13 +398,13 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
 
     print()
 
-    terms = get_app_name_list(appIDs)
-    num_appIDs_to_show = 20
+    terms = get_app_name_list(app_ids)
+    num_app_ids_to_show = 20
     for i in range(n_clusters_kmeans):
         print("Cluster %d:\n\t" % i, end='')
         indices = np.where(km.labels_ == i)[0]
         iter_count = 0
-        for ind in indices[:num_appIDs_to_show]:
+        for ind in indices[:num_app_ids_to_show]:
             iter_count += 1
             if iter_count % 7 == 0:
                 print(' %s \n\t' % terms[ind], end='')
@@ -407,8 +415,9 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
     return
 
 
-def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages):
+def test_affinity_propagation_clustering(normalized_game_feature_matrix, app_ids, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
+    # noinspection PyPep8Naming
     X = normalized_game_feature_matrix
 
     from sklearn.cluster import AffinityPropagation
@@ -449,8 +458,8 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
         print()
 
-        num_appIDs_to_show = None
-        terms = get_app_name_list(appIDs)
+        num_app_ids_to_show = None
+        terms = get_app_name_list(app_ids)
         for i in range(n_clusters_):
             # Samples
             indices = np.where(af.labels_ == i)[0]
@@ -465,8 +474,8 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
             print('Samples:')
             iter_count = 0
-            if num_appIDs_to_show is not None:
-                selected_indices_to_display = indices[:num_appIDs_to_show]
+            if num_app_ids_to_show is not None:
+                selected_indices_to_display = indices[:num_app_ids_to_show]
             else:
                 selected_indices_to_display = indices
             for ind in selected_indices_to_display:
@@ -483,26 +492,26 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
     return
 
 
-def testClustering(game_feature_dict, all_languages):
+def test_clustering(game_feature_dict, all_languages):
     game_feature_dict = remove_bugged_app_ids(game_feature_dict)
 
-    game_feature_matrix = computeGameFeatureMatrix(game_feature_dict, all_languages)
+    game_feature_matrix = compute_game_feature_matrix(game_feature_dict, all_languages)
 
     normalized_game_feature_matrix = normalize_each_row(game_feature_matrix)
 
-    appIDs = sorted(list(game_feature_dict.keys()))
+    app_ids = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
 
     # Need to know the number of clusters we want in order to use K-means
-    # testKmeansClustering(normalized_game_feature_matrix, appIDs, languages)
+    # test_kmeans_clustering(normalized_game_feature_matrix, appIDs, languages)
 
     # Need to specify the "preference" parameter in order to use Affinity Propagation
-    testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, languages)
+    test_affinity_propagation_clustering(normalized_game_feature_matrix, app_ids, languages)
 
     return
 
 
-def computeReviewLanguageDistribution(game_feature_dict, all_languages):
+def compute_review_language_distribution(game_feature_dict, all_languages):
     # Compute the distribution of review languages among reviewers
 
     review_language_distribution = dict()
@@ -638,19 +647,20 @@ def choose_language_specific_prior_based_on_hidden_gems(game_feature_dict, all_l
     return language_specific_prior
 
 
-def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
-                                            compute_prior_on_whole_steam_catalog=True,
-                                            compute_language_specific_prior=False,
-                                            verbose=False,
-                                            quantile_for_our_own_wilson_score=0.95):
+def prepare_dictionary_for_ranking_of_hidden_gems(steam_spy_dict, game_feature_dict, all_languages,
+                                                  compute_prior_on_whole_steam_catalog=True,
+                                                  compute_language_specific_prior=False,
+                                                  verbose=False,
+                                                  quantile_for_our_own_wilson_score=0.95):
     # Prepare dictionary to feed to compute_stats module in hidden-gems repository
 
-    from compute_wilson_score import computeWilsonScore
+    from compute_wilson_score import compute_wilson_score
     from compute_bayesian_rating import compute_bayesian_score
 
+    # noinspection PyPep8Naming
     D = dict()
 
-    review_language_distribution = computeReviewLanguageDistribution(game_feature_dict, all_languages)
+    review_language_distribution = compute_review_language_distribution(game_feature_dict, all_languages)
 
     if compute_prior_on_whole_steam_catalog:
 
@@ -699,8 +709,8 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
 
             num_reviews = num_positive_reviews + num_negative_reviews
 
-            wilson_score = computeWilsonScore(num_positive_reviews, num_negative_reviews,
-                                              quantile_for_our_own_wilson_score)
+            wilson_score = compute_wilson_score(num_positive_reviews, num_negative_reviews,
+                                                quantile_for_our_own_wilson_score)
 
             if wilson_score is None:
                 wilson_score = -1
@@ -733,16 +743,16 @@ def prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, a
     return D
 
 
-def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
-                                        perform_optimization_at_runtime=True,
-                                        num_top_games_to_print=1000,
-                                        popularity_measure_str=None,
-                                        quality_measure_str=None,
-                                        compute_prior_on_whole_steam_catalog=True,
-                                        compute_language_specific_prior=False,
-                                        verbose=False):
-    from download_json import getTodaysSteamSpyData
-    from compute_stats import computeRanking, saveRankingToFile
+def compute_regional_rankings_of_hidden_gems(game_feature_dict, all_languages,
+                                             perform_optimization_at_runtime=True,
+                                             num_top_games_to_print=1000,
+                                             popularity_measure_str=None,
+                                             quality_measure_str=None,
+                                             compute_prior_on_whole_steam_catalog=True,
+                                             compute_language_specific_prior=False,
+                                             verbose=False):
+    from download_json import get_todays_steam_spy_data
+    from compute_stats import compute_ranking, save_ranking_to_file
 
     import pathlib
 
@@ -751,51 +761,52 @@ def computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages,
     # Reference of the following line: https://stackoverflow.com/a/14364249
     pathlib.Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-    steam_spy_dict = getTodaysSteamSpyData()
+    steam_spy_dict = get_todays_steam_spy_data()
 
-    D = prepareDictionaryForRankingOfHiddenGems(steam_spy_dict, game_feature_dict, all_languages,
-                                                compute_prior_on_whole_steam_catalog,
-                                                compute_language_specific_prior,
-                                                verbose)
+    # noinspection PyPep8Naming
+    D = prepare_dictionary_for_ranking_of_hidden_gems(steam_spy_dict, game_feature_dict, all_languages,
+                                                      compute_prior_on_whole_steam_catalog,
+                                                      compute_language_specific_prior,
+                                                      verbose)
 
     for language in all_languages:
         output_filename = output_folder + "hidden_gems_" + language + ".md"
 
-        ranking = computeRanking(D, num_top_games_to_print, [], [], language, perform_optimization_at_runtime,
-                                 popularity_measure_str,
-                                 quality_measure_str)
+        ranking = compute_ranking(D, num_top_games_to_print, [], [], language, perform_optimization_at_runtime,
+                                  popularity_measure_str,
+                                  quality_measure_str)
 
-        saveRankingToFile(output_filename, ranking)
+        save_ranking_to_file(output_filename, ranking)
 
     return
 
 
-def getInputData(force_update_of_regional_stats=False):
+def get_input_data(force_update_of_regional_stats=False):
     # If force_update_of_regional_stats is True, the TXT files below will be updated, which might take a lot of time
     # if the last update was done a long time ago. Otherwise, the TXT files will just be loaded as they are.
 
     dict_filename = "dict_review_languages.txt"
     language_filename = "list_all_languages.txt"
-    previously_detected_languages_filename = "previously_detected_languages.txt"
+    previously_detected_languages_fname = "previously_detected_languages.txt"
 
     # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
     # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
     load_from_disk = not force_update_of_regional_stats
 
     if load_from_disk:
-        (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
+        (game_feature_dict, all_languages) = load_game_features_as_review_language(dict_filename, language_filename)
     else:
-        (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename,
-                                                                             previously_detected_languages_filename)
+        (game_feature_dict, all_languages) = get_game_features_as_review_language(dict_filename, language_filename,
+                                                                                  previously_detected_languages_fname)
 
     return game_feature_dict, all_languages
 
 
 def main():
     force_update_of_regional_stats = False
-    (game_feature_dict, all_languages) = getInputData(force_update_of_regional_stats)
+    (game_feature_dict, all_languages) = get_input_data(force_update_of_regional_stats)
 
-    # testClustering(game_feature_dict, all_languages)
+    # test_clustering(game_feature_dict, all_languages)
 
     perform_optimization_at_runtime = True
     num_top_games_to_print = 250
@@ -816,15 +827,15 @@ def main():
 
     verbose = True
 
-    computeRegionalRankingsOfHiddenGems(game_feature_dict, all_languages, perform_optimization_at_runtime,
-                                        num_top_games_to_print,
-                                        popularity_measure_str,
-                                        quality_measure_str,
-                                        compute_prior_on_whole_steam_catalog,
-                                        compute_language_specific_prior,
-                                        verbose)
+    compute_regional_rankings_of_hidden_gems(game_feature_dict, all_languages, perform_optimization_at_runtime,
+                                             num_top_games_to_print,
+                                             popularity_measure_str,
+                                             quality_measure_str,
+                                             compute_prior_on_whole_steam_catalog,
+                                             compute_language_specific_prior,
+                                             verbose)
 
-    # Print the top 50 games of ranking for French speakers (mainly to check results with Github Travis)
+    # Print the top 50 games of output_ranking for French speakers (mainly to check results with Github Travis)
     language = 'fr'
     file_path = 'regional_rankings/hidden_gems_' + language + '.md'
     num_lines_to_print = 50

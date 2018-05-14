@@ -14,11 +14,11 @@ sns.set(color_codes=True)
 np.random.seed(sum(map(ord, "distributions")))
 
 
-def loadData(appID):
+def load_data(app_id):
     # Data folder
     data_path = "data/"
 
-    json_filename = "review_" + appID + ".json"
+    json_filename = "review_" + app_id + ".json"
 
     data_filename = data_path + json_filename
 
@@ -28,7 +28,7 @@ def loadData(appID):
     return review_data
 
 
-def describeData(review_data):
+def describe_data(review_data):
     try:
         query_summary = review_data['query_summary']
 
@@ -50,10 +50,10 @@ def describeData(review_data):
     return query_summary, reviews
 
 
-def aggregateReviews(appID):
-    review_data = loadData(appID)
+def aggregate_reviews(app_id):
+    review_data = load_data(app_id)
 
-    (query_summary, reviews) = describeData(review_data)
+    (query_summary, reviews) = describe_data(review_data)
 
     review_stats = dict()
 
@@ -133,8 +133,8 @@ def aggregateReviews(appID):
     return review_stats
 
 
-def aggregateReviewsToPandas(appID):
-    review_stats = aggregateReviews(appID)
+def aggregate_reviews_to_pandas(app_id):
+    review_stats = aggregate_reviews(app_id)
 
     df = pd.DataFrame(data=review_stats)
 
@@ -148,7 +148,7 @@ def aggregateReviewsToPandas(appID):
     return df
 
 
-def findTopLanguagesByReviewNumber(df, num_top_languages=3, verbose=True):
+def find_top_languages_by_review_number(df, num_top_languages=3, verbose=True):
     # Extract a dataframe for reviews written in top languages (by review numbers)
 
     sorted_languages = df["language"].value_counts().index.tolist()
@@ -162,7 +162,7 @@ def findTopLanguagesByReviewNumber(df, num_top_languages=3, verbose=True):
     return top_languages
 
 
-def extractReviewsForTopLanguagesOnly(df, top_languages, verbose=True):
+def extract_reviews_for_top_languages_only(df, top_languages, verbose=True):
     # Extract a dataframe for reviews written in top languages (by review numbers)
 
     s = pd.Series([lang in top_languages for lang in df["language"]], name='language')
@@ -174,19 +174,19 @@ def extractReviewsForTopLanguagesOnly(df, top_languages, verbose=True):
     return df_extracted
 
 
-def plotUnivariateDistribution(data_frame, strX="votes_up"):
+def plot_univariate_distribution(data_frame, str_x="votes_up"):
     # Reference: https://seaborn.pydata.org/tutorial/distributions.html
 
-    sns.distplot(data_frame[strX], kde=False, fit=stats.lognorm)
+    sns.distplot(data_frame[str_x], kde=False, fit=stats.lognorm)
     plt.show()
 
     return
 
 
-def plotBoxPlot(data_frame, strX="language", strY="votes_up"):
+def plot_box_plot(data_frame, str_x="language", str_y="votes_up"):
     # Reference: https://seaborn.pydata.org/examples/grouped_boxplot.html
 
-    sns.boxplot(x=strX, y=strY, data=data_frame, palette="PRGn")
+    sns.boxplot(x=str_x, y=str_y, data=data_frame, palette="PRGn")
     plt.show()
 
     # NB: Discriminating between positive and negative reviews (with "voted_up") is not super useful in our case,
@@ -195,16 +195,16 @@ def plotBoxPlot(data_frame, strX="language", strY="votes_up"):
     return
 
 
-def analyzeAppID(appID, languages_to_extract=None, create_separate_plots=True):
-    df = aggregateReviewsToPandas(appID)
+def analyze_app_id(app_id, languages_to_extract=None, create_separate_plots=True):
+    df = aggregate_reviews_to_pandas(app_id)
 
     num_top_languages = 3
     if languages_to_extract is None:
-        top_languages = findTopLanguagesByReviewNumber(df, num_top_languages)
+        top_languages = find_top_languages_by_review_number(df, num_top_languages)
     else:
         top_languages = languages_to_extract
 
-    df_extracted = extractReviewsForTopLanguagesOnly(df, top_languages)
+    df_extracted = extract_reviews_for_top_languages_only(df, top_languages)
 
     # All the possible variables are listed here:
     variables = df_extracted.keys()
@@ -212,46 +212,46 @@ def analyzeAppID(appID, languages_to_extract=None, create_separate_plots=True):
 
     if create_separate_plots:
         variable_to_plot = "lexicon_count"
-        plotUnivariateDistribution(df_extracted, variable_to_plot)
+        plot_univariate_distribution(df_extracted, variable_to_plot)
 
         if num_top_languages > 1:
-            plotBoxPlot(df_extracted, "language", variable_to_plot)
+            plot_box_plot(df_extracted, "language", variable_to_plot)
 
     return df_extracted
 
 
-def analyzeAppIDinEnglish(appID):
-    df = analyzeAppID(appID, ['english'], False)
+def analyze_app_id_in_english(app_id):
+    df = analyze_app_id(app_id, ['english'], False)
     return df
 
 
-def getReviewContent(appID, reviewID):
-    data = loadData(appID)
+def get_review_content(app_id, review_id):
+    data = load_data(app_id)
 
     reviews = list(data['reviews'].values())
 
     review_content = "-1"
 
     for review in reviews:
-        if review['recommendationid'] == reviewID:
+        if review['recommendationid'] == review_id:
             review_content = review['review']
             break
 
     return review_content
 
 
-def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot="lexicon_count", languages_to_extract=None):
+def plot_overlays_of_univariate_distribution(app_id_list, variable_to_plot="lexicon_count", languages_to_extract=None):
     # By definition, we want to overlay plots with this function, hence the following variable is set to False:
     if languages_to_extract is None:
         languages_to_extract = ['english']
     create_separate_plots = False
 
-    current_palette = sns.color_palette(n_colors=len(appID_list))
+    current_palette = sns.color_palette(n_colors=len(app_id_list))
 
-    for (iter_count, appID) in enumerate(appID_list):
+    for (iter_count, appID) in enumerate(app_id_list):
         print(appID)
 
-        df = analyzeAppID(appID, languages_to_extract, create_separate_plots)
+        df = analyze_app_id(appID, languages_to_extract, create_separate_plots)
 
         sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta,
                      color=current_palette[iter_count],
@@ -265,25 +265,25 @@ def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot="lexicon_c
 
 
 def main(argv):
-    appID_list = ["723090", "639780", "573170"]
+    app_id_list = ["723090", "639780", "573170"]
 
     if len(argv) == 0:
-        appID = appID_list[-1]
-        print("No input detected. AppID automatically set to " + appID)
-        compare_appIDs_in_default_list = True
+        app_id = app_id_list[-1]
+        print("No input detected. AppID automatically set to " + app_id)
+        compare_app_ids_in_default_list = True
     else:
-        appID = argv[0]
-        print("Input appID detected as " + appID)
-        compare_appIDs_in_default_list = False
+        app_id = argv[0]
+        print("Input appID detected as " + app_id)
+        compare_app_ids_in_default_list = False
 
     # Analyze one appID
 
-    analyzeAppID(appID)
+    analyze_app_id(app_id)
 
     # Compare different appIDs
 
-    if compare_appIDs_in_default_list:
-        plotOverlaysOfUnivariateDistribution(appID_list)
+    if compare_app_ids_in_default_list:
+        plot_overlays_of_univariate_distribution(app_id_list)
 
     return
 

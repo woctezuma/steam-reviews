@@ -59,7 +59,7 @@ def previous_results():
     return all_ids
 
 
-def main(download_reference_hidden_gems_as_well=False):
+def main(download_reference_hidden_gems=False):
     """Entry point."""
 
     from appids import appid_hidden_gems_reference_set
@@ -107,7 +107,7 @@ def main(download_reference_hidden_gems_as_well=False):
     log.info("Opening idlist.txt")
     appid_list = [appid for appid in id_reader()]
 
-    if download_reference_hidden_gems_as_well:
+    if download_reference_hidden_gems:
         appid_list = list(set(appid_list).union(appid_hidden_gems_reference_set))
 
     for appid in appid_list:
@@ -129,7 +129,7 @@ def main(download_reference_hidden_gems_as_well=False):
             review_dict = dict()
             review_dict["reviews"] = dict()
 
-        previous_reviewIDs = set(review_dict["reviews"].keys())
+        previous_review_ids = set(review_dict["reviews"].keys())
 
         url = api_url + str(appid)
 
@@ -180,12 +180,12 @@ def main(download_reference_hidden_gems_as_well=False):
                 time.sleep(wait_time)
                 query_count = 0
 
-            if any([review["recommendationid"] in previous_reviewIDs for review in downloaded_reviews]):
+            if any([review["recommendationid"] in previous_review_ids for review in downloaded_reviews]):
                 break
 
-        for review in [r for r in new_reviews if r["recommendationid"] not in previous_reviewIDs]:
-            reviewID = review["recommendationid"]
-            review_dict["reviews"][reviewID] = review
+        for review in [r for r in new_reviews if r["recommendationid"] not in previous_review_ids]:
+            review_id = review["recommendationid"]
+            review_dict["reviews"][review_id] = review
 
         with open(data_filename, "w") as g:
             g.write(json.dumps(review_dict) + '\n')
