@@ -6,10 +6,11 @@
 
 import csv
 import json
-import time
-import requests
 import logging
-import os.path
+import time
+
+import requests
+
 
 def parse_id(i):
     """Since we deal with both strings and ints, force appid to be correct."""
@@ -113,7 +114,7 @@ def main(download_reference_hidden_gems_as_well = False):
         output_file = "review_" + str(appid) + ".json"
         data_filename = data_path + output_file
 
-        if os.path.isfile(data_filename):
+        if pathlib.Path(data_filename).is_file():
             if appid in previos_ids:
                 log.info("Skipping previously found id %d", appid)
                 continue

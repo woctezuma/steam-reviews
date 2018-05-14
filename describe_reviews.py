@@ -1,15 +1,14 @@
-import sys, getopt
-
 import json
-from textstat.textstat import textstat
-from textblob import TextBlob
+import sys
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from scipy import stats
-import matplotlib.pyplot as plt
-
 import seaborn as sns
+from scipy import stats
+from textblob import TextBlob
+from textstat.textstat import textstat
+
 sns.set(color_codes=True)
 
 np.random.seed(sum(map(ord, "distributions")))
@@ -47,7 +46,7 @@ def describeData(review_data):
     sentence = 'Number of downloaded reviews: ' + str(len(reviews))
     print(sentence)
 
-    return (query_summary, reviews)
+    return query_summary, reviews
 
 def aggregateReviews(appID):
 
@@ -234,8 +233,11 @@ def getReviewContent(appID, reviewID):
 
     return review_content
 
-def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot = "lexicon_count", languages_to_extract = ['english']):
+
+def plotOverlaysOfUnivariateDistribution(appID_list, variable_to_plot="lexicon_count", languages_to_extract=None):
     # By definition, we want to overlay plots with this function, hence the following variable is set to False:
+    if languages_to_extract is None:
+        languages_to_extract = ['english']
     create_separate_plots = False
 
     current_palette = sns.color_palette(n_colors=len(appID_list))

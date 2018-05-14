@@ -32,8 +32,8 @@ def test_imported_module():
 
     return
 
-def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
 
+def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns=None):
     # Maybe the variable excluded_columns is not needed after all... I just leave it there as a legacy for now.
     if excluded_columns is None:
         D = df
@@ -42,13 +42,15 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
         D = df.ix[:, df.columns.difference(excluded_columns)]
 
     D_binary = D.ix[:, ['received_for_free', 'steam_purchase', 'voted_up']]
-    D_generic = D.ix[:, ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count', 'weighted_vote_score']]
+    D_generic = D.ix[:,
+                ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count',
+                 'weighted_vote_score']]
     D_length_correlated = D.ix[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
     D_readability_correlated = D.ix[:, ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
-    D_sentiment = D.ix[:, ['polarity','subjectivity']]
+    D_sentiment = D.ix[:, ['polarity', 'subjectivity']]
 
     # Convert from Pandas to NumPy arrays
-    #Reference: https://stackoverflow.com/a/22653050
+    # Reference: https://stackoverflow.com/a/22653050
     convertFromPandas = lambda data_frame: data_frame.reset_index().values
 
     X_binary = convertFromPandas(D_binary)
@@ -72,7 +74,8 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns = None):
     sentiment_scaler = StandardScaler()
     X_sentiment_new = sentiment_scaler.fit_transform(X_sentiment)
 
-    X = np.concatenate((X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new, X_sentiment_new), axis=1)
+    X = np.concatenate(
+        (X_binary, X_generic_new, X_length_correlated_new, X_readability_correlated_new, X_sentiment_new), axis=1)
 
     return X
 
@@ -94,9 +97,10 @@ def getTopClustersByCount(af, provided_labels=None, verbose=False):
 
     list_of_clusters_by_count = summary_labels.index.tolist()
 
-    return (summary_labels, list_of_clusters_by_count)
+    return summary_labels, list_of_clusters_by_count
 
-def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = False):
+
+def showRepresentativeReviews(appID, df, af, num_top_clusters=None, verbose=False):
     # Show representative reviews, i.e. the reviews used as cluster centers for Affinity Propagation
     # df: dataframe
     # af: affinity propagation model
@@ -116,7 +120,8 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
         reviewID = list(df["recommendationid"])[ind]
         review_content = getReviewContent(appID, reviewID)
         # Reference: https://stackoverflow.com/a/18544440
-        print("\n ==== Cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+        print("\n ==== Cluster " + chr(cluster_count + 65) + " (#reviews = " + str(
+            summary_labels[cluster_count]) + ") ====")
         printSentimentAnalysis(review_content)
 
         try:
@@ -127,8 +132,8 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters = None, verbose = 
 
     return
 
-def printSentimentAnalysis(text):
 
+def printSentimentAnalysis(text):
     blob = TextBlob(text)
 
     print('=> Sentiment analysis: '
@@ -158,7 +163,7 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
 
     cluster_index = int(list_of_clusters_by_count[cluster_count])
 
-    if (af is not None):
+    if af is not None:
         cluster_centers_indices = af.cluster_centers_indices_
         cluster_representative_ind = cluster_centers_indices[cluster_index]
     else:
@@ -180,7 +185,8 @@ def showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provi
             break
 
         # Reference: https://stackoverflow.com/a/18544440
-        print("\n ==== Review " + str(review_count+1) + info_str + " in cluster " + chr(cluster_count+65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====" )
+        print("\n ==== Review " + str(review_count + 1) + info_str + " in cluster " + chr(
+            cluster_count + 65) + " (#reviews = " + str(summary_labels[cluster_count]) + ") ====")
         printSentimentAnalysis(review_content)
 
         try:
@@ -198,8 +204,8 @@ def showAllReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels
     showFixedNumberOfReviewsFromGivenCluster(appID, df, af, cluster_count, provided_labels)
     return
 
-def showDataFrameForClusterCenters(df, af, num_top_clusters = None, verbose = True):
 
+def showDataFrameForClusterCenters(df, af, num_top_clusters=None, verbose=True):
     cluster_centers_indices = af.cluster_centers_indices_
     # labels = af.labels_
 
@@ -218,7 +224,8 @@ def showDataFrameForClusterCenters(df, af, num_top_clusters = None, verbose = Tr
 
     return df_representative
 
-def tryAffinityPropagation(appID, df, X, num_top_clusters = 4, verbose = False):
+
+def tryAffinityPropagation(appID, df, X, num_top_clusters=4, verbose=False):
     # #############################################################################
     # Compute Affinity Propagation
     af = AffinityPropagation().fit(X)
@@ -251,17 +258,19 @@ def tryAffinityPropagation(appID, df, X, num_top_clusters = 4, verbose = False):
 
     return labels
 
-def tryBirch(appID, df, X, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3):
+
+def tryBirch(appID, df, X, num_clusters_input=3, num_reviews_to_show_per_cluster=3):
     # #############################################################################
     # Compute Agglomerative Clustering with Birch as a first step
 
-    brc = Birch(branching_factor=50, n_clusters=num_clusters_input, threshold=0.5, compute_labels = True)
+    brc = Birch(branching_factor=50, n_clusters=num_clusters_input, threshold=0.5, compute_labels=True)
     brc_labels = brc.fit_predict(X)
 
     # Show Birch results
 
     for cluster_count in range(num_clusters_input):
-        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, brc_labels, num_reviews_to_show_per_cluster)
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, brc_labels,
+                                                 num_reviews_to_show_per_cluster)
 
     # Display number of reviews in each cluster
 
@@ -269,8 +278,9 @@ def tryBirch(appID, df, X, num_clusters_input = 3, num_reviews_to_show_per_clust
 
     return brc_labels
 
-def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3,
-                                linkage = 'ward', use_connectivity = True):
+
+def tryAgglomerativeClustering(appID, df, X, num_clusters_input=3, num_reviews_to_show_per_cluster=3,
+                               linkage='ward', use_connectivity=True):
     # #############################################################################
     # Compute Agglomerative Clustering without Birch
 
@@ -278,7 +288,7 @@ def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews
 
     if use_connectivity:
         knn_graph = kneighbors_graph(X, 30, include_self=False)
-        connectivity = knn_graph # one of these: None or knn_graph
+        connectivity = knn_graph  # one of these: None or knn_graph
     else:
         connectivity = None
 
@@ -289,7 +299,8 @@ def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews
     # Show Agglomerative Clustering results
 
     for cluster_count in range(num_clusters_input):
-        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, agg_labels, num_reviews_to_show_per_cluster)
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, agg_labels,
+                                                 num_reviews_to_show_per_cluster)
 
     # Display number of reviews in each cluster
 
@@ -297,7 +308,8 @@ def tryAgglomerativeClustering(appID, df, X, num_clusters_input = 3, num_reviews
 
     return agg_labels
 
-def tryDBSCAN(appID, df, X, db_eps = 0.3, db_min_samples=10, num_reviews_to_show_per_cluster = 3):
+
+def tryDBSCAN(appID, df, X, db_eps=0.3, db_min_samples=10, num_reviews_to_show_per_cluster=3):
     # #############################################################################
     # Compute DBSCAN
 
@@ -323,13 +335,15 @@ def tryDBSCAN(appID, df, X, db_eps = 0.3, db_min_samples=10, num_reviews_to_show
     # Show DBSCAN results
 
     for cluster_count in range(num_clusters_including_noise_cluster):
-        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, dbscan_labels, num_reviews_to_show_per_cluster)
+        showFixedNumberOfReviewsFromGivenCluster(appID, df, None, cluster_count, dbscan_labels,
+                                                 num_reviews_to_show_per_cluster)
 
     # Display number of reviews in each cluster
 
     getTopClustersByCount(None, dbscan_labels, True)
 
     return dbscan_labels
+
 
 def test_every_clustering_method(appID):
     ## Clustering
@@ -347,7 +361,6 @@ def test_every_clustering_method(appID):
 
     # Convert to NumPy matrix format
     X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
-
 
     ## Demo of every clustering method
 
@@ -375,7 +388,8 @@ def test_every_clustering_method(appID):
     linkage = 'ward'
     use_connectivity = True
 
-    tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage, use_connectivity)
+    tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage,
+                               use_connectivity)
 
     ## DBSCAN
     # NB: Not satisfactory here. Either the parameters, or the data pre-processing, should be changed for DBSCAN.
@@ -387,7 +401,8 @@ def test_every_clustering_method(appID):
 
     return
 
-def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster = 3):
+
+def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster=3):
     # Cluster reviews for appID using Affinity Propagation
 
     # Load Pandas dataframe
@@ -420,9 +435,10 @@ def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster = 3):
 
     getTopClustersByCount(None, labels, True)
 
-    return (df, labels)
+    return df, labels
 
-def applyBirch(appID, num_clusters_input = 3, num_reviews_to_show_per_cluster = 3):
+
+def applyBirch(appID, num_clusters_input=3, num_reviews_to_show_per_cluster=3):
     # Cluster reviews for appID using selected method (Birch and then Agglomerative Clustering)
 
     # Load Pandas dataframe
@@ -433,7 +449,8 @@ def applyBirch(appID, num_clusters_input = 3, num_reviews_to_show_per_cluster = 
 
     brc_labels = tryBirch(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster)
 
-    return (df, brc_labels)
+    return df, brc_labels
+
 
 def main(argv):
     appID_list = ["723090", "639780", "573170"]
@@ -445,7 +462,7 @@ def main(argv):
         appID = argv[0]
         print("Input appID detected as " + appID)
 
-    num_reviews_to_show_per_cluster = 3 # Set to None to show all the reviews
+    num_reviews_to_show_per_cluster = 3  # Set to None to show all the reviews
 
     apply_birch_method = True
 
@@ -465,6 +482,7 @@ def main(argv):
         test_every_clustering_method(appID)
 
     return
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

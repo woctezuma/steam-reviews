@@ -13,15 +13,16 @@ def getXY():
         num_players_list.append(num_players)
         num_reviews_list.append(num_reviews)
 
-    return (num_players_list, num_reviews_list)
+    return num_players_list, num_reviews_list
 
 
 def getLogList(vec):
     from math import log10
 
-    log_vec = [log10(1+x) for x in vec]
+    log_vec = [log10(1 + x) for x in vec]
 
     return log_vec
+
 
 def main():
     import matplotlib.pyplot as plt

@@ -69,7 +69,7 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
     sentence = 'Hype: {0:.3f} ; Wilson score deviation: {1:.3f}'
     print(sentence.format(hype, wilson_score_deviation))
 
-    return (hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags)
+    return hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags
 
 def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
     from download_json import getTodaysSteamSpyData

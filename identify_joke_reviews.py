@@ -175,9 +175,10 @@ def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
                                       or review_dict[keyword][reviewID]['polarity'] > sentiment_threshold['polarity'][1]) ]
 
         # Subjectivity interval used with AND: joke reviews necessarily have a subjectivity OUTSIDE the interval!
-        acceptable_reviewIDs_wrt_subjectivity = [ reviewID for reviewID in current_reviewIDs
-                                 if bool(review_dict[keyword][reviewID]['subjectivity'] >= sentiment_threshold['subjectivity'][0]
-                                     and review_dict[keyword][reviewID]['subjectivity'] <= sentiment_threshold['subjectivity'][1]) ]
+        acceptable_reviewIDs_wrt_subjectivity = [reviewID for reviewID in current_reviewIDs
+                                                 if bool(
+                sentiment_threshold['subjectivity'][0] <= review_dict[keyword][reviewID]['subjectivity'] <=
+                sentiment_threshold['subjectivity'][1])]
 
         acceptable_reviewIDs = set(acceptable_reviewIDs_wrt_polarity).union(set(acceptable_reviewIDs_wrt_subjectivity))
 
@@ -191,7 +192,7 @@ def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
         print('Interval for being acceptable w.r.t. subjectivity: [{0:.2f}, {1:.2f}]'.format(sentiment_threshold['subjectivity'][0],
                                                                                              sentiment_threshold['subjectivity'][1]))
 
-    return (acceptable_reviews_dict, joke_reviews_dict)
+    return acceptable_reviews_dict, joke_reviews_dict
 
 def getDictionaryWilsonScore(review_dict, verbose = False):
 

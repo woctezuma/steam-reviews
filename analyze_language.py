@@ -54,7 +54,7 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict=None):
         language_dict[reviewID]['detected'] = detected_language
         language_dict[reviewID]['voted_up'] = is_a_positive_review
 
-    return (language_dict, previously_detected_languages_dict)
+    return language_dict, previously_detected_languages_dict
 
 
 def most_common(L):
@@ -188,7 +188,7 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
 
     all_languages = sorted(list(all_languages))
 
-    return (game_feature_dict, all_languages)
+    return game_feature_dict, all_languages
 
 
 def loadGameFeatureDictionary(dict_filename="dict_review_languages.txt"):
@@ -225,7 +225,7 @@ def loadGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
 
     all_languages = loadAllLanguages(language_filename)
 
-    return (game_feature_dict, all_languages)
+    return game_feature_dict, all_languages
 
 
 def writeContentToDisk(contentToWrite, filename):
@@ -253,7 +253,7 @@ def getGameFeaturesAsReviewLanguage(dict_filename="dict_review_languages.txt",
     writeContentToDisk(all_languages, language_filename)
     print('List of languages written to disk.')
 
-    return (game_feature_dict, all_languages)
+    return game_feature_dict, all_languages
 
 
 def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose=False):
@@ -779,7 +779,7 @@ def getInputData(force_update_of_regional_stats=False):
 
     # In order to update stats regarding reviewers' languages, load_from_disk needs to be set to False.
     # Otherwise, game_feature_dict is loaded from the disk without being updated at all.
-    load_from_disk = not (force_update_of_regional_stats)
+    load_from_disk = not force_update_of_regional_stats
 
     if load_from_disk:
         (game_feature_dict, all_languages) = loadGameFeaturesAsReviewLanguage(dict_filename, language_filename)
@@ -787,7 +787,7 @@ def getInputData(force_update_of_regional_stats=False):
         (game_feature_dict, all_languages) = getGameFeaturesAsReviewLanguage(dict_filename, language_filename,
                                                                              previously_detected_languages_filename)
 
-    return (game_feature_dict, all_languages)
+    return game_feature_dict, all_languages
 
 
 def main():
@@ -810,7 +810,7 @@ def main():
     # NB: This bool is only relevant if the prior is NOT based on the whole Steam catalog. Indeed, language-specific
     #     computation is impossible for the whole catalog since we don't have access to language data for every game.
     if compute_prior_on_whole_steam_catalog:
-        assert (not (compute_language_specific_prior))
+        assert (not compute_language_specific_prior)
 
     verbose = True
 
