@@ -27,7 +27,8 @@ def id_reader():
         for row in reader:
             yield parse_id(row[0])
 
-def get_id_processed_filename(use_date = True):
+
+def get_id_processed_filename(use_date=True):
     import time
 
     # Get current day as yyyymmdd format
@@ -41,6 +42,7 @@ def get_id_processed_filename(use_date = True):
 
     return id_processed_filename
 
+
 def previous_results():
     """Return a set of all previous found ID's."""
     temp_filename = get_id_processed_filename()
@@ -52,12 +54,12 @@ def previous_results():
                 if appid:
                     all_ids.add(appid)
     except FileNotFoundError:
-        with open(temp_filename, "w") as f:
+        with open(temp_filename, "w") as _:
             print('Creating ' + temp_filename)
     return all_ids
 
 
-def main(download_reference_hidden_gems_as_well = False):
+def main(download_reference_hidden_gems_as_well=False):
     """Entry point."""
 
     from appids import appid_hidden_gems_reference_set
@@ -99,7 +101,6 @@ def main(download_reference_hidden_gems_as_well = False):
     log.info("Opening " + get_id_processed_filename())
     query_count = 0
     game_count = 0
-    game = dict()
 
     temp_filename = get_id_processed_filename()
 
@@ -124,11 +125,11 @@ def main(download_reference_hidden_gems_as_well = False):
         try:
             with open(data_filename, 'r', encoding="utf8") as in_json_file:
                 review_dict = json.load(in_json_file)
-        except:
+        except FileNotFoundError:
             review_dict = dict()
             review_dict["reviews"] = dict()
 
-        previous_reviewIDs = set( review_dict["reviews"].keys() )
+        previous_reviewIDs = set(review_dict["reviews"].keys())
 
         url = api_url + str(appid)
 
@@ -179,7 +180,7 @@ def main(download_reference_hidden_gems_as_well = False):
                 time.sleep(wait_time)
                 query_count = 0
 
-            if any([ review["recommendationid"] in previous_reviewIDs for review in downloaded_reviews ]):
+            if any([review["recommendationid"] in previous_reviewIDs for review in downloaded_reviews]):
                 break
 
         for review in [r for r in new_reviews if r["recommendationid"] not in previous_reviewIDs]:

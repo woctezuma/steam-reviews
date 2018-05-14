@@ -8,8 +8,7 @@ from compute_wilson_score import computeWilsonScore
 from describe_reviews import loadData, describeData, getReviewContent
 
 
-def detectLanguage(review_content, blob = None, call_Google_Translate = False):
-
+def detectLanguage(review_content, blob=None, call_Google_Translate=False):
     try:
 
         if call_Google_Translate:
@@ -39,8 +38,8 @@ def detectLanguage(review_content, blob = None, call_Google_Translate = False):
 
 
 def getReviewSentimentDictionary(appID, accepted_languages=None,
-                                 perform_language_detection_with_Google_Tool = False,
-                                 verbose_reviews_wrongly_tagged_as_written_in_English = False):
+                                 perform_language_detection_with_Google_Tool=False,
+                                 verbose_reviews_wrongly_tagged_as_written_in_English=False):
     # A light version of aggregateReviews() from describe_reviews.py
     # NB: Only reviews marked on Steam as being written in English are accepted for sentiment analysis to work properly.
 
@@ -87,7 +86,7 @@ def getReviewSentimentDictionary(appID, accepted_languages=None,
             # TODO For generality, one would need to match accepted_languages to accepted_languages_iso (ISO 639-1)
             # cf. https://en.wikipedia.org/wiki/ISO_639-1
             # cf. https://gist.github.com/carlopires/1262033
-            if not(detected_language in accepted_languages_iso):
+            if not (detected_language in accepted_languages_iso):
                 count_reviews_wrongly_tagged_as_written_in_English += 1
                 wrongly_tagged_reviewID.append(reviewID)
                 if verbose_reviews_wrongly_tagged_as_written_in_English:
@@ -107,15 +106,17 @@ def getReviewSentimentDictionary(appID, accepted_languages=None,
 
     review_dict['language_tag'] = dict()
     review_dict['language_tag']['reviews_wrongly_tagged_English'] = wrongly_tagged_reviewID
-    review_dict['language_tag']['num_reviews_wrongly_tagged_English'] = count_reviews_wrongly_tagged_as_written_in_English
+    review_dict['language_tag'][
+        'num_reviews_wrongly_tagged_English'] = count_reviews_wrongly_tagged_as_written_in_English
     review_dict['language_tag']['num_reviews_tagged_English'] = count_reviews_tagged_as_written_in_English
     review_dict['language_tag']['num_reviews'] = len(reviews)
 
-    ## Mostly display
+    # Mostly display
 
     try:
-        percentage_reviews_tagged_as_written_in_English = review_dict['language_tag']['num_reviews_tagged_English']/review_dict['language_tag']['num_reviews']
-        end_of_sentence =  ' Percentage of English tags: {0:.2f}'.format(percentage_reviews_tagged_as_written_in_English)
+        percentage_reviews_tagged_as_written_in_English = review_dict['language_tag']['num_reviews_tagged_English'] / \
+                                                          review_dict['language_tag']['num_reviews']
+        end_of_sentence = ' Percentage of English tags: {0:.2f}'.format(percentage_reviews_tagged_as_written_in_English)
     except ZeroDivisionError:
         percentage_reviews_tagged_as_written_in_English = -1
         end_of_sentence = ''
@@ -125,22 +126,28 @@ def getReviewSentimentDictionary(appID, accepted_languages=None,
     sentence = 'Number of reviews: {0} ({1} with English tag ; {2} with another language tag).'
     print(sentence.format(review_dict['language_tag']['num_reviews'],
                           review_dict['language_tag']['num_reviews_tagged_English'],
-                          review_dict['language_tag']['num_reviews']-review_dict['language_tag']['num_reviews_tagged_English'])
+                          review_dict['language_tag']['num_reviews'] - review_dict['language_tag'][
+                              'num_reviews_tagged_English'])
           + end_of_sentence)
 
-    ## Mostly display
+    # Mostly display
 
-    num_confirmed_English_tags = review_dict['language_tag']['num_reviews_tagged_English']-review_dict['language_tag']['num_reviews_wrongly_tagged_English']
+    num_confirmed_English_tags = review_dict['language_tag']['num_reviews_tagged_English'] - \
+                                 review_dict['language_tag']['num_reviews_wrongly_tagged_English']
 
     try:
-        percentage_confirmed_English_tags = num_confirmed_English_tags/review_dict['language_tag']['num_reviews_tagged_English']
-        end_of_sentence =  ' Percentage of confirmed English tags: {0:.2f}\n'.format(percentage_confirmed_English_tags)
+        percentage_confirmed_English_tags = num_confirmed_English_tags / review_dict['language_tag'][
+            'num_reviews_tagged_English']
+        end_of_sentence = ' Percentage of confirmed English tags: {0:.2f}\n'.format(percentage_confirmed_English_tags)
     except ZeroDivisionError:
         percentage_confirmed_English_tags = -1
         end_of_sentence = '\n'
 
     review_dict['language_tag']['prct_confirmed_English_tags_among_English_tags'] = percentage_confirmed_English_tags
-    review_dict['language_tag']['prct_confirmed_English_tags_among_all_tags'] = max(0, percentage_confirmed_English_tags) * max(0, percentage_reviews_tagged_as_written_in_English)
+    review_dict['language_tag']['prct_confirmed_English_tags_among_all_tags'] = max(0,
+                                                                                    percentage_confirmed_English_tags) * \
+                                                                                max(0,
+                                                                                    percentage_reviews_tagged_as_written_in_English)
 
     accepted_languages_as_concatenated_str = ' '.join(l.capitalize() for l in accepted_languages)
     sentence = 'Number of reviews tagged as in ' + accepted_languages_as_concatenated_str + ': {0} ({1} with dubious tag ; {2} with tag confirmed by language detection).'
@@ -151,8 +158,8 @@ def getReviewSentimentDictionary(appID, accepted_languages=None,
 
     return review_dict
 
-def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
 
+def classifyReviews(review_dict, sentiment_threshold=None, verbose=False):
     # The variable sentiment_threshold is a Python dictionary, which describes the criterion to distinguish between
     # acceptable and joke reviews, based on Sentiment Analysis.
     if (sentiment_threshold is None) or bool(len(sentiment_threshold) == 0):
@@ -170,9 +177,10 @@ def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
         current_reviewIDs = review_dict[keyword].keys()
 
         # Polarity set used with OR: joke reviews necessarily have a polarity INSIDE the interval!
-        acceptable_reviewIDs_wrt_polarity = [ reviewID for reviewID in current_reviewIDs
-                                 if bool(review_dict[keyword][reviewID]['polarity'] < sentiment_threshold['polarity'][0]
-                                      or review_dict[keyword][reviewID]['polarity'] > sentiment_threshold['polarity'][1]) ]
+        acceptable_reviewIDs_wrt_polarity = [reviewID for reviewID in current_reviewIDs
+                                             if bool(
+                review_dict[keyword][reviewID]['polarity'] < sentiment_threshold['polarity'][0]
+                or review_dict[keyword][reviewID]['polarity'] > sentiment_threshold['polarity'][1])]
 
         # Subjectivity interval used with AND: joke reviews necessarily have a subjectivity OUTSIDE the interval!
         acceptable_reviewIDs_wrt_subjectivity = [reviewID for reviewID in current_reviewIDs
@@ -187,22 +195,24 @@ def classifyReviews(review_dict, sentiment_threshold = None, verbose = False):
 
     if verbose:
         print('A review is acceptable if it is acceptable with respect to either polarity or subjectivity.')
-        print('Set for being acceptable w.r.t. polarity: [-1.00, {0:.2f}[ U ]{1:.2f}, 1.00]'.format(sentiment_threshold['polarity'][0],
-                                                                                                    sentiment_threshold['polarity'][1]))
-        print('Interval for being acceptable w.r.t. subjectivity: [{0:.2f}, {1:.2f}]'.format(sentiment_threshold['subjectivity'][0],
-                                                                                             sentiment_threshold['subjectivity'][1]))
+        print('Set for being acceptable w.r.t. polarity: [-1.00, {0:.2f}[ U ]{1:.2f}, 1.00]'.format(
+            sentiment_threshold['polarity'][0],
+            sentiment_threshold['polarity'][1]))
+        print('Interval for being acceptable w.r.t. subjectivity: [{0:.2f}, {1:.2f}]'.format(
+            sentiment_threshold['subjectivity'][0],
+            sentiment_threshold['subjectivity'][1]))
 
     return acceptable_reviews_dict, joke_reviews_dict
 
-def getDictionaryWilsonScore(review_dict, verbose = False):
 
+def getDictionaryWilsonScore(review_dict, verbose=False):
     num_pos = len(review_dict['positive'])
     num_neg = len(review_dict['negative'])
     wilson_score = computeWilsonScore(num_pos, num_neg)
 
     if verbose:
-        num_reviews = num_pos+num_neg
-        if num_reviews>0:
+        num_reviews = num_pos + num_neg
+        if num_reviews > 0:
             sentence = 'Number of reviews: {0} ({1} up ; {2} down) ; Wilson score: {3:.2f}'
             print(sentence.format(num_reviews, num_pos, num_neg, wilson_score))
         else:
@@ -211,7 +221,8 @@ def getDictionaryWilsonScore(review_dict, verbose = False):
 
     return wilson_score
 
-def showReviews(appID, reviewID_list, max_num_reviews_to_print = None):
+
+def showReviews(appID, reviewID_list, max_num_reviews_to_print=None):
     # Adapted from showFixedNumberOfReviewsFromGivenCluster() in cluster_reviews.py
 
     for (review_count, reviewID) in enumerate(reviewID_list):
@@ -221,7 +232,7 @@ def showReviews(appID, reviewID_list, max_num_reviews_to_print = None):
             break
 
         # Reference: https://stackoverflow.com/a/18544440
-        print("\n ==== Review " + str(review_count+1) + " (#reviews = " + str(len(reviewID_list)) + ") ====" )
+        print("\n ==== Review " + str(review_count + 1) + " (#reviews = " + str(len(reviewID_list)) + ") ====")
         printSentimentAnalysis(review_content)
 
         try:
@@ -231,6 +242,7 @@ def showReviews(appID, reviewID_list, max_num_reviews_to_print = None):
             print(review_content.encode('ascii', 'ignore'))
 
     return
+
 
 def main(argv):
     appID_list = ["723090", "639780", "573170"]
@@ -249,7 +261,10 @@ def main(argv):
                                                verbose_reviews_wrongly_tagged_as_written_in_English)
 
     sentiment_verbose = True
-    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict, None, sentiment_verbose)
+    # noinspection PyTypeChecker
+    (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict,
+                                                                   sentiment_threshold=None,
+                                                                   verbose=sentiment_verbose)
 
     print_Wilson_score = True
 
@@ -281,9 +296,11 @@ def main(argv):
     wilson_score_joke_only = getDictionaryWilsonScore(joke_reviews_dict, print_Wilson_score)
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
-    print('\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(wilson_score_deviation))
+    print(
+        '\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(wilson_score_deviation))
 
     return
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

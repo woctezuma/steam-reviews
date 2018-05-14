@@ -55,7 +55,8 @@ def computeScoreGeneric(tuple, parameter_list, language=None, popularity_measure
         popularity_measure = num_reviews
 
     # Decreasing function
-    decreasing_fun = lambda x: alpha / (alpha + x)
+    def decreasing_fun(x):
+        return alpha / (alpha + x)
 
     score = quality_measure * decreasing_fun(popularity_measure)
 
@@ -101,8 +102,8 @@ def rankGames(D, parameter_list, verbose=False, appid_reference_set={appidContra
     # Boolean to decide whether there is a filtering-out of appIDs (typically to filter-out genres or tags).
     hide_filtered_appIDs_only = bool(not (filtered_appIDs_to_hide is None) and not (len(filtered_appIDs_to_hide) == 0))
 
-    computeScore = lambda x: computeScoreGeneric(x, parameter_list, language, popularity_measure_str,
-                                                 quality_measure_str)
+    def computeScore(x):
+        return computeScoreGeneric(x, parameter_list, language, popularity_measure_str, quality_measure_str)
 
     # Rank all the Steam games
     sortedValues = sorted(D.values(), key=computeScore, reverse=True)
@@ -204,8 +205,8 @@ def optimizeForAlpha(D, verbose=True, appid_reference_set={appidContradiction},
     from scipy.optimize import differential_evolution
 
     # Goal: find the optimal value for alpha by minimizing the rank of games chosen as references of "hidden gems"
-    functionToMinimize = lambda x: \
-        rankGames(D, [x], False, appid_reference_set, language, popularity_measure_str, quality_measure_str)[0]
+    def functionToMinimize(x):
+        return rankGames(D, [x], False, appid_reference_set, language, popularity_measure_str, quality_measure_str)[0]
 
     # Bounds for the optimization procedure of the parameter alpha
     my_bounds = [(lower_search_bound, upper_search_bound)]
@@ -286,8 +287,10 @@ def computeRanking(D, num_top_games_to_print=None, keywords_to_include=list(), k
                 vec = [int(game[index_num_players]) for game in D.values()]
             else:
                 assert (popularity_measure_str == 'num_reviews')
-                get_num_reviews = lambda game: int(game[index_num_positive_reviews]) + int(
-                    game[index_num_negative_reviews])
+
+                def get_num_reviews(game):
+                    return int(game[index_num_positive_reviews]) + int(game[index_num_negative_reviews])
+
                 vec = [get_num_reviews(game) for game in D.values()]
 
         else:

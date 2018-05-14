@@ -33,6 +33,13 @@ def test_imported_module():
     return
 
 
+def convertFromPandas(data_frame):
+    # Convert from Pandas to NumPy arrays
+    # Reference: https://stackoverflow.com/a/22653050
+
+    return data_frame.reset_index().values
+
+
 def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns=None):
     # Maybe the variable excluded_columns is not needed after all... I just leave it there as a legacy for now.
     if excluded_columns is None:
@@ -48,10 +55,6 @@ def convertFromPandasDataframeToNumpyMatrix(df, excluded_columns=None):
     D_length_correlated = D.ix[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
     D_readability_correlated = D.ix[:, ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
     D_sentiment = D.ix[:, ['polarity', 'subjectivity']]
-
-    # Convert from Pandas to NumPy arrays
-    # Reference: https://stackoverflow.com/a/22653050
-    convertFromPandas = lambda data_frame: data_frame.reset_index().values
 
     X_binary = convertFromPandas(D_binary)
     X_generic = convertFromPandas(D_generic)
@@ -108,7 +111,10 @@ def showRepresentativeReviews(appID, df, af, num_top_clusters=None, verbose=Fals
     cluster_centers_indices = af.cluster_centers_indices_
     # labels = af.labels_
 
-    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af, None, verbose)
+    # noinspection PyTypeChecker
+    (summary_labels, list_of_clusters_by_count) = getTopClustersByCount(af,
+                                                                        provided_labels=None,
+                                                                        verbose=verbose)
 
     if num_top_clusters is None:
         top_clusters = list_of_clusters_by_count
@@ -346,7 +352,7 @@ def tryDBSCAN(appID, df, X, db_eps=0.3, db_min_samples=10, num_reviews_to_show_p
 
 
 def test_every_clustering_method(appID):
-    ## Clustering
+    # Clustering
     # Reference: http://scikit-learn.org/stable/modules/clustering.html
 
     # NB: We are not interested in outlier detection:
@@ -362,9 +368,9 @@ def test_every_clustering_method(appID):
     # Convert to NumPy matrix format
     X = convertFromPandasDataframeToNumpyMatrix(df, excluded_columns)
 
-    ## Demo of every clustering method
+    # Demo of every clustering method
 
-    ## Affinity Propagation
+    # Affinity Propagation
     # NB: The clusters look consistent, I like the results, but:
     # - there are too many clusters (11) for our application,
     # - and there is no direct control of the number of clusters.
@@ -375,14 +381,14 @@ def test_every_clustering_method(appID):
 
     tryAffinityPropagation(appID, df, X, num_top_clusters, verbose)
 
-    ## Agglomerative Clustering with Birch
+    # Agglomerative Clustering with Birch
 
     num_clusters_input = 3
     num_reviews_to_show_per_cluster = 3
 
     tryBirch(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster)
 
-    ## Agglomerative Clustering without Birch
+    # Agglomerative Clustering without Birch
     # NB: With some parameters, results are similar to Birch's (as expected from scikit-learn documentation of Birch).
 
     linkage = 'ward'
@@ -391,7 +397,7 @@ def test_every_clustering_method(appID):
     tryAgglomerativeClustering(appID, df, X, num_clusters_input, num_reviews_to_show_per_cluster, linkage,
                                use_connectivity)
 
-    ## DBSCAN
+    # DBSCAN
     # NB: Not satisfactory here. Either the parameters, or the data pre-processing, should be changed for DBSCAN.
 
     db_eps = 40
@@ -438,7 +444,7 @@ def applyAffinityPropagation(appID, num_reviews_to_show_per_cluster=3):
     return df, labels
 
 
-def applyBirch(appID, num_clusters_input=3, num_reviews_to_show_per_cluster=3):
+def apply_birch(appID, num_clusters_input=3, num_reviews_to_show_per_cluster=3):
     # Cluster reviews for appID using selected method (Birch and then Agglomerative Clustering)
 
     # Load Pandas dataframe
@@ -453,10 +459,10 @@ def applyBirch(appID, num_clusters_input=3, num_reviews_to_show_per_cluster=3):
 
 
 def main(argv):
-    appID_list = ["723090", "639780", "573170"]
+    app_id_list = ["723090", "639780", "573170"]
 
     if len(argv) == 0:
-        appID = appID_list[-1]
+        appID = app_id_list[-1]
         print("No input detected. AppID automatically set to " + appID)
     else:
         appID = argv[0]
@@ -469,7 +475,7 @@ def main(argv):
     if apply_birch_method:
         # Apply Birch and then Agglomerative Clustering
         num_clusters_input = 3
-        (df, labels) = applyBirch(appID, num_clusters_input, num_reviews_to_show_per_cluster)
+        (df, labels) = apply_birch(appID, num_clusters_input, num_reviews_to_show_per_cluster)
     else:
         # Apply Affinity Propagation
         (df, labels) = applyAffinityPropagation(appID, num_reviews_to_show_per_cluster)

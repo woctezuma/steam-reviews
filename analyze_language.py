@@ -7,12 +7,12 @@ from sklearn.preprocessing import normalize
 from describe_reviews import loadData, describeData
 
 
-def getReviewLanguageDictionary(appID, previously_detected_languages_dict=None):
+def getReviewLanguageDictionary(app_id, previously_detected_languages_dict=None):
     # Returns dictionary: reviewID -> dictionary with (tagged language, detected language)
 
-    review_data = loadData(appID)
+    review_data = loadData(app_id)
 
-    print('\nAppID: ' + appID)
+    print('\nAppID: ' + app_id)
 
     (query_summary, reviews) = describeData(review_data)
 
@@ -21,12 +21,12 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict=None):
     if previously_detected_languages_dict is None:
         previously_detected_languages_dict = dict()
 
-    if appID not in previously_detected_languages_dict.keys():
-        previously_detected_languages_dict[appID] = dict()
+    if app_id not in previously_detected_languages_dict.keys():
+        previously_detected_languages_dict[app_id] = dict()
 
     for review in reviews:
         # Review ID
-        reviewID = review["recommendationid"]
+        review_id = review["recommendationid"]
 
         # Review polarity tag, i.e. either "recommended" or "not recommended"
         is_a_positive_review = review['voted_up']
@@ -38,21 +38,21 @@ def getReviewLanguageDictionary(appID, previously_detected_languages_dict=None):
         review_language_tag = review['language']
 
         # Review's automatically detected language
-        if reviewID in previously_detected_languages_dict[appID].keys():
-            detected_language = previously_detected_languages_dict[appID][reviewID]
+        if review_id in previously_detected_languages_dict[app_id].keys():
+            detected_language = previously_detected_languages_dict[app_id][review_id]
         else:
             try:
                 DetectorFactory.seed = 0
                 detected_language = detect(review_content)
             except lang_detect_exception.LangDetectException:
                 detected_language = 'unknown'
-            previously_detected_languages_dict[appID][reviewID] = detected_language
+            previously_detected_languages_dict[app_id][review_id] = detected_language
             previously_detected_languages_dict['has_changed'] = True
 
-        language_dict[reviewID] = dict()
-        language_dict[reviewID]['tag'] = review_language_tag
-        language_dict[reviewID]['detected'] = detected_language
-        language_dict[reviewID]['voted_up'] = is_a_positive_review
+        language_dict[review_id] = dict()
+        language_dict[review_id]['tag'] = review_language_tag
+        language_dict[review_id]['detected'] = detected_language
+        language_dict[review_id]['voted_up'] = is_a_positive_review
 
     return language_dict, previously_detected_languages_dict
 
@@ -145,9 +145,9 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
     with open('idlist.txt') as f:
         d = f.readlines()
 
-    appID_list = [x.strip() for x in d]
+    app_id_list = [x.strip() for x in d]
 
-    appID_list = list(set(appID_list).union(appid_hidden_gems_reference_set))
+    app_id_list = list(set(app_id_list).union(appid_hidden_gems_reference_set))
 
     game_feature_dict = dict()
     all_languages = set()
@@ -157,15 +157,15 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
         with open(previously_detected_languages_filename, 'r', encoding="utf8") as infile:
             lines = infile.readlines()
             # The dictionary is on the first line
-            previously_detected_languages_dict = eval(lines[0])
+            previously_detected_languages = eval(lines[0])
     except FileNotFoundError:
-        previously_detected_languages_dict = dict()
+        previously_detected_languages = dict()
 
-    previously_detected_languages_dict['has_changed'] = False
+    previously_detected_languages['has_changed'] = False
 
-    for count, appID in enumerate(appID_list):
-        (language_dict, previously_detected_languages_dict) = getReviewLanguageDictionary(appID,
-                                                                                          previously_detected_languages_dict)
+    for count, appID in enumerate(app_id_list):
+        (language_dict, previously_detected_languages) = getReviewLanguageDictionary(appID,
+                                                                                     previously_detected_languages)
 
         summary_dict = summarizeReviewLanguageDictionary(language_dict)
 
@@ -175,16 +175,16 @@ def getAllReviewLanguageSummaries(previously_detected_languages_filename=None, d
         if delta_n_reviews_between_temp_saves > 0:
             flush_to_file_now = bool(count % delta_n_reviews_between_temp_saves == 0)
         else:
-            flush_to_file_now = bool(count == len(appID_list) - 1)
+            flush_to_file_now = bool(count == len(app_id_list) - 1)
 
         # Export the result of language detection for each review, so as to avoid repeating intensive computations.
         if previously_detected_languages_filename is not None and flush_to_file_now and \
-                previously_detected_languages_dict['has_changed']:
+                previously_detected_languages['has_changed']:
             with open(previously_detected_languages_filename, 'w', encoding="utf8") as outfile:
-                print(previously_detected_languages_dict, file=outfile)
-            previously_detected_languages_dict['has_changed'] = False
+                print(previously_detected_languages, file=outfile)
+            previously_detected_languages['has_changed'] = False
 
-        print('AppID ' + str(count + 1) + '/' + str(len(appID_list)) + ' done.')
+        print('AppID ' + str(count + 1) + '/' + str(len(app_id_list)) + ' done.')
 
     all_languages = sorted(list(all_languages))
 
@@ -280,7 +280,7 @@ def computeGameFeatureMatrix(game_feature_dict, all_languages, verbose=False):
     return game_feature_matrix
 
 
-def normalizeEachRow(X, verbose=False):
+def normalize_each_row(X, verbose=False):
     X_normalized = normalize(X.astype('float64'), norm='l1')
 
     if verbose:
@@ -289,7 +289,7 @@ def normalizeEachRow(X, verbose=False):
     return X_normalized
 
 
-def getAppNameList(appID_list):
+def get_app_name_list(appID_list):
     from download_json import getTodaysSteamSpyData
 
     # Download latest SteamSpy data to have access to the matching between appID and game name
@@ -307,10 +307,10 @@ def getAppNameList(appID_list):
     return appName_list
 
 
-def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs=None):
+def remove_bugged_app_ids(game_feature_dict, list_bugged_appIDs=None):
     if list_bugged_appIDs is None:
         list_bugged_appIDs = ['272670', '34460', '575050']
-    list_bugged_appNames = getAppNameList(list_bugged_appIDs)
+    list_bugged_appNames = get_app_name_list(list_bugged_appIDs)
 
     print('\nRemoving bugged appIDs:\t' + ' ; '.join(list_bugged_appNames) + '\n')
 
@@ -325,6 +325,7 @@ def removeBuggedAppIDs(game_feature_dict, list_bugged_appIDs=None):
 
 def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
     # Cluster hidden gems based on the number of reviews and the language they are written in.
+    global svd
     X = normalized_game_feature_matrix
 
     import matplotlib.pyplot as plt
@@ -389,7 +390,7 @@ def testKmeansClustering(normalized_game_feature_matrix, appIDs, languages):
 
     print()
 
-    terms = getAppNameList(appIDs)
+    terms = get_app_name_list(appIDs)
     num_appIDs_to_show = 20
     for i in range(n_clusters_kmeans):
         print("Cluster %d:\n\t" % i, end='')
@@ -449,7 +450,7 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
         print()
 
         num_appIDs_to_show = None
-        terms = getAppNameList(appIDs)
+        terms = get_app_name_list(appIDs)
         for i in range(n_clusters_):
             # Samples
             indices = np.where(af.labels_ == i)[0]
@@ -483,11 +484,11 @@ def testAffinityPropagationClustering(normalized_game_feature_matrix, appIDs, la
 
 
 def testClustering(game_feature_dict, all_languages):
-    game_feature_dict = removeBuggedAppIDs(game_feature_dict)
+    game_feature_dict = remove_bugged_app_ids(game_feature_dict)
 
     game_feature_matrix = computeGameFeatureMatrix(game_feature_dict, all_languages)
 
-    normalized_game_feature_matrix = normalizeEachRow(game_feature_matrix)
+    normalized_game_feature_matrix = normalize_each_row(game_feature_matrix)
 
     appIDs = sorted(list(game_feature_dict.keys()))
     languages = sorted(list(all_languages))
@@ -802,7 +803,8 @@ def main():
     popularity_measure_str = 'num_players'  # Either 'num_players' or 'num_reviews'
     quality_measure_str = 'bayesian_rating'  # Either 'wilson_score' or 'bayesian_rating'
 
-    # Whether to compute a prior for Bayesian rating with the whole Steam catalog, or with a pre-computed set of top-ranked hidden gems
+    # Whether to compute a prior for Bayesian rating with the whole Steam catalog,
+    # or with a pre-computed set of top-ranked hidden gems
     compute_prior_on_whole_steam_catalog = False
 
     # Whether to compute a prior for Bayesian rating for each language independently

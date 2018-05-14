@@ -3,12 +3,12 @@
 def getNumReviews(review_dict):
     import numpy as np
 
-    num_reviews = np.sum([ len(review_dict[keyword]) for keyword in review_dict.keys() ])
+    num_reviews = np.sum([len(review_dict[keyword]) for keyword in review_dict.keys()])
 
     return num_reviews
 
-def getHype(joke_reviews_dict, acceptable_reviews_dict):
 
+def getHype(joke_reviews_dict, acceptable_reviews_dict):
     num_reviews_acceptable_only = getNumReviews(acceptable_reviews_dict)
     num_reviews_joke_only = getNumReviews(joke_reviews_dict)
 
@@ -16,12 +16,13 @@ def getHype(joke_reviews_dict, acceptable_reviews_dict):
 
     # Hype is the percentage of joke reviews among all reviews.
     # NB: There could be a small bias du to the fact that only reviews which are written in English are considered.
-    if num_reviews>0:
+    if num_reviews > 0:
         hype = num_reviews_joke_only / num_reviews
     else:
         hype = -1
 
     return hype
+
 
 def getWilsonScoreDeviation(review_dict, acceptable_reviews_dict):
     from identify_joke_reviews import getDictionaryWilsonScore
@@ -36,7 +37,8 @@ def getWilsonScoreDeviation(review_dict, acceptable_reviews_dict):
 
     return wilson_score_deviation
 
-def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
+
+def computeHypeAndWilsonScoreDeviation(appID):
     from identify_joke_reviews import getReviewSentimentDictionary, classifyReviews
 
     # Only reviews written in English are considered, for sentiment analysis to work.
@@ -50,7 +52,8 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
                                                verbose_reviews_wrongly_tagged_as_written_in_English)
 
     prct_English_tags = review_dict['language_tag']['prct_English_tags']
-    prct_confirmed_English_tags_among_all_tags = review_dict['language_tag']['prct_confirmed_English_tags_among_all_tags']
+    prct_confirmed_English_tags_among_all_tags = review_dict['language_tag'][
+        'prct_confirmed_English_tags_among_all_tags']
 
     (acceptable_reviews_dict, joke_reviews_dict) = classifyReviews(review_dict)
 
@@ -71,7 +74,8 @@ def computeHypeAndWilsonScoreDeviation(appID, verbose = True):
 
     return hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags
 
-def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
+
+def printRankingAccordingToKeyword(hype_dict, keyword='hype'):
     from download_json import getTodaysSteamSpyData
 
     # Download latest SteamSpy data to have access to the matching between appID and game name
@@ -88,9 +92,10 @@ def printRankingAccordingToKeyword(hype_dict, keyword ='hype'):
         except KeyError:
             appName = 'unknown'
         sentence = '{0:3}. AppID: ' + appID + '\t' + formatted_keyword + ': {1:.3f}' + '\t(' + appName + ')'
-        print( sentence.format(rank+1, hype_dict[appID][keyword]) )
+        print(sentence.format(rank + 1, hype_dict[appID][keyword]))
 
     return
+
 
 def main():
     with open('idlist.txt') as f:
@@ -100,7 +105,8 @@ def main():
 
     result_dict = dict()
     for appID in appID_list:
-        (hype, wilson_score_deviation, prct_English_tags, prct_confirmed_English_tags_among_all_tags) = computeHypeAndWilsonScoreDeviation(appID)
+        (hype, wilson_score_deviation, prct_English_tags,
+         prct_confirmed_English_tags_among_all_tags) = computeHypeAndWilsonScoreDeviation(appID)
         result_dict[appID] = dict()
         result_dict[appID]['hype'] = hype
         result_dict[appID]['wilson_score_deviation'] = wilson_score_deviation
@@ -116,6 +122,7 @@ def main():
     printRankingAccordingToKeyword(result_dict, 'proportion_confirmed-English-tags')
 
     return
+
 
 if __name__ == "__main__":
     main()
