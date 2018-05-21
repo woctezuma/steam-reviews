@@ -48,20 +48,21 @@ def convert_from_pandas_dataframe_to_numpy_matrix(df, excluded_columns=None):
     else:
         # Reference: https://stackoverflow.com/a/32152755
         # noinspection PyPep8Naming
-        D = df.ix[:, df.columns.difference(excluded_columns)]
+        D = df.loc[:, df.columns.difference(excluded_columns)]
 
     # noinspection PyPep8Naming
-    D_binary = D.ix[:, ['received_for_free', 'steam_purchase', 'voted_up']]
+    D_binary = D.loc[:, ['received_for_free', 'steam_purchase', 'voted_up']]
     # noinspection PyPep8,PyPep8Naming
-    D_generic = D.ix[:,
+    D_generic = D.loc[:,
                 ['num_games_owned', 'num_reviews', 'playtime_forever', 'votes_up', 'votes_funny', 'comment_count',
                  'weighted_vote_score']]
     # noinspection PyPep8Naming
-    D_length_correlated = D.ix[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
+    D_length_correlated = D.loc[:, ['character_count', 'syllable_count', 'lexicon_count', 'sentence_count']]
     # noinspection PyPep8Naming
-    D_readability_correlated = D.ix[:, ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
+    D_readability_correlated = D.loc[:,
+                               ['dale_chall_readability_score', 'flesch_reading_ease', 'difficult_words_count']]
     # noinspection PyPep8Naming
-    D_sentiment = D.ix[:, ['polarity', 'subjectivity']]
+    D_sentiment = D.loc[:, ['polarity', 'subjectivity']]
 
     # noinspection PyPep8Naming
     X_binary = convert_from_pandas(D_binary)
