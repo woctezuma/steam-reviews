@@ -12,54 +12,54 @@
 
 This repository contains Python code to compute statistics of Steam reviews.
 
-### Definitions
+## Definitions
 
-A "joke review" is a review which does not try to express the reviewer's opinion. Typically, a joke review is a funny reference to the game's themes or characters.
+### Joke review
 
-"Hype" is the percentage of joke reviews for a given game.
+A "joke review" is a review which does not try to express the reviewer's opinion. Typically, a joke review is a funny 
+reference to the game's themes or characters.
+
+### Game hype
+
+The "hype" of a game is its ratio of joke reviews.
 
 ## Goal
 
-The goal is to filter Steam reviews in order to find out:
+Our goal is to filter Steam reviews, in order to find out:
 
 * which game has the highest percentage of joke reviews,
-* which game benefits the most from joke reviews in terms of Wilson score,
+* which game benefits the most, in terms of Wilson score, from joke reviews,
 * which game has the highest percentage of English reviews.
-
-It is noticeable that a few genres are more popular in a few parts of the world, and this leads to different appreciations of rankings of hidden gems. Moreover, genre can be a very fuzzy concept, and attributing a genre to a game is debatable and error-prone. A work-in-progress deals with clustering games with regards to the player demography. Indeed, this would allow to personalize rankings of hidden gems based on each player's language, and completely avoid considering genres. For each game, a number of reviews is written in English, Chinese, Russian, etc. This piece of information allows to characterize the player demography, and cluster games with similar demography. An example of such clustering is shown [here](output/language_analysis.txt).
-
-## Data source
-
-Data can be downloaded from SteamSpy API and Steam API. It is also available as a snapshot in [a data repository](https://github.com/woctezuma/steam-reviews-data).
-
-### Limitations
-
-The analysis of Steam reviews requires to download data through Steam API, which has a rate limit of about 10 reviews per second.
-
-Sentiment analysis is performed on reviews written in English. The language is available with Steam's meta-data, but it is not always accurate because it requires the reviewers to correctly specify their language at the time the review is published. To try to be as robust as possible against mistagging, the language of each review is confirmed by [a tool running locally](https://github.com/Mimino666/langdetect), which used to be provided by Google. The limitation of this tool is that there are occasional false negatives (reviews which are written in English, but only consist of 3-5 words, with typos, so the algorithm might not recognize the English language). If you are looking for a better accuracy, at the expense of a slower running time and numerous pings to Google Translate, you could directly use the language detection function provided by [TextBlob](https://github.com/sloria/TextBlob).
 
 ## Usage
 
-If you are running Windows, you could call the main functions using the `steamReviews.bat` script.
-
-The main functions are structured as follows:
+The functions are structured as follows:
 * `download_reviews.py` allows to download reviews via Steam API,
-* `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
-* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
-* `analyze_language.py` allows to compute [regional rankings](https://www.resetera.com/posts/3786423/) of hidden gems. [Full results here](regional_rankings/). It can also allow to cluster games according to the player demography, assessed with the number of reviews written for each language.
-* `create_README_for_regional_rankings.py` displays the content to be pasted to `regional_rankings/README.md`
-
-Additional functions are called from:
-* `download_json.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
-* `compute_wilson_score.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
-* `compute_stats.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
-* `appids.py` is a utility copied from [my hidden-gems repository](https://github.com/woctezuma/hidden-gems),
 * `describe_reviews.py` allows to compute text properties, and then aggregate meta-data and review features,
 * `cluster_reviews.py` attempts to divide reviews into clusters.
+* `identify_joke_reviews.py` allows to focus on a single game, and classify its reviews as acceptable vs. joke,
+* `estimate_hype.py` allows to rank games according to their hype (percentage of joke reviews), Wilson score bonus (due to hype), or percentage of Steam reviews in English (as given by Steam's meta-data and confirmed by Google Translate),
+If you are running Windows, you could call these functions using the `steamReviews.bat` script.
 
-## Results as of January 18, 2018
+To compute [regional rankings](https://www.resetera.com/posts/3786423/) of hidden gems, please refer to my [hidden-gems](https://github.com/woctezuma/hidden-gems)
+repository. Archived results are shown in [`regional_rankings/`](regional_rankings/).
 
-[A list of 250 hidden gems](hidden_gems.md) has been processed. Here is an excerpt of the input:
+## Limitations
+
+Analysis requires [to download reviews through Steam API](https://github.com/woctezuma/download-steam-reviews), which has a rate limit of about 10 reviews per second. A snapshot is available in [my data repository](https://github.com/woctezuma/steam-reviews-data).
+
+Sentiment analysis is performed on reviews written in English. The language is available with Steam's meta-data, but it 
+is not always accurate because it requires the reviewers to correctly specify their language at the time the review is 
+published. To try to be as robust as possible against mistagging, the language of each review is confirmed by 
+[a tool running locally](https://github.com/Mimino666/langdetect), which used to be provided by Google. 
+The limitation of this tool is that there are occasional false negatives (reviews which are written in English, but only
+consist of 3-5 words, with typos, so the algorithm might not recognize the English language). If you are looking for a 
+better accuracy, at the expense of a slower running time and numerous pings to Google Translate, you could directly use
+the language detection function provided by [TextBlob](https://github.com/sloria/TextBlob).
+
+## Input
+
+[A list of 250 hidden gems](hidden_gems.md) has been processed in January 2018. Here is an excerpt of the input:
 
 00001.	[Short Stories Collection of Class Tangerine](http://store.steampowered.com/app/701930)
 00002.	[BLUE REVOLVER](http://store.steampowered.com/app/439490)
@@ -72,10 +72,11 @@ Additional functions are called from:
 00009.	[Linelight](http://store.steampowered.com/app/469790)
 00010.	[Monolith](http://store.steampowered.com/app/603960)
 
+## Results
+
 Here are the results as [output](output/output_rankings.txt) by `estimate_hype.py`.
 
-
-### Ranking by hype
+### Ranking of games by hype
 
 A hype of 0.300 means that 30.0% of the English reviews are classified as joke reviews.
 
@@ -106,7 +107,7 @@ NB: For `Planetarian HD`, only 1.4% of reviews are written in English, so 30% hy
 245. AppID: 650570	Hype: 0.000	(Code 7)
 ```
 
-### Ranking by Wilson score bonus due to unexpectedly positive hype
+### Ranking of games by benefit from hype
 
 A Wilson score bonus (or deviation) of 0.077 means that the game's Wilson score (95% confidence) is improved by 7.7% thanks to the joke reviews.
 
@@ -137,7 +138,7 @@ NB: The Wilson score depends on the sample size, and may vary widly after small 
 245. AppID: 372940	Wilson score deviation: -0.021	(Lost Lands: The Four Horsemen)
 ```
 
-### Ranking by proportion of English reviews
+### Ranking of games by proportion of (self-described) English reviews
 
 Some games appear at the top of the ranking of hidden gems, yet at the bottom of the ranking by proportion of English reviews: these games are really pushed to the higher ranks by non-English reviewers.
 
@@ -168,7 +169,7 @@ NB: Three games do not appear in this ranking as the download process failed for
 247. AppID: 713260	Proportion english-tags: 0.000	(Beyond the Sunset )
 ```
 
-### Ranking by proportion of English reviews, with confirmation by a language detection tool
+### Ranking of games by proportion of (confirmed) English reviews
 
 After assessing the language with a tool to correct for mistagging, the top 10 ranking is roughly the same: `Total Miner`, `Pajama Sam: No Need to Hide When It's Dark Outside` and `Paradigm` are out, while `Unbreakable Vr Runner`, `Subsurface Circular` and `Champions of Breakfast` are in. The bottom 10 consists of the same games which are a priori popular in Asia, and might not have been translated to English.
 
@@ -200,9 +201,10 @@ The games which are reviewed almost exclusively by English speakers seem to be g
 247. AppID: 713260      Proportion confirmed-english-tags: 0.000        (Beyond the Sunset )
 ```
 
-### Final remarks
+### Discussion
 
-`Deep Space Waifu` and `Meltys Quest` feature respectively 20.7% and 18.6% joke reviews. However, they do not benefit much from joke reviews: their Wilson score is respectively 0.3% and 0.9% lower without the joke reviews.
+`Deep Space Waifu` and `Meltys Quest` feature respectively 20.7% and 18.6% joke reviews. However, they do not benefit 
+much from joke reviews: their Wilson score is respectively 0.3% and 0.9% lower without the joke reviews.
 
 ```
 AppID: 639790 (DEEP SPACE WAIFU)
@@ -227,4 +229,3 @@ Percentage of confirmed English tags: 0.90
 Number of reviews in English: 172 (32 joke ; 140 acceptable)
 Hype: 0.186 ; Wilson score deviation: 0.009
 ```
-
