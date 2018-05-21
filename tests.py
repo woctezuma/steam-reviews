@@ -25,7 +25,7 @@ class TestAppidsMethods(unittest.TestCase):
 class TestClusterReviewsMethods(unittest.TestCase):
 
     def test_main(self):
-        self.assertTrue(cluster_reviews.main())
+        self.assertTrue(cluster_reviews.main('723090'))
 
 
 class TestComputeBayesianRatingMethods(unittest.TestCase):
@@ -43,7 +43,7 @@ class TestComputeWilsonScoreMethods(unittest.TestCase):
 class TestDescribeReviewsMethods(unittest.TestCase):
 
     def test_main(self):
-        self.assertTrue(describe_reviews.main())
+        self.assertTrue(describe_reviews.main('723090'))
 
 
 class TestEstimateHypeMethods(unittest.TestCase):
@@ -55,7 +55,7 @@ class TestEstimateHypeMethods(unittest.TestCase):
 class TestIdentifyJokeReviewsMethods(unittest.TestCase):
 
     def test_main(self):
-        self.assertTrue(identify_joke_reviews.main())
+        self.assertTrue(identify_joke_reviews.main('723090'))
 
 
 if __name__ == '__main__':
