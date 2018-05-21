@@ -6,8 +6,15 @@ import cluster_reviews
 import compute_bayesian_rating
 import compute_wilson_score
 import describe_reviews
+import download_reviews
 import estimate_hype
 import identify_joke_reviews
+
+
+class TestDownloadReviewsMethods(unittest.TestCase):
+
+    def test_main(self):
+        self.assertTrue(download_reviews.main(download_reference_hidden_gems_as_well=False))
 
 
 class TestCheckCorrelationMethods(unittest.TestCase):
