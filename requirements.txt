@@ -9,5 +9,5 @@ seaborn==0.8.1
 sklearn==0.0
 textblob==0.15.1
 textstat==0.4.1
-steamreviews==0.3
+steamreviews==0.4.1
 steamspypi==0.9.1
