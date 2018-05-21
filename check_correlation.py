@@ -7,6 +7,15 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
+def get_mid_of_interval(interval_as_str):
+    interval_as_str_formatted = [s.replace(',', '') for s in interval_as_str.split('..')]
+    lower_bound = float(interval_as_str_formatted[0])
+    upper_bound = float(interval_as_str_formatted[1])
+    mid_value = (lower_bound + upper_bound) / 2
+
+    return mid_value
+
+
 def get_x_y():
     steam_spy_dict = steamspypi.load()
 
@@ -15,6 +24,10 @@ def get_x_y():
 
     for appID in steam_spy_dict.keys():
         num_owners = steam_spy_dict[appID]['owners']
+        try:
+            num_owners = float(num_owners)
+        except:
+            num_owners = get_mid_of_interval(num_owners)
         num_reviews = sum(steam_spy_dict[appID][keyword] for keyword in ['positive', 'negative'])
 
         num_owners_list.append(num_owners)
