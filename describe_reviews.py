@@ -289,7 +289,7 @@ def main(argv):
     if compare_app_ids_in_default_list:
         plot_overlays_of_univariate_distribution(app_id_list)
 
-    return
+    return True
 
 
 if __name__ == "__main__":
