@@ -1,5 +1,7 @@
 # Objective: rank games according to their hype (percentage of joke reviews among all reviews written in English).
 
+import steamspypi
+
 
 def get_num_reviews(review_dict):
     import numpy as np
@@ -78,10 +80,8 @@ def compute_hype_and_wilson_score_deviation(app_id):
 
 
 def print_ranking_according_to_keyword(hype_dict, keyword='hype'):
-    from download_json import get_todays_steam_spy_data
-
     # Download latest SteamSpy data to have access to the matching between appID and game name
-    steam_spy_data = get_todays_steam_spy_data()
+    steam_spy_data = steamspypi.load()
 
     hype_ranking = sorted(hype_dict.keys(), key=lambda x: hype_dict[x][keyword], reverse=True)
 

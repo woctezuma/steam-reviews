@@ -1,7 +1,8 @@
-def get_x_y():
-    from download_json import get_todays_steam_spy_data
+import steamspypi
 
-    steam_spy_dict = get_todays_steam_spy_data()
+
+def get_x_y():
+    steam_spy_dict = steamspypi.load()
 
     num_players_list = []
     num_reviews_list = []

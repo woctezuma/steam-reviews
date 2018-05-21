@@ -2,28 +2,11 @@
 
 import json
 import pathlib
-from urllib.request import urlopen
+
+import steamspypi
 
 
-def get_todays_steam_spy_data():
-    import time
-
-    json_filename_suffixe = "_steamspy.json"
-
-    # Get current day as yyyymmdd format
-    date_format = "%Y%m%d"
-    current_date = time.strftime(date_format)
-
-    # Database filename
-    json_filename = current_date + json_filename_suffixe
-
-    # SteamSpy's data in JSON format
-    data = download_steam_spy_data(json_filename)
-
-    return data
-
-
-def download_steam_spy_data(json_filename="steamspy.json", genre=None, tag=None):
+def download_steam_spy_data(json_filename="steamspy.json", genre=None):
     # Data folder
     data_path = "data/"
     # Reference of the following line: https://stackoverflow.com/a/14364249
@@ -31,36 +14,22 @@ def download_steam_spy_data(json_filename="steamspy.json", genre=None, tag=None)
 
     data_filename = data_path + json_filename
 
-    # If json_filename is missing, we will attempt to download and cache it from steamspy_url:
-    steamspy_url = "http://steamspy.com/api.php?request=all"
-
-    # Provide a possibility to download data for a given genre
-    if bool(not (genre is None)):
-        print("Focusing on genre " + genre)
-        formatted_str = genre.replace(" ", "+")
-        steamspy_url = "http://steamspy.com/api.php?request=genre&genre=" + formatted_str
-    # Provide a possibility to download data for a given tag
-    elif bool(not (tag is None)):
-        print("Focusing on tag " + tag)
-        formatted_str = tag.replace(" ", "+")
-        steamspy_url = "http://steamspy.com/api.php?request=tag&tag=" + formatted_str
-
     try:
         with open(data_filename, 'r', encoding="utf8") as in_json_file:
             data = json.load(in_json_file)
     except FileNotFoundError:
         print("Downloading and caching data from SteamSpy")
-        with urlopen(steamspy_url) as response:
-            # Reference: https://stackoverflow.com/a/32169442
-            raw_data = response.read()
-            encoding = response.info().get_content_charset('utf8')  # JSON default
-            data = json.loads(raw_data.decode(encoding))
-            # Make sure the json data is using double quotes instead of single quotes
-            # Reference: https://stackoverflow.com/a/8710579/
-            json_string = json.dumps(data)
-            # Cache the json data to a local file
-            with open(data_filename, 'w', encoding="utf8") as cache_json_file:
-                print(json_string, file=cache_json_file)
+
+        if genre is None:
+            data = steamspypi.load()
+        else:
+            data_request = dict()
+            data_request['request'] = 'genre'
+            data_request['genre'] = genre
+
+            data = steamspypi.download(data_request)
+
+        steamspypi.print_data(data, data_filename)
 
     return data
 
@@ -78,12 +47,10 @@ def get_appid_by_keyword(keyword):
     json_filename = current_date + json_filename_suffixe
 
     # Download data which meta-data includes this keyword as genre
-    data_genre = download_steam_spy_data("genre_" + keyword + "_" + json_filename, keyword, None)
-    # Download data which meta-data includes this keyword as tag
-    data_tag = download_steam_spy_data("tag_" + keyword + "_" + json_filename, None, keyword)
+    data_genre = download_steam_spy_data("genre_" + keyword + "_" + json_filename, keyword)
 
     # Merge appIDs which genres or tags include the chosen keyword
-    app_ids = set(data_genre.keys()).union(set(data_tag.keys()))
+    app_ids = set(data_genre.keys())
 
     return app_ids
 
@@ -120,4 +87,4 @@ def get_appid_by_keyword_list_to_exclude(keyword_list):
 
 
 if __name__ == "__main__":
-    get_todays_steam_spy_data()
+    steamspypi.load()

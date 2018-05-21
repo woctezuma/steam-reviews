@@ -1,6 +1,7 @@
 import iso639
 import numpy as np
 import scipy.sparse as sp
+import steamspypi
 from langdetect import detect, DetectorFactory, lang_detect_exception
 from sklearn.preprocessing import normalize
 
@@ -295,10 +296,8 @@ def normalize_each_row(X, verbose=False):
 
 
 def get_app_name_list(app_id_list):
-    from download_json import get_todays_steam_spy_data
-
     # Download latest SteamSpy data to have access to the matching between appID and game name
-    steam_spy_data = get_todays_steam_spy_data()
+    steam_spy_data = steamspypi.load()
 
     app_name_list = []
 
@@ -751,7 +750,6 @@ def compute_regional_rankings_of_hidden_gems(game_feature_dict, all_languages,
                                              compute_prior_on_whole_steam_catalog=True,
                                              compute_language_specific_prior=False,
                                              verbose=False):
-    from download_json import get_todays_steam_spy_data
     from compute_stats import compute_ranking, save_ranking_to_file
 
     import pathlib
@@ -761,7 +759,7 @@ def compute_regional_rankings_of_hidden_gems(game_feature_dict, all_languages,
     # Reference of the following line: https://stackoverflow.com/a/14364249
     pathlib.Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-    steam_spy_dict = get_todays_steam_spy_data()
+    steam_spy_dict = steamspypi.load()
 
     # noinspection PyPep8Naming
     D = prepare_dictionary_for_ranking_of_hidden_gems(steam_spy_dict, game_feature_dict, all_languages,
