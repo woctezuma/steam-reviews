@@ -34,7 +34,7 @@ class TestClusterReviewsMethods(unittest.TestCase):
     def test_main(self):
         download_reviews.main(download_reference_hidden_gems_as_well=False)
 
-        self.assertTrue(cluster_reviews.main('723090'))
+        self.assertTrue(cluster_reviews.main(['723090']))
 
 
 class TestComputeBayesianRatingMethods(unittest.TestCase):
@@ -54,7 +54,7 @@ class TestDescribeReviewsMethods(unittest.TestCase):
     def test_main(self):
         download_reviews.main(download_reference_hidden_gems_as_well=False)
 
-        self.assertTrue(describe_reviews.main('723090'))
+        self.assertTrue(describe_reviews.main(['723090']))
 
 
 class TestEstimateHypeMethods(unittest.TestCase):
@@ -68,7 +68,7 @@ class TestIdentifyJokeReviewsMethods(unittest.TestCase):
     def test_main(self):
         download_reviews.main(download_reference_hidden_gems_as_well=False)
 
-        self.assertTrue(identify_joke_reviews.main('723090'))
+        self.assertTrue(identify_joke_reviews.main(['723090']))
 
 
 if __name__ == '__main__':
