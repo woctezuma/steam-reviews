@@ -1,4 +1,10 @@
+from math import log10
+
+import matplotlib
 import steamspypi
+
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 
 def get_x_y():
@@ -18,16 +24,12 @@ def get_x_y():
 
 
 def get_log_list(vec):
-    from math import log10
-
     log_vec = [log10(1 + x) for x in vec]
 
     return log_vec
 
 
 def main():
-    import matplotlib.pyplot as plt
-
     (num_players_list, num_reviews_list) = get_x_y()
 
     log_num_players_list = get_log_list(num_players_list)
@@ -50,6 +52,8 @@ def main():
     plt.ylim(0, ymax)
 
     plt.show()
+
+    return True
 
 
 if __name__ == '__main__':

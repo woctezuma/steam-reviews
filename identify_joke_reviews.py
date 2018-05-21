@@ -307,7 +307,7 @@ def main(argv):
     print(
         '\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(wilson_score_deviation))
 
-    return
+    return True
 
 
 if __name__ == "__main__":

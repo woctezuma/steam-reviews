@@ -123,7 +123,7 @@ def main():
 
     print_ranking_according_to_keyword(result_dict, 'proportion_confirmed-English-tags')
 
-    return
+    return True
 
 
 if __name__ == "__main__":

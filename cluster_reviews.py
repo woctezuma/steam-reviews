@@ -516,7 +516,7 @@ def main(argv):
     if perform_full_test_suite:
         test_every_clustering_method(app_id)
 
-    return
+    return True
 
 
 if __name__ == "__main__":
