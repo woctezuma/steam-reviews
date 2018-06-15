@@ -3,7 +3,7 @@ iso639==0.1.4
 langdetect==1.0.7
 numpy==1.14.3
 pandas==0.23.0
-requests==2.18.4
+requests==2.19.1
 scipy==1.1.0
 seaborn==0.8.1
 sklearn==0.0
