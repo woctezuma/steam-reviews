@@ -2,7 +2,7 @@ matplotlib==3.0.0
 iso639==0.1.4
 langdetect==1.0.7
 pandas==0.23.4
-numpy==1.15.1
+numpy==1.15.2
 requests==2.19.1
 scipy==1.1.0
 seaborn==0.9.0
