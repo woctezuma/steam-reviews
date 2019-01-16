@@ -26,7 +26,7 @@ def get_x_y():
         num_owners = steam_spy_dict[appID]['owners']
         try:
             num_owners = float(num_owners)
-        except:
+        except ValueError:
             num_owners = get_mid_of_interval(num_owners)
         num_reviews = sum(steam_spy_dict[appID][keyword] for keyword in ['positive', 'negative'])
 
