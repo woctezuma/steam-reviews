@@ -49,7 +49,7 @@ def get_review_sentiment_dictionary(app_id, accepted_languages=None,
 
     print('\nAppID: ' + app_id)
 
-    (query_summary, reviews) = describe_data(review_data)
+    (_, reviews) = describe_data(review_data)
 
     wrongly_tagged_review_id = []
     count_reviews_wrongly_tagged_as_written_in_english = 0
@@ -300,7 +300,6 @@ def main(argv):
     wilson_score_acceptable_only = get_dictionary_wilson_score(acceptable_reviews_dict, print_wilson_score)
 
     print('\nStats for detected joke reviews (subjectivity < threshold)')
-    # noinspection PyUnusedLocal
     _ = get_dictionary_wilson_score(joke_reviews_dict, print_wilson_score)
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
