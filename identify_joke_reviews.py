@@ -301,7 +301,7 @@ def main(argv):
 
     print('\nStats for detected joke reviews (subjectivity < threshold)')
     # noinspection PyUnusedLocal
-    wilson_score_joke_only = get_dictionary_wilson_score(joke_reviews_dict, print_wilson_score)
+    _ = get_dictionary_wilson_score(joke_reviews_dict, print_wilson_score)
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
     print(

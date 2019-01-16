@@ -48,7 +48,7 @@ def main():
     log_num_owners_list = get_log_list(num_owners_list)
     log_num_reviews_list = get_log_list(num_reviews_list)
 
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
     ax.scatter(log_num_owners_list, log_num_reviews_list)
 
     ax.set_xlabel('log(1+#owners)')

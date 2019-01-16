@@ -57,7 +57,7 @@ def describe_data(review_data):
 def aggregate_reviews(app_id):
     review_data = load_data(app_id)
 
-    (query_summary, reviews) = describe_data(review_data)
+    (_, reviews) = describe_data(review_data)
 
     review_stats = dict()
 
