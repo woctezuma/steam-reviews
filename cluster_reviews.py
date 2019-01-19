@@ -234,7 +234,7 @@ def show_data_frame_for_cluster_centers(df, af, num_top_clusters=None, verbose=T
     cluster_centers_indices = af.cluster_centers_indices_
     # labels = af.labels_
 
-    (summary_labels, list_of_clusters_by_count) = get_top_clusters_by_count(af)
+    (_, list_of_clusters_by_count) = get_top_clusters_by_count(af)
 
     sorted_cluster_centers_indices = cluster_centers_indices[[int(i) for i in list_of_clusters_by_count]]
 
@@ -280,8 +280,7 @@ def try_affinity_propagation(app_id, df, X, num_top_clusters=4, verbose=False):
 
     # Show dataframe limited to cluster centers
 
-    # noinspection PyUnusedLocal
-    df_representative = show_data_frame_for_cluster_centers(df, af, num_top_clusters)
+    _ = show_data_frame_for_cluster_centers(df, af, num_top_clusters)
 
     return labels
 
@@ -503,12 +502,10 @@ def main(argv):
     if apply_birch_method:
         # Apply Birch and then Agglomerative Clustering
         num_clusters_input = 3
-        # noinspection PyUnusedLocal
-        (df, labels) = apply_birch(app_id, num_clusters_input, num_reviews_to_show_per_cluster)
+        (_, _) = apply_birch(app_id, num_clusters_input, num_reviews_to_show_per_cluster)
     else:
         # Apply Affinity Propagation
-        # noinspection PyUnusedLocal
-        (df, labels) = apply_affinity_propagation(app_id, num_reviews_to_show_per_cluster)
+        (_, _) = apply_affinity_propagation(app_id, num_reviews_to_show_per_cluster)
 
     # Demo of every clustering method
 
