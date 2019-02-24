@@ -7,7 +7,7 @@ requests==2.21.0
 scipy==1.2.1
 seaborn==0.9.0
 sklearn==0.0
-textblob==0.15.2
+textblob==0.15.3
 textstat==0.5.4
 steamreviews==0.5.0
 steamspypi==1.0.0
