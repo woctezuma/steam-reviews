@@ -1,4 +1,4 @@
-matplotlib==3.1.0
+matplotlib==3.1.1
 iso639==0.1.4
 langdetect==1.0.7
 pandas==0.24.2
