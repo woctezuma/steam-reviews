@@ -1,8 +1,6 @@
 # Steam Reviews
 
 [![Build status][Build image]][Build]
-[![Updates][Dependency image]][PyUp]
-[![Python 3][Python3 image]][PyUp]
 [![Code coverage][Codecov image]][Codecov]
 
 This repository contains Python code to compute statistics of Steam reviews.
