@@ -37,8 +37,11 @@ def describe_data(review_data):
         query_summary = review_data['query_summary']
 
         sentence = 'Number of reviews: {0} ({1} up ; {2} down)'
-        sentence = sentence.format(query_summary["total_reviews"], query_summary["total_positive"],
-                                   query_summary["total_negative"])
+        sentence = sentence.format(
+            query_summary["total_reviews"],
+            query_summary["total_positive"],
+            query_summary["total_negative"],
+        )
     except KeyError:
         query_summary = None
 
@@ -122,12 +125,18 @@ def aggregate_reviews(app_id):
         review_stats['syllable_count'].append(textstat.syllable_count(review_content))
         review_stats['lexicon_count'].append(textstat.lexicon_count(review_content))
         review_stats['sentence_count'].append(textstat.sentence_count(review_content))
-        review_stats['difficult_words_count'].append(textstat.difficult_words(review_content))
+        review_stats['difficult_words_count'].append(
+            textstat.difficult_words(review_content),
+        )
         try:
-            review_stats['flesch_reading_ease'].append(textstat.flesch_reading_ease(review_content))
+            review_stats['flesch_reading_ease'].append(
+                textstat.flesch_reading_ease(review_content),
+            )
         except TypeError:
             review_stats['flesch_reading_ease'].append(None)
-        review_stats['dale_chall_readability_score'].append(textstat.dale_chall_readability_score(review_content))
+        review_stats['dale_chall_readability_score'].append(
+            textstat.dale_chall_readability_score(review_content),
+        )
 
         # Sentiment analysis
         blob = TextBlob(review_content)
@@ -244,7 +253,11 @@ def get_review_content(app_id, review_id):
     return review_content
 
 
-def plot_overlays_of_univariate_distribution(app_id_list, variable_to_plot="lexicon_count", languages_to_extract=None):
+def plot_overlays_of_univariate_distribution(
+    app_id_list,
+    variable_to_plot="lexicon_count",
+    languages_to_extract=None,
+):
     # By definition, we want to overlay plots with this function, hence the following variable is set to False:
     if languages_to_extract is None:
         languages_to_extract = ['english']
@@ -257,10 +270,18 @@ def plot_overlays_of_univariate_distribution(app_id_list, variable_to_plot="lexi
 
         df = analyze_app_id(appID, languages_to_extract, create_separate_plots)
 
-        sns.distplot(df[variable_to_plot], kde=False, fit=stats.beta,
-                     color=current_palette[iter_count],
-                     label=appID,
-                     fit_kws={"label": appID + " fit", "color": current_palette[iter_count], "alpha": 0.25})
+        sns.distplot(
+            df[variable_to_plot],
+            kde=False,
+            fit=stats.beta,
+            color=current_palette[iter_count],
+            label=appID,
+            fit_kws={
+                "label": appID + " fit",
+                "color": current_palette[iter_count],
+                "alpha": 0.25,
+            },
+        )
 
     plt.legend()
     plt.show()
