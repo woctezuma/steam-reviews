@@ -225,8 +225,8 @@ Hype: 0.186 ; Wilson score deviation: 0.009
 
 <!-- Definitions -->
 
-  [Build]: https://travis-ci.org/woctezuma/steam-reviews
-  [Build image]: https://travis-ci.org/woctezuma/steam-reviews.svg?branch=master
+  [Build]: <https://github.com/woctezuma/steam-reviews/actions>
+  [Build image]: <https://github.com/woctezuma/steam-reviews/workflows/Python package/badge.svg?branch=master>
 
   [PyUp]: https://pyup.io/repos/github/woctezuma/steam-reviews/
   [Dependency image]: https://pyup.io/repos/github/woctezuma/steam-reviews/shield.svg
