@@ -6,7 +6,7 @@ import steamspypi
 def get_num_reviews(review_dict):
     import numpy as np
 
-    num_reviews = np.sum([len(review_dict[keyword]) for keyword in review_dict.keys()])
+    num_reviews = np.sum([len(review_dict[keyword]) for keyword in review_dict])
 
     return num_reviews
 
@@ -42,7 +42,7 @@ def get_wilson_score_deviation(review_dict, acceptable_reviews_dict):
 
 
 def compute_hype_and_wilson_score_deviation(app_id):
-    from identify_joke_reviews import get_review_sentiment_dictionary, classify_reviews
+    from identify_joke_reviews import classify_reviews, get_review_sentiment_dictionary
 
     # Only reviews written in English are considered, for sentiment analysis to work.
     accepted_languages = ['english']
@@ -142,7 +142,7 @@ def main():
 
     app_id_list = [x.strip() for x in d]
 
-    result_dict = dict()
+    result_dict = {}
     for appID in app_id_list:
         (
             hype,
@@ -150,7 +150,7 @@ def main():
             prct_English_tags,
             prct_confirmed_English_tags_among_all_tags,
         ) = compute_hype_and_wilson_score_deviation(appID)
-        result_dict[appID] = dict()
+        result_dict[appID] = {}
         result_dict[appID]['hype'] = hype
         result_dict[appID]['wilson_score_deviation'] = wilson_score_deviation
         result_dict[appID]['proportion_English-tags'] = prct_English_tags

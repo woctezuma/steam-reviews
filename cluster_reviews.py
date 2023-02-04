@@ -3,10 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 from sklearn import metrics
-from sklearn.cluster import AffinityPropagation
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.cluster import Birch
-from sklearn.cluster import DBSCAN
+from sklearn.cluster import DBSCAN, AffinityPropagation, AgglomerativeClustering, Birch
 from sklearn.decomposition import PCA
 from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import StandardScaler
@@ -197,9 +194,9 @@ def print_sentiment_analysis(text):
 
     print(
         '=> Sentiment analysis: '
-        + 'polarity({0:.2f})'.format(blob.sentiment.polarity)
+        + f'polarity({blob.sentiment.polarity:.2f})'
         + ' ; '
-        + 'subjectivity({0:.2f})'.format(blob.sentiment.subjectivity)
+        + f'subjectivity({blob.sentiment.subjectivity:.2f})'
         + ')',
     )
 

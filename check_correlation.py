@@ -24,7 +24,7 @@ def get_x_y():
     num_owners_list = []
     num_reviews_list = []
 
-    for appID in steam_spy_dict.keys():
+    for appID in steam_spy_dict:
         num_owners = steam_spy_dict[appID]['owners']
         try:
             num_owners = float(num_owners)

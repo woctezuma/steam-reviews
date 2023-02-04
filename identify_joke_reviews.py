@@ -1,11 +1,11 @@
 import sys
 
-from langdetect import detect, DetectorFactory, lang_detect_exception
+from langdetect import DetectorFactory, detect, lang_detect_exception
 from textblob import TextBlob, exceptions
 
 from cluster_reviews import print_sentiment_analysis
 from compute_wilson_score import compute_wilson_score
-from describe_reviews import load_data, describe_data, get_review_content
+from describe_reviews import describe_data, get_review_content, load_data
 
 
 def detect_language(review_content, blob=None, call_google_translate=False):
@@ -58,9 +58,9 @@ def get_review_sentiment_dictionary(
     count_reviews_wrongly_tagged_as_written_in_english = 0
     count_reviews_tagged_as_written_in_english = 0
 
-    review_dict = dict()
-    review_dict['positive'] = dict()
-    review_dict['negative'] = dict()
+    review_dict = {}
+    review_dict['positive'] = {}
+    review_dict['negative'] = {}
 
     for review in reviews:
         if review['language'] in accepted_languages:
@@ -89,7 +89,7 @@ def get_review_sentiment_dictionary(
             # TODO For generality, one would need to match accepted_languages to accepted_languages_iso (ISO 639-1)
             # cf. https://en.wikipedia.org/wiki/ISO_639-1
             # cf. https://gist.github.com/carlopires/1262033
-            if not (detected_language in accepted_languages_iso):
+            if detected_language not in accepted_languages_iso:
                 count_reviews_wrongly_tagged_as_written_in_english += 1
                 wrongly_tagged_review_id.append(review_id)
                 if verbose_reviews_wrongly_tagged_as_written_in_english:
@@ -108,13 +108,13 @@ def get_review_sentiment_dictionary(
             else:
                 keyword = 'negative'
 
-            review_dict[keyword][review_id] = dict()
+            review_dict[keyword][review_id] = {}
             review_dict[keyword][review_id]['polarity'] = blob.sentiment.polarity
             review_dict[keyword][review_id][
                 'subjectivity'
             ] = blob.sentiment.subjectivity
 
-    review_dict['language_tag'] = dict()
+    review_dict['language_tag'] = {}
     review_dict['language_tag'][
         'reviews_wrongly_tagged_English'
     ] = wrongly_tagged_review_id
@@ -133,7 +133,7 @@ def get_review_sentiment_dictionary(
             review_dict['language_tag']['num_reviews_tagged_English']
             / review_dict['language_tag']['num_reviews']
         )
-        end_of_sentence = ' Percentage of English tags: {0:.2f}'.format(
+        end_of_sentence = ' Percentage of English tags: {:.2f}'.format(
             percentage_reviews_tagged_as_written_in_english,
         )
     except ZeroDivisionError:
@@ -170,7 +170,7 @@ def get_review_sentiment_dictionary(
             num_confirmed_english_tags
             / review_dict['language_tag']['num_reviews_tagged_English']
         )
-        end_of_sentence = ' Percentage of confirmed English tags: {0:.2f}\n'.format(
+        end_of_sentence = ' Percentage of confirmed English tags: {:.2f}\n'.format(
             percentage_confirmed_english_tags,
         )
     except ZeroDivisionError:
@@ -217,8 +217,8 @@ def classify_reviews(review_dict, sentiment_threshold=None, verbose=False):
     # - polarity threshold:     [-1, 1] to avoid any polarity-based criterion (therefore solely rely on subjectivity)
     # - subjectivity threshold: [ 0, 1] to avoid any subjectivity-based criterion (therefore solely rely on polarity)
 
-    acceptable_reviews_dict = dict()
-    joke_reviews_dict = dict()
+    acceptable_reviews_dict = {}
+    joke_reviews_dict = {}
 
     for keyword in ['positive', 'negative']:
         current_review_ids = review_dict[keyword].keys()
@@ -260,13 +260,13 @@ def classify_reviews(review_dict, sentiment_threshold=None, verbose=False):
             'A review is acceptable if it is acceptable with respect to either polarity or subjectivity.',
         )
         print(
-            'Set for being acceptable w.r.t. polarity: [-1.00, {0:.2f}[ U ]{1:.2f}, 1.00]'.format(
+            'Set for being acceptable w.r.t. polarity: [-1.00, {:.2f}[ U ]{:.2f}, 1.00]'.format(
                 sentiment_threshold['polarity'][0],
                 sentiment_threshold['polarity'][1],
             ),
         )
         print(
-            'Interval for being acceptable w.r.t. subjectivity: [{0:.2f}, {1:.2f}]'.format(
+            'Interval for being acceptable w.r.t. subjectivity: [{:.2f}, {:.2f}]'.format(
                 sentiment_threshold['subjectivity'][0],
                 sentiment_threshold['subjectivity'][1],
             ),
@@ -389,7 +389,7 @@ def main(argv):
 
     wilson_score_deviation = wilson_score_raw - wilson_score_acceptable_only
     print(
-        '\nConclusion: estimated deviation of Wilson score due to joke reviews: {0:.2f}'.format(
+        '\nConclusion: estimated deviation of Wilson score due to joke reviews: {:.2f}'.format(
             wilson_score_deviation,
         ),
     )

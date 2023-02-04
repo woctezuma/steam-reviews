@@ -26,7 +26,7 @@ def load_data(app_id):
 
     data_filename = data_path + json_filename
 
-    with open(data_filename, 'r', encoding="utf8") as in_json_file:
+    with open(data_filename, encoding="utf8") as in_json_file:
         review_data = json.load(in_json_file)
 
     return review_data
@@ -62,7 +62,7 @@ def aggregate_reviews(app_id):
 
     (_, reviews) = describe_data(review_data)
 
-    review_stats = dict()
+    review_stats = {}
 
     ##
 
