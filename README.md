@@ -5,6 +5,9 @@
 
 This repository contains Python code to compute statistics of Steam reviews.
 
+>**Note**
+Nowadays, I recommend to check [SteamScout][SteamScout-website] and [Gamalytic][Gamalytic-website].
+
 ## Definitions
 
 ### Joke review
@@ -224,6 +227,9 @@ Hype: 0.186 ; Wilson score deviation: 0.009
 ```
 
 <!-- Definitions -->
+
+  [SteamScout-website]: <https://www.togeproductions.com/SteamScout/>
+  [Gamalytic-website]: <https://gamalytic.com/>
 
   [Build]: <https://github.com/woctezuma/steam-reviews/actions>
   [Build image]: <https://github.com/woctezuma/steam-reviews/workflows/Python package/badge.svg?branch=master>
