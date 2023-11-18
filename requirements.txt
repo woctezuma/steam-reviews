@@ -4,7 +4,7 @@ langdetect==1.0.9
 pandas==1.5.3
 numpy==1.26.2
 requests==2.31.0
-scipy==1.11.3
+scipy==1.11.4
 seaborn==0.13.0
 scikit-learn
 textblob==0.17.1
