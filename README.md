@@ -5,7 +5,7 @@
 
 This repository contains Python code to compute statistics of Steam reviews.
 
->**Note**
+> [!Note]
 Nowadays, I recommend to check [SteamScout][SteamScout-website] and [Gamalytic][Gamalytic-website].
 
 ## Definitions
