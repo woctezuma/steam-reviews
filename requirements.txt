@@ -7,7 +7,7 @@ requests==2.31.0
 scipy==1.11.4
 seaborn==0.13.0
 scikit-learn
-textblob==0.17.1
+textblob==0.18.0.post0
 textstat==0.7.3
 steamreviews==0.9.5
 steamspypi==1.1.1
