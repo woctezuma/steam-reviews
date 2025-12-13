@@ -8,6 +8,6 @@ scipy==1.12.0
 seaborn==0.13.2
 scikit-learn
 textblob==0.18.0.post0
-textstat==0.7.3
+textstat==0.7.12
 steamreviews==0.9.5
 steamspypi==1.1.1
